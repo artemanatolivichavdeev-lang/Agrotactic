@@ -1,0 +1,22 @@
+# System Files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node (if ever used later)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Build (if ever used later)
+dist/
+build/
