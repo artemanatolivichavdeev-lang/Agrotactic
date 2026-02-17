@@ -8,6 +8,7 @@
 - JS: sticky, burger, tabs, accordion, drawer (overlay + Escape + focus), hotspots (hover/tap), self-check.
 - Шрифты: Inter + JetBrains Mono (через HEAD).
 - TILDA-ONLY confirmed. Единственный артефакт: `/tilda/t123/home/home.html`.
+- **UX Fixes (Revision 2):** Stepper A2-A4 clickable + JS logic, de-duped buttons in S10, "Download" links open Drawer instead of scroll-to-top.
 
 ---
 
