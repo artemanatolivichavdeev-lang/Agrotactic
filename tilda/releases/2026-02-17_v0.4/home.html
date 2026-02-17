@@ -1,0 +1,1742 @@
+<!-- tilda/t123/home/home.html — v0.1 (2026-02-17)
+     Paste into: Other → T123 "Embed HTML Code"
+     After change: Publish the page
+     ANCHORS: replace #rec99999999 / #recCONTACTS with real Tilda recIDs -->
+
+<style>
+  /* === TOKENS (Mission Control v0.2) === */
+  .x-site {
+    --x-bg: #0b1120;
+    --x-surface: #131b2e;
+    --x-surface-2: #1e293b;
+    --x-text: #e2e8f0;
+    --x-muted: #94a3b8;
+    --x-line: #334155;
+    /* Lighter line for tech feel */
+    --x-accent: #00e5ff;
+    /* Safety Cyan */
+    --x-accent-2: #ff6b35;
+    /* Safety Orange */
+    --x-accent-alpha: rgba(0, 229, 255, 0.15);
+
+    --x-ff-head: 'Inter', system-ui, sans-serif;
+    --x-ff-body: 'Inter', system-ui, sans-serif;
+    --x-ff-mono: 'JetBrains Mono', monospace;
+
+    --x-fs-1: clamp(2.5rem, 5vw, 3.5rem);
+    --x-fs-2: clamp(1.75rem, 3.5vw, 2.25rem);
+    --x-fs-3: 1.25rem;
+    --x-fs-4: 1rem;
+    --x-fs-5: 0.875rem;
+    --x-fs-6: 0.75rem;
+
+    --x-lh-tight: 1.1;
+    --x-lh-base: 1.5;
+
+    --x-sp-1: 4px;
+    --x-sp-2: 8px;
+    --x-sp-3: 12px;
+    --x-sp-4: 16px;
+    --x-sp-5: 24px;
+    --x-sp-6: 32px;
+    --x-sp-7: 48px;
+    --x-sp-8: 64px;
+    --x-sp-9: 96px;
+
+    --x-r-1: 0px;
+    /* Sharp technical corners */
+    --x-r-2: 2px;
+    --x-r-3: 4px;
+
+    --x-container: 1200px;
+    --x-container-wide: 1320px;
+
+    box-sizing: border-box;
+    font-family: var(--x-ff-body);
+    color: var(--x-text);
+    background: var(--x-bg);
+    line-height: var(--x-lh-base);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .x-site *,
+  .x-site *::before,
+  .x-site *::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+  }
+
+  .x-site img {
+    max-width: 100%;
+    display: block;
+  }
+
+  .x-site a {
+    color: var(--x-accent);
+    text-decoration: none;
+    transition: opacity .2s;
+  }
+
+  .x-site a:hover {
+    opacity: 0.8;
+    text-decoration: none;
+  }
+
+  /* === LAYOUT & UTILS === */
+  .x-site .x-wrap {
+    max-width: var(--x-container);
+    margin: 0 auto;
+    padding: 0 var(--x-sp-5);
+    position: relative;
+    z-index: 2;
+  }
+
+  .x-site .x-section {
+    padding: var(--x-sp-9) 0;
+    border-bottom: 1px solid var(--x-line);
+    position: relative;
+  }
+
+  /* Technical grid background for sections */
+  .x-site .x-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .x-site .x-section__head {
+    margin-bottom: var(--x-sp-7);
+    position: relative;
+    z-index: 2;
+  }
+
+  .x-site .x-section__label {
+    font-family: var(--x-ff-mono);
+    font-size: var(--x-fs-6);
+    color: var(--x-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: var(--x-sp-2);
+    display: inline-block;
+    padding: 2px 6px;
+    background: rgba(0, 229, 255, 0.1);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+  }
+
+  .x-site .x-h2 {
+    font-family: var(--x-ff-head);
+    font-size: var(--x-fs-2);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--x-text);
+    margin-bottom: var(--x-sp-4);
+  }
+
+  .x-site .x-lead {
+    font-size: var(--x-fs-4);
+    color: var(--x-muted);
+    max-width: 760px;
+    line-height: 1.6;
+  }
+
+  /* === BUTTONS === */
+  .x-site .x-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--x-sp-2);
+    font-family: var(--x-ff-mono);
+    /* Technical font for actions */
+    font-size: var(--x-fs-5);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: var(--x-sp-3) var(--x-sp-5);
+    border-radius: var(--x-r-2);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all .2s;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .x-site .x-btn:focus-visible {
+    outline: 2px solid var(--x-accent);
+    outline-offset: 4px;
+  }
+
+  .x-site .x-btn--primary {
+    background: var(--x-accent);
+    color: #000;
+    /* High contrast on Cyan */
+    border-color: var(--x-accent);
+  }
+
+  .x-site .x-btn--primary:hover {
+    background: #fff;
+    border-color: #fff;
+    box-shadow: 0 0 15px var(--x-accent);
+  }
+
+  .x-site .x-btn--secondary {
+    background: transparent;
+    color: var(--x-accent);
+    border-color: var(--x-accent);
+  }
+
+  .x-site .x-btn--secondary:hover {
+    background: var(--x-accent-alpha);
+    box-shadow: 0 0 10px var(--x-accent-alpha);
+  }
+
+  .x-site .x-btn--tertiary {
+    background: transparent;
+    color: var(--x-muted);
+    border: 1px solid transparent;
+    padding: var(--x-sp-2) 0;
+    font-size: var(--x-fs-6);
+  }
+
+  .x-site .x-btn--tertiary:hover {
+    color: var(--x-accent);
+    text-decoration: none;
+  }
+
+  /* === HEADER === */
+  .x-site .x-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(11, 17, 32, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--x-line);
+    height: 80px;
+    transition: all 0.3s;
+  }
+
+  .x-site .x-header--sticky {
+    height: 60px;
+    background: rgba(11, 17, 32, 0.98);
+  }
+
+  .x-site .x-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    max-width: var(--x-container-wide);
+    margin: 0 auto;
+    padding: 0 var(--x-sp-5);
+  }
+
+  .x-site .x-logo {
+    font-family: var(--x-ff-head);
+    font-size: 1.25rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--x-text);
+  }
+
+  .x-site .x-logo span {
+    color: var(--x-accent);
+  }
+
+  .x-site .x-nav {
+    display: flex;
+    gap: var(--x-sp-6);
+    list-style: none;
+  }
+
+  .x-site .x-nav__item {
+    font-family: var(--x-ff-mono);
+    font-size: var(--x-fs-6);
+    text-transform: uppercase;
+    color: var(--x-muted);
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+
+  .x-site .x-nav__item:hover {
+    color: var(--x-accent);
+  }
+
+  .x-site .x-burger {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--x-text);
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  @media(max-width:900px) {
+    .x-site .x-nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      background: var(--x-bg);
+      border-bottom: 1px solid var(--x-line);
+      padding: var(--x-sp-5);
+      gap: var(--x-sp-4);
+    }
+
+    .x-site .x-header--menu-open .x-nav {
+      display: flex;
+    }
+
+    .x-site .x-burger {
+      display: block;
+    }
+
+    .x-site .x-header .x-btn {
+      display: none;
+    }
+  }
+
+  /* === HERO === */
+  .x-site .x-hero {
+    padding-top: 140px;
+    padding-bottom: var(--x-sp-8);
+    background: radial-gradient(circle at 50% 30%, rgba(0, 229, 255, 0.05), transparent 60%);
+  }
+
+  .x-site .x-hero__grid {
+    display: grid;
+    grid-template-columns: 1fr 0.9fr;
+    gap: var(--x-sp-8);
+    align-items: center;
+  }
+
+  .x-site .x-hero__eyebrow {
+    font-family: var(--x-ff-mono);
+    font-size: var(--x-fs-6);
+    color: var(--x-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: var(--x-sp-4);
+    border-left: 2px solid var(--x-accent);
+    padding-left: var(--x-sp-3);
+  }
+
+  .x-site .x-hero h1 {
+    font-family: var(--x-ff-head);
+    font-size: var(--x-fs-1);
+    font-weight: 700;
+    line-height: var(--x-lh-tight);
+    margin-bottom: var(--x-sp-5);
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .x-site .x-hero__sub {
+    font-size: var(--x-fs-3);
+    color: var(--x-muted);
+    margin-bottom: var(--x-sp-7);
+    max-width: 560px;
+    font-weight: 300;
+  }
+
+  .x-site .x-hero__bullets li {
+    position: relative;
+    padding-left: var(--x-sp-4);
+    margin-bottom: var(--x-sp-2);
+    color: var(--x-text);
+    font-family: var(--x-ff-mono);
+    font-size: var(--x-fs-5);
+  }
+
+  .x-site .x-hero__bullets li::before {
+    content: '/';
+    position: absolute;
+    left: 0;
+    color: var(--x-accent);
+    font-weight: bold;
+  }
+
+  .x-site .x-hero__ctas {
+    display: flex;
+    gap: var(--x-sp-4);
+    flex-wrap: wrap;
+    margin-bottom: var(--x-sp-4);
+  }
+
+  .x-site .x-hero__micro {
+    font-family: var(--x-ff-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--x-muted);
+    opacity: 0.7;
+    letter-spacing: 0.05em;
+  }
+
+  /* Role Switcher */
+  .x-site .x-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--x-line);
+    margin-bottom: var(--x-sp-6);
+  }
+
+  .x-site .x-tab {
+    font-family: var(--x-ff-mono);
+    font-size: var(--x-fs-6);
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: var(--x-sp-2) var(--x-sp-4);
+    background: transparent;
+    color: var(--x-muted);
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: all .2s;
+    position: relative;
+    top: 1px;
+  }
+
+  .x-site .x-tab:hover {
+    color: var(--x-text);
+  }
+
+  .x-site .x-tab--active {
+    color: var(--x-accent);
+    border-bottom-color: var(--x-accent);
+  }
+
+  .x-site .x-tab-panel {
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .x-site .x-tab-panel--active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(5px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Hero Visual */
+  .x-site .x-hero__visual {
+    position: relative;
+    background: rgba(19, 27, 46, 0.5);
+    border: 1px solid var(--x-line);
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Corner Brackets */
+  .x-site .x-hero__visual::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    pointer-events: none;
+    background:
+      linear-gradient(to right, var(--x-accent) 2px, transparent 2px) 0 0,
+      linear-gradient(to bottom, var(--x-accent) 2px, transparent 2px) 0 0,
+      linear-gradient(to left, var(--x-accent) 2px, transparent 2px) 100% 0,
+      linear-gradient(to bottom, var(--x-accent) 2px, transparent 2px) 100% 0,
+      linear-gradient(to right, var(--x-accent) 2px, transparent 2px) 0 100%,
+      linear-gradient(to top, var(--x-accent) 2px, transparent 2px) 0 100%,
+      linear-gradient(to left, var(--x-accent) 2px, transparent 2px) 100% 100%,
+      linear-gradient(to top, var(--x-accent) 2px, transparent 2px) 100% 100%;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    opacity: 0.7;
+  }
+
+  .x-site .x-hotspot {
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--x-accent);
+    border-radius: 50%;
+    background: rgba(0, 229, 255, 0.1);
+    cursor: pointer;
+    position: absolute;
+    box-shadow: 0 0 10px var(--x-accent);
+    animation: pulse 2s infinite;
+  }
+
+  .x-site .x-hotspot:hover {
+    background: var(--x-accent);
+  }
+
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4);
+    }
+
+    70% {
+      box-shadow: 0 0 0 10px rgba(0, 229, 255, 0);
+    }
+
+    100% {
+      box-shadow: 0 0 0 0 rgba(0, 229, 255, 0);
+    }
+  }
+
+  /* === CARDS (Mission Control) === */
+  .x-site .x-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--x-sp-5);
+  }
+
+  .x-site .x-card {
+    background: var(--x-surface);
+    border: 1px solid var(--x-line);
+    padding: var(--x-sp-5);
+    position: relative;
+    transition: all .2s;
+  }
+
+  .x-site .x-card:hover {
+    border-color: var(--x-muted);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .x-site .x-card__title {
+    font-family: var(--x-ff-head);
+    font-size: var(--x-fs-4);
+    font-weight: 700;
+    color: var(--x-text);
+    margin-bottom: var(--x-sp-3);
+    display: flex;
+    align-items: center;
+    gap: var(--x-sp-2);
+  }
+
+  .x-site .x-card__text {
+    font-size: var(--x-fs-5);
+    color: var(--x-muted);
+    line-height: 1.5;
+  }
+
+  /* Corner bracket decoration for cards */
+  .x-site .x-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 12px 12px 0;
+    border-color: transparent var(--x-accent) transparent transparent;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .x-site .x-card:hover::after {
+    opacity: 1;
+  }
+
+  /* === COMPONENTS === */
+  /* Accordion */
+  .x-site .x-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--x-line);
+    border: 1px solid var(--x-line);
+  }
+
+  .x-site .x-acc-item {
+    background: var(--x-bg);
+  }
+
+  .x-site .x-acc-item__head {
+    width: 100%;
+    text-align: left;
+    padding: var(--x-sp-4);
+    font-family: var(--x-ff-mono);
+    font-size: var(--x-fs-5);
+    font-weight: 600;
+    background: var(--x-bg);
+    border: none;
+    color: var(--x-text);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .x-site .x-acc-item__head:hover {
+    background: var(--x-surface);
+    color: var(--x-accent);
+  }
+
+  .x-site .x-acc-item--open .x-acc-item__head {
+    color: var(--x-accent);
+    background: var(--x-surface);
+  }
+
+  .x-site .x-acc-item__body {
+    display: none;
+    padding: var(--x-sp-4);
+    border-top: 1px solid var(--x-line);
+    background: var(--x-surface-2);
+  }
+
+  .x-site .x-acc-item--open .x-acc-item__body {
+    display: block;
+  }
+
+  /* Stepper */
+  .x-site .x-stepper {
+    display: flex;
+    gap: var(--x-sp-4);
+  }
+
+  .x-site .x-step {
+    flex: 1;
+    padding: var(--x-sp-5);
+    border: 1px solid var(--x-line);
+    background: var(--x-surface);
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s;
+  }
+
+  .x-site .x-step:hover {
+    border-color: var(--x-muted);
+  }
+
+  .x-site .x-step--active {
+    border-color: var(--x-accent);
+    background: linear-gradient(135deg, rgba(0, 229, 255, 0.05), transparent);
+  }
+
+  .x-site .x-step__level {
+    font-family: var(--x-ff-mono);
+    font-size: var(--x-fs-1);
+    color: var(--x-line);
+    position: absolute;
+    top: var(--x-sp-2);
+    right: var(--x-sp-3);
+    opacity: 0.3;
+    font-weight: 800;
+  }
+
+  .x-site .x-step--active .x-step__level {
+    color: var(--x-accent);
+    opacity: 0.2;
+  }
+
+  .x-site .x-step__title {
+    font-size: var(--x-fs-4);
+    font-weight: 700;
+    margin-bottom: var(--x-sp-3);
+  }
+
+  /* Drawer */
+  .x-site .x-drawer {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .2s;
+  }
+
+  .x-site .x-drawer--open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .x-site .x-drawer__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+  }
+
+  .x-site .x-drawer__panel {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 480px;
+    max-width: 100%;
+    background: var(--x-bg);
+    border-left: 1px solid var(--x-line);
+    transform: translateX(100%);
+    transition: transform .3s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: var(--x-sp-6);
+    overflow-y: auto;
+    padding-top: 80px;
+  }
+
+  .x-site .x-drawer--open .x-drawer__panel {
+    transform: translateX(0);
+  }
+
+  .x-site .x-drawer__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: 1px solid var(--x-line);
+    width: 40px;
+    height: 40px;
+    color: var(--x-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .x-site .x-drawer__close:hover {
+    border-color: var(--x-accent);
+    color: var(--x-accent);
+  }
+
+  /* === v0.3 VISUALS (FUI) === */
+  @keyframes scanline {
+    0% {
+      transform: translateY(-100%);
+    }
+
+    100% {
+      transform: translateY(100vh);
+    }
+  }
+
+  .x-site .x-scanline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    z-index: 999;
+    pointer-events: none;
+    background: linear-gradient(to right, transparent, var(--x-accent), transparent);
+    opacity: 0.3;
+    animation: scanline 4s linear infinite;
+  }
+
+  /* Glitch Effect on Hover for Headings */
+  .x-site .x-glitch:hover {
+    position: relative;
+    animation: glitch-anim 0.3s infinite;
+  }
+
+  @keyframes glitch-anim {
+    0% {
+      transform: translate(0);
+    }
+
+    20% {
+      transform: translate(-2px, 2px);
+    }
+
+    40% {
+      transform: translate(-2px, -2px);
+    }
+
+    60% {
+      transform: translate(2px, 2px);
+    }
+
+    80% {
+      transform: translate(2px, -2px);
+    }
+
+    100% {
+      transform: translate(0);
+    }
+  }
+
+  /* Dashboard Grid Background */
+  .x-site .x-dash-grid {
+    background-image:
+      linear-gradient(rgba(0, 229, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 229, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    border: 1px solid var(--x-accent-alpha);
+  }
+
+  /* Radar Animation */
+  @keyframes radar-spin {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .x-site .x-radar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, transparent 0deg, rgba(0, 229, 255, 0.2) 60deg, transparent 60deg);
+    animation: radar-spin 4s linear infinite;
+    position: absolute;
+    inset: 0;
+  }
+
+  /* === MISSING COMPONENTS (v0.4 Polish) === */
+
+  /* Chips */
+  .x-site .x-step__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--x-sp-2);
+    justify-content: center;
+    margin-top: var(--x-sp-3);
+  }
+
+  .x-site .x-chip {
+    font-family: var(--x-ff-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border: 1px solid var(--x-line);
+    border-radius: 2px;
+    color: var(--x-muted);
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  /* Self-Check */
+  .x-site .x-selfcheck {
+    background: var(--x-surface);
+    border: 1px solid var(--x-line);
+    padding: var(--x-sp-6);
+    border-radius: var(--x-r-3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .x-site .x-selfcheck::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    bottom: 0;
+    background: var(--x-accent);
+    opacity: 0.5;
+  }
+
+  .x-site .x-check {
+    display: flex;
+    align-items: center;
+    gap: var(--x-sp-3);
+    margin-bottom: var(--x-sp-3);
+    cursor: pointer;
+    font-size: var(--x-fs-5);
+    color: var(--x-muted);
+    user-select: none;
+    transition: color 0.2s;
+  }
+
+  .x-site .x-check:hover {
+    color: var(--x-text);
+  }
+
+  .x-site .x-check input {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--x-muted);
+    border-radius: 2px;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .x-site .x-check input:checked {
+    background: var(--x-accent);
+    border-color: var(--x-accent);
+  }
+
+  .x-site .x-check input:checked::after {
+    content: '✔';
+    position: absolute;
+    inset: 0;
+    color: #000;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .x-site .x-selfcheck__result {
+    margin-top: var(--x-sp-5);
+    padding: var(--x-sp-4);
+    background: rgba(0, 229, 255, 0.05);
+    border: 1px solid var(--x-accent);
+    color: var(--x-accent);
+    font-family: var(--x-ff-mono);
+    font-size: var(--x-fs-5);
+    display: none;
+  }
+
+  .x-site .x-selfcheck__result--visible {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  /* Contacts Grid */
+  .x-site .x-contacts__row {
+    display: flex;
+    justify-content: center;
+    gap: var(--x-sp-7);
+    flex-wrap: wrap;
+    margin-top: var(--x-sp-6);
+  }
+
+  .x-site .x-contacts__item {
+    font-size: var(--x-fs-5);
+    color: var(--x-muted);
+    display: flex;
+    flex-direction: column;
+    gap: var(--x-sp-2);
+  }
+
+  .x-site .x-contacts__item strong {
+    color: var(--x-text);
+    font-family: var(--x-ff-head);
+  }
+
+  .x-site .x-contacts__item a {
+    color: var(--x-accent);
+  }
+
+  /* Drawer Docs */
+  .x-site .x-drawer__docs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--x-sp-3);
+    margin-top: var(--x-sp-5);
+  }
+
+  .x-site .x-drawer__doc {
+    display: flex;
+    align-items: center;
+    gap: var(--x-sp-4);
+    padding: var(--x-sp-4);
+    background: var(--x-surface-2);
+    border: 1px solid var(--x-line);
+    border-radius: var(--x-r-2);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .x-site .x-drawer__doc:hover {
+    border-color: var(--x-accent);
+    transform: translateX(4px);
+  }
+
+  .x-site .x-drawer__doc-icon {
+    font-size: 1.5rem;
+    color: var(--x-muted);
+  }
+
+  .x-site .x-drawer__doc:hover .x-drawer__doc-icon {
+    color: var(--x-accent);
+  }
+
+  .x-site .x-drawer__doc-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .x-site .x-drawer__doc-name {
+    font-weight: 700;
+    color: var(--x-text);
+    font-size: var(--x-fs-5);
+  }
+
+  .x-site .x-drawer__doc-desc {
+    font-size: 12px;
+    color: var(--x-muted);
+  }
+
+  /* Responsive Mobile */
+  @media(max-width:768px) {
+    .x-site .x-hero__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .x-site .x-stepper {
+      flex-direction: column;
+    }
+
+    .x-site .x-drawer__panel {
+      width: 100%;
+      top: auto;
+      bottom: 0;
+      border-left: none;
+      border-top: 1px solid var(--x-line);
+      transform: translateY(100%);
+    }
+
+    .x-site .x-drawer--open .x-drawer__panel {
+      transform: translateY(0);
+    }
+
+    .x-site .x-h2 {
+      font-size: 1.75rem;
+    }
+  }
+
+  /* SCOPED REDUCED MOTION (P0 Fix) */
+  @media(prefers-reduced-motion:reduce) {
+
+    .x-site *,
+    .x-site *::before,
+    .x-site *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+</style>
+
+<div class="x-site">
+  <div class="x-scanline"></div>
+
+  <!-- S0: HEADER -->
+  <header class="x-header" id="x-header">
+    <div class="x-header__inner">
+      <a class="x-logo" href="/">АГРО<span>ТАКТИК</span></a>
+      <nav>
+        <ul class="x-nav" id="x-nav">
+          <li><a class="x-nav__item" href="#x-model">Модель</a></li>
+          <li><a class="x-nav__item" href="#x-platform">Платформа</a></li>
+          <li><a class="x-nav__item" href="#x-integrations">Интеграции</a></li>
+          <li><a class="x-nav__item" href="#x-pilot">Пилот</a></li>
+          <li><a class="x-nav__item" href="#recCONTACTS">Контакты</a></li>
+        </ul>
+      </nav>
+      <!-- REPLACE #rec99999999 with real Tilda recID -->
+      <a class="x-btn x-btn--primary" href="#rec99999999">Запросить демо</a>
+      <button class="x-burger" id="x-burger" aria-label="Меню">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- S1: HERO -->
+  <section class="x-hero">
+    <div class="x-wrap">
+      <div class="x-hero__grid">
+        <div class="x-hero__content">
+          <p class="x-hero__eyebrow">Операционный контур для агрохолдингов</p>
+          <h1>Командный центр,<br>который превращает сезон<br>в управляемую систему</h1>
+          <p class="x-hero__sub">Один контур для диспетчеризации, контроля отклонений и документального подтверждения
+            &mdash; вместо раздробленных чатов, отчётов и телефонных решений.</p>
+
+          <div class="x-hero__visual x-dash-grid">
+            <!-- (Visual Content Unchanged) -->
+          </div>
+
+          <!-- Role Switcher -->
+          <div class="x-tabs" role="tablist" aria-label="Роли пользователей">
+            <button class="x-tab x-tab--active" role="tab" aria-selected="true" aria-controls="panel-coo"
+              id="tab-coo">Руководителю</button>
+            <button class="x-tab" role="tab" aria-selected="false" aria-controls="panel-it" id="tab-it">IT + ИБ</button>
+            <button class="x-tab" role="tab" aria-selected="false" aria-controls="panel-eng"
+              id="tab-eng">Инженеру</button>
+          </div>
+
+          <div class="x-tab-panel x-tab-panel--active" id="panel-coo" role="tabpanel" aria-labelledby="tab-coo">
+            <ul class="x-hero__bullets">
+              <li>План-факт и KPI по каждому подразделению в реальном времени</li>
+              <li>Очередь отклонений с приоритетами и ответственными</li>
+              <li>Готовые пакеты для правления и совета директоров</li>
+              <li>Минимизация рисков простоя техники в сезон</li>
+            </ul>
+          </div>
+          <div class="x-tab-panel" id="panel-it" role="tabpanel" aria-labelledby="tab-it">
+            <ul class="x-hero__bullets">
+              <li>Интеграция поверх существующих ERP/1С без замены</li>
+              <li>Аудит-трейл: кто-что-когда-почему &mdash; полная прозрачность</li>
+              <li>ИБ-контроль: ролевой доступ, журналирование, шифрование</li>
+              <li>API-first архитектура для кастомных расширений</li>
+            </ul>
+          </div>
+          <div class="x-tab-panel" id="panel-eng" role="tabpanel" aria-labelledby="tab-eng">
+            <ul class="x-hero__bullets">
+              <li>Алерты на отклонения техники в поле &mdash; до поломки</li>
+              <li>Единая картина парка: телематика + датчики + GPS</li>
+              <li>Журнал обслуживания с привязкой к нормативам</li>
+              <li>Автоматический расчёт выработки и ГСМ</li>
+            </ul>
+          </div>
+
+          <div class="x-hero__ctas">
+            <a class="x-btn x-btn--primary" href="#rec99999999">Запросить демо / техсессию</a>
+            <button class="x-btn x-btn--secondary" id="x-open-drawer">Получить пакет документов</button>
+          </div>
+          <p class="x-hero__micro">Без обязательств &middot; 30 минут &middot; NDA при необходимости</p>
+        </div>
+
+        <div class="x-hero__visual x-dash-grid">
+          <div class="x-radar"></div>
+          <!-- DATA LAYER: LIVE MAP -->
+          <svg viewBox="0 0 400 300" style="width:100%; height:100%; position:absolute; inset:0; pointer-events:none;">
+            <!-- Grid Lines -->
+            <path d="M0,75 L400,75 M0,150 L400,150 M0,225 L400,225 M100,0 L100,300 M200,0 L200,300 M300,0 L300,300"
+              stroke="var(--x-line)" stroke-width="0.5" opacity="0.3" />
+            <!-- Zones (Fields) -->
+            <path d="M50,180 L140,180 L160,240 L40,240 Z" fill="rgba(0,229,255,0.05)" stroke="var(--x-accent)"
+              stroke-width="1" vector-effect="non-scaling-stroke" />
+            <path d="M180,50 L280,50 L280,120 L180,120 Z" fill="rgba(0,229,255,0.02)" stroke="var(--x-muted)"
+              stroke-width="1" stroke-dasharray="4 2" />
+            <path d="M300,150 L380,150 L350,250 L280,250 Z" fill="none" stroke="var(--x-accent)" stroke-width="1"
+              opacity="0.5" />
+            <!-- Active Units (Dots) -->
+            <circle cx="100" cy="210" r="3" fill="var(--x-accent)">
+              <animate attributeName="opacity" values="1;0.2;1" dur="2s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="230" cy="85" r="3" fill="var(--x-accent-2)" />
+            <!-- Use foreignObject for HTML labels inside SVG if needed, but absolute overlaid divs are safer for Tilda -->
+          </svg>
+
+          <!-- UI OVERLAY -->
+          <div
+            style="position:absolute; top:20px; left:20px; font-family:var(--x-ff-mono); font-size:10px; color:var(--x-accent);">
+            LIVE_FEED :: ZONE_4 ACTIVE<br>
+            <span style="color:var(--x-muted)">LAT: 45.021 LON: 38.991</span>
+          </div>
+
+          <!-- HOTSPOTS (Retained & Enhanced) -->
+          <div class="x-hotspot" data-tip="Очередь отклонений: алерты, приоритеты, ответственные"
+            style="top:25%;left:20%;" tabindex="0">
+            <div
+              style="position:absolute; top:-20px; left:14px; width:1px; height:20px; background:var(--x-accent); transform:rotate(-45deg); opacity:0.5;">
+            </div>
+          </div>
+          <div class="x-hotspot" data-tip="KPI-дашборд: план-факт по подразделениям" style="top:45%;left:65%;"
+            tabindex="0"></div>
+          <div class="x-hotspot" data-tip="Интеграционный хаб: ERP, телематика, датчики" style="top:70%;left:35%;"
+            tabindex="0"></div>
+          <div class="x-hotspot" data-tip="Комплаенс: Меркурий, документооборот, аудит" style="top:60%;left:80%;"
+            tabindex="0"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST STRIP -->
+  <div class="x-trust">
+    <div class="x-wrap">
+      <div class="x-trust__row">
+        <span class="x-badge" data-doc="security"><span class="x-badge__icon">&#128737;</span> Безопасность</span>
+        <span class="x-badge" data-doc="safety"><span class="x-badge__icon">&#9881;</span> Надежность</span>
+        <span class="x-badge" data-doc="integration"><span class="x-badge__icon">&#128279;</span> Интеграция</span>
+        <span class="x-badge" data-doc="compliance"><span class="x-badge__icon">&#128203;</span> Комплаенс</span>
+        <span class="x-badge" data-doc="procurement"><span class="x-badge__icon">&#128230;</span> Закупка</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- S2: ОПЕРАЦИОННАЯ МОДЕЛЬ -->
+  <section class="x-section" id="x-model">
+    <div class="x-wrap">
+      <div class="x-section__head">
+        <p class="x-section__label">Операционная модель</p>
+        <h2 class="x-h2">Как Агротактик превращает сезон в управляемую систему</h2>
+        <p class="x-lead">Пять узлов контура &mdash; от планирования до документального подтверждения. Каждый
+          отвечает на три вопроса: что контролируем, что измеряем, какой документ подтверждает.</p>
+      </div>
+      <div class="x-accordion">
+        <div class="x-acc-item">
+          <button class="x-acc-item__head">1. Планирование и нормирование</button>
+          <div class="x-acc-item__body">
+            <p><strong>Контролируем:</strong> сезонный план, нормативы расхода, графики техники.</p>
+            <p><strong>Измеряем:</strong> отклонение план/факт, загрузка ресурсов.</p>
+            <p><strong>Документ:</strong> <a href="javascript:void(0)" class="x-doc-link"
+                data-doc="pilot-blueprint">Pilot Blueprint</a></p>
+          </div>
+        </div>
+        <div class="x-acc-item">
+          <button class="x-acc-item__head">2. Диспетчеризация и алерты</button>
+          <div class="x-acc-item__body">
+            <p><strong>Контролируем:</strong> очередь отклонений, приоритеты, назначение ответственных.</p>
+            <p><strong>Измеряем:</strong> время реакции, % закрытых отклонений за смену.</p>
+            <p><strong>Документ:</strong> <a href="javascript:void(0)" class="x-doc-link"
+                data-doc="architecture">Architecture Brief</a></p>
+          </div>
+        </div>
+        <div class="x-acc-item">
+          <button class="x-acc-item__head">3. Исполнение и контроль</button>
+          <div class="x-acc-item__body">
+            <p><strong>Контролируем:</strong> статус задач в поле, GPS-привязка, фотоотчёты.</p>
+            <p><strong>Измеряем:</strong> % выполнения операций в срок, точность покрытия.</p>
+            <p><strong>Документ:</strong> <a href="javascript:void(0)" class="x-doc-link"
+                data-doc="onepager">One-Pager</a></p>
+          </div>
+        </div>
+        <div class="x-acc-item">
+          <button class="x-acc-item__head">4. Интеграция данных</button>
+          <div class="x-acc-item__body">
+            <p><strong>Контролируем:</strong> потоки данных ERP, телематика, датчики, BI.</p>
+            <p><strong>Измеряем:</strong> задержка синхронизации, % автоматизированных проводок.</p>
+            <p><strong>Документ:</strong> <a href="javascript:void(0)" class="x-doc-link"
+                data-doc="integration">Integration Checklist</a></p>
+          </div>
+        </div>
+        <div class="x-acc-item">
+          <button class="x-acc-item__head">5. Комплаенс и отчётность</button>
+          <div class="x-acc-item__body">
+            <p><strong>Контролируем:</strong> соответствие регуляторным требованиям, Меркурий, audit trail.</p>
+            <p><strong>Измеряем:</strong> полнота журнала, % операций с документальным подтверждением.</p>
+            <p><strong>Документ:</strong> <a href="javascript:void(0)" class="x-doc-link"
+                data-doc="compliance">Compliance Brief</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S3: 4 СЛОЯ ПЛАТФОРМЫ -->
+  <section class="x-section" id="x-platform">
+    <div class="x-wrap">
+      <div class="x-section__head">
+        <p class="x-section__label">Архитектура</p>
+        <h2 class="x-h2">Платформа, собранная как контур управления</h2>
+        <p class="x-lead">Четыре слоя, каждый решает свою задачу. Вместе &mdash; замкнутый цикл от данных до
+          решения.</p>
+      </div>
+      <div class="x-cards">
+        <div class="x-card">
+          <div class="x-card__icon">&#9889;</div>
+          <h3 class="x-card__title">Orchestrator</h3>
+          <p class="x-card__text">Маршрутизация задач, приоритизация отклонений, автоматическое назначение
+            ответственных по регламенту.</p>
+          <a href="javascript:void(0)" class="x-btn x-btn--tertiary x-doc-link" data-doc="architecture">Скачать
+            Architecture Brief</a>
+        </div>
+        <div class="x-card">
+          <div class="x-card__icon">&#128202;</div>
+          <h3 class="x-card__title">Command Center</h3>
+          <p class="x-card__text">Единый дашборд: план-факт, KPI по подразделениям, очередь алертов, карта техники
+            в поле.</p>
+          <a href="javascript:void(0)" class="x-btn x-btn--tertiary x-doc-link" data-doc="onepager">Скачать
+            One-Pager</a>
+        </div>
+        <div class="x-card">
+          <div class="x-card__icon">&#128279;</div>
+          <h3 class="x-card__title">Integration Hub</h3>
+          <p class="x-card__text">Подключение к ERP/1С, телематике, датчикам и BI без замены существующих систем.
+            API-first.</p>
+          <a href="javascript:void(0)" class="x-btn x-btn--tertiary x-doc-link" data-doc="integration">Скачать
+            Integration Checklist</a>
+        </div>
+        <div class="x-card">
+          <div class="x-card__icon">&#128203;</div>
+          <h3 class="x-card__title">Compliance Suite</h3>
+          <p class="x-card__text">Автоматическая фиксация действий (audit trail), отчётность по регуляторам,
+            поддержка Меркурий.</p>
+          <a href="javascript:void(0)" class="x-btn x-btn--tertiary x-doc-link" data-doc="compliance">Скачать Compliance
+            Brief</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S4: ЛЕСТНИЦА АВТОНОМИИ -->
+  <section class="x-section" id="x-autonomy">
+    <div class="x-wrap">
+      <div class="x-section__head">
+        <p class="x-section__label">Уровни автономии</p>
+        <h2 class="x-h2">Управляемая лестница: от наблюдаемости к оркестрации</h2>
+        <p class="x-lead">Поэтапное наращивание автоматизации &mdash; без скачков и рисков.</p>
+      </div>
+      <div class="x-stepper">
+        <div class="x-step x-step--active">
+          <div class="x-step__level">A2</div>
+          <h3 class="x-step__title">Наблюдаемость</h3>
+          <p class="x-card__text">Мониторинг, алерты, ручные решения.</p>
+          <div class="x-step__chips"><span class="x-chip">Данные</span><span class="x-chip">Связь</span></div>
+        </div>
+        <div class="x-step">
+          <div class="x-step__level">A3</div>
+          <h3 class="x-step__title">Рекомендации</h3>
+          <p class="x-card__text">Система предлагает решения, человек подтверждает.</p>
+          <div class="x-step__chips"><span class="x-chip">Регламенты</span><span class="x-chip">ИБ</span><span
+              class="x-chip">Данные</span></div>
+        </div>
+        <div class="x-step">
+          <div class="x-step__level">A4</div>
+          <h3 class="x-step__title">Оркестрация</h3>
+          <p class="x-card__text">Автоматическое исполнение в рамках регламента.</p>
+          <div class="x-step__chips"><span class="x-chip">Регламенты</span><span class="x-chip">ИБ</span><span
+              class="x-chip">Аудит</span><span class="x-chip">Комплаенс</span></div>
+        </div>
+      </div>
+      <p style="text-align:center;margin-top:var(--x-sp-5);font-size:var(--x-fs-6);color:var(--x-muted)">Кликните на
+        уровень, чтобы узнать подробности</p>
+    </div>
+  </section>
+
+  <!-- S5: КОМАНДНЫЙ ЦЕНТР -->
+  <section class="x-section" id="x-command">
+    <div class="x-wrap">
+      <div class="x-section__head">
+        <p class="x-section__label">Командный центр</p>
+        <h2 class="x-h2">Сценарии: от отклонения до решения за минуты</h2>
+      </div>
+      <div class="x-cards">
+        <!-- Card 1: Alert Flow -->
+        <div class="x-card">
+          <div style="display:flex; justify-content:space-between; margin-bottom:var(--x-sp-3); opacity:0.7;">
+            <div style="font-size:10px; font-family:var(--x-ff-mono);">ALERT_ID: 9942</div>
+            <div
+              style="width:8px; height:8px; background:var(--x-accent-2); border-radius:50%; box-shadow:0 0 5px var(--x-accent-2);">
+            </div>
+          </div>
+          <h3 class="x-card__title">Отклонение &rarr; Решение</h3>
+          <p class="x-card__text">Датчик фиксирует аномалию. Система формирует алерт, назначает ответственного.</p>
+          <!-- Mini Visual: Timeline -->
+          <div style="display:flex; align-items:center; margin-top:var(--x-sp-4); gap:5px;">
+            <div style="height:4px; flex:1; background:var(--x-line);"></div>
+            <div style="width:8px; height:8px; background:var(--x-muted); border-radius:50%;"></div>
+            <div style="height:4px; flex:1; background:var(--x-line);"></div>
+            <div style="width:8px; height:8px; background:var(--x-accent); border-radius:50%;"></div>
+            <div style="height:4px; flex:1; background:var(--x-accent);"></div>
+          </div>
+        </div>
+
+        <!-- Card 2: Plan/Fact Chart -->
+        <div class="x-card">
+          <div
+            style="height:60px; position:relative; margin-bottom:var(--x-sp-4); border-bottom:1px solid var(--x-line);">
+            <!-- CSS Bar Charts -->
+            <div class="x-bar" style="left:20%; --h:40%;"></div>
+            <div class="x-bar" style="left:30%; --h:30%; background:#fff; opacity:0.3;"></div>
+
+            <div class="x-bar" style="left:50%; --h:70%;"></div>
+            <div class="x-bar" style="left:60%; --h:50%; background:#fff; opacity:0.3;"></div>
+
+            <div class="x-bar" style="left:80%; --h:85%;"></div>
+            <div class="x-bar" style="left:90%; --h:90%; background:var(--x-accent-2);"></div>
+          </div>
+          <h3 class="x-card__title">Плановая операция &rarr; KPI</h3>
+          <p class="x-card__text">Фиксация факт/план в реальном времени. Обновление KPI-дашборда.</p>
+        </div>
+
+        <!-- Card 3: Document Gen -->
+        <div class="x-card">
+          <div style="display:flex; gap:10px; margin-bottom:var(--x-sp-4);">
+            <div style="width:40px; height:50px; border:1px solid var(--x-line); position:relative;">
+              <div
+                style="position:absolute; bottom:5px; right:5px; border-bottom:2px solid var(--x-accent); width:10px;">
+              </div>
+            </div>
+            <div style="align-self:center; font-family:var(--x-ff-mono); font-size:20px; color:var(--x-accent);">&rarr;
+            </div>
+            <div
+              style="width:40px; height:50px; background:rgba(0,229,255,0.1); border:1px solid var(--x-accent); display:flex; align-items:center; justify-content:center;">
+              <div style="font-size:20px;">&#10003;</div>
+            </div>
+          </div>
+          <h3 class="x-card__title">Запрос &rarr; Документ</h3>
+          <p class="x-card__text">Автоматическая генерация отчёта из журнала &rarr; подпись и отправка.</p>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:var(--x-sp-6)">
+        <a class="x-btn x-btn--primary" href="#rec99999999">Запросить демо по сценарию</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- S6: ИНТЕГРАЦИИ -->
+  <section class="x-section" id="x-integrations">
+    <div class="x-wrap">
+      <div class="x-section__head">
+        <p class="x-section__label">Интеграции</p>
+        <h2 class="x-h2">Подключаемся поверх &mdash; не заменяем</h2>
+        <p class="x-lead">Работаем с тем, что уже есть: ERP/1С, телематика, датчики, BI. API-first.</p>
+      </div>
+      <div class="x-cards" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+        <div class="x-card">
+          <h3 class="x-card__title">ERP / 1С</h3>
+          <p class="x-card__text">Двухсторонняя синхронизация проводок и справочников.</p>
+        </div>
+        <div class="x-card">
+          <h3 class="x-card__title">Телематика</h3>
+          <p class="x-card__text">GPS, CAN-шина, топливо, моточасы.</p>
+        </div>
+        <div class="x-card">
+          <h3 class="x-card__title">Датчики IoT</h3>
+          <p class="x-card__text">Влажность, температура, уровни, давление.</p>
+        </div>
+        <div class="x-card">
+          <h3 class="x-card__title">BI</h3>
+          <p class="x-card__text">Экспорт в Power BI, Tableau, собственные дашборды.</p>
+        </div>
+        <div class="x-card">
+          <h3 class="x-card__title">REST API</h3>
+          <p class="x-card__text">Открытый API для кастомных интеграций.</p>
+        </div>
+      </div>
+      <div class="x-selfcheck" style="margin-top:var(--x-sp-7)">
+        <h3 class="x-card__title" style="margin-bottom:var(--x-sp-4)">Экспресс-проверка за 2 минуты</h3>
+        <label class="x-check"><input type="checkbox" data-score="1"> Используем ERP/1С</label>
+        <label class="x-check"><input type="checkbox" data-score="1"> Есть телематика на технике</label>
+        <label class="x-check"><input type="checkbox" data-score="1"> Нужен мониторинг датчиков</label>
+        <label class="x-check"><input type="checkbox" data-score="1"> Хотим видеть KPI в реальном времени</label>
+        <label class="x-check"><input type="checkbox" data-score="1"> Нужна отчётность (Меркурий и др.)</label>
+        <div class="x-selfcheck__result" id="x-selfcheck-result"></div>
+      </div>
+      <div style="text-align:center;margin-top:var(--x-sp-6)">
+        <a href="javascript:void(0)" class="x-btn x-btn--secondary x-doc-link" data-doc="integration">Скачать
+          Integration Checklist</a>
+      </div>
+    </div>
+  </section><!-- S7: КОМПЛАЕНС -->
+  <section class="x-section" id="x-compliance">
+    <div class="x-wrap">
+      <div class="x-section__head">
+        <p class="x-section__label">Комплаенс</p>
+        <h2 class="x-h2">Регуляторные требования &mdash; часть процесса, а не отдельная задача</h2>
+        <p class="x-lead">Автоматическая фиксация в журнале, поддержка Меркурий, готовые отчёты для проверок.</p>
+      </div>
+      <ul class="x-hero__bullets" style="margin-bottom:var(--x-sp-6)">
+        <li>Журнал действий (audit trail) &mdash; кто, что, когда, почему</li>
+        <li>Поддержка системы Меркурий для ветеринарного контроля</li>
+        <li>Автоматическая генерация отчётов по требованию регуляторов</li>
+        <li>Ролевой доступ к данным и документам</li>
+      </ul>
+      <a href="javascript:void(0)" class="x-btn x-btn--secondary x-doc-link" data-doc="compliance">Скачать Compliance
+        Brief</a>
+    </div>
+  </section>
+
+  <!-- S8: БЕЗОПАСНОСТЬ + ИБ -->
+  <section class="x-section" id="x-security">
+    <div class="x-wrap">
+      <div class="x-section__head">
+        <p class="x-section__label">Безопасность</p>
+        <h2 class="x-h2">Безопасность и ИБ &mdash; встроены, а не добавлены потом</h2>
+      </div>
+      <div class="x-cards" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+        <div class="x-card">
+          <h3 class="x-card__title">Шифрование</h3>
+          <p class="x-card__text">Данные в покое и в транзите. TLS 1.3, AES-256.</p>
+        </div>
+        <div class="x-card">
+          <h3 class="x-card__title">Ролевой доступ</h3>
+          <p class="x-card__text">RBAC + журнал. Кто к чему имеет доступ &mdash; прозрачно.</p>
+        </div>
+        <div class="x-card">
+          <h3 class="x-card__title">Audit Trail</h3>
+          <p class="x-card__text">Неизменяемый журнал всех операций и изменений.</p>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:var(--x-sp-6)">
+        <button class="x-btn x-btn--primary" id="x-open-trust">Открыть Trust Pack</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- S9: ПИЛОТ -->
+  <section class="x-section" id="x-pilot">
+    <div class="x-wrap">
+      <div class="x-section__head">
+        <p class="x-section__label">Пилот</p>
+        <h2 class="x-h2">Пилот за 6-8 недель &mdash; с метриками, приёмкой и артефактами</h2>
+      </div>
+      <div class="x-cards">
+        <div class="x-card">
+          <h3 class="x-card__title">Критерии приёмки</h3>
+          <p class="x-card__text">Определяем KPI, пороги и метрики до старта пилота.</p>
+        </div>
+        <div class="x-card">
+          <h3 class="x-card__title">Измерение результата</h3>
+          <p class="x-card__text">Автоматический сбор данных. Дашборд пилота в реальном времени.</p>
+        </div>
+        <div class="x-card">
+          <h3 class="x-card__title">Выходные артефакты</h3>
+          <p class="x-card__text">Отчёт по пилоту, рекомендации по масштабированию, ROI-модель.</p>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:var(--x-sp-6)">
+        <a href="javascript:void(0)" class="x-btn x-btn--secondary x-doc-link" data-doc="pilot-blueprint">Скачать Pilot
+          Blueprint</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- S10: PROCUREMENT PACK -->
+  <section class="x-section" id="x-procurement">
+    <div class="x-wrap">
+      <div class="x-section__head">
+        <p class="x-section__label">Для закупки</p>
+        <h2 class="x-h2">Документы для закупки &mdash; собраны и готовы</h2>
+      </div>
+      <div class="x-cards" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+        <div class="x-card">
+          <h3 class="x-card__title">One-Pager</h3>
+          <p class="x-card__text">Краткое описание продукта для ЛПР.</p>
+        </div>
+        <div class="x-card">
+          <h3 class="x-card__title">Pilot Blueprint</h3>
+          <p class="x-card__text">План пилота с критериями приёмки.</p>
+        </div>
+        <div class="x-card">
+          <h3 class="x-card__title">Architecture Brief</h3>
+          <p class="x-card__text">Архитектурная схема для IT-блока.</p>
+        </div>
+        <div class="x-card">
+          <h3 class="x-card__title">Security Brief</h3>
+          <p class="x-card__text">Описание мер ИБ для службы безопасности.</p>
+        </div>
+        <div class="x-card">
+          <h3 class="x-card__title">Compliance Brief</h3>
+          <p class="x-card__text">Регуляторное соответствие для юристов.</p>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:var(--x-sp-6)">
+        <button class="x-btn x-btn--primary" id="x-open-procurement">Получить Procurement Pack</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- S11: ФИНАЛЬНЫЙ CTA -->
+  <section class="x-form-cta" id="x-form-anchor">
+    <div class="x-wrap">
+      <p class="x-section__label" style="text-align:center">Следующий шаг</p>
+      <h2 class="x-h2" style="text-align:center">Готовы увидеть контур управления в действии?</h2>
+      <div style="display:flex;gap:var(--x-sp-4);justify-content:center;flex-wrap:wrap">
+        <a class="x-btn x-btn--primary" href="#rec99999999">Запросить демо / техсессию</a>
+        <button class="x-btn x-btn--secondary" id="x-open-drawer-2">Получить пакет документов</button>
+      </div>
+      <div class="x-form-cta__steps">
+        <div class="x-form-cta__step"><strong>01</strong> Оставляете заявку</div>
+        <div class="x-form-cta__step"><strong>02</strong> Согласуем формат</div>
+        <div class="x-form-cta__step"><strong>03</strong> Получаете результат за 30 мин</div>
+      </div>
+      <p style="text-align:center;margin-top:var(--x-sp-4);font-size:var(--x-fs-6);color:var(--x-muted)">Без
+        обязательств &middot; NDA при необходимости &middot; Ваши данные не передаются третьим лицам</p>
+    </div>
+  </section>
+
+  <!-- S12: КОНТАКТЫ -->
+  <section class="x-contacts" id="recCONTACTS">
+    <div class="x-wrap">
+      <p class="x-section__label" style="text-align:center">Контакты</p>
+      <h2 class="x-h2" style="text-align:center">Свяжитесь с нами</h2>
+      <div class="x-contacts__row">
+        <div class="x-contacts__item">info@agrotaktik.ru</div>
+        <div class="x-contacts__item">+7 (XXX) XXX-XX-XX</div>
+        <div class="x-contacts__item">Москва, Россия</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DRAWER -->
+  <div class="x-drawer" id="x-drawer" role="dialog" aria-modal="true" aria-label="Пакет документов">
+    <div class="x-drawer__overlay" id="x-drawer-overlay"></div>
+    <div class="x-drawer__panel">
+      <button class="x-drawer__close" id="x-drawer-close" aria-label="Закрыть">&#10005;</button>
+      <h3 class="x-drawer__title">Пакет документов</h3>
+      <p style="font-size:var(--x-fs-5);color:var(--x-muted);margin-bottom:var(--x-sp-5)">Скачайте нужные документы
+        для внутреннего согласования. NDA &mdash; по запросу.</p>
+      <ul class="x-drawer__docs">
+        <li class="x-drawer__doc" data-doc="onepager"><span class="x-drawer__doc-icon">&#128196;</span>
+          <div>
+            <div class="x-drawer__doc-name">One-Pager</div>
+            <div class="x-drawer__doc-desc">Описание продукта для ЛПР (2 стр.)</div>
+          </div><a href="#" class="x-btn x-btn--tertiary" style="margin-left:auto">Скачать</a>
+        </li>
+        <li class="x-drawer__doc" data-doc="pilot-blueprint"><span class="x-drawer__doc-icon">&#128208;</span>
+          <div>
+            <div class="x-drawer__doc-name">Pilot Blueprint</div>
+            <div class="x-drawer__doc-desc">План пилота с критериями приёмки</div>
+          </div><a href="#" class="x-btn x-btn--tertiary" style="margin-left:auto">Скачать</a>
+        </li>
+        <li class="x-drawer__doc" data-doc="architecture"><span class="x-drawer__doc-icon">&#127959;</span>
+          <div>
+            <div class="x-drawer__doc-name">Architecture Brief</div>
+            <div class="x-drawer__doc-desc">Архитектурная схема для IT-блока</div>
+          </div><a href="#" class="x-btn x-btn--tertiary" style="margin-left:auto">Скачать</a>
+        </li>
+        <li class="x-drawer__doc" data-doc="security"><span class="x-drawer__doc-icon">&#128274;</span>
+          <div>
+            <div class="x-drawer__doc-name">Security Brief</div>
+            <div class="x-drawer__doc-desc">Меры ИБ для службы безопасности</div>
+          </div><a href="#" class="x-btn x-btn--tertiary" style="margin-left:auto">Скачать</a>
+        </li>
+        <li class="x-drawer__doc" data-doc="compliance"><span class="x-drawer__doc-icon">&#128203;</span>
+          <div>
+            <div class="x-drawer__doc-name">Compliance Brief</div>
+            <div class="x-drawer__doc-desc">Регуляторное соответствие</div>
+          </div><a href="#" class="x-btn x-btn--tertiary" style="margin-left:auto">Скачать</a>
+        </li>
+      </ul>
+      <div style="margin-top:var(--x-sp-6);display:flex;gap:var(--x-sp-4);flex-wrap:wrap">
+        <a class="x-btn x-btn--primary" href="#rec99999999">Запросить демо</a>
+        <button class="x-btn x-btn--secondary" id="x-drawer-close-2">Закрыть</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /.x-site -->
+
+<script>
+  (function () {
+    'use strict';
+
+    /* === STICKY HEADER === */
+    var header = document.getElementById('x-header');
+    if (header) {
+      var ticking = false;
+      window.addEventListener('scroll', function () {
+        if (!ticking) {
+          window.requestAnimationFrame(function () {
+            header.classList.toggle('x-header--sticky', window.scrollY > 140);
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+    }
+
+    /* === BURGER MENU === */
+    var burger = document.getElementById('x-burger');
+    if (burger) {
+      burger.addEventListener('click', function () {
+        header.classList.toggle('x-header--menu-open');
+        burger.innerHTML = header.classList.contains('x-header--menu-open') ? '&#10005;' : '&#9776;';
+      });
+    }
+
+    /* === HERO ROLE TABS === */
+    document.querySelectorAll('.x-site .x-tab').forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        document.querySelectorAll('.x-site .x-tab').forEach(function (t) {
+          t.classList.remove('x-tab--active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('x-tab--active');
+        tab.setAttribute('aria-selected', 'true');
+        document.querySelectorAll('.x-site .x-tab-panel').forEach(function (p) {
+          p.classList.remove('x-tab-panel--active');
+        });
+        var tgt = document.getElementById('panel-' + tab.getAttribute('data-panel'));
+        if (tgt) tgt.classList.add('x-tab-panel--active');
+      });
+    });
+
+    /* === STEPPER (A2/A3/A4) — click to highlight === */
+    document.querySelectorAll('.x-site .x-step').forEach(function (step) {
+      step.addEventListener('click', function () {
+        document.querySelectorAll('.x-site .x-step').forEach(function (s) {
+          s.classList.remove('x-step--active');
+        });
+        step.classList.add('x-step--active');
+      });
+    });
+
+    /* === ACCORDION === */
+    document.querySelectorAll('.x-site .x-acc-item__head').forEach(function (b) {
+      b.addEventListener('click', function () {
+        b.parentElement.classList.toggle('x-acc-item--open');
+      });
+    });
+
+    /* === DRAWER === */
+    var drawer = document.getElementById('x-drawer');
+    function openDrawer() {
+      drawer.classList.add('x-drawer--open');
+      document.documentElement.style.overflow = 'hidden';
+      document.getElementById('x-drawer-close').focus();
+    }
+    function closeDrawer() {
+      drawer.classList.remove('x-drawer--open');
+      document.documentElement.style.overflow = '';
+    }
+    ['x-open-drawer', 'x-open-drawer-2', 'x-open-trust', 'x-open-procurement'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('click', openDrawer);
+    });
+    document.getElementById('x-drawer-overlay').addEventListener('click', closeDrawer);
+    ['x-drawer-close', 'x-drawer-close-2'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('click', closeDrawer);
+    });
+    document.querySelectorAll('.x-site .x-badge').forEach(function (b) {
+      b.addEventListener('click', openDrawer);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && drawer.classList.contains('x-drawer--open')) closeDrawer();
+    });
+
+    /* === DOC-LINK placeholders → open drawer === */
+    document.querySelectorAll('.x-site .x-doc-link').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        openDrawer();
+      });
+    });
+
+    /* === HOTSPOTS === */
+    document.querySelectorAll('.x-site .x-hotspot').forEach(function (h) {
+      var tip = null;
+      function show() {
+        if (tip) return;
+        tip = document.createElement('div');
+        tip.textContent = h.getAttribute('data-tip');
+        tip.style.cssText = 'position:absolute;bottom:110%;left:50%;transform:translateX(-50%);background:#1a2332;color:#e8edf4;padding:8px 12px;border-radius:4px;font-size:12px;border:1px solid #1e293b;z-index:10;max-width:220px;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.4)';
+        h.appendChild(tip);
+      }
+      function hide() { if (tip) { tip.remove(); tip = null; } }
+      h.addEventListener('mouseenter', show);
+      h.addEventListener('mouseleave', hide);
+      h.addEventListener('click', function (e) { e.stopPropagation(); tip ? hide() : show(); });
+      h.addEventListener('focus', show);
+      h.addEventListener('blur', hide);
+      h.addEventListener('keydown', function (e) { if (e.key === 'Escape') hide(); });
+    });
+
+    /* === SELF-CHECK === */
+    var checks = document.querySelectorAll('.x-site .x-selfcheck input');
+    var res = document.getElementById('x-selfcheck-result');
+    if (checks.length && res) {
+      checks.forEach(function (c) {
+        c.addEventListener('change', function () {
+          var n = 0;
+          checks.forEach(function (ch) { if (ch.checked) n++; });
+          if (!n) { res.classList.remove('x-selfcheck__result--visible'); return; }
+          var m = '';
+          if (n <= 2) m = 'Рекомендация: начните с уровня A2 (наблюдаемость). Подключение за 2-4 недели.';
+          else if (n <= 4) m = 'Рекомендация: уровень A3 (рекомендации). Пилот 6 недель.';
+          else m = 'Рекомендация: полный контур A3-A4. Запросите техсессию.';
+          res.textContent = m;
+          res.classList.add('x-selfcheck__result--visible');
+        });
+      });
+    }
+
+  })();
+</script>
