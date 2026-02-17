@@ -678,7 +678,8 @@
     padding: var(--x-sp-5);
     border: 1px solid var(--x-line);
     border-radius: var(--x-r-3);
-    transition: border-color .2s
+    transition: border-color .2s;
+    cursor: pointer
   }
 
   .x-site .x-step--active {
@@ -914,424 +915,546 @@
   </div>
 
   <!-- S2: ОПЕРАЦИОННАЯ МОДЕЛЬ -->
-<section class="x-section" id="x-model">
+  <section class="x-section" id="x-model">
     <div class="x-wrap">
-        <div class="x-section__head">
-            <p class="x-section__label">Операционная модель</p>
-            <h2 class="x-h2">Как Агротактик превращает сезон в управляемую систему</h2>
-            <p class="x-lead">Пять узлов контура &mdash; от планирования до документального подтверждения. Каждый
-                отвечает на три вопроса: что контролируем, что измеряем, какой документ подтверждает.</p>
+      <div class="x-section__head">
+        <p class="x-section__label">Операционная модель</p>
+        <h2 class="x-h2">Как Агротактик превращает сезон в управляемую систему</h2>
+        <p class="x-lead">Пять узлов контура &mdash; от планирования до документального подтверждения. Каждый
+          отвечает на три вопроса: что контролируем, что измеряем, какой документ подтверждает.</p>
+      </div>
+      <div class="x-accordion">
+        <div class="x-acc-item">
+          <button class="x-acc-item__head">1. Планирование и нормирование</button>
+          <div class="x-acc-item__body">
+            <p><strong>Контролируем:</strong> сезонный план, нормативы расхода, графики техники.</p>
+            <p><strong>Измеряем:</strong> отклонение план/факт, загрузка ресурсов.</p>
+            <p><strong>Документ:</strong> <a href="javascript:void(0)" class="x-doc-link"
+                data-doc="pilot-blueprint">Pilot Blueprint</a></p>
+          </div>
         </div>
-        <div class="x-accordion">
-            <div class="x-acc-item">
-                <button class="x-acc-item__head">1. Планирование и нормирование</button>
-                <div class="x-acc-item__body">
-                    <p><strong>Контролируем:</strong> сезонный план, нормативы расхода, графики техники.</p>
-                    <p><strong>Измеряем:</strong> отклонение план/факт, загрузка ресурсов.</p>
-                    <p><strong>Документ:</strong> <a href="#" data-doc="pilot-blueprint">Pilot Blueprint</a></p>
-                </div>
-            </div>
-            <div class="x-acc-item">
-                <button class="x-acc-item__head">2. Диспетчеризация и алерты</button>
-                <div class="x-acc-item__body">
-                    <p><strong>Контролируем:</strong> очередь отклонений, приоритеты, назначение ответственных.</p>
-                    <p><strong>Измеряем:</strong> время реакции, % закрытых отклонений за смену.</p>
-                    <p><strong>Документ:</strong> <a href="#" data-doc="architecture">Architecture Brief</a></p>
-                </div>
-            </div>
-            <div class="x-acc-item">
-                <button class="x-acc-item__head">3. Исполнение и контроль</button>
-                <div class="x-acc-item__body">
-                    <p><strong>Контролируем:</strong> статус задач в поле, GPS-привязка, фотоотчёты.</p>
-                    <p><strong>Измеряем:</strong> % выполнения операций в срок, точность покрытия.</p>
-                    <p><strong>Документ:</strong> <a href="#" data-doc="onepager">One-Pager</a></p>
-                </div>
-            </div>
-            <div class="x-acc-item">
-                <button class="x-acc-item__head">4. Интеграция данных</button>
-                <div class="x-acc-item__body">
-                    <p><strong>Контролируем:</strong> потоки данных ERP, телематика, датчики, BI.</p>
-                    <p><strong>Измеряем:</strong> задержка синхронизации, % автоматизированных проводок.</p>
-                    <p><strong>Документ:</strong> <a href="#" data-doc="integration">Integration Checklist</a></p>
-                </div>
-            </div>
-            <div class="x-acc-item">
-                <button class="x-acc-item__head">5. Комплаенс и отчётность</button>
-                <div class="x-acc-item__body">
-                    <p><strong>Контролируем:</strong> соответствие регуляторным требованиям, Меркурий, audit trail.</p>
-                    <p><strong>Измеряем:</strong> полнота журнала, % операций с документальным подтверждением.</p>
-                    <p><strong>Документ:</strong> <a href="#" data-doc="compliance">Compliance Brief</a></p>
-                </div>
-            </div>
+        <div class="x-acc-item">
+          <button class="x-acc-item__head">2. Диспетчеризация и алерты</button>
+          <div class="x-acc-item__body">
+            <p><strong>Контролируем:</strong> очередь отклонений, приоритеты, назначение ответственных.</p>
+            <p><strong>Измеряем:</strong> время реакции, % закрытых отклонений за смену.</p>
+            <p><strong>Документ:</strong> <a href="javascript:void(0)" class="x-doc-link"
+                data-doc="architecture">Architecture Brief</a></p>
+          </div>
         </div>
+        <div class="x-acc-item">
+          <button class="x-acc-item__head">3. Исполнение и контроль</button>
+          <div class="x-acc-item__body">
+            <p><strong>Контролируем:</strong> статус задач в поле, GPS-привязка, фотоотчёты.</p>
+            <p><strong>Измеряем:</strong> % выполнения операций в срок, точность покрытия.</p>
+            <p><strong>Документ:</strong> <a href="javascript:void(0)" class="x-doc-link"
+                data-doc="onepager">One-Pager</a></p>
+          </div>
+        </div>
+        <div class="x-acc-item">
+          <button class="x-acc-item__head">4. Интеграция данных</button>
+          <div class="x-acc-item__body">
+            <p><strong>Контролируем:</strong> потоки данных ERP, телематика, датчики, BI.</p>
+            <p><strong>Измеряем:</strong> задержка синхронизации, % автоматизированных проводок.</p>
+            <p><strong>Документ:</strong> <a href="javascript:void(0)" class="x-doc-link"
+                data-doc="integration">Integration Checklist</a></p>
+          </div>
+        </div>
+        <div class="x-acc-item">
+          <button class="x-acc-item__head">5. Комплаенс и отчётность</button>
+          <div class="x-acc-item__body">
+            <p><strong>Контролируем:</strong> соответствие регуляторным требованиям, Меркурий, audit trail.</p>
+            <p><strong>Измеряем:</strong> полнота журнала, % операций с документальным подтверждением.</p>
+            <p><strong>Документ:</strong> <a href="javascript:void(0)" class="x-doc-link"
+                data-doc="compliance">Compliance Brief</a></p>
+          </div>
+        </div>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- S3: 4 СЛОЯ ПЛАТФОРМЫ -->
-<section class="x-section" id="x-platform">
+  <!-- S3: 4 СЛОЯ ПЛАТФОРМЫ -->
+  <section class="x-section" id="x-platform">
     <div class="x-wrap">
-        <div class="x-section__head">
-            <p class="x-section__label">Архитектура</p>
-            <h2 class="x-h2">Платформа, собранная как контур управления</h2>
-            <p class="x-lead">Четыре слоя, каждый решает свою задачу. Вместе &mdash; замкнутый цикл от данных до
-                решения.</p>
+      <div class="x-section__head">
+        <p class="x-section__label">Архитектура</p>
+        <h2 class="x-h2">Платформа, собранная как контур управления</h2>
+        <p class="x-lead">Четыре слоя, каждый решает свою задачу. Вместе &mdash; замкнутый цикл от данных до
+          решения.</p>
+      </div>
+      <div class="x-cards">
+        <div class="x-card">
+          <div class="x-card__icon">&#9889;</div>
+          <h3 class="x-card__title">Orchestrator</h3>
+          <p class="x-card__text">Маршрутизация задач, приоритизация отклонений, автоматическое назначение
+            ответственных по регламенту.</p>
+          <a href="javascript:void(0)" class="x-btn x-btn--tertiary x-doc-link" data-doc="architecture">Скачать
+            Architecture Brief</a>
         </div>
-        <div class="x-cards">
-            <div class="x-card">
-                <div class="x-card__icon">&#9889;</div>
-                <h3 class="x-card__title">Orchestrator</h3>
-                <p class="x-card__text">Маршрутизация задач, приоритизация отклонений, автоматическое назначение
-                    ответственных по регламенту.</p>
-                <a href="#" class="x-btn x-btn--tertiary" data-doc="architecture">Скачать Architecture Brief</a>
-            </div>
-            <div class="x-card">
-                <div class="x-card__icon">&#128202;</div>
-                <h3 class="x-card__title">Command Center</h3>
-                <p class="x-card__text">Единый дашборд: план-факт, KPI по подразделениям, очередь алертов, карта техники
-                    в поле.</p>
-                <a href="#" class="x-btn x-btn--tertiary" data-doc="onepager">Скачать One-Pager</a>
-            </div>
-            <div class="x-card">
-                <div class="x-card__icon">&#128279;</div>
-                <h3 class="x-card__title">Integration Hub</h3>
-                <p class="x-card__text">Подключение к ERP/1С, телематике, датчикам и BI без замены существующих систем.
-                    API-first.</p>
-                <a href="#" class="x-btn x-btn--tertiary" data-doc="integration">Скачать Integration Checklist</a>
-            </div>
-            <div class="x-card">
-                <div class="x-card__icon">&#128203;</div>
-                <h3 class="x-card__title">Compliance Suite</h3>
-                <p class="x-card__text">Автоматическая фиксация действий (audit trail), отчётность по регуляторам,
-                    поддержка Меркурий.</p>
-                <a href="#" class="x-btn x-btn--tertiary" data-doc="compliance">Скачать Compliance Brief</a>
-            </div>
+        <div class="x-card">
+          <div class="x-card__icon">&#128202;</div>
+          <h3 class="x-card__title">Command Center</h3>
+          <p class="x-card__text">Единый дашборд: план-факт, KPI по подразделениям, очередь алертов, карта техники
+            в поле.</p>
+          <a href="javascript:void(0)" class="x-btn x-btn--tertiary x-doc-link" data-doc="onepager">Скачать
+            One-Pager</a>
         </div>
+        <div class="x-card">
+          <div class="x-card__icon">&#128279;</div>
+          <h3 class="x-card__title">Integration Hub</h3>
+          <p class="x-card__text">Подключение к ERP/1С, телематике, датчикам и BI без замены существующих систем.
+            API-first.</p>
+          <a href="javascript:void(0)" class="x-btn x-btn--tertiary x-doc-link" data-doc="integration">Скачать
+            Integration Checklist</a>
+        </div>
+        <div class="x-card">
+          <div class="x-card__icon">&#128203;</div>
+          <h3 class="x-card__title">Compliance Suite</h3>
+          <p class="x-card__text">Автоматическая фиксация действий (audit trail), отчётность по регуляторам,
+            поддержка Меркурий.</p>
+          <a href="javascript:void(0)" class="x-btn x-btn--tertiary x-doc-link" data-doc="compliance">Скачать Compliance
+            Brief</a>
+        </div>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- S4: ЛЕСТНИЦА АВТОНОМИИ -->
-<section class="x-section" id="x-autonomy">
+  <!-- S4: ЛЕСТНИЦА АВТОНОМИИ -->
+  <section class="x-section" id="x-autonomy">
     <div class="x-wrap">
-        <div class="x-section__head">
-            <p class="x-section__label">Уровни автономии</p>
-            <h2 class="x-h2">Управляемая лестница: от наблюдаемости к оркестрации</h2>
-            <p class="x-lead">Поэтапное наращивание автоматизации &mdash; без скачков и рисков.</p>
+      <div class="x-section__head">
+        <p class="x-section__label">Уровни автономии</p>
+        <h2 class="x-h2">Управляемая лестница: от наблюдаемости к оркестрации</h2>
+        <p class="x-lead">Поэтапное наращивание автоматизации &mdash; без скачков и рисков.</p>
+      </div>
+      <div class="x-stepper">
+        <div class="x-step x-step--active">
+          <div class="x-step__level">A2</div>
+          <h3 class="x-step__title">Наблюдаемость</h3>
+          <p class="x-card__text">Мониторинг, алерты, ручные решения.</p>
+          <div class="x-step__chips"><span class="x-chip">Данные</span><span class="x-chip">Связь</span></div>
         </div>
-        <div class="x-stepper">
-            <div class="x-step x-step--active">
-                <div class="x-step__level">A2</div>
-                <h3 class="x-step__title">Наблюдаемость</h3>
-                <p class="x-card__text">Мониторинг, алерты, ручные решения.</p>
-                <div class="x-step__chips"><span class="x-chip">Данные</span><span class="x-chip">Связь</span></div>
-            </div>
-            <div class="x-step">
-                <div class="x-step__level">A3</div>
-                <h3 class="x-step__title">Рекомендации</h3>
-                <p class="x-card__text">Система предлагает решения, человек подтверждает.</p>
-                <div class="x-step__chips"><span class="x-chip">Регламенты</span><span class="x-chip">ИБ</span><span
-                        class="x-chip">Данные</span></div>
-            </div>
-            <div class="x-step">
-                <div class="x-step__level">A4</div>
-                <h3 class="x-step__title">Оркестрация</h3>
-                <p class="x-card__text">Автоматическое исполнение в рамках регламента.</p>
-                <div class="x-step__chips"><span class="x-chip">Регламенты</span><span class="x-chip">ИБ</span><span
-                        class="x-chip">Аудит</span><span class="x-chip">Комплаенс</span></div>
-            </div>
+        <div class="x-step">
+          <div class="x-step__level">A3</div>
+          <h3 class="x-step__title">Рекомендации</h3>
+          <p class="x-card__text">Система предлагает решения, человек подтверждает.</p>
+          <div class="x-step__chips"><span class="x-chip">Регламенты</span><span class="x-chip">ИБ</span><span
+              class="x-chip">Данные</span></div>
         </div>
-        <div style="text-align:center;margin-top:var(--x-sp-6)">
-            <a class="x-btn x-btn--secondary" href="#recFORM">Подобрать стартовый уровень (A2)</a>
+        <div class="x-step">
+          <div class="x-step__level">A4</div>
+          <h3 class="x-step__title">Оркестрация</h3>
+          <p class="x-card__text">Автоматическое исполнение в рамках регламента.</p>
+          <div class="x-step__chips"><span class="x-chip">Регламенты</span><span class="x-chip">ИБ</span><span
+              class="x-chip">Аудит</span><span class="x-chip">Комплаенс</span></div>
         </div>
+      </div>
+      <p style="text-align:center;margin-top:var(--x-sp-5);font-size:var(--x-fs-6);color:var(--x-muted)">Кликните на
+        уровень, чтобы узнать подробности</p>
     </div>
-</section>
+  </section>
 
-<!-- S5: КОМАНДНЫЙ ЦЕНТР -->
-<section class="x-section" id="x-command">
+  <!-- S5: КОМАНДНЫЙ ЦЕНТР -->
+  <section class="x-section" id="x-command">
     <div class="x-wrap">
-        <div class="x-section__head">
-            <p class="x-section__label">Командный центр</p>
-            <h2 class="x-h2">Сценарии: от отклонения до решения за минуты</h2>
+      <div class="x-section__head">
+        <p class="x-section__label">Командный центр</p>
+        <h2 class="x-h2">Сценарии: от отклонения до решения за минуты</h2>
+      </div>
+      <div class="x-cards">
+        <div class="x-card">
+          <div class="x-card__icon">&#128680;</div>
+          <h3 class="x-card__title">Отклонение &rarr; Алерт &rarr; Решение</h3>
+          <p class="x-card__text">Датчик фиксирует аномалию. Система формирует алерт, назначает ответственного,
+            контролирует время реакции.</p>
         </div>
-        <div class="x-cards">
-            <div class="x-card">
-                <div class="x-card__icon">&#128680;</div>
-                <h3 class="x-card__title">Отклонение &rarr; Алерт &rarr; Решение</h3>
-                <p class="x-card__text">Датчик фиксирует аномалию. Система формирует алерт, назначает ответственного,
-                    контролирует время реакции.</p>
-            </div>
-            <div class="x-card">
-                <div class="x-card__icon">&#128200;</div>
-                <h3 class="x-card__title">Плановая операция &rarr; Факт &rarr; KPI</h3>
-                <p class="x-card__text">Задача из плана &rarr; исполнение в поле &rarr; фиксация план/факт &rarr;
-                    обновление KPI-дашборда.</p>
-            </div>
-            <div class="x-card">
-                <div class="x-card__icon">&#128209;</div>
-                <h3 class="x-card__title">Запрос &rarr; Документ &rarr; Аудит</h3>
-                <p class="x-card__text">Запрос от регулятора &rarr; автоматическая генерация отчёта из журнала &rarr;
-                    подпись и отправка.</p>
-            </div>
+        <div class="x-card">
+          <div class="x-card__icon">&#128200;</div>
+          <h3 class="x-card__title">Плановая операция &rarr; Факт &rarr; KPI</h3>
+          <p class="x-card__text">Задача из плана &rarr; исполнение в поле &rarr; фиксация план/факт &rarr;
+            обновление KPI-дашборда.</p>
         </div>
-        <div style="text-align:center;margin-top:var(--x-sp-6)">
-            <a class="x-btn x-btn--primary" href="#recFORM">Запросить демо по сценарию</a>
+        <div class="x-card">
+          <div class="x-card__icon">&#128209;</div>
+          <h3 class="x-card__title">Запрос &rarr; Документ &rarr; Аудит</h3>
+          <p class="x-card__text">Запрос от регулятора &rarr; автоматическая генерация отчёта из журнала &rarr;
+            подпись и отправка.</p>
         </div>
+      </div>
+      <div style="text-align:center;margin-top:var(--x-sp-6)">
+        <a class="x-btn x-btn--primary" href="#recFORM">Запросить демо по сценарию</a>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- S6: ИНТЕГРАЦИИ -->
-<section class="x-section" id="x-integrations">
+  <!-- S6: ИНТЕГРАЦИИ -->
+  <section class="x-section" id="x-integrations">
     <div class="x-wrap">
-        <div class="x-section__head">
-            <p class="x-section__label">Интеграции</p>
-            <h2 class="x-h2">Подключаемся поверх &mdash; не заменяем</h2>
-            <p class="x-lead">Работаем с тем, что уже есть: ERP/1С, телематика, датчики, BI. API-first.</p>
+      <div class="x-section__head">
+        <p class="x-section__label">Интеграции</p>
+        <h2 class="x-h2">Подключаемся поверх &mdash; не заменяем</h2>
+        <p class="x-lead">Работаем с тем, что уже есть: ERP/1С, телематика, датчики, BI. API-first.</p>
+      </div>
+      <div class="x-cards" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+        <div class="x-card">
+          <h3 class="x-card__title">ERP / 1С</h3>
+          <p class="x-card__text">Двухсторонняя синхронизация проводок и справочников.</p>
         </div>
-        <div class="x-cards" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
-            <div class="x-card">
-                <h3 class="x-card__title">ERP / 1С</h3>
-                <p class="x-card__text">Двухсторонняя синхронизация проводок и справочников.</p>
-            </div>
-            <div class="x-card">
-                <h3 class="x-card__title">Телематика</h3>
-                <p class="x-card__text">GPS, CAN-шина, топливо, моточасы.</p>
-            </div>
-            <div class="x-card">
-                <h3 class="x-card__title">Датчики IoT</h3>
-                <p class="x-card__text">Влажность, температура, уровни, давление.</p>
-            </div>
-            <div class="x-card">
-                <h3 class="x-card__title">BI</h3>
-                <p class="x-card__text">Экспорт в Power BI, Tableau, собственные дашборды.</p>
-            </div>
-            <div class="x-card">
-                <h3 class="x-card__title">REST API</h3>
-                <p class="x-card__text">Открытый API для кастомных интеграций.</p>
-            </div>
+        <div class="x-card">
+          <h3 class="x-card__title">Телематика</h3>
+          <p class="x-card__text">GPS, CAN-шина, топливо, моточасы.</p>
         </div>
-        <div class="x-selfcheck" style="margin-top:var(--x-sp-7)">
-            <h3 class="x-card__title" style="margin-bottom:var(--x-sp-4)">Экспресс-проверка за 2 минуты</h3>
-            <label class="x-check"><input type="checkbox" data-score="1"> Используем ERP/1С</label>
-            <label class="x-check"><input type="checkbox" data-score="1"> Есть телематика на технике</label>
-            <label class="x-check"><input type="checkbox" data-score="1"> Нужен мониторинг датчиков</label>
-            <label class="x-check"><input type="checkbox" data-score="1"> Хотим видеть KPI в реальном времени</label>
-            <label class="x-check"><input type="checkbox" data-score="1"> Нужна отчётность (Меркурий и др.)</label>
-            <div class="x-selfcheck__result" id="x-selfcheck-result"></div>
+        <div class="x-card">
+          <h3 class="x-card__title">Датчики IoT</h3>
+          <p class="x-card__text">Влажность, температура, уровни, давление.</p>
         </div>
-        <div style="text-align:center;margin-top:var(--x-sp-6)">
-            <a href="#" class="x-btn x-btn--secondary" data-doc="integration">Скачать Integration Checklist</a>
+        <div class="x-card">
+          <h3 class="x-card__title">BI</h3>
+          <p class="x-card__text">Экспорт в Power BI, Tableau, собственные дашборды.</p>
         </div>
+        <div class="x-card">
+          <h3 class="x-card__title">REST API</h3>
+          <p class="x-card__text">Открытый API для кастомных интеграций.</p>
+        </div>
+      </div>
+      <div class="x-selfcheck" style="margin-top:var(--x-sp-7)">
+        <h3 class="x-card__title" style="margin-bottom:var(--x-sp-4)">Экспресс-проверка за 2 минуты</h3>
+        <label class="x-check"><input type="checkbox" data-score="1"> Используем ERP/1С</label>
+        <label class="x-check"><input type="checkbox" data-score="1"> Есть телематика на технике</label>
+        <label class="x-check"><input type="checkbox" data-score="1"> Нужен мониторинг датчиков</label>
+        <label class="x-check"><input type="checkbox" data-score="1"> Хотим видеть KPI в реальном времени</label>
+        <label class="x-check"><input type="checkbox" data-score="1"> Нужна отчётность (Меркурий и др.)</label>
+        <div class="x-selfcheck__result" id="x-selfcheck-result"></div>
+      </div>
+      <div style="text-align:center;margin-top:var(--x-sp-6)">
+        <a href="javascript:void(0)" class="x-btn x-btn--secondary x-doc-link" data-doc="integration">Скачать
+          Integration Checklist</a>
+      </div>
     </div>
-</section><!-- S7: КОМПЛАЕНС -->
-<section class="x-section" id="x-compliance">
+  </section><!-- S7: КОМПЛАЕНС -->
+  <section class="x-section" id="x-compliance">
     <div class="x-wrap">
-        <div class="x-section__head">
-            <p class="x-section__label">Комплаенс</p>
-            <h2 class="x-h2">Регуляторные требования &mdash; часть процесса, а не отдельная задача</h2>
-            <p class="x-lead">Автоматическая фиксация в журнале, поддержка Меркурий, готовые отчёты для проверок.</p>
-        </div>
-        <ul class="x-hero__bullets" style="margin-bottom:var(--x-sp-6)">
-            <li>Журнал действий (audit trail) &mdash; кто, что, когда, почему</li>
-            <li>Поддержка системы Меркурий для ветеринарного контроля</li>
-            <li>Автоматическая генерация отчётов по требованию регуляторов</li>
-            <li>Ролевой доступ к данным и документам</li>
-        </ul>
-        <a href="#" class="x-btn x-btn--secondary" data-doc="compliance">Скачать Compliance Brief</a>
+      <div class="x-section__head">
+        <p class="x-section__label">Комплаенс</p>
+        <h2 class="x-h2">Регуляторные требования &mdash; часть процесса, а не отдельная задача</h2>
+        <p class="x-lead">Автоматическая фиксация в журнале, поддержка Меркурий, готовые отчёты для проверок.</p>
+      </div>
+      <ul class="x-hero__bullets" style="margin-bottom:var(--x-sp-6)">
+        <li>Журнал действий (audit trail) &mdash; кто, что, когда, почему</li>
+        <li>Поддержка системы Меркурий для ветеринарного контроля</li>
+        <li>Автоматическая генерация отчётов по требованию регуляторов</li>
+        <li>Ролевой доступ к данным и документам</li>
+      </ul>
+      <a href="javascript:void(0)" class="x-btn x-btn--secondary x-doc-link" data-doc="compliance">Скачать Compliance
+        Brief</a>
     </div>
-</section>
+  </section>
 
-<!-- S8: БЕЗОПАСНОСТЬ + ИБ -->
-<section class="x-section" id="x-security">
+  <!-- S8: БЕЗОПАСНОСТЬ + ИБ -->
+  <section class="x-section" id="x-security">
     <div class="x-wrap">
-        <div class="x-section__head">
-            <p class="x-section__label">Безопасность</p>
-            <h2 class="x-h2">Безопасность и ИБ &mdash; встроены, а не добавлены потом</h2>
+      <div class="x-section__head">
+        <p class="x-section__label">Безопасность</p>
+        <h2 class="x-h2">Безопасность и ИБ &mdash; встроены, а не добавлены потом</h2>
+      </div>
+      <div class="x-cards" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+        <div class="x-card">
+          <h3 class="x-card__title">Шифрование</h3>
+          <p class="x-card__text">Данные в покое и в транзите. TLS 1.3, AES-256.</p>
         </div>
-        <div class="x-cards" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
-            <div class="x-card">
-                <h3 class="x-card__title">Шифрование</h3>
-                <p class="x-card__text">Данные в покое и в транзите. TLS 1.3, AES-256.</p>
-            </div>
-            <div class="x-card">
-                <h3 class="x-card__title">Ролевой доступ</h3>
-                <p class="x-card__text">RBAC + журнал. Кто к чему имеет доступ &mdash; прозрачно.</p>
-            </div>
-            <div class="x-card">
-                <h3 class="x-card__title">Audit Trail</h3>
-                <p class="x-card__text">Неизменяемый журнал всех операций и изменений.</p>
-            </div>
+        <div class="x-card">
+          <h3 class="x-card__title">Ролевой доступ</h3>
+          <p class="x-card__text">RBAC + журнал. Кто к чему имеет доступ &mdash; прозрачно.</p>
         </div>
-        <div style="text-align:center;margin-top:var(--x-sp-6)">
-            <button class="x-btn x-btn--primary" id="x-open-trust">Открыть Trust Pack</button>
+        <div class="x-card">
+          <h3 class="x-card__title">Audit Trail</h3>
+          <p class="x-card__text">Неизменяемый журнал всех операций и изменений.</p>
         </div>
+      </div>
+      <div style="text-align:center;margin-top:var(--x-sp-6)">
+        <button class="x-btn x-btn--primary" id="x-open-trust">Открыть Trust Pack</button>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- S9: ПИЛОТ -->
-<section class="x-section" id="x-pilot">
+  <!-- S9: ПИЛОТ -->
+  <section class="x-section" id="x-pilot">
     <div class="x-wrap">
-        <div class="x-section__head">
-            <p class="x-section__label">Пилот</p>
-            <h2 class="x-h2">Пилот за 6-8 недель &mdash; с метриками, приёмкой и артефактами</h2>
+      <div class="x-section__head">
+        <p class="x-section__label">Пилот</p>
+        <h2 class="x-h2">Пилот за 6-8 недель &mdash; с метриками, приёмкой и артефактами</h2>
+      </div>
+      <div class="x-cards">
+        <div class="x-card">
+          <h3 class="x-card__title">Критерии приёмки</h3>
+          <p class="x-card__text">Определяем KPI, пороги и метрики до старта пилота.</p>
         </div>
-        <div class="x-cards">
-            <div class="x-card">
-                <h3 class="x-card__title">Критерии приёмки</h3>
-                <p class="x-card__text">Определяем KPI, пороги и метрики до старта пилота.</p>
-            </div>
-            <div class="x-card">
-                <h3 class="x-card__title">Измерение результата</h3>
-                <p class="x-card__text">Автоматический сбор данных. Дашборд пилота в реальном времени.</p>
-            </div>
-            <div class="x-card">
-                <h3 class="x-card__title">Выходные артефакты</h3>
-                <p class="x-card__text">Отчёт по пилоту, рекомендации по масштабированию, ROI-модель.</p>
-            </div>
+        <div class="x-card">
+          <h3 class="x-card__title">Измерение результата</h3>
+          <p class="x-card__text">Автоматический сбор данных. Дашборд пилота в реальном времени.</p>
         </div>
-        <div style="text-align:center;margin-top:var(--x-sp-6)">
-            <a href="#" class="x-btn x-btn--secondary" data-doc="pilot-blueprint">Скачать Pilot Blueprint</a>
+        <div class="x-card">
+          <h3 class="x-card__title">Выходные артефакты</h3>
+          <p class="x-card__text">Отчёт по пилоту, рекомендации по масштабированию, ROI-модель.</p>
         </div>
+      </div>
+      <div style="text-align:center;margin-top:var(--x-sp-6)">
+        <a href="javascript:void(0)" class="x-btn x-btn--secondary x-doc-link" data-doc="pilot-blueprint">Скачать Pilot
+          Blueprint</a>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- S10: PROCUREMENT PACK -->
-<section class="x-section" id="x-procurement">
+  <!-- S10: PROCUREMENT PACK -->
+  <section class="x-section" id="x-procurement">
     <div class="x-wrap">
-        <div class="x-section__head">
-            <p class="x-section__label">Для закупки</p>
-            <h2 class="x-h2">Документы для закупки &mdash; собраны и готовы</h2>
+      <div class="x-section__head">
+        <p class="x-section__label">Для закупки</p>
+        <h2 class="x-h2">Документы для закупки &mdash; собраны и готовы</h2>
+      </div>
+      <div class="x-cards" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+        <div class="x-card">
+          <h3 class="x-card__title">One-Pager</h3>
+          <p class="x-card__text">Краткое описание продукта для ЛПР.</p>
         </div>
-        <div class="x-cards" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
-            <div class="x-card">
-                <h3 class="x-card__title">One-Pager</h3>
-                <p class="x-card__text">Краткое описание продукта для ЛПР.</p>
-            </div>
-            <div class="x-card">
-                <h3 class="x-card__title">Pilot Blueprint</h3>
-                <p class="x-card__text">План пилота с критериями приёмки.</p>
-            </div>
-            <div class="x-card">
-                <h3 class="x-card__title">Architecture Brief</h3>
-                <p class="x-card__text">Архитектурная схема для IT-блока.</p>
-            </div>
-            <div class="x-card">
-                <h3 class="x-card__title">Security Brief</h3>
-                <p class="x-card__text">Описание мер ИБ для службы безопасности.</p>
-            </div>
-            <div class="x-card">
-                <h3 class="x-card__title">Compliance Brief</h3>
-                <p class="x-card__text">Регуляторное соответствие для юристов.</p>
-            </div>
+        <div class="x-card">
+          <h3 class="x-card__title">Pilot Blueprint</h3>
+          <p class="x-card__text">План пилота с критериями приёмки.</p>
         </div>
-        <div
-            style="text-align:center;margin-top:var(--x-sp-6);display:flex;gap:var(--x-sp-4);justify-content:center;flex-wrap:wrap">
-            <button class="x-btn x-btn--primary" id="x-open-procurement">Получить Procurement Pack</button>
-            <button class="x-btn x-btn--secondary"
-                onclick="document.getElementById('x-open-procurement').click()">Получить документы без звонка</button>
+        <div class="x-card">
+          <h3 class="x-card__title">Architecture Brief</h3>
+          <p class="x-card__text">Архитектурная схема для IT-блока.</p>
         </div>
+        <div class="x-card">
+          <h3 class="x-card__title">Security Brief</h3>
+          <p class="x-card__text">Описание мер ИБ для службы безопасности.</p>
+        </div>
+        <div class="x-card">
+          <h3 class="x-card__title">Compliance Brief</h3>
+          <p class="x-card__text">Регуляторное соответствие для юристов.</p>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:var(--x-sp-6)">
+        <button class="x-btn x-btn--primary" id="x-open-procurement">Получить Procurement Pack</button>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- S11: ФИНАЛЬНЫЙ CTA -->
-<section class="x-form-cta" id="x-form-anchor">
+  <!-- S11: ФИНАЛЬНЫЙ CTA -->
+  <section class="x-form-cta" id="x-form-anchor">
     <div class="x-wrap">
-        <p class="x-section__label" style="text-align:center">Следующий шаг</p>
-        <h2 class="x-h2" style="text-align:center">Готовы увидеть контур управления в действии?</h2>
-        <div style="display:flex;gap:var(--x-sp-4);justify-content:center;flex-wrap:wrap">
-            <a class="x-btn x-btn--primary" href="#recFORM">Запросить демо / техсессию</a>
-            <button class="x-btn x-btn--secondary" id="x-open-drawer-2">Получить пакет документов</button>
-        </div>
-        <div class="x-form-cta__steps">
-            <div class="x-form-cta__step"><strong>01</strong> Оставляете заявку</div>
-            <div class="x-form-cta__step"><strong>02</strong> Согласуем формат</div>
-            <div class="x-form-cta__step"><strong>03</strong> Получаете результат за 30 мин</div>
-        </div>
-        <p style="text-align:center;margin-top:var(--x-sp-4);font-size:var(--x-fs-6);color:var(--x-muted)">Без
-            обязательств &middot; NDA при необходимости &middot; Ваши данные не передаются третьим лицам</p>
+      <p class="x-section__label" style="text-align:center">Следующий шаг</p>
+      <h2 class="x-h2" style="text-align:center">Готовы увидеть контур управления в действии?</h2>
+      <div style="display:flex;gap:var(--x-sp-4);justify-content:center;flex-wrap:wrap">
+        <a class="x-btn x-btn--primary" href="#recFORM">Запросить демо / техсессию</a>
+        <button class="x-btn x-btn--secondary" id="x-open-drawer-2">Получить пакет документов</button>
+      </div>
+      <div class="x-form-cta__steps">
+        <div class="x-form-cta__step"><strong>01</strong> Оставляете заявку</div>
+        <div class="x-form-cta__step"><strong>02</strong> Согласуем формат</div>
+        <div class="x-form-cta__step"><strong>03</strong> Получаете результат за 30 мин</div>
+      </div>
+      <p style="text-align:center;margin-top:var(--x-sp-4);font-size:var(--x-fs-6);color:var(--x-muted)">Без
+        обязательств &middot; NDA при необходимости &middot; Ваши данные не передаются третьим лицам</p>
     </div>
-</section>
+  </section>
 
-<!-- S12: КОНТАКТЫ -->
-<section class="x-contacts" id="recCONTACTS">
+  <!-- S12: КОНТАКТЫ -->
+  <section class="x-contacts" id="recCONTACTS">
     <div class="x-wrap">
-        <p class="x-section__label" style="text-align:center">Контакты</p>
-        <h2 class="x-h2" style="text-align:center">Свяжитесь с нами</h2>
-        <div class="x-contacts__row">
-            <div class="x-contacts__item">info@agrotaktik.ru</div>
-            <div class="x-contacts__item">+7 (XXX) XXX-XX-XX</div>
-            <div class="x-contacts__item">Москва, Россия</div>
-        </div>
+      <p class="x-section__label" style="text-align:center">Контакты</p>
+      <h2 class="x-h2" style="text-align:center">Свяжитесь с нами</h2>
+      <div class="x-contacts__row">
+        <div class="x-contacts__item">info@agrotaktik.ru</div>
+        <div class="x-contacts__item">+7 (XXX) XXX-XX-XX</div>
+        <div class="x-contacts__item">Москва, Россия</div>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- DRAWER -->
-<div class="x-drawer" id="x-drawer" role="dialog" aria-modal="true" aria-label="Пакет документов">
+  <!-- DRAWER -->
+  <div class="x-drawer" id="x-drawer" role="dialog" aria-modal="true" aria-label="Пакет документов">
     <div class="x-drawer__overlay" id="x-drawer-overlay"></div>
     <div class="x-drawer__panel">
-        <button class="x-drawer__close" id="x-drawer-close" aria-label="Закрыть">&#10005;</button>
-        <h3 class="x-drawer__title">Пакет документов</h3>
-        <p style="font-size:var(--x-fs-5);color:var(--x-muted);margin-bottom:var(--x-sp-5)">Скачайте нужные документы
-            для внутреннего согласования. NDA &mdash; по запросу.</p>
-        <ul class="x-drawer__docs">
-            <li class="x-drawer__doc" data-doc="onepager"><span class="x-drawer__doc-icon">&#128196;</span>
-                <div>
-                    <div class="x-drawer__doc-name">One-Pager</div>
-                    <div class="x-drawer__doc-desc">Описание продукта для ЛПР (2 стр.)</div>
-                </div><a href="#" class="x-btn x-btn--tertiary" style="margin-left:auto">Скачать</a>
-            </li>
-            <li class="x-drawer__doc" data-doc="pilot-blueprint"><span class="x-drawer__doc-icon">&#128208;</span>
-                <div>
-                    <div class="x-drawer__doc-name">Pilot Blueprint</div>
-                    <div class="x-drawer__doc-desc">План пилота с критериями приёмки</div>
-                </div><a href="#" class="x-btn x-btn--tertiary" style="margin-left:auto">Скачать</a>
-            </li>
-            <li class="x-drawer__doc" data-doc="architecture"><span class="x-drawer__doc-icon">&#127959;</span>
-                <div>
-                    <div class="x-drawer__doc-name">Architecture Brief</div>
-                    <div class="x-drawer__doc-desc">Архитектурная схема для IT-блока</div>
-                </div><a href="#" class="x-btn x-btn--tertiary" style="margin-left:auto">Скачать</a>
-            </li>
-            <li class="x-drawer__doc" data-doc="security"><span class="x-drawer__doc-icon">&#128274;</span>
-                <div>
-                    <div class="x-drawer__doc-name">Security Brief</div>
-                    <div class="x-drawer__doc-desc">Меры ИБ для службы безопасности</div>
-                </div><a href="#" class="x-btn x-btn--tertiary" style="margin-left:auto">Скачать</a>
-            </li>
-            <li class="x-drawer__doc" data-doc="compliance"><span class="x-drawer__doc-icon">&#128203;</span>
-                <div>
-                    <div class="x-drawer__doc-name">Compliance Brief</div>
-                    <div class="x-drawer__doc-desc">Регуляторное соответствие</div>
-                </div><a href="#" class="x-btn x-btn--tertiary" style="margin-left:auto">Скачать</a>
-            </li>
-        </ul>
-        <div style="margin-top:var(--x-sp-6);display:flex;gap:var(--x-sp-4);flex-wrap:wrap">
-            <a class="x-btn x-btn--primary" href="#recFORM">Запросить демо</a>
-            <button class="x-btn x-btn--secondary" id="x-drawer-close-2">Закрыть</button>
-        </div>
+      <button class="x-drawer__close" id="x-drawer-close" aria-label="Закрыть">&#10005;</button>
+      <h3 class="x-drawer__title">Пакет документов</h3>
+      <p style="font-size:var(--x-fs-5);color:var(--x-muted);margin-bottom:var(--x-sp-5)">Скачайте нужные документы
+        для внутреннего согласования. NDA &mdash; по запросу.</p>
+      <ul class="x-drawer__docs">
+        <li class="x-drawer__doc" data-doc="onepager"><span class="x-drawer__doc-icon">&#128196;</span>
+          <div>
+            <div class="x-drawer__doc-name">One-Pager</div>
+            <div class="x-drawer__doc-desc">Описание продукта для ЛПР (2 стр.)</div>
+          </div><a href="#" class="x-btn x-btn--tertiary" style="margin-left:auto">Скачать</a>
+        </li>
+        <li class="x-drawer__doc" data-doc="pilot-blueprint"><span class="x-drawer__doc-icon">&#128208;</span>
+          <div>
+            <div class="x-drawer__doc-name">Pilot Blueprint</div>
+            <div class="x-drawer__doc-desc">План пилота с критериями приёмки</div>
+          </div><a href="#" class="x-btn x-btn--tertiary" style="margin-left:auto">Скачать</a>
+        </li>
+        <li class="x-drawer__doc" data-doc="architecture"><span class="x-drawer__doc-icon">&#127959;</span>
+          <div>
+            <div class="x-drawer__doc-name">Architecture Brief</div>
+            <div class="x-drawer__doc-desc">Архитектурная схема для IT-блока</div>
+          </div><a href="#" class="x-btn x-btn--tertiary" style="margin-left:auto">Скачать</a>
+        </li>
+        <li class="x-drawer__doc" data-doc="security"><span class="x-drawer__doc-icon">&#128274;</span>
+          <div>
+            <div class="x-drawer__doc-name">Security Brief</div>
+            <div class="x-drawer__doc-desc">Меры ИБ для службы безопасности</div>
+          </div><a href="#" class="x-btn x-btn--tertiary" style="margin-left:auto">Скачать</a>
+        </li>
+        <li class="x-drawer__doc" data-doc="compliance"><span class="x-drawer__doc-icon">&#128203;</span>
+          <div>
+            <div class="x-drawer__doc-name">Compliance Brief</div>
+            <div class="x-drawer__doc-desc">Регуляторное соответствие</div>
+          </div><a href="#" class="x-btn x-btn--tertiary" style="margin-left:auto">Скачать</a>
+        </li>
+      </ul>
+      <div style="margin-top:var(--x-sp-6);display:flex;gap:var(--x-sp-4);flex-wrap:wrap">
+        <a class="x-btn x-btn--primary" href="#recFORM">Запросить демо</a>
+        <button class="x-btn x-btn--secondary" id="x-drawer-close-2">Закрыть</button>
+      </div>
     </div>
-</div>
+  </div>
 
 </div><!-- /.x-site -->
 
 <script>
-    (function () {
-        'use strict';
-        var header = document.getElementById('x-header');
-        if (header) { var t = false; window.addEventListener('scroll', function () { if (!t) { window.requestAnimationFrame(function () { header.classList.toggle('x-header--sticky', window.scrollY > 140); t = false }); t = true } }) }
-        var burger = document.getElementById('x-burger');
-        if (burger) burger.addEventListener('click', function () { header.classList.toggle('x-header--menu-open'); burger.innerHTML = header.classList.contains('x-header--menu-open') ? '&#10005;' : '&#9776;' });
-        document.querySelectorAll('.x-site .x-tab').forEach(function (tab) { tab.addEventListener('click', function () { document.querySelectorAll('.x-site .x-tab').forEach(function (t) { t.classList.remove('x-tab--active'); t.setAttribute('aria-selected', 'false') }); tab.classList.add('x-tab--active'); tab.setAttribute('aria-selected', 'true'); document.querySelectorAll('.x-site .x-tab-panel').forEach(function (p) { p.classList.remove('x-tab-panel--active') }); var tgt = document.getElementById('panel-' + tab.getAttribute('data-panel')); if (tgt) tgt.classList.add('x-tab-panel--active') }) });
-        document.querySelectorAll('.x-site .x-acc-item__head').forEach(function (b) { b.addEventListener('click', function () { b.parentElement.classList.toggle('x-acc-item--open') }) });
-        var drawer = document.getElementById('x-drawer');
-        function openDrawer() { drawer.classList.add('x-drawer--open'); document.documentElement.style.overflow = 'hidden'; document.getElementById('x-drawer-close').focus() }
-        function closeDrawer() { drawer.classList.remove('x-drawer--open'); document.documentElement.style.overflow = '' }
-        ['x-open-drawer', 'x-open-drawer-2', 'x-open-trust', 'x-open-procurement'].forEach(function (id) { var el = document.getElementById(id); if (el) el.addEventListener('click', openDrawer) });
-        document.getElementById('x-drawer-overlay').addEventListener('click', closeDrawer);
-        ['x-drawer-close', 'x-drawer-close-2'].forEach(function (id) { var el = document.getElementById(id); if (el) el.addEventListener('click', closeDrawer) });
-        document.querySelectorAll('.x-site .x-badge').forEach(function (b) { b.addEventListener('click', openDrawer) });
-        document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && drawer.classList.contains('x-drawer--open')) closeDrawer() });
-        document.querySelectorAll('.x-site .x-hotspot').forEach(function (h) { var tip = null; function show() { if (tip) return; tip = document.createElement('div'); tip.textContent = h.getAttribute('data-tip'); tip.style.cssText = 'position:absolute;bottom:110%;left:50%;transform:translateX(-50%);background:#1a2332;color:#e8edf4;padding:8px 12px;border-radius:4px;font-size:12px;border:1px solid #1e293b;z-index:10;max-width:220px;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.4)'; h.appendChild(tip) } function hide() { if (tip) { tip.remove(); tip = null } } h.addEventListener('mouseenter', show); h.addEventListener('mouseleave', hide); h.addEventListener('click', function (e) { e.stopPropagation(); tip ? hide() : show() }); h.addEventListener('focus', show); h.addEventListener('blur', hide); h.addEventListener('keydown', function (e) { if (e.key === 'Escape') hide() }) });
-        var checks = document.querySelectorAll('.x-site .x-selfcheck input');
-        var res = document.getElementById('x-selfcheck-result');
-        if (checks.length && res) { checks.forEach(function (c) { c.addEventListener('change', function () { var n = 0; checks.forEach(function (ch) { if (ch.checked) n++ }); if (!n) { res.classList.remove('x-selfcheck__result--visible'); return } var m = ''; if (n <= 2) m = 'Рекомендация: начните с уровня A2 (наблюдаемость). Подключение за 2-4 недели.'; else if (n <= 4) m = 'Рекомендация: уровень A3 (рекомендации). Пилот 6 недель.'; else m = 'Рекомендация: полный контур A3-A4. Запросите техсессию.'; res.textContent = m; res.classList.add('x-selfcheck__result--visible') }) }) }
-    })();
+  (function () {
+    'use strict';
+
+    /* === STICKY HEADER === */
+    var header = document.getElementById('x-header');
+    if (header) {
+      var ticking = false;
+      window.addEventListener('scroll', function () {
+        if (!ticking) {
+          window.requestAnimationFrame(function () {
+            header.classList.toggle('x-header--sticky', window.scrollY > 140);
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+    }
+
+    /* === BURGER MENU === */
+    var burger = document.getElementById('x-burger');
+    if (burger) {
+      burger.addEventListener('click', function () {
+        header.classList.toggle('x-header--menu-open');
+        burger.innerHTML = header.classList.contains('x-header--menu-open') ? '&#10005;' : '&#9776;';
+      });
+    }
+
+    /* === HERO ROLE TABS === */
+    document.querySelectorAll('.x-site .x-tab').forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        document.querySelectorAll('.x-site .x-tab').forEach(function (t) {
+          t.classList.remove('x-tab--active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('x-tab--active');
+        tab.setAttribute('aria-selected', 'true');
+        document.querySelectorAll('.x-site .x-tab-panel').forEach(function (p) {
+          p.classList.remove('x-tab-panel--active');
+        });
+        var tgt = document.getElementById('panel-' + tab.getAttribute('data-panel'));
+        if (tgt) tgt.classList.add('x-tab-panel--active');
+      });
+    });
+
+    /* === STEPPER (A2/A3/A4) — click to highlight === */
+    document.querySelectorAll('.x-site .x-step').forEach(function (step) {
+      step.addEventListener('click', function () {
+        document.querySelectorAll('.x-site .x-step').forEach(function (s) {
+          s.classList.remove('x-step--active');
+        });
+        step.classList.add('x-step--active');
+      });
+    });
+
+    /* === ACCORDION === */
+    document.querySelectorAll('.x-site .x-acc-item__head').forEach(function (b) {
+      b.addEventListener('click', function () {
+        b.parentElement.classList.toggle('x-acc-item--open');
+      });
+    });
+
+    /* === DRAWER === */
+    var drawer = document.getElementById('x-drawer');
+    function openDrawer() {
+      drawer.classList.add('x-drawer--open');
+      document.documentElement.style.overflow = 'hidden';
+      document.getElementById('x-drawer-close').focus();
+    }
+    function closeDrawer() {
+      drawer.classList.remove('x-drawer--open');
+      document.documentElement.style.overflow = '';
+    }
+    ['x-open-drawer', 'x-open-drawer-2', 'x-open-trust', 'x-open-procurement'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('click', openDrawer);
+    });
+    document.getElementById('x-drawer-overlay').addEventListener('click', closeDrawer);
+    ['x-drawer-close', 'x-drawer-close-2'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('click', closeDrawer);
+    });
+    document.querySelectorAll('.x-site .x-badge').forEach(function (b) {
+      b.addEventListener('click', openDrawer);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && drawer.classList.contains('x-drawer--open')) closeDrawer();
+    });
+
+    /* === DOC-LINK placeholders → open drawer === */
+    document.querySelectorAll('.x-site .x-doc-link').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        openDrawer();
+      });
+    });
+
+    /* === HOTSPOTS === */
+    document.querySelectorAll('.x-site .x-hotspot').forEach(function (h) {
+      var tip = null;
+      function show() {
+        if (tip) return;
+        tip = document.createElement('div');
+        tip.textContent = h.getAttribute('data-tip');
+        tip.style.cssText = 'position:absolute;bottom:110%;left:50%;transform:translateX(-50%);background:#1a2332;color:#e8edf4;padding:8px 12px;border-radius:4px;font-size:12px;border:1px solid #1e293b;z-index:10;max-width:220px;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.4)';
+        h.appendChild(tip);
+      }
+      function hide() { if (tip) { tip.remove(); tip = null; } }
+      h.addEventListener('mouseenter', show);
+      h.addEventListener('mouseleave', hide);
+      h.addEventListener('click', function (e) { e.stopPropagation(); tip ? hide() : show(); });
+      h.addEventListener('focus', show);
+      h.addEventListener('blur', hide);
+      h.addEventListener('keydown', function (e) { if (e.key === 'Escape') hide(); });
+    });
+
+    /* === SELF-CHECK === */
+    var checks = document.querySelectorAll('.x-site .x-selfcheck input');
+    var res = document.getElementById('x-selfcheck-result');
+    if (checks.length && res) {
+      checks.forEach(function (c) {
+        c.addEventListener('change', function () {
+          var n = 0;
+          checks.forEach(function (ch) { if (ch.checked) n++; });
+          if (!n) { res.classList.remove('x-selfcheck__result--visible'); return; }
+          var m = '';
+          if (n <= 2) m = 'Рекомендация: начните с уровня A2 (наблюдаемость). Подключение за 2-4 недели.';
+          else if (n <= 4) m = 'Рекомендация: уровень A3 (рекомендации). Пилот 6 недель.';
+          else m = 'Рекомендация: полный контур A3-A4. Запросите техсессию.';
+          res.textContent = m;
+          res.classList.add('x-selfcheck__result--visible');
+        });
+      });
+    }
+
+  })();
 </script>
