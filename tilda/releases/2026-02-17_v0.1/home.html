@@ -1,799 +1,1337 @@
-﻿<!-- tilda/t123/home/home.html вЂ” v0.1 (2026-02-17)
-     Paste into: Other в†’ T123 "Embed HTML Code"
+<!-- tilda/t123/home/home.html — v0.1 (2026-02-17)
+     Paste into: Other → T123 "Embed HTML Code"
      After change: Publish the page
      ANCHORS: replace #recFORM / #recCONTACTS with real Tilda recIDs -->
 
 <style>
-/* в•ђв•ђв•ђ TOKENS в•ђв•ђв•ђ */
-.x-site{
-  --x-bg:#0b1120;--x-surface:#111827;--x-surface-2:#1a2332;
-  --x-text:#e8edf4;--x-muted:#7b8ca3;--x-line:#1e293b;
-  --x-accent:#00cfff;--x-accent-2:#ff6b35;
-  --x-ff-head:'Inter',system-ui,sans-serif;
-  --x-ff-body:'Inter',system-ui,sans-serif;
-  --x-ff-mono:'JetBrains Mono',monospace;
-  --x-fs-1:clamp(2rem,4vw,3rem);--x-fs-2:clamp(1.5rem,3vw,2rem);
-  --x-fs-3:1.25rem;--x-fs-4:1rem;--x-fs-5:.875rem;--x-fs-6:.75rem;
-  --x-lh-tight:1.2;--x-lh-base:1.6;
-  --x-sp-1:4px;--x-sp-2:8px;--x-sp-3:12px;--x-sp-4:16px;
-  --x-sp-5:24px;--x-sp-6:32px;--x-sp-7:48px;--x-sp-8:64px;
-  --x-sp-9:96px;--x-sp-10:128px;
-  --x-r-1:2px;--x-r-2:4px;--x-r-3:8px;--x-r-4:12px;
-  --x-sh-1:0 1px 3px rgba(0,0,0,.3);--x-sh-2:0 4px 12px rgba(0,0,0,.4);
-  --x-sh-3:0 8px 32px rgba(0,0,0,.5);
-  --x-container:1200px;--x-container-wide:1280px;
-  box-sizing:border-box;font-family:var(--x-ff-body);color:var(--x-text);
-  background:var(--x-bg);line-height:var(--x-lh-base);-webkit-font-smoothing:antialiased;
-}
-.x-site *,.x-site *::before,.x-site *::after{box-sizing:inherit;margin:0;padding:0}
-.x-site img{max-width:100%;display:block}
-.x-site a{color:var(--x-accent);text-decoration:none}
-.x-site a:hover{text-decoration:underline}
+  /* === TOKENS === */
+  .x-site {
+    --x-bg: #0b1120;
+    --x-surface: #111827;
+    --x-surface-2: #1a2332;
+    --x-text: #e8edf4;
+    --x-muted: #7b8ca3;
+    --x-line: #1e293b;
+    --x-accent: #00cfff;
+    --x-accent-2: #ff6b35;
+    --x-ff-head: 'Inter', system-ui, sans-serif;
+    --x-ff-body: 'Inter', system-ui, sans-serif;
+    --x-ff-mono: 'JetBrains Mono', monospace;
+    --x-fs-1: clamp(2rem, 4vw, 3rem);
+    --x-fs-2: clamp(1.5rem, 3vw, 2rem);
+    --x-fs-3: 1.25rem;
+    --x-fs-4: 1rem;
+    --x-fs-5: .875rem;
+    --x-fs-6: .75rem;
+    --x-lh-tight: 1.2;
+    --x-lh-base: 1.6;
+    --x-sp-1: 4px;
+    --x-sp-2: 8px;
+    --x-sp-3: 12px;
+    --x-sp-4: 16px;
+    --x-sp-5: 24px;
+    --x-sp-6: 32px;
+    --x-sp-7: 48px;
+    --x-sp-8: 64px;
+    --x-sp-9: 96px;
+    --x-sp-10: 128px;
+    --x-r-1: 2px;
+    --x-r-2: 4px;
+    --x-r-3: 8px;
+    --x-r-4: 12px;
+    --x-sh-1: 0 1px 3px rgba(0, 0, 0, .3);
+    --x-sh-2: 0 4px 12px rgba(0, 0, 0, .4);
+    --x-sh-3: 0 8px 32px rgba(0, 0, 0, .5);
+    --x-container: 1200px;
+    --x-container-wide: 1280px;
+    box-sizing: border-box;
+    font-family: var(--x-ff-body);
+    color: var(--x-text);
+    background: var(--x-bg);
+    line-height: var(--x-lh-base);
+    -webkit-font-smoothing: antialiased;
+  }
 
-/* в•ђв•ђв•ђ LAYOUT в•ђв•ђв•ђ */
-.x-site .x-wrap{max-width:var(--x-container);margin:0 auto;padding:0 var(--x-sp-5)}
-.x-site .x-section{padding:var(--x-sp-9) 0;border-bottom:1px solid var(--x-line)}
-.x-site .x-section__head{margin-bottom:var(--x-sp-7)}
-.x-site .x-section__label{font-family:var(--x-ff-mono);font-size:var(--x-fs-6);
-  color:var(--x-accent);text-transform:uppercase;letter-spacing:.12em;margin-bottom:var(--x-sp-2)}
-.x-site .x-h2{font-family:var(--x-ff-head);font-size:var(--x-fs-2);
-  font-weight:700;line-height:var(--x-lh-tight);color:var(--x-text);margin-bottom:var(--x-sp-4)}
-.x-site .x-lead{font-size:var(--x-fs-4);color:var(--x-muted);max-width:720px;line-height:var(--x-lh-base)}
+  .x-site *,
+  .x-site *::before,
+  .x-site *::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0
+  }
 
-/* в•ђв•ђв•ђ BUTTONS в•ђв•ђв•ђ */
-.x-site .x-btn{display:inline-flex;align-items:center;gap:var(--x-sp-2);
-  font-family:var(--x-ff-body);font-size:var(--x-fs-5);font-weight:600;
-  padding:var(--x-sp-3) var(--x-sp-5);border-radius:var(--x-r-2);border:1px solid transparent;
-  cursor:pointer;transition:all .2s;text-decoration:none}
-.x-site .x-btn:focus-visible{outline:2px solid var(--x-accent);outline-offset:2px}
-.x-site .x-btn--primary{background:var(--x-accent);color:var(--x-bg);border-color:var(--x-accent)}
-.x-site .x-btn--primary:hover{background:#00b8e0;border-color:#00b8e0}
-.x-site .x-btn--secondary{background:transparent;color:var(--x-accent);border-color:var(--x-accent)}
-.x-site .x-btn--secondary:hover{background:rgba(0,207,255,.1)}
-.x-site .x-btn--tertiary{background:transparent;color:var(--x-accent);border:none;padding-left:0;padding-right:0}
-.x-site .x-btn--tertiary:hover{text-decoration:underline}
-.x-site .x-btn:disabled,.x-site .x-btn[disabled]{opacity:.4;cursor:not-allowed}
+  .x-site img {
+    max-width: 100%;
+    display: block
+  }
 
-/* в•ђв•ђв•ђ HEADER в•ђв•ђв•ђ */
-.x-site .x-header{position:fixed;top:0;left:0;right:0;z-index:100;
-  background:rgba(11,17,32,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--x-line);
-  transition:all .25s}
-.x-site .x-header--sticky{background:rgba(11,17,32,.95)}
-.x-site .x-header__inner{display:flex;align-items:center;justify-content:space-between;
-  max-width:var(--x-container-wide);margin:0 auto;padding:var(--x-sp-4) var(--x-sp-5);
-  transition:padding .25s}
-.x-site .x-header--sticky .x-header__inner{padding-top:var(--x-sp-2);padding-bottom:var(--x-sp-2)}
-.x-site .x-logo{font-family:var(--x-ff-head);font-size:var(--x-fs-3);font-weight:700;
-  color:var(--x-text);letter-spacing:.04em}
-.x-site .x-logo span{color:var(--x-accent)}
-.x-site .x-nav{display:flex;align-items:center;gap:var(--x-sp-5);list-style:none}
-.x-site .x-nav__item{font-size:var(--x-fs-5);color:var(--x-muted);transition:color .15s}
-.x-site .x-nav__item:hover{color:var(--x-text);text-decoration:none}
-.x-site .x-burger{display:none;background:none;border:none;color:var(--x-text);
-  font-size:1.5rem;cursor:pointer;padding:var(--x-sp-2)}
-@media(max-width:768px){
-  .x-site .x-nav{display:none;position:absolute;top:100%;left:0;right:0;
-    flex-direction:column;background:var(--x-surface);padding:var(--x-sp-5);
-    border-bottom:1px solid var(--x-line)}
-  .x-site .x-header--menu-open .x-nav{display:flex}
-  .x-site .x-burger{display:block}
-  .x-site .x-header .x-btn{display:none}
-}
+  .x-site a {
+    color: var(--x-accent);
+    text-decoration: none
+  }
 
-/* в•ђв•ђв•ђ HERO в•ђв•ђв•ђ */
-.x-site .x-hero{padding:calc(80px + var(--x-sp-9)) 0 var(--x-sp-8) 0}
-.x-site .x-hero__grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--x-sp-8);align-items:center}
-.x-site .x-hero__eyebrow{font-family:var(--x-ff-mono);font-size:var(--x-fs-6);
-  color:var(--x-accent);text-transform:uppercase;letter-spacing:.15em;margin-bottom:var(--x-sp-3)}
-.x-site .x-hero h1{font-family:var(--x-ff-head);font-size:var(--x-fs-1);
-  font-weight:700;line-height:var(--x-lh-tight);margin-bottom:var(--x-sp-4)}
-.x-site .x-hero__sub{font-size:var(--x-fs-4);color:var(--x-muted);margin-bottom:var(--x-sp-6);max-width:540px}
-.x-site .x-hero__bullets{list-style:none;margin-bottom:var(--x-sp-6)}
-.x-site .x-hero__bullets li{position:relative;padding-left:var(--x-sp-5);margin-bottom:var(--x-sp-3);
-  color:var(--x-muted);font-size:var(--x-fs-5)}
-.x-site .x-hero__bullets li::before{content:'в–ё';position:absolute;left:0;color:var(--x-accent)}
-.x-site .x-hero__ctas{display:flex;gap:var(--x-sp-4);flex-wrap:wrap;margin-bottom:var(--x-sp-4)}
-.x-site .x-hero__micro{font-size:var(--x-fs-6);color:var(--x-muted)}
-.x-site .x-hero__visual{position:relative;background:var(--x-surface);border:1px solid var(--x-line);
-  border-radius:var(--x-r-3);padding:var(--x-sp-4);min-height:360px;
-  display:flex;align-items:center;justify-content:center}
-.x-site .x-hero__visual-label{font-family:var(--x-ff-mono);font-size:var(--x-fs-6);color:var(--x-muted);
-  text-align:center}
-@media(max-width:768px){
-  .x-site .x-hero__grid{grid-template-columns:1fr;gap:var(--x-sp-6)}
-  .x-site .x-hero{padding-top:calc(64px + var(--x-sp-7))}
-}
+  .x-site a:hover {
+    text-decoration: underline
+  }
 
-/* в•ђв•ђв•ђ TABS / ROLE SWITCHER в•ђв•ђв•ђ */
-.x-site .x-tabs{display:flex;gap:var(--x-sp-2);margin-bottom:var(--x-sp-6);flex-wrap:wrap}
-.x-site .x-tab{font-family:var(--x-ff-body);font-size:var(--x-fs-5);font-weight:500;
-  padding:var(--x-sp-2) var(--x-sp-4);border:1px solid var(--x-line);border-radius:var(--x-r-2);
-  background:transparent;color:var(--x-muted);cursor:pointer;transition:all .2s}
-.x-site .x-tab:hover{border-color:var(--x-accent);color:var(--x-text)}
-.x-site .x-tab--active{background:var(--x-accent);color:var(--x-bg);border-color:var(--x-accent)}
-.x-site .x-tab:focus-visible{outline:2px solid var(--x-accent);outline-offset:2px}
-.x-site .x-tab-panel{display:none}
-.x-site .x-tab-panel--active{display:block}
+  /* === LAYOUT === */
+  .x-site .x-wrap {
+    max-width: var(--x-container);
+    margin: 0 auto;
+    padding: 0 var(--x-sp-5)
+  }
 
-/* в•ђв•ђв•ђ TRUST STRIP в•ђв•ђв•ђ */
-.x-site .x-trust{padding:var(--x-sp-6) 0;border-bottom:1px solid var(--x-line)}
-.x-site .x-trust__row{display:flex;gap:var(--x-sp-5);flex-wrap:wrap;justify-content:center}
-.x-site .x-badge{display:inline-flex;align-items:center;gap:var(--x-sp-2);
-  font-family:var(--x-ff-mono);font-size:var(--x-fs-6);color:var(--x-muted);
-  padding:var(--x-sp-2) var(--x-sp-3);border:1px solid var(--x-line);border-radius:var(--x-r-2);
-  cursor:pointer;transition:all .2s;text-transform:uppercase;letter-spacing:.05em}
-.x-site .x-badge:hover,.x-site .x-badge--active{border-color:var(--x-accent);color:var(--x-accent)}
-.x-site .x-badge__icon{font-size:1rem}
+  .x-site .x-section {
+    padding: var(--x-sp-9) 0;
+    border-bottom: 1px solid var(--x-line)
+  }
 
-/* в•ђв•ђв•ђ DRAWER в•ђв•ђв•ђ */
-.x-site .x-drawer{position:fixed;top:0;right:0;bottom:0;z-index:200;
-  display:flex;pointer-events:none;opacity:0;transition:opacity .25s}
-.x-site .x-drawer--open{pointer-events:auto;opacity:1}
-.x-site .x-drawer__overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200}
-.x-site .x-drawer__panel{position:fixed;top:0;right:0;bottom:0;width:420px;max-width:90vw;
-  background:var(--x-surface);border-left:1px solid var(--x-line);z-index:201;
-  overflow-y:auto;padding:var(--x-sp-6);transform:translateX(100%);transition:transform .25s}
-.x-site .x-drawer--open .x-drawer__panel{transform:translateX(0)}
-.x-site .x-drawer__close{position:absolute;top:var(--x-sp-4);right:var(--x-sp-4);
-  background:none;border:none;color:var(--x-muted);font-size:1.25rem;cursor:pointer}
-.x-site .x-drawer__close:hover{color:var(--x-text)}
-.x-site .x-drawer__title{font-family:var(--x-ff-head);font-size:var(--x-fs-3);
-  font-weight:700;margin-bottom:var(--x-sp-5)}
-.x-site .x-drawer__docs{list-style:none;display:flex;flex-direction:column;gap:var(--x-sp-3)}
-.x-site .x-drawer__doc{display:flex;align-items:center;gap:var(--x-sp-3);
-  padding:var(--x-sp-3) var(--x-sp-4);border:1px solid var(--x-line);border-radius:var(--x-r-2);
-  transition:border-color .2s}
-.x-site .x-drawer__doc:hover{border-color:var(--x-accent)}
-.x-site .x-drawer__doc-icon{font-size:1.25rem}
-.x-site .x-drawer__doc-name{font-size:var(--x-fs-5);font-weight:600}
-.x-site .x-drawer__doc-desc{font-size:var(--x-fs-6);color:var(--x-muted)}
-@media(max-width:768px){
-  .x-site .x-drawer__panel{top:auto;right:0;left:0;bottom:0;width:100%;max-width:100%;
-    max-height:85vh;border-left:none;border-top:1px solid var(--x-line);
-    border-radius:var(--x-r-4) var(--x-r-4) 0 0;transform:translateY(100%)}
-  .x-site .x-drawer--open .x-drawer__panel{transform:translateY(0)}
-}
+  .x-site .x-section__head {
+    margin-bottom: var(--x-sp-7)
+  }
 
-/* в•ђв•ђв•ђ CARDS в•ђв•ђв•ђ */
-.x-site .x-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--x-sp-5)}
-.x-site .x-card{background:var(--x-surface);border:1px solid var(--x-line);border-radius:var(--x-r-3);
-  padding:var(--x-sp-5);transition:border-color .2s}
-.x-site .x-card:hover{border-color:var(--x-accent)}
-.x-site .x-card__icon{font-size:1.5rem;margin-bottom:var(--x-sp-3)}
-.x-site .x-card__title{font-size:var(--x-fs-4);font-weight:700;margin-bottom:var(--x-sp-2)}
-.x-site .x-card__text{font-size:var(--x-fs-5);color:var(--x-muted);margin-bottom:var(--x-sp-4)}
+  .x-site .x-section__label {
+    font-family: var(--x-ff-mono);
+    font-size: var(--x-fs-6);
+    color: var(--x-accent);
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    margin-bottom: var(--x-sp-2)
+  }
 
-/* в•ђв•ђв•ђ ACCORDION в•ђв•ђв•ђ */
-.x-site .x-accordion{display:flex;flex-direction:column;gap:var(--x-sp-3)}
-.x-site .x-acc-item{border:1px solid var(--x-line);border-radius:var(--x-r-2)}
-.x-site .x-acc-item__head{display:flex;align-items:center;justify-content:space-between;
-  padding:var(--x-sp-4) var(--x-sp-5);cursor:pointer;font-weight:600;font-size:var(--x-fs-4);
-  background:none;border:none;color:var(--x-text);width:100%;text-align:left;
-  font-family:var(--x-ff-body)}
-.x-site .x-acc-item__head::after{content:'пј‹';font-size:1.25rem;color:var(--x-muted);transition:transform .2s}
-.x-site .x-acc-item--open .x-acc-item__head::after{content:'в€’'}
-.x-site .x-acc-item__body{display:none;padding:0 var(--x-sp-5) var(--x-sp-5);
-  font-size:var(--x-fs-5);color:var(--x-muted)}
-.x-site .x-acc-item--open .x-acc-item__body{display:block}
+  .x-site .x-h2 {
+    font-family: var(--x-ff-head);
+    font-size: var(--x-fs-2);
+    font-weight: 700;
+    line-height: var(--x-lh-tight);
+    color: var(--x-text);
+    margin-bottom: var(--x-sp-4)
+  }
 
-/* в•ђв•ђв•ђ STEPPER в•ђв•ђв•ђ */
-.x-site .x-stepper{display:flex;gap:var(--x-sp-5);flex-wrap:wrap;justify-content:center}
-.x-site .x-step{flex:1;min-width:200px;text-align:center;padding:var(--x-sp-5);
-  border:1px solid var(--x-line);border-radius:var(--x-r-3);position:relative;transition:border-color .2s}
-.x-site .x-step--active{border-color:var(--x-accent)}
-.x-site .x-step__level{font-family:var(--x-ff-mono);font-size:var(--x-fs-2);font-weight:700;
-  color:var(--x-accent);margin-bottom:var(--x-sp-2)}
-.x-site .x-step__title{font-size:var(--x-fs-4);font-weight:600;margin-bottom:var(--x-sp-3)}
-.x-site .x-step__chips{display:flex;flex-wrap:wrap;gap:var(--x-sp-2);justify-content:center}
-.x-site .x-chip{font-family:var(--x-ff-mono);font-size:var(--x-fs-6);padding:var(--x-sp-1) var(--x-sp-3);
-  border:1px solid var(--x-line);border-radius:var(--x-r-1);color:var(--x-muted)}
+  .x-site .x-lead {
+    font-size: var(--x-fs-4);
+    color: var(--x-muted);
+    max-width: 720px;
+    line-height: var(--x-lh-base)
+  }
 
-/* в•ђв•ђв•ђ SELF-CHECK в•ђв•ђв•ђ */
-.x-site .x-selfcheck{background:var(--x-surface);border:1px solid var(--x-line);
-  border-radius:var(--x-r-3);padding:var(--x-sp-6)}
-.x-site .x-check{display:flex;align-items:center;gap:var(--x-sp-3);margin-bottom:var(--x-sp-3);
-  cursor:pointer;font-size:var(--x-fs-5);color:var(--x-muted)}
-.x-site .x-check input{accent-color:var(--x-accent);width:18px;height:18px}
-.x-site .x-selfcheck__result{margin-top:var(--x-sp-5);padding:var(--x-sp-4);
-  border:1px solid var(--x-accent);border-radius:var(--x-r-2);
-  font-family:var(--x-ff-mono);font-size:var(--x-fs-5);color:var(--x-accent);display:none}
-.x-site .x-selfcheck__result--visible{display:block}
+  /* === BUTTONS === */
+  .x-site .x-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--x-sp-2);
+    font-family: var(--x-ff-body);
+    font-size: var(--x-fs-5);
+    font-weight: 600;
+    padding: var(--x-sp-3) var(--x-sp-5);
+    border-radius: var(--x-r-2);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all .2s;
+    text-decoration: none
+  }
 
-/* в•ђв•ђв•ђ FORM CTA в•ђв•ђв•ђ */
-.x-site .x-form-cta{text-align:center;padding:var(--x-sp-9) 0}
-.x-site .x-form-cta .x-h2{margin-bottom:var(--x-sp-5)}
-.x-site .x-form-cta__steps{display:flex;justify-content:center;gap:var(--x-sp-6);
-  margin-top:var(--x-sp-6);flex-wrap:wrap}
-.x-site .x-form-cta__step{font-size:var(--x-fs-5);color:var(--x-muted)}
-.x-site .x-form-cta__step strong{color:var(--x-accent);display:block;font-family:var(--x-ff-mono)}
+  .x-site .x-btn:focus-visible {
+    outline: 2px solid var(--x-accent);
+    outline-offset: 2px
+  }
 
-/* в•ђв•ђв•ђ CONTACTS в•ђв•ђв•ђ */
-.x-site .x-contacts{text-align:center;padding:var(--x-sp-7) 0}
-.x-site .x-contacts__row{display:flex;justify-content:center;gap:var(--x-sp-7);flex-wrap:wrap;margin-top:var(--x-sp-5)}
-.x-site .x-contacts__item{font-size:var(--x-fs-5);color:var(--x-muted)}
+  .x-site .x-btn--primary {
+    background: var(--x-accent);
+    color: var(--x-bg);
+    border-color: var(--x-accent)
+  }
 
-/* в•ђв•ђв•ђ REDUCED MOTION в•ђв•ђв•ђ */
-@media(prefers-reduced-motion:reduce){
-  .x-site,.x-site *{transition-duration:0s!important;animation-duration:0s!important}
-}
+  .x-site .x-btn--primary:hover {
+    background: #00b8e0;
+    border-color: #00b8e0
+  }
+
+  .x-site .x-btn--secondary {
+    background: transparent;
+    color: var(--x-accent);
+    border-color: var(--x-accent)
+  }
+
+  .x-site .x-btn--secondary:hover {
+    background: rgba(0, 207, 255, .1)
+  }
+
+  .x-site .x-btn--tertiary {
+    background: transparent;
+    color: var(--x-accent);
+    border: none;
+    padding-left: 0;
+    padding-right: 0
+  }
+
+  .x-site .x-btn--tertiary:hover {
+    text-decoration: underline
+  }
+
+  .x-site .x-btn:disabled,
+  .x-site .x-btn[disabled] {
+    opacity: .4;
+    cursor: not-allowed
+  }
+
+  /* === HEADER === */
+  .x-site .x-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(11, 17, 32, .85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--x-line);
+    transition: all .25s
+  }
+
+  .x-site .x-header--sticky {
+    background: rgba(11, 17, 32, .95)
+  }
+
+  .x-site .x-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: var(--x-container-wide);
+    margin: 0 auto;
+    padding: var(--x-sp-4) var(--x-sp-5);
+    transition: padding .25s
+  }
+
+  .x-site .x-header--sticky .x-header__inner {
+    padding-top: var(--x-sp-2);
+    padding-bottom: var(--x-sp-2)
+  }
+
+  .x-site .x-logo {
+    font-family: var(--x-ff-head);
+    font-size: var(--x-fs-3);
+    font-weight: 700;
+    color: var(--x-text);
+    letter-spacing: .04em
+  }
+
+  .x-site .x-logo span {
+    color: var(--x-accent)
+  }
+
+  .x-site .x-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--x-sp-5);
+    list-style: none
+  }
+
+  .x-site .x-nav__item {
+    font-size: var(--x-fs-5);
+    color: var(--x-muted);
+    transition: color .15s
+  }
+
+  .x-site .x-nav__item:hover {
+    color: var(--x-text);
+    text-decoration: none
+  }
+
+  .x-site .x-burger {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--x-text);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: var(--x-sp-2)
+  }
+
+  @media(max-width:768px) {
+    .x-site .x-nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      background: var(--x-surface);
+      padding: var(--x-sp-5);
+      border-bottom: 1px solid var(--x-line)
+    }
+
+    .x-site .x-header--menu-open .x-nav {
+      display: flex
+    }
+
+    .x-site .x-burger {
+      display: block
+    }
+
+    .x-site .x-header .x-btn {
+      display: none
+    }
+  }
+
+  /* === HERO === */
+  .x-site .x-hero {
+    padding: calc(80px + var(--x-sp-9)) 0 var(--x-sp-8) 0
+  }
+
+  .x-site .x-hero__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--x-sp-8);
+    align-items: center
+  }
+
+  .x-site .x-hero__eyebrow {
+    font-family: var(--x-ff-mono);
+    font-size: var(--x-fs-6);
+    color: var(--x-accent);
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    margin-bottom: var(--x-sp-3)
+  }
+
+  .x-site .x-hero h1 {
+    font-family: var(--x-ff-head);
+    font-size: var(--x-fs-1);
+    font-weight: 700;
+    line-height: var(--x-lh-tight);
+    margin-bottom: var(--x-sp-4)
+  }
+
+  .x-site .x-hero__sub {
+    font-size: var(--x-fs-4);
+    color: var(--x-muted);
+    margin-bottom: var(--x-sp-6);
+    max-width: 540px
+  }
+
+  .x-site .x-hero__bullets {
+    list-style: none;
+    margin-bottom: var(--x-sp-6)
+  }
+
+  .x-site .x-hero__bullets li {
+    position: relative;
+    padding-left: var(--x-sp-5);
+    margin-bottom: var(--x-sp-3);
+    color: var(--x-muted);
+    font-size: var(--x-fs-5)
+  }
+
+  .x-site .x-hero__bullets li::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    color: var(--x-accent)
+  }
+
+  .x-site .x-hero__ctas {
+    display: flex;
+    gap: var(--x-sp-4);
+    flex-wrap: wrap;
+    margin-bottom: var(--x-sp-4)
+  }
+
+  .x-site .x-hero__micro {
+    font-size: var(--x-fs-6);
+    color: var(--x-muted)
+  }
+
+  .x-site .x-hero__visual {
+    position: relative;
+    background: var(--x-surface);
+    border: 1px solid var(--x-line);
+    border-radius: var(--x-r-3);
+    padding: var(--x-sp-4);
+    min-height: 360px;
+    display: flex;
+    align-items: center;
+    justify-content: center
+  }
+
+  .x-site .x-hero__visual-label {
+    font-family: var(--x-ff-mono);
+    font-size: var(--x-fs-6);
+    color: var(--x-muted);
+    text-align: center
+  }
+
+  @media(max-width:768px) {
+    .x-site .x-hero__grid {
+      grid-template-columns: 1fr;
+      gap: var(--x-sp-6)
+    }
+
+    .x-site .x-hero {
+      padding-top: calc(64px + var(--x-sp-7))
+    }
+  }
+
+  /* === TABS === */
+  .x-site .x-tabs {
+    display: flex;
+    gap: var(--x-sp-2);
+    margin-bottom: var(--x-sp-6);
+    flex-wrap: wrap
+  }
+
+  .x-site .x-tab {
+    font-family: var(--x-ff-body);
+    font-size: var(--x-fs-5);
+    font-weight: 500;
+    padding: var(--x-sp-2) var(--x-sp-4);
+    border: 1px solid var(--x-line);
+    border-radius: var(--x-r-2);
+    background: transparent;
+    color: var(--x-muted);
+    cursor: pointer;
+    transition: all .2s
+  }
+
+  .x-site .x-tab:hover {
+    border-color: var(--x-accent);
+    color: var(--x-text)
+  }
+
+  .x-site .x-tab--active {
+    background: var(--x-accent);
+    color: var(--x-bg);
+    border-color: var(--x-accent)
+  }
+
+  .x-site .x-tab:focus-visible {
+    outline: 2px solid var(--x-accent);
+    outline-offset: 2px
+  }
+
+  .x-site .x-tab-panel {
+    display: none
+  }
+
+  .x-site .x-tab-panel--active {
+    display: block
+  }
+
+  /* === TRUST === */
+  .x-site .x-trust {
+    padding: var(--x-sp-6) 0;
+    border-bottom: 1px solid var(--x-line)
+  }
+
+  .x-site .x-trust__row {
+    display: flex;
+    gap: var(--x-sp-5);
+    flex-wrap: wrap;
+    justify-content: center
+  }
+
+  .x-site .x-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--x-sp-2);
+    font-family: var(--x-ff-mono);
+    font-size: var(--x-fs-6);
+    color: var(--x-muted);
+    padding: var(--x-sp-2) var(--x-sp-3);
+    border: 1px solid var(--x-line);
+    border-radius: var(--x-r-2);
+    cursor: pointer;
+    transition: all .2s;
+    text-transform: uppercase;
+    letter-spacing: .05em
+  }
+
+  .x-site .x-badge:hover {
+    border-color: var(--x-accent);
+    color: var(--x-accent)
+  }
+
+  .x-site .x-badge__icon {
+    font-size: 1rem
+  }
+
+  /* === DRAWER === */
+  .x-site .x-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 200;
+    display: flex;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .25s
+  }
+
+  .x-site .x-drawer--open {
+    pointer-events: auto;
+    opacity: 1
+  }
+
+  .x-site .x-drawer__overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .6);
+    z-index: 200
+  }
+
+  .x-site .x-drawer__panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 420px;
+    max-width: 90vw;
+    background: var(--x-surface);
+    border-left: 1px solid var(--x-line);
+    z-index: 201;
+    overflow-y: auto;
+    padding: var(--x-sp-6);
+    transform: translateX(100%);
+    transition: transform .25s
+  }
+
+  .x-site .x-drawer--open .x-drawer__panel {
+    transform: translateX(0)
+  }
+
+  .x-site .x-drawer__close {
+    position: absolute;
+    top: var(--x-sp-4);
+    right: var(--x-sp-4);
+    background: none;
+    border: none;
+    color: var(--x-muted);
+    font-size: 1.25rem;
+    cursor: pointer
+  }
+
+  .x-site .x-drawer__close:hover {
+    color: var(--x-text)
+  }
+
+  .x-site .x-drawer__title {
+    font-family: var(--x-ff-head);
+    font-size: var(--x-fs-3);
+    font-weight: 700;
+    margin-bottom: var(--x-sp-5)
+  }
+
+  .x-site .x-drawer__docs {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--x-sp-3)
+  }
+
+  .x-site .x-drawer__doc {
+    display: flex;
+    align-items: center;
+    gap: var(--x-sp-3);
+    padding: var(--x-sp-3) var(--x-sp-4);
+    border: 1px solid var(--x-line);
+    border-radius: var(--x-r-2);
+    transition: border-color .2s
+  }
+
+  .x-site .x-drawer__doc:hover {
+    border-color: var(--x-accent)
+  }
+
+  .x-site .x-drawer__doc-icon {
+    font-size: 1.25rem
+  }
+
+  .x-site .x-drawer__doc-name {
+    font-size: var(--x-fs-5);
+    font-weight: 600
+  }
+
+  .x-site .x-drawer__doc-desc {
+    font-size: var(--x-fs-6);
+    color: var(--x-muted)
+  }
+
+  @media(max-width:768px) {
+    .x-site .x-drawer__panel {
+      top: auto;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      max-width: 100%;
+      max-height: 85vh;
+      border-left: none;
+      border-top: 1px solid var(--x-line);
+      border-radius: var(--x-r-4) var(--x-r-4) 0 0;
+      transform: translateY(100%)
+    }
+
+    .x-site .x-drawer--open .x-drawer__panel {
+      transform: translateY(0)
+    }
+  }
+
+  /* === CARDS === */
+  .x-site .x-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--x-sp-5)
+  }
+
+  .x-site .x-card {
+    background: var(--x-surface);
+    border: 1px solid var(--x-line);
+    border-radius: var(--x-r-3);
+    padding: var(--x-sp-5);
+    transition: border-color .2s
+  }
+
+  .x-site .x-card:hover {
+    border-color: var(--x-accent)
+  }
+
+  .x-site .x-card__icon {
+    font-size: 1.5rem;
+    margin-bottom: var(--x-sp-3)
+  }
+
+  .x-site .x-card__title {
+    font-size: var(--x-fs-4);
+    font-weight: 700;
+    margin-bottom: var(--x-sp-2)
+  }
+
+  .x-site .x-card__text {
+    font-size: var(--x-fs-5);
+    color: var(--x-muted);
+    margin-bottom: var(--x-sp-4)
+  }
+
+  /* === ACCORDION === */
+  .x-site .x-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: var(--x-sp-3)
+  }
+
+  .x-site .x-acc-item {
+    border: 1px solid var(--x-line);
+    border-radius: var(--x-r-2)
+  }
+
+  .x-site .x-acc-item__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--x-sp-4) var(--x-sp-5);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: var(--x-fs-4);
+    background: none;
+    border: none;
+    color: var(--x-text);
+    width: 100%;
+    text-align: left;
+    font-family: var(--x-ff-body)
+  }
+
+  .x-site .x-acc-item__head::after {
+    content: '+';
+    font-size: 1.25rem;
+    color: var(--x-muted);
+    transition: transform .2s
+  }
+
+  .x-site .x-acc-item--open .x-acc-item__head::after {
+    content: '-'
+  }
+
+  .x-site .x-acc-item__body {
+    display: none;
+    padding: 0 var(--x-sp-5) var(--x-sp-5);
+    font-size: var(--x-fs-5);
+    color: var(--x-muted)
+  }
+
+  .x-site .x-acc-item--open .x-acc-item__body {
+    display: block
+  }
+
+  /* === STEPPER === */
+  .x-site .x-stepper {
+    display: flex;
+    gap: var(--x-sp-5);
+    flex-wrap: wrap;
+    justify-content: center
+  }
+
+  .x-site .x-step {
+    flex: 1;
+    min-width: 200px;
+    text-align: center;
+    padding: var(--x-sp-5);
+    border: 1px solid var(--x-line);
+    border-radius: var(--x-r-3);
+    transition: border-color .2s
+  }
+
+  .x-site .x-step--active {
+    border-color: var(--x-accent)
+  }
+
+  .x-site .x-step__level {
+    font-family: var(--x-ff-mono);
+    font-size: var(--x-fs-2);
+    font-weight: 700;
+    color: var(--x-accent);
+    margin-bottom: var(--x-sp-2)
+  }
+
+  .x-site .x-step__title {
+    font-size: var(--x-fs-4);
+    font-weight: 600;
+    margin-bottom: var(--x-sp-3)
+  }
+
+  .x-site .x-step__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--x-sp-2);
+    justify-content: center
+  }
+
+  .x-site .x-chip {
+    font-family: var(--x-ff-mono);
+    font-size: var(--x-fs-6);
+    padding: var(--x-sp-1) var(--x-sp-3);
+    border: 1px solid var(--x-line);
+    border-radius: var(--x-r-1);
+    color: var(--x-muted)
+  }
+
+  /* === SELF-CHECK === */
+  .x-site .x-selfcheck {
+    background: var(--x-surface);
+    border: 1px solid var(--x-line);
+    border-radius: var(--x-r-3);
+    padding: var(--x-sp-6)
+  }
+
+  .x-site .x-check {
+    display: flex;
+    align-items: center;
+    gap: var(--x-sp-3);
+    margin-bottom: var(--x-sp-3);
+    cursor: pointer;
+    font-size: var(--x-fs-5);
+    color: var(--x-muted)
+  }
+
+  .x-site .x-check input {
+    accent-color: var(--x-accent);
+    width: 18px;
+    height: 18px
+  }
+
+  .x-site .x-selfcheck__result {
+    margin-top: var(--x-sp-5);
+    padding: var(--x-sp-4);
+    border: 1px solid var(--x-accent);
+    border-radius: var(--x-r-2);
+    font-family: var(--x-ff-mono);
+    font-size: var(--x-fs-5);
+    color: var(--x-accent);
+    display: none
+  }
+
+  .x-site .x-selfcheck__result--visible {
+    display: block
+  }
+
+  /* === FORM CTA === */
+  .x-site .x-form-cta {
+    text-align: center;
+    padding: var(--x-sp-9) 0
+  }
+
+  .x-site .x-form-cta .x-h2 {
+    margin-bottom: var(--x-sp-5)
+  }
+
+  .x-site .x-form-cta__steps {
+    display: flex;
+    justify-content: center;
+    gap: var(--x-sp-6);
+    margin-top: var(--x-sp-6);
+    flex-wrap: wrap
+  }
+
+  .x-site .x-form-cta__step {
+    font-size: var(--x-fs-5);
+    color: var(--x-muted)
+  }
+
+  .x-site .x-form-cta__step strong {
+    color: var(--x-accent);
+    display: block;
+    font-family: var(--x-ff-mono)
+  }
+
+  /* === CONTACTS === */
+  .x-site .x-contacts {
+    text-align: center;
+    padding: var(--x-sp-7) 0
+  }
+
+  .x-site .x-contacts__row {
+    display: flex;
+    justify-content: center;
+    gap: var(--x-sp-7);
+    flex-wrap: wrap;
+    margin-top: var(--x-sp-5)
+  }
+
+  .x-site .x-contacts__item {
+    font-size: var(--x-fs-5);
+    color: var(--x-muted)
+  }
+
+  /* === REDUCED MOTION === */
+  @media(prefers-reduced-motion:reduce) {
+
+    .x-site,
+    .x-site * {
+      transition-duration: 0s !important;
+      animation-duration: 0s !important
+    }
+  }
 </style>
 
 <div class="x-site">
 
-<!-- в•ђв•ђв•ђ S0: HEADER в•ђв•ђв•ђ -->
-<header class="x-header" id="x-header">
-  <div class="x-header__inner">
-    <a class="x-logo" href="/">РђР“Р Рћ<span>РўРђРљРўРРљ</span></a>
-    <nav>
-      <ul class="x-nav" id="x-nav">
-        <li><a class="x-nav__item" href="#x-model">РњРѕРґРµР»СЊ</a></li>
-        <li><a class="x-nav__item" href="#x-platform">РџР»Р°С‚С„РѕСЂРјР°</a></li>
-        <li><a class="x-nav__item" href="#x-integrations">РРЅС‚РµРіСЂР°С†РёРё</a></li>
-        <li><a class="x-nav__item" href="#x-pilot">РџРёР»РѕС‚</a></li>
-        <li><a class="x-nav__item" href="#recCONTACTS">РљРѕРЅС‚Р°РєС‚С‹</a></li>
-      </ul>
-    </nav>
-    <!-- REPLACE #recFORM with real Tilda recID -->
-    <a class="x-btn x-btn--primary" href="#recFORM">Р—Р°РїСЂРѕСЃРёС‚СЊ РґРµРјРѕ</a>
-    <button class="x-burger" id="x-burger" aria-label="РњРµРЅСЋ">в°</button>
-  </div>
-</header>
+  <!-- S0: HEADER -->
+  <header class="x-header" id="x-header">
+    <div class="x-header__inner">
+      <a class="x-logo" href="/">АГРО<span>ТАКТИК</span></a>
+      <nav>
+        <ul class="x-nav" id="x-nav">
+          <li><a class="x-nav__item" href="#x-model">Модель</a></li>
+          <li><a class="x-nav__item" href="#x-platform">Платформа</a></li>
+          <li><a class="x-nav__item" href="#x-integrations">Интеграции</a></li>
+          <li><a class="x-nav__item" href="#x-pilot">Пилот</a></li>
+          <li><a class="x-nav__item" href="#recCONTACTS">Контакты</a></li>
+        </ul>
+      </nav>
+      <!-- REPLACE #recFORM with real Tilda recID -->
+      <a class="x-btn x-btn--primary" href="#recFORM">Запросить демо</a>
+      <button class="x-burger" id="x-burger" aria-label="Меню">&#9776;</button>
+    </div>
+  </header>
 
-<!-- в•ђв•ђв•ђ S1: HERO в•ђв•ђв•ђ -->
-<section class="x-hero">
-  <div class="x-wrap">
-    <div class="x-hero__grid">
-      <div class="x-hero__content">
-        <p class="x-hero__eyebrow">РћРїРµСЂР°С†РёРѕРЅРЅС‹Р№ РєРѕРЅС‚СѓСЂ РґР»СЏ Р°РіСЂРѕС…РѕР»РґРёРЅРіРѕРІ</p>
-        <h1>РљРѕРјР°РЅРґРЅС‹Р№ С†РµРЅС‚СЂ,<br>РєРѕС‚РѕСЂС‹Р№ РїСЂРµРІСЂР°С‰Р°РµС‚ СЃРµР·РѕРЅ<br>РІ СѓРїСЂР°РІР»СЏРµРјСѓСЋ СЃРёСЃС‚РµРјСѓ</h1>
-        <p class="x-hero__sub">РћРґРёРЅ РєРѕРЅС‚СѓСЂ РґР»СЏ РґРёСЃРїРµС‚С‡РµСЂРёР·Р°С†РёРё, РєРѕРЅС‚СЂРѕР»СЏ РѕС‚РєР»РѕРЅРµРЅРёР№ Рё РґРѕРєСѓРјРµРЅС‚Р°Р»СЊРЅРѕРіРѕ РїРѕРґС‚РІРµСЂР¶РґРµРЅРёСЏ вЂ” РІРјРµСЃС‚Рѕ СЂР°Р·РґСЂРѕР±Р»РµРЅРЅС‹С… С‡Р°С‚РѕРІ, РѕС‚С‡С‘С‚РѕРІ Рё С‚РµР»РµС„РѕРЅРЅС‹С… СЂРµС€РµРЅРёР№.</p>
+  <!-- S1: HERO -->
+  <section class="x-hero">
+    <div class="x-wrap">
+      <div class="x-hero__grid">
+        <div class="x-hero__content">
+          <p class="x-hero__eyebrow">Операционный контур для агрохолдингов</p>
+          <h1>Командный центр,<br>который превращает сезон<br>в управляемую систему</h1>
+          <p class="x-hero__sub">Один контур для диспетчеризации, контроля отклонений и документального подтверждения
+            &mdash; вместо раздробленных чатов, отчётов и телефонных решений.</p>
 
-        <!-- Role Switcher -->
-        <div class="x-tabs" role="tablist">
-          <button class="x-tab x-tab--active" role="tab" data-panel="coo" aria-selected="true">Р СѓРєРѕРІРѕРґРёС‚РµР»СЋ</button>
-          <button class="x-tab" role="tab" data-panel="it" aria-selected="false">IT + РР‘</button>
-          <button class="x-tab" role="tab" data-panel="eng" aria-selected="false">РРЅР¶РµРЅРµСЂСѓ</button>
+          <!-- Role Switcher -->
+          <div class="x-tabs" role="tablist">
+            <button class="x-tab x-tab--active" role="tab" data-panel="coo" aria-selected="true">Руководителю</button>
+            <button class="x-tab" role="tab" data-panel="it" aria-selected="false">IT + ИБ</button>
+            <button class="x-tab" role="tab" data-panel="eng" aria-selected="false">Инженеру</button>
+          </div>
+
+          <div class="x-tab-panel x-tab-panel--active" id="panel-coo">
+            <ul class="x-hero__bullets">
+              <li>План-факт и KPI по каждому подразделению в реальном времени</li>
+              <li>Очередь отклонений с приоритетами и ответственными</li>
+              <li>Готовые пакеты для правления и совета директоров</li>
+            </ul>
+          </div>
+          <div class="x-tab-panel" id="panel-it">
+            <ul class="x-hero__bullets">
+              <li>Интеграция поверх существующих ERP/1С без замены</li>
+              <li>Аудит-трейл: кто-что-когда-почему &mdash; полная прозрачность</li>
+              <li>ИБ-контроль: ролевой доступ, журналирование, шифрование</li>
+            </ul>
+          </div>
+          <div class="x-tab-panel" id="panel-eng">
+            <ul class="x-hero__bullets">
+              <li>Алерты на отклонения техники в поле &mdash; до поломки</li>
+              <li>Единая картина парка: телематика + датчики + GPS</li>
+              <li>Журнал обслуживания с привязкой к нормативам</li>
+            </ul>
+          </div>
+
+          <div class="x-hero__ctas">
+            <a class="x-btn x-btn--primary" href="#recFORM">Запросить демо / техсессию</a>
+            <button class="x-btn x-btn--secondary" id="x-open-drawer">Получить пакет документов</button>
+          </div>
+          <p class="x-hero__micro">Без обязательств &middot; 30 минут &middot; NDA при необходимости</p>
         </div>
 
-        <div class="x-tab-panel x-tab-panel--active" id="panel-coo">
-          <ul class="x-hero__bullets">
-            <li>РџР»Р°РЅ-С„Р°РєС‚ Рё KPI РїРѕ РєР°Р¶РґРѕРјСѓ РїРѕРґСЂР°Р·РґРµР»РµРЅРёСЋ РІ СЂРµР°Р»СЊРЅРѕРј РІСЂРµРјРµРЅРё</li>
-            <li>РћС‡РµСЂРµРґСЊ РѕС‚РєР»РѕРЅРµРЅРёР№ СЃ РїСЂРёРѕСЂРёС‚РµС‚Р°РјРё Рё РѕС‚РІРµС‚СЃС‚РІРµРЅРЅС‹РјРё</li>
-            <li>Р“РѕС‚РѕРІС‹Рµ РїР°РєРµС‚С‹ РґР»СЏ РїСЂР°РІР»РµРЅРёСЏ Рё СЃРѕРІРµС‚Р° РґРёСЂРµРєС‚РѕСЂРѕРІ</li>
-          </ul>
+        <div class="x-hero__visual">
+          <p class="x-hero__visual-label">[ Мокап командного центра ]<br><span
+              style="font-size:.7rem;color:var(--x-muted)">Hotspots активны на опубликованной странице</span></p>
+          <div class="x-hotspot" data-tip="Очередь отклонений: алерты, приоритеты, ответственные"
+            style="position:absolute;top:25%;left:20%;width:28px;height:28px;border:2px solid var(--x-accent);border-radius:50%;cursor:pointer"
+            tabindex="0"></div>
+          <div class="x-hotspot" data-tip="KPI-дашборд: план-факт по подразделениям"
+            style="position:absolute;top:45%;left:65%;width:28px;height:28px;border:2px solid var(--x-accent);border-radius:50%;cursor:pointer"
+            tabindex="0"></div>
+          <div class="x-hotspot" data-tip="Интеграционный хаб: ERP, телематика, датчики"
+            style="position:absolute;top:70%;left:35%;width:28px;height:28px;border:2px solid var(--x-accent);border-radius:50%;cursor:pointer"
+            tabindex="0"></div>
+          <div class="x-hotspot" data-tip="Комплаенс: Меркурий, документооборот, аудит"
+            style="position:absolute;top:60%;left:80%;width:28px;height:28px;border:2px solid var(--x-accent);border-radius:50%;cursor:pointer"
+            tabindex="0"></div>
         </div>
-        <div class="x-tab-panel" id="panel-it">
-          <ul class="x-hero__bullets">
-            <li>РРЅС‚РµРіСЂР°С†РёСЏ РїРѕРІРµСЂС… СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёС… ERP/1РЎ Р±РµР· Р·Р°РјРµРЅС‹</li>
-            <li>РђСѓРґРёС‚-С‚СЂРµР№Р»: РєС‚Рѕ-С‡С‚Рѕ-РєРѕРіРґР°-РїРѕС‡РµРјСѓ вЂ” РїРѕР»РЅР°СЏ РїСЂРѕР·СЂР°С‡РЅРѕСЃС‚СЊ</li>
-            <li>РР‘-РєРѕРЅС‚СЂРѕР»СЊ: СЂРѕР»РµРІРѕР№ РґРѕСЃС‚СѓРї, Р¶СѓСЂРЅР°Р»РёСЂРѕРІР°РЅРёРµ, С€РёС„СЂРѕРІР°РЅРёРµ</li>
-          </ul>
-        </div>
-        <div class="x-tab-panel" id="panel-eng">
-          <ul class="x-hero__bullets">
-            <li>РђР»РµСЂС‚С‹ РЅР° РѕС‚РєР»РѕРЅРµРЅРёСЏ С‚РµС…РЅРёРєРё РІ РїРѕР»Рµ вЂ” РґРѕ РїРѕР»РѕРјРєРё</li>
-            <li>Р•РґРёРЅР°СЏ РєР°СЂС‚РёРЅР° РїР°СЂРєР°: С‚РµР»РµРјР°С‚РёРєР° + РґР°С‚С‡РёРєРё + GPS</li>
-            <li>Р–СѓСЂРЅР°Р» РѕР±СЃР»СѓР¶РёРІР°РЅРёСЏ СЃ РїСЂРёРІСЏР·РєРѕР№ Рє РЅРѕСЂРјР°С‚РёРІР°Рј</li>
-          </ul>
-        </div>
-
-        <div class="x-hero__ctas">
-          <!-- REPLACE #recFORM with real Tilda recID -->
-          <a class="x-btn x-btn--primary" href="#recFORM">Р—Р°РїСЂРѕСЃРёС‚СЊ РґРµРјРѕ / С‚РµС…СЃРµСЃСЃРёСЋ</a>
-          <button class="x-btn x-btn--secondary" id="x-open-drawer">РџРѕР»СѓС‡РёС‚СЊ РїР°РєРµС‚ РґРѕРєСѓРјРµРЅС‚РѕРІ</button>
-        </div>
-        <p class="x-hero__micro">Р‘РµР· РѕР±СЏР·Р°С‚РµР»СЊСЃС‚РІ В· 30 РјРёРЅСѓС‚ В· NDA РїСЂРё РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё</p>
       </div>
+    </div>
+  </section>
 
-      <div class="x-hero__visual">
-        <p class="x-hero__visual-label">[ РњРѕРєР°Рї РєРѕРјР°РЅРґРЅРѕРіРѕ С†РµРЅС‚СЂР° ]<br><span style="font-size:.7rem;color:var(--x-muted)">Hotspots Р°РєС‚РёРІРЅС‹ РЅР° РѕРїСѓР±Р»РёРєРѕРІР°РЅРЅРѕР№ СЃС‚СЂР°РЅРёС†Рµ</span></p>
-        <!-- Hotspots вЂ” Р·Р°РјРµРЅРёС‚СЊ РЅР° СЂРµР°Р»СЊРЅС‹Р№ РјРѕРєР°Рї РїРѕР·РґРЅРµРµ -->
-        <div class="x-hotspot" data-tip="РћС‡РµСЂРµРґСЊ РѕС‚РєР»РѕРЅРµРЅРёР№: Р°Р»РµСЂС‚С‹, РїСЂРёРѕСЂРёС‚РµС‚С‹, РѕС‚РІРµС‚СЃС‚РІРµРЅРЅС‹Рµ" style="position:absolute;top:25%;left:20%;width:28px;height:28px;border:2px solid var(--x-accent);border-radius:50%;cursor:pointer" tabindex="0"></div>
-        <div class="x-hotspot" data-tip="KPI-РґР°С€Р±РѕСЂРґ: РїР»Р°РЅ-С„Р°РєС‚ РїРѕ РїРѕРґСЂР°Р·РґРµР»РµРЅРёСЏРј" style="position:absolute;top:45%;left:65%;width:28px;height:28px;border:2px solid var(--x-accent);border-radius:50%;cursor:pointer" tabindex="0"></div>
-        <div class="x-hotspot" data-tip="РРЅС‚РµРіСЂР°С†РёРѕРЅРЅС‹Р№ С…Р°Р±: ERP, С‚РµР»РµРјР°С‚РёРєР°, РґР°С‚С‡РёРєРё" style="position:absolute;top:70%;left:35%;width:28px;height:28px;border:2px solid var(--x-accent);border-radius:50%;cursor:pointer" tabindex="0"></div>
-        <div class="x-hotspot" data-tip="РљРѕРјРїР»Р°РµРЅСЃ: РњРµСЂРєСѓСЂРёР№, РґРѕРєСѓРјРµРЅС‚РѕРѕР±РѕСЂРѕС‚, Р°СѓРґРёС‚" style="position:absolute;top:60%;left:80%;width:28px;height:28px;border:2px solid var(--x-accent);border-radius:50%;cursor:pointer" tabindex="0"></div>
+  <!-- TRUST STRIP -->
+  <div class="x-trust">
+    <div class="x-wrap">
+      <div class="x-trust__row">
+        <span class="x-badge" data-doc="security"><span class="x-badge__icon">&#128737;</span> Security</span>
+        <span class="x-badge" data-doc="safety"><span class="x-badge__icon">&#9881;</span> Safety</span>
+        <span class="x-badge" data-doc="integration"><span class="x-badge__icon">&#128279;</span> Integration</span>
+        <span class="x-badge" data-doc="compliance"><span class="x-badge__icon">&#128203;</span> Compliance</span>
+        <span class="x-badge" data-doc="procurement"><span class="x-badge__icon">&#128230;</span> Procurement</span>
       </div>
     </div>
   </div>
-</section>
 
-<!-- в•ђв•ђв•ђ TRUST STRIP в•ђв•ђв•ђ -->
-<div class="x-trust">
-  <div class="x-wrap">
-    <div class="x-trust__row">
-      <span class="x-badge" data-doc="security"><span class="x-badge__icon">рџ›Ў</span> Security</span>
-      <span class="x-badge" data-doc="safety"><span class="x-badge__icon">вљ™</span> Safety</span>
-      <span class="x-badge" data-doc="integration"><span class="x-badge__icon">рџ”—</span> Integration</span>
-      <span class="x-badge" data-doc="compliance"><span class="x-badge__icon">рџ“‹</span> Compliance</span>
-      <span class="x-badge" data-doc="procurement"><span class="x-badge__icon">рџ“¦</span> Procurement Ready</span>
-    </div>
-  </div>
-</div>
-
-
-<!-- в•ђв•ђв•ђ S2: РћРџР•Р РђР¦РРћРќРќРђРЇ РњРћР”Р•Р›Р¬ в•ђв•ђв•ђ -->
+  <!-- S2: ОПЕРАЦИОННАЯ МОДЕЛЬ -->
 <section class="x-section" id="x-model">
-  <div class="x-wrap">
-    <div class="x-section__head">
-      <p class="x-section__label">РћРїРµСЂР°С†РёРѕРЅРЅР°СЏ РјРѕРґРµР»СЊ</p>
-      <h2 class="x-h2">РљР°Рє В«РђРіСЂРѕС‚Р°РєС‚РёРєВ» РїСЂРµРІСЂР°С‰Р°РµС‚ СЃРµР·РѕРЅ РІ СѓРїСЂР°РІР»СЏРµРјСѓСЋ СЃРёСЃС‚РµРјСѓ</h2>
-      <p class="x-lead">РџСЏС‚СЊ СѓР·Р»РѕРІ РєРѕРЅС‚СѓСЂР° вЂ” РѕС‚ РїР»Р°РЅРёСЂРѕРІР°РЅРёСЏ РґРѕ РґРѕРєСѓРјРµРЅС‚Р°Р»СЊРЅРѕРіРѕ РїРѕРґС‚РІРµСЂР¶РґРµРЅРёСЏ. РљР°Р¶РґС‹Р№ РѕС‚РІРµС‡Р°РµС‚ РЅР° С‚СЂРё РІРѕРїСЂРѕСЃР°: С‡С‚Рѕ РєРѕРЅС‚СЂРѕР»РёСЂСѓРµРј, С‡С‚Рѕ РёР·РјРµСЂСЏРµРј, РєР°РєРѕР№ РґРѕРєСѓРјРµРЅС‚ РїРѕРґС‚РІРµСЂР¶РґР°РµС‚.</p>
+    <div class="x-wrap">
+        <div class="x-section__head">
+            <p class="x-section__label">Операционная модель</p>
+            <h2 class="x-h2">Как Агротактик превращает сезон в управляемую систему</h2>
+            <p class="x-lead">Пять узлов контура &mdash; от планирования до документального подтверждения. Каждый
+                отвечает на три вопроса: что контролируем, что измеряем, какой документ подтверждает.</p>
+        </div>
+        <div class="x-accordion">
+            <div class="x-acc-item">
+                <button class="x-acc-item__head">1. Планирование и нормирование</button>
+                <div class="x-acc-item__body">
+                    <p><strong>Контролируем:</strong> сезонный план, нормативы расхода, графики техники.</p>
+                    <p><strong>Измеряем:</strong> отклонение план/факт, загрузка ресурсов.</p>
+                    <p><strong>Документ:</strong> <a href="#" data-doc="pilot-blueprint">Pilot Blueprint</a></p>
+                </div>
+            </div>
+            <div class="x-acc-item">
+                <button class="x-acc-item__head">2. Диспетчеризация и алерты</button>
+                <div class="x-acc-item__body">
+                    <p><strong>Контролируем:</strong> очередь отклонений, приоритеты, назначение ответственных.</p>
+                    <p><strong>Измеряем:</strong> время реакции, % закрытых отклонений за смену.</p>
+                    <p><strong>Документ:</strong> <a href="#" data-doc="architecture">Architecture Brief</a></p>
+                </div>
+            </div>
+            <div class="x-acc-item">
+                <button class="x-acc-item__head">3. Исполнение и контроль</button>
+                <div class="x-acc-item__body">
+                    <p><strong>Контролируем:</strong> статус задач в поле, GPS-привязка, фотоотчёты.</p>
+                    <p><strong>Измеряем:</strong> % выполнения операций в срок, точность покрытия.</p>
+                    <p><strong>Документ:</strong> <a href="#" data-doc="onepager">One-Pager</a></p>
+                </div>
+            </div>
+            <div class="x-acc-item">
+                <button class="x-acc-item__head">4. Интеграция данных</button>
+                <div class="x-acc-item__body">
+                    <p><strong>Контролируем:</strong> потоки данных ERP, телематика, датчики, BI.</p>
+                    <p><strong>Измеряем:</strong> задержка синхронизации, % автоматизированных проводок.</p>
+                    <p><strong>Документ:</strong> <a href="#" data-doc="integration">Integration Checklist</a></p>
+                </div>
+            </div>
+            <div class="x-acc-item">
+                <button class="x-acc-item__head">5. Комплаенс и отчётность</button>
+                <div class="x-acc-item__body">
+                    <p><strong>Контролируем:</strong> соответствие регуляторным требованиям, Меркурий, audit trail.</p>
+                    <p><strong>Измеряем:</strong> полнота журнала, % операций с документальным подтверждением.</p>
+                    <p><strong>Документ:</strong> <a href="#" data-doc="compliance">Compliance Brief</a></p>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="x-accordion">
-      <div class="x-acc-item">
-        <button class="x-acc-item__head">1. РџР»Р°РЅРёСЂРѕРІР°РЅРёРµ Рё РЅРѕСЂРјРёСЂРѕРІР°РЅРёРµ</button>
-        <div class="x-acc-item__body">
-          <p><strong>РљРѕРЅС‚СЂРѕР»РёСЂСѓРµРј:</strong> СЃРµР·РѕРЅРЅС‹Р№ РїР»Р°РЅ, РЅРѕСЂРјР°С‚РёРІС‹ СЂР°СЃС…РѕРґР°, РіСЂР°С„РёРєРё С‚РµС…РЅРёРєРё.</p>
-          <p><strong>РР·РјРµСЂСЏРµРј:</strong> РѕС‚РєР»РѕРЅРµРЅРёРµ РїР»Р°РЅ/С„Р°РєС‚, Р·Р°РіСЂСѓР·РєР° СЂРµСЃСѓСЂСЃРѕРІ.</p>
-          <p><strong>Р”РѕРєСѓРјРµРЅС‚:</strong> <a href="#" class="x-btn--tertiary" data-doc="pilot-blueprint">Pilot Blueprint в†—</a></p>
-        </div>
-      </div>
-      <div class="x-acc-item">
-        <button class="x-acc-item__head">2. Р”РёСЃРїРµС‚С‡РµСЂРёР·Р°С†РёСЏ Рё Р°Р»РµСЂС‚С‹</button>
-        <div class="x-acc-item__body">
-          <p><strong>РљРѕРЅС‚СЂРѕР»РёСЂСѓРµРј:</strong> РѕС‡РµСЂРµРґСЊ РѕС‚РєР»РѕРЅРµРЅРёР№, РїСЂРёРѕСЂРёС‚РµС‚С‹, РЅР°Р·РЅР°С‡РµРЅРёРµ РѕС‚РІРµС‚СЃС‚РІРµРЅРЅС‹С….</p>
-          <p><strong>РР·РјРµСЂСЏРµРј:</strong> РІСЂРµРјСЏ СЂРµР°РєС†РёРё, % Р·Р°РєСЂС‹С‚С‹С… РѕС‚РєР»РѕРЅРµРЅРёР№ Р·Р° СЃРјРµРЅСѓ.</p>
-          <p><strong>Р”РѕРєСѓРјРµРЅС‚:</strong> <a href="#" class="x-btn--tertiary" data-doc="architecture">Architecture Brief в†—</a></p>
-        </div>
-      </div>
-      <div class="x-acc-item">
-        <button class="x-acc-item__head">3. РСЃРїРѕР»РЅРµРЅРёРµ Рё РєРѕРЅС‚СЂРѕР»СЊ</button>
-        <div class="x-acc-item__body">
-          <p><strong>РљРѕРЅС‚СЂРѕР»РёСЂСѓРµРј:</strong> СЃС‚Р°С‚СѓСЃ Р·Р°РґР°С‡ РІ РїРѕР»Рµ, GPS-РїСЂРёРІСЏР·РєР°, С„РѕС‚РѕРѕС‚С‡С‘С‚С‹.</p>
-          <p><strong>РР·РјРµСЂСЏРµРј:</strong> % РІС‹РїРѕР»РЅРµРЅРёСЏ РѕРїРµСЂР°С†РёР№ РІ СЃСЂРѕРє, С‚РѕС‡РЅРѕСЃС‚СЊ РїРѕРєСЂС‹С‚РёСЏ.</p>
-          <p><strong>Р”РѕРєСѓРјРµРЅС‚:</strong> <a href="#" class="x-btn--tertiary" data-doc="onepager">One-Pager в†—</a></p>
-        </div>
-      </div>
-      <div class="x-acc-item">
-        <button class="x-acc-item__head">4. РРЅС‚РµРіСЂР°С†РёСЏ РґР°РЅРЅС‹С…</button>
-        <div class="x-acc-item__body">
-          <p><strong>РљРѕРЅС‚СЂРѕР»РёСЂСѓРµРј:</strong> РїРѕС‚РѕРєРё РґР°РЅРЅС‹С… ERP в†” С‚РµР»РµРјР°С‚РёРєР° в†” РґР°С‚С‡РёРєРё в†” BI.</p>
-          <p><strong>РР·РјРµСЂСЏРµРј:</strong> Р·Р°РґРµСЂР¶РєР° СЃРёРЅС…СЂРѕРЅРёР·Р°С†РёРё, % Р°РІС‚РѕРјР°С‚РёР·РёСЂРѕРІР°РЅРЅС‹С… РїСЂРѕРІРѕРґРѕРє.</p>
-          <p><strong>Р”РѕРєСѓРјРµРЅС‚:</strong> <a href="#" class="x-btn--tertiary" data-doc="integration">Integration Checklist в†—</a></p>
-        </div>
-      </div>
-      <div class="x-acc-item">
-        <button class="x-acc-item__head">5. РљРѕРјРїР»Р°РµРЅСЃ Рё РѕС‚С‡С‘С‚РЅРѕСЃС‚СЊ</button>
-        <div class="x-acc-item__body">
-          <p><strong>РљРѕРЅС‚СЂРѕР»РёСЂСѓРµРј:</strong> СЃРѕРѕС‚РІРµС‚СЃС‚РІРёРµ СЂРµРіСѓР»СЏС‚РѕСЂРЅС‹Рј С‚СЂРµР±РѕРІР°РЅРёСЏРј, РњРµСЂРєСѓСЂРёР№, audit trail.</p>
-          <p><strong>РР·РјРµСЂСЏРµРј:</strong> РїРѕР»РЅРѕС‚Р° Р¶СѓСЂРЅР°Р»Р°, % РѕРїРµСЂР°С†РёР№ СЃ РґРѕРєСѓРјРµРЅС‚Р°Р»СЊРЅС‹Рј РїРѕРґС‚РІРµСЂР¶РґРµРЅРёРµРј.</p>
-          <p><strong>Р”РѕРєСѓРјРµРЅС‚:</strong> <a href="#" class="x-btn--tertiary" data-doc="compliance">Compliance Brief в†—</a></p>
-        </div>
-      </div>
-    </div>
-  </div>
 </section>
 
-<!-- в•ђв•ђв•ђ S3: 4 РЎР›РћРЇ РџР›РђРўР¤РћР РњР« в•ђв•ђв•ђ -->
+<!-- S3: 4 СЛОЯ ПЛАТФОРМЫ -->
 <section class="x-section" id="x-platform">
-  <div class="x-wrap">
-    <div class="x-section__head">
-      <p class="x-section__label">РђСЂС…РёС‚РµРєС‚СѓСЂР°</p>
-      <h2 class="x-h2">РџР»Р°С‚С„РѕСЂРјР°, СЃРѕР±СЂР°РЅРЅР°СЏ РєР°Рє РєРѕРЅС‚СѓСЂ СѓРїСЂР°РІР»РµРЅРёСЏ</h2>
-      <p class="x-lead">Р§РµС‚С‹СЂРµ СЃР»РѕСЏ, РєР°Р¶РґС‹Р№ СЂРµС€Р°РµС‚ СЃРІРѕСЋ Р·Р°РґР°С‡Сѓ. Р’РјРµСЃС‚Рµ вЂ” Р·Р°РјРєРЅСѓС‚С‹Р№ С†РёРєР» РѕС‚ РґР°РЅРЅС‹С… РґРѕ СЂРµС€РµРЅРёСЏ.</p>
+    <div class="x-wrap">
+        <div class="x-section__head">
+            <p class="x-section__label">Архитектура</p>
+            <h2 class="x-h2">Платформа, собранная как контур управления</h2>
+            <p class="x-lead">Четыре слоя, каждый решает свою задачу. Вместе &mdash; замкнутый цикл от данных до
+                решения.</p>
+        </div>
+        <div class="x-cards">
+            <div class="x-card">
+                <div class="x-card__icon">&#9889;</div>
+                <h3 class="x-card__title">Orchestrator</h3>
+                <p class="x-card__text">Маршрутизация задач, приоритизация отклонений, автоматическое назначение
+                    ответственных по регламенту.</p>
+                <a href="#" class="x-btn x-btn--tertiary" data-doc="architecture">Скачать Architecture Brief</a>
+            </div>
+            <div class="x-card">
+                <div class="x-card__icon">&#128202;</div>
+                <h3 class="x-card__title">Command Center</h3>
+                <p class="x-card__text">Единый дашборд: план-факт, KPI по подразделениям, очередь алертов, карта техники
+                    в поле.</p>
+                <a href="#" class="x-btn x-btn--tertiary" data-doc="onepager">Скачать One-Pager</a>
+            </div>
+            <div class="x-card">
+                <div class="x-card__icon">&#128279;</div>
+                <h3 class="x-card__title">Integration Hub</h3>
+                <p class="x-card__text">Подключение к ERP/1С, телематике, датчикам и BI без замены существующих систем.
+                    API-first.</p>
+                <a href="#" class="x-btn x-btn--tertiary" data-doc="integration">Скачать Integration Checklist</a>
+            </div>
+            <div class="x-card">
+                <div class="x-card__icon">&#128203;</div>
+                <h3 class="x-card__title">Compliance Suite</h3>
+                <p class="x-card__text">Автоматическая фиксация действий (audit trail), отчётность по регуляторам,
+                    поддержка Меркурий.</p>
+                <a href="#" class="x-btn x-btn--tertiary" data-doc="compliance">Скачать Compliance Brief</a>
+            </div>
+        </div>
     </div>
-    <div class="x-cards">
-      <div class="x-card">
-        <div class="x-card__icon">вљЎ</div>
-        <h3 class="x-card__title">Orchestrator</h3>
-        <p class="x-card__text">РњР°СЂС€СЂСѓС‚РёР·Р°С†РёСЏ Р·Р°РґР°С‡, РїСЂРёРѕСЂРёС‚РёР·Р°С†РёСЏ РѕС‚РєР»РѕРЅРµРЅРёР№, Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ РЅР°Р·РЅР°С‡РµРЅРёРµ РѕС‚РІРµС‚СЃС‚РІРµРЅРЅС‹С… РїРѕ СЂРµРіР»Р°РјРµРЅС‚Сѓ.</p>
-        <!-- UPLOAD PDF TO TILDA в†’ REPLACE URL HERE -->
-        <a href="#" class="x-btn x-btn--tertiary" data-doc="architecture">РЎРєР°С‡Р°С‚СЊ Architecture Brief в†—</a>
-      </div>
-      <div class="x-card">
-        <div class="x-card__icon">рџ“Љ</div>
-        <h3 class="x-card__title">Command Center</h3>
-        <p class="x-card__text">Р•РґРёРЅС‹Р№ РґР°С€Р±РѕСЂРґ: РїР»Р°РЅ-С„Р°РєС‚, KPI РїРѕ РїРѕРґСЂР°Р·РґРµР»РµРЅРёСЏРј, РѕС‡РµСЂРµРґСЊ Р°Р»РµСЂС‚РѕРІ, РєР°СЂС‚Р° С‚РµС…РЅРёРєРё РІ РїРѕР»Рµ.</p>
-        <a href="#" class="x-btn x-btn--tertiary" data-doc="onepager">РЎРєР°С‡Р°С‚СЊ One-Pager в†—</a>
-      </div>
-      <div class="x-card">
-        <div class="x-card__icon">рџ”—</div>
-        <h3 class="x-card__title">Integration Hub</h3>
-        <p class="x-card__text">РџРѕРґРєР»СЋС‡РµРЅРёРµ Рє ERP/1РЎ, С‚РµР»РµРјР°С‚РёРєРµ, РґР°С‚С‡РёРєР°Рј Рё BI Р±РµР· Р·Р°РјРµРЅС‹ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёС… СЃРёСЃС‚РµРј. API-first.</p>
-        <a href="#" class="x-btn x-btn--tertiary" data-doc="integration">РЎРєР°С‡Р°С‚СЊ Integration Checklist в†—</a>
-      </div>
-      <div class="x-card">
-        <div class="x-card__icon">рџ“‹</div>
-        <h3 class="x-card__title">Compliance Suite</h3>
-        <p class="x-card__text">РђРІС‚РѕРјР°С‚РёС‡РµСЃРєР°СЏ С„РёРєСЃР°С†РёСЏ РґРµР№СЃС‚РІРёР№ (audit trail), РѕС‚С‡С‘С‚РЅРѕСЃС‚СЊ РїРѕ СЂРµРіСѓР»СЏС‚РѕСЂР°Рј, РїРѕРґРґРµСЂР¶РєР° В«РњРµСЂРєСѓСЂРёР№В».</p>
-        <a href="#" class="x-btn x-btn--tertiary" data-doc="compliance">РЎРєР°С‡Р°С‚СЊ Compliance Brief в†—</a>
-      </div>
-    </div>
-  </div>
 </section>
 
-<!-- в•ђв•ђв•ђ S4: Р›Р•РЎРўРќРР¦Рђ РђР’РўРћРќРћРњРР A2в†’A3в†’A4 в•ђв•ђв•ђ -->
+<!-- S4: ЛЕСТНИЦА АВТОНОМИИ -->
 <section class="x-section" id="x-autonomy">
-  <div class="x-wrap">
-    <div class="x-section__head">
-      <p class="x-section__label">РЈСЂРѕРІРЅРё Р°РІС‚РѕРЅРѕРјРёРё</p>
-      <h2 class="x-h2">РЈРїСЂР°РІР»СЏРµРјР°СЏ Р»РµСЃС‚РЅРёС†Р°: РѕС‚ РЅР°Р±Р»СЋРґР°РµРјРѕСЃС‚Рё Рє РѕСЂРєРµСЃС‚СЂР°С†РёРё</h2>
-      <p class="x-lead">РџРѕСЌС‚Р°РїРЅРѕРµ РЅР°СЂР°С‰РёРІР°РЅРёРµ Р°РІС‚РѕРјР°С‚РёР·Р°С†РёРё вЂ” Р±РµР· СЃРєР°С‡РєРѕРІ Рё СЂРёСЃРєРѕРІ. РљР°Р¶РґС‹Р№ СѓСЂРѕРІРµРЅСЊ РІРєР»СЋС‡Р°РµС‚ С‡С‘С‚РєРёРµ С‚СЂРµР±РѕРІР°РЅРёСЏ.</p>
-    </div>
-    <div class="x-stepper">
-      <div class="x-step x-step--active">
-        <div class="x-step__level">A2</div>
-        <h3 class="x-step__title">РќР°Р±Р»СЋРґР°РµРјРѕСЃС‚СЊ</h3>
-        <p class="x-card__text">РњРѕРЅРёС‚РѕСЂРёРЅРі, Р°Р»РµСЂС‚С‹, СЂСѓС‡РЅС‹Рµ СЂРµС€РµРЅРёСЏ.</p>
-        <div class="x-step__chips">
-          <span class="x-chip">Р”Р°РЅРЅС‹Рµ</span>
-          <span class="x-chip">РЎРІСЏР·СЊ</span>
+    <div class="x-wrap">
+        <div class="x-section__head">
+            <p class="x-section__label">Уровни автономии</p>
+            <h2 class="x-h2">Управляемая лестница: от наблюдаемости к оркестрации</h2>
+            <p class="x-lead">Поэтапное наращивание автоматизации &mdash; без скачков и рисков.</p>
         </div>
-      </div>
-      <div class="x-step">
-        <div class="x-step__level">A3</div>
-        <h3 class="x-step__title">Р РµРєРѕРјРµРЅРґР°С†РёРё</h3>
-        <p class="x-card__text">РЎРёСЃС‚РµРјР° РїСЂРµРґР»Р°РіР°РµС‚ СЂРµС€РµРЅРёСЏ, С‡РµР»РѕРІРµРє РїРѕРґС‚РІРµСЂР¶РґР°РµС‚.</p>
-        <div class="x-step__chips">
-          <span class="x-chip">Р РµРіР»Р°РјРµРЅС‚С‹</span>
-          <span class="x-chip">РР‘</span>
-          <span class="x-chip">Р”Р°РЅРЅС‹Рµ</span>
+        <div class="x-stepper">
+            <div class="x-step x-step--active">
+                <div class="x-step__level">A2</div>
+                <h3 class="x-step__title">Наблюдаемость</h3>
+                <p class="x-card__text">Мониторинг, алерты, ручные решения.</p>
+                <div class="x-step__chips"><span class="x-chip">Данные</span><span class="x-chip">Связь</span></div>
+            </div>
+            <div class="x-step">
+                <div class="x-step__level">A3</div>
+                <h3 class="x-step__title">Рекомендации</h3>
+                <p class="x-card__text">Система предлагает решения, человек подтверждает.</p>
+                <div class="x-step__chips"><span class="x-chip">Регламенты</span><span class="x-chip">ИБ</span><span
+                        class="x-chip">Данные</span></div>
+            </div>
+            <div class="x-step">
+                <div class="x-step__level">A4</div>
+                <h3 class="x-step__title">Оркестрация</h3>
+                <p class="x-card__text">Автоматическое исполнение в рамках регламента.</p>
+                <div class="x-step__chips"><span class="x-chip">Регламенты</span><span class="x-chip">ИБ</span><span
+                        class="x-chip">Аудит</span><span class="x-chip">Комплаенс</span></div>
+            </div>
         </div>
-      </div>
-      <div class="x-step">
-        <div class="x-step__level">A4</div>
-        <h3 class="x-step__title">РћСЂРєРµСЃС‚СЂР°С†РёСЏ</h3>
-        <p class="x-card__text">РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ РёСЃРїРѕР»РЅРµРЅРёРµ РІ СЂР°РјРєР°С… СЂРµРіР»Р°РјРµРЅС‚Р°.</p>
-        <div class="x-step__chips">
-          <span class="x-chip">Р РµРіР»Р°РјРµРЅС‚С‹</span>
-          <span class="x-chip">РР‘</span>
-          <span class="x-chip">РђСѓРґРёС‚</span>
-          <span class="x-chip">РљРѕРјРїР»Р°РµРЅСЃ</span>
+        <div style="text-align:center;margin-top:var(--x-sp-6)">
+            <a class="x-btn x-btn--secondary" href="#recFORM">Подобрать стартовый уровень (A2)</a>
         </div>
-      </div>
     </div>
-    <div style="text-align:center;margin-top:var(--x-sp-6)">
-      <!-- REPLACE #recFORM with real Tilda recID -->
-      <a class="x-btn x-btn--secondary" href="#recFORM">РџРѕРґРѕР±СЂР°С‚СЊ СЃС‚Р°СЂС‚РѕРІС‹Р№ СѓСЂРѕРІРµРЅСЊ (A2)</a>
-    </div>
-  </div>
 </section>
 
-<!-- в•ђв•ђв•ђ S5: РљРћРњРђРќР”РќР«Р™ Р¦Р•РќРўР  в•ђв•ђв•ђ -->
+<!-- S5: КОМАНДНЫЙ ЦЕНТР -->
 <section class="x-section" id="x-command">
-  <div class="x-wrap">
-    <div class="x-section__head">
-      <p class="x-section__label">РљРѕРјР°РЅРґРЅС‹Р№ С†РµРЅС‚СЂ</p>
-      <h2 class="x-h2">РЎС†РµРЅР°СЂРёРё: РѕС‚ РѕС‚РєР»РѕРЅРµРЅРёСЏ РґРѕ СЂРµС€РµРЅРёСЏ Р·Р° РјРёРЅСѓС‚С‹</h2>
-      <p class="x-lead">РўСЂРё РѕСЃРЅРѕРІРЅС‹С… СЃС†РµРЅР°СЂРёСЏ, РєРѕС‚РѕСЂС‹Рµ Р·Р°РєСЂС‹РІР°СЋС‚ 80% РѕРїРµСЂР°С†РёРѕРЅРЅС‹С… СЃРёС‚СѓР°С†РёР№.</p>
+    <div class="x-wrap">
+        <div class="x-section__head">
+            <p class="x-section__label">Командный центр</p>
+            <h2 class="x-h2">Сценарии: от отклонения до решения за минуты</h2>
+        </div>
+        <div class="x-cards">
+            <div class="x-card">
+                <div class="x-card__icon">&#128680;</div>
+                <h3 class="x-card__title">Отклонение &rarr; Алерт &rarr; Решение</h3>
+                <p class="x-card__text">Датчик фиксирует аномалию. Система формирует алерт, назначает ответственного,
+                    контролирует время реакции.</p>
+            </div>
+            <div class="x-card">
+                <div class="x-card__icon">&#128200;</div>
+                <h3 class="x-card__title">Плановая операция &rarr; Факт &rarr; KPI</h3>
+                <p class="x-card__text">Задача из плана &rarr; исполнение в поле &rarr; фиксация план/факт &rarr;
+                    обновление KPI-дашборда.</p>
+            </div>
+            <div class="x-card">
+                <div class="x-card__icon">&#128209;</div>
+                <h3 class="x-card__title">Запрос &rarr; Документ &rarr; Аудит</h3>
+                <p class="x-card__text">Запрос от регулятора &rarr; автоматическая генерация отчёта из журнала &rarr;
+                    подпись и отправка.</p>
+            </div>
+        </div>
+        <div style="text-align:center;margin-top:var(--x-sp-6)">
+            <a class="x-btn x-btn--primary" href="#recFORM">Запросить демо по сценарию</a>
+        </div>
     </div>
-    <div class="x-cards">
-      <div class="x-card x-card--scenario">
-        <div class="x-card__icon">рџљЁ</div>
-        <h3 class="x-card__title">РћС‚РєР»РѕРЅРµРЅРёРµ в†’ РђР»РµСЂС‚ в†’ Р РµС€РµРЅРёРµ</h3>
-        <p class="x-card__text">Р”Р°С‚С‡РёРє С„РёРєСЃРёСЂСѓРµС‚ Р°РЅРѕРјР°Р»РёСЋ. РЎРёСЃС‚РµРјР° С„РѕСЂРјРёСЂСѓРµС‚ Р°Р»РµСЂС‚, РЅР°Р·РЅР°С‡Р°РµС‚ РѕС‚РІРµС‚СЃС‚РІРµРЅРЅРѕРіРѕ, РєРѕРЅС‚СЂРѕР»РёСЂСѓРµС‚ РІСЂРµРјСЏ СЂРµР°РєС†РёРё.</p>
-      </div>
-      <div class="x-card x-card--scenario">
-        <div class="x-card__icon">рџ“€</div>
-        <h3 class="x-card__title">РџР»Р°РЅРѕРІР°СЏ РѕРїРµСЂР°С†РёСЏ в†’ Р¤Р°РєС‚ в†’ KPI</h3>
-        <p class="x-card__text">Р—Р°РґР°С‡Р° РёР· РїР»Р°РЅР° в†’ РёСЃРїРѕР»РЅРµРЅРёРµ РІ РїРѕР»Рµ в†’ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєР°СЏ С„РёРєСЃР°С†РёСЏ РїР»Р°РЅ/С„Р°РєС‚ в†’ РѕР±РЅРѕРІР»РµРЅРёРµ KPI-РґР°С€Р±РѕСЂРґР°.</p>
-      </div>
-      <div class="x-card x-card--scenario">
-        <div class="x-card__icon">рџ“‘</div>
-        <h3 class="x-card__title">Р—Р°РїСЂРѕСЃ в†’ Р”РѕРєСѓРјРµРЅС‚ в†’ РђСѓРґРёС‚</h3>
-        <p class="x-card__text">Р—Р°РїСЂРѕСЃ РѕС‚ СЂРµРіСѓР»СЏС‚РѕСЂР° РёР»Рё РїСЂР°РІР»РµРЅРёСЏ в†’ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєР°СЏ РіРµРЅРµСЂР°С†РёСЏ РѕС‚С‡С‘С‚Р° РёР· Р¶СѓСЂРЅР°Р»Р° в†’ РїРѕРґРїРёСЃСЊ Рё РѕС‚РїСЂР°РІРєР°.</p>
-      </div>
-    </div>
-    <div style="text-align:center;margin-top:var(--x-sp-6)">
-      <a class="x-btn x-btn--primary" href="#recFORM">Р—Р°РїСЂРѕСЃРёС‚СЊ РґРµРјРѕ РїРѕ СЃС†РµРЅР°СЂРёСЋ</a>
-    </div>
-  </div>
 </section>
 
-<!-- в•ђв•ђв•ђ S6: РРќРўР•Р“Р РђР¦РР в•ђв•ђв•ђ -->
+<!-- S6: ИНТЕГРАЦИИ -->
 <section class="x-section" id="x-integrations">
-  <div class="x-wrap">
-    <div class="x-section__head">
-      <p class="x-section__label">РРЅС‚РµРіСЂР°С†РёРё</p>
-      <h2 class="x-h2">РџРѕРґРєР»СЋС‡Р°РµРјСЃСЏ РїРѕРІРµСЂС… вЂ” РЅРµ Р·Р°РјРµРЅСЏРµРј</h2>
-      <p class="x-lead">Р Р°Р±РѕС‚Р°РµРј СЃ С‚РµРј, С‡С‚Рѕ СѓР¶Рµ РµСЃС‚СЊ: ERP/1РЎ, С‚РµР»РµРјР°С‚РёРєР°, РґР°С‚С‡РёРєРё, BI. API-first, Р±РµР· СЂРёСЃРєРѕРІ РјРёРіСЂР°С†РёРё.</p>
+    <div class="x-wrap">
+        <div class="x-section__head">
+            <p class="x-section__label">Интеграции</p>
+            <h2 class="x-h2">Подключаемся поверх &mdash; не заменяем</h2>
+            <p class="x-lead">Работаем с тем, что уже есть: ERP/1С, телематика, датчики, BI. API-first.</p>
+        </div>
+        <div class="x-cards" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+            <div class="x-card">
+                <h3 class="x-card__title">ERP / 1С</h3>
+                <p class="x-card__text">Двухсторонняя синхронизация проводок и справочников.</p>
+            </div>
+            <div class="x-card">
+                <h3 class="x-card__title">Телематика</h3>
+                <p class="x-card__text">GPS, CAN-шина, топливо, моточасы.</p>
+            </div>
+            <div class="x-card">
+                <h3 class="x-card__title">Датчики IoT</h3>
+                <p class="x-card__text">Влажность, температура, уровни, давление.</p>
+            </div>
+            <div class="x-card">
+                <h3 class="x-card__title">BI</h3>
+                <p class="x-card__text">Экспорт в Power BI, Tableau, собственные дашборды.</p>
+            </div>
+            <div class="x-card">
+                <h3 class="x-card__title">REST API</h3>
+                <p class="x-card__text">Открытый API для кастомных интеграций.</p>
+            </div>
+        </div>
+        <div class="x-selfcheck" style="margin-top:var(--x-sp-7)">
+            <h3 class="x-card__title" style="margin-bottom:var(--x-sp-4)">Экспресс-проверка за 2 минуты</h3>
+            <label class="x-check"><input type="checkbox" data-score="1"> Используем ERP/1С</label>
+            <label class="x-check"><input type="checkbox" data-score="1"> Есть телематика на технике</label>
+            <label class="x-check"><input type="checkbox" data-score="1"> Нужен мониторинг датчиков</label>
+            <label class="x-check"><input type="checkbox" data-score="1"> Хотим видеть KPI в реальном времени</label>
+            <label class="x-check"><input type="checkbox" data-score="1"> Нужна отчётность (Меркурий и др.)</label>
+            <div class="x-selfcheck__result" id="x-selfcheck-result"></div>
+        </div>
+        <div style="text-align:center;margin-top:var(--x-sp-6)">
+            <a href="#" class="x-btn x-btn--secondary" data-doc="integration">Скачать Integration Checklist</a>
+        </div>
     </div>
-    <div class="x-cards" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
-      <div class="x-card"><div class="x-card__icon">рџЏў</div><h3 class="x-card__title">ERP / 1РЎ</h3><p class="x-card__text">Р”РІСѓС…СЃС‚РѕСЂРѕРЅРЅСЏСЏ СЃРёРЅС…СЂРѕРЅРёР·Р°С†РёСЏ РїСЂРѕРІРѕРґРѕРє Рё СЃРїСЂР°РІРѕС‡РЅРёРєРѕРІ.</p></div>
-      <div class="x-card"><div class="x-card__icon">рџ“Ў</div><h3 class="x-card__title">РўРµР»РµРјР°С‚РёРєР°</h3><p class="x-card__text">GPS, CAN-С€РёРЅР°, С‚РѕРїР»РёРІРѕ, РјРѕС‚РѕС‡Р°СЃС‹ вЂ” Р»СЋР±РѕР№ РїСЂРѕРІР°Р№РґРµСЂ.</p></div>
-      <div class="x-card"><div class="x-card__icon">рџЊЎ</div><h3 class="x-card__title">Р”Р°С‚С‡РёРєРё</h3><p class="x-card__text">IoT-СЃРµРЅСЃРѕСЂС‹: РІР»Р°Р¶РЅРѕСЃС‚СЊ, С‚РµРјРїРµСЂР°С‚СѓСЂР°, СѓСЂРѕРІРЅРё, РґР°РІР»РµРЅРёРµ.</p></div>
-      <div class="x-card"><div class="x-card__icon">рџ“Љ</div><h3 class="x-card__title">BI</h3><p class="x-card__text">Р­РєСЃРїРѕСЂС‚ РґР°РЅРЅС‹С… РІ Power BI, Tableau, СЃРѕР±СЃС‚РІРµРЅРЅС‹Рµ РґР°С€Р±РѕСЂРґС‹.</p></div>
-      <div class="x-card"><div class="x-card__icon">рџ”Њ</div><h3 class="x-card__title">REST API</h3><p class="x-card__text">РћС‚РєСЂС‹С‚С‹Р№ API РґР»СЏ РєР°СЃС‚РѕРјРЅС‹С… РёРЅС‚РµРіСЂР°С†РёР№ Рё Р°РІС‚РѕРјР°С‚РёР·Р°С†РёР№.</p></div>
-    </div>
-
-    <!-- Self-check -->
-    <div class="x-selfcheck" style="margin-top:var(--x-sp-7)">
-      <h3 class="x-card__title" style="margin-bottom:var(--x-sp-4)">Р­РєСЃРїСЂРµСЃСЃ-РїСЂРѕРІРµСЂРєР° Р·Р° 2 РјРёРЅСѓС‚С‹</h3>
-      <label class="x-check"><input type="checkbox" data-score="1"> РСЃРїРѕР»СЊР·СѓРµРј ERP/1РЎ</label>
-      <label class="x-check"><input type="checkbox" data-score="1"> Р•СЃС‚СЊ С‚РµР»РµРјР°С‚РёРєР° РЅР° С‚РµС…РЅРёРєРµ</label>
-      <label class="x-check"><input type="checkbox" data-score="1"> РќСѓР¶РµРЅ РјРѕРЅРёС‚РѕСЂРёРЅРі РґР°С‚С‡РёРєРѕРІ</label>
-      <label class="x-check"><input type="checkbox" data-score="1"> РҐРѕС‚РёРј РІРёРґРµС‚СЊ KPI РІ СЂРµР°Р»СЊРЅРѕРј РІСЂРµРјРµРЅРё</label>
-      <label class="x-check"><input type="checkbox" data-score="1"> РќСѓР¶РЅР° РѕС‚С‡С‘С‚РЅРѕСЃС‚СЊ (РњРµСЂРєСѓСЂРёР№ Рё РґСЂ.)</label>
-      <div class="x-selfcheck__result" id="x-selfcheck-result"></div>
-    </div>
-
-    <div style="text-align:center;margin-top:var(--x-sp-6)">
-      <a href="#" class="x-btn x-btn--secondary" data-doc="integration">РЎРєР°С‡Р°С‚СЊ Integration Checklist в†—</a>
-    </div>
-  </div>
-</section>
-
-
-<!-- в•ђв•ђв•ђ S7: РљРћРњРџР›РђР•РќРЎ в•ђв•ђв•ђ -->
+</section><!-- S7: КОМПЛАЕНС -->
 <section class="x-section" id="x-compliance">
-  <div class="x-wrap">
-    <div class="x-section__head">
-      <p class="x-section__label">РљРѕРјРїР»Р°РµРЅСЃ</p>
-      <h2 class="x-h2">Р РµРіСѓР»СЏС‚РѕСЂРЅС‹Рµ С‚СЂРµР±РѕРІР°РЅРёСЏ вЂ” С‡Р°СЃС‚СЊ РїСЂРѕС†РµСЃСЃР°, Р° РЅРµ РѕС‚РґРµР»СЊРЅР°СЏ Р·Р°РґР°С‡Р°</h2>
-      <p class="x-lead">РђРІС‚РѕРјР°С‚РёС‡РµСЃРєР°СЏ С„РёРєСЃР°С†РёСЏ РІ Р¶СѓСЂРЅР°Р»Рµ, РїРѕРґРґРµСЂР¶РєР° В«РњРµСЂРєСѓСЂРёР№В», РіРѕС‚РѕРІС‹Рµ РѕС‚С‡С‘С‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРѕРє.</p>
+    <div class="x-wrap">
+        <div class="x-section__head">
+            <p class="x-section__label">Комплаенс</p>
+            <h2 class="x-h2">Регуляторные требования &mdash; часть процесса, а не отдельная задача</h2>
+            <p class="x-lead">Автоматическая фиксация в журнале, поддержка Меркурий, готовые отчёты для проверок.</p>
+        </div>
+        <ul class="x-hero__bullets" style="margin-bottom:var(--x-sp-6)">
+            <li>Журнал действий (audit trail) &mdash; кто, что, когда, почему</li>
+            <li>Поддержка системы Меркурий для ветеринарного контроля</li>
+            <li>Автоматическая генерация отчётов по требованию регуляторов</li>
+            <li>Ролевой доступ к данным и документам</li>
+        </ul>
+        <a href="#" class="x-btn x-btn--secondary" data-doc="compliance">Скачать Compliance Brief</a>
     </div>
-    <ul class="x-hero__bullets" style="margin-bottom:var(--x-sp-6)">
-      <li>Р–СѓСЂРЅР°Р» РґРµР№СЃС‚РІРёР№ (audit trail) вЂ” РєС‚Рѕ, С‡С‚Рѕ, РєРѕРіРґР°, РїРѕС‡РµРјСѓ</li>
-      <li>РџРѕРґРґРµСЂР¶РєР° СЃРёСЃС‚РµРјС‹ В«РњРµСЂРєСѓСЂРёР№В» РґР»СЏ РІРµС‚РµСЂРёРЅР°СЂРЅРѕРіРѕ РєРѕРЅС‚СЂРѕР»СЏ</li>
-      <li>РђРІС‚РѕРјР°С‚РёС‡РµСЃРєР°СЏ РіРµРЅРµСЂР°С†РёСЏ РѕС‚С‡С‘С‚РѕРІ РїРѕ С‚СЂРµР±РѕРІР°РЅРёСЋ СЂРµРіСѓР»СЏС‚РѕСЂРѕРІ</li>
-      <li>Р РѕР»РµРІРѕР№ РґРѕСЃС‚СѓРї Рє РґР°РЅРЅС‹Рј Рё РґРѕРєСѓРјРµРЅС‚Р°Рј</li>
-    </ul>
-    <a href="#" class="x-btn x-btn--secondary" data-doc="compliance">РЎРєР°С‡Р°С‚СЊ Compliance Brief в†—</a>
-  </div>
 </section>
 
-<!-- в•ђв•ђв•ђ S8: Р‘Р•Р—РћРџРђРЎРќРћРЎРўР¬ + РР‘ в•ђв•ђв•ђ -->
+<!-- S8: БЕЗОПАСНОСТЬ + ИБ -->
 <section class="x-section" id="x-security">
-  <div class="x-wrap">
-    <div class="x-section__head">
-      <p class="x-section__label">Р‘РµР·РѕРїР°СЃРЅРѕСЃС‚СЊ</p>
-      <h2 class="x-h2">Р‘РµР·РѕРїР°СЃРЅРѕСЃС‚СЊ Рё РР‘ вЂ” РІСЃС‚СЂРѕРµРЅС‹, Р° РЅРµ В«РґРѕР±Р°РІР»РµРЅС‹ РїРѕС‚РѕРјВ»</h2>
-      <p class="x-lead">РЁРёС„СЂРѕРІР°РЅРёРµ, СЂРѕР»РµРІРѕР№ РґРѕСЃС‚СѓРї, Р¶СѓСЂРЅР°Р»РёСЂРѕРІР°РЅРёРµ, СЃРѕРѕС‚РІРµС‚СЃС‚РІРёРµ С‚СЂРµР±РѕРІР°РЅРёСЏРј РР‘ вЂ” Р°СЂС‚РµС„Р°РєС‚, Р° РЅРµ РѕР±РµС‰Р°РЅРёРµ.</p>
+    <div class="x-wrap">
+        <div class="x-section__head">
+            <p class="x-section__label">Безопасность</p>
+            <h2 class="x-h2">Безопасность и ИБ &mdash; встроены, а не добавлены потом</h2>
+        </div>
+        <div class="x-cards" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+            <div class="x-card">
+                <h3 class="x-card__title">Шифрование</h3>
+                <p class="x-card__text">Данные в покое и в транзите. TLS 1.3, AES-256.</p>
+            </div>
+            <div class="x-card">
+                <h3 class="x-card__title">Ролевой доступ</h3>
+                <p class="x-card__text">RBAC + журнал. Кто к чему имеет доступ &mdash; прозрачно.</p>
+            </div>
+            <div class="x-card">
+                <h3 class="x-card__title">Audit Trail</h3>
+                <p class="x-card__text">Неизменяемый журнал всех операций и изменений.</p>
+            </div>
+        </div>
+        <div style="text-align:center;margin-top:var(--x-sp-6)">
+            <button class="x-btn x-btn--primary" id="x-open-trust">Открыть Trust Pack</button>
+        </div>
     </div>
-    <div class="x-cards" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
-      <div class="x-card"><h3 class="x-card__title">рџ”ђ РЁРёС„СЂРѕРІР°РЅРёРµ</h3><p class="x-card__text">Р”Р°РЅРЅС‹Рµ РІ РїРѕРєРѕРµ Рё РІ С‚СЂР°РЅР·РёС‚Рµ. TLS 1.3, AES-256.</p></div>
-      <div class="x-card"><h3 class="x-card__title">рџ‘¤ Р РѕР»РµРІРѕР№ РґРѕСЃС‚СѓРї</h3><p class="x-card__text">RBAC + Р¶СѓСЂРЅР°Р». РљС‚Рѕ Рє С‡РµРјСѓ РёРјРµРµС‚ РґРѕСЃС‚СѓРї вЂ” РїСЂРѕР·СЂР°С‡РЅРѕ.</p></div>
-      <div class="x-card"><h3 class="x-card__title">рџ“њ Audit Trail</h3><p class="x-card__text">РќРµРёР·РјРµРЅСЏРµРјС‹Р№ Р¶СѓСЂРЅР°Р» РІСЃРµС… РѕРїРµСЂР°С†РёР№ Рё РёР·РјРµРЅРµРЅРёР№.</p></div>
-    </div>
-    <div style="text-align:center;margin-top:var(--x-sp-6)">
-      <button class="x-btn x-btn--primary" id="x-open-trust">РћС‚РєСЂС‹С‚СЊ Trust Pack</button>
-    </div>
-  </div>
 </section>
 
-<!-- в•ђв•ђв•ђ S9: РџРР›РћРў 6вЂ“8 РќР•Р”Р•Р›Р¬ в•ђв•ђв•ђ -->
+<!-- S9: ПИЛОТ -->
 <section class="x-section" id="x-pilot">
-  <div class="x-wrap">
-    <div class="x-section__head">
-      <p class="x-section__label">РџРёР»РѕС‚</p>
-      <h2 class="x-h2">РџРёР»РѕС‚ Р·Р° 6вЂ“8 РЅРµРґРµР»СЊ вЂ” СЃ РјРµС‚СЂРёРєР°РјРё, РїСЂРёС‘РјРєРѕР№ Рё Р°СЂС‚РµС„Р°РєС‚Р°РјРё</h2>
-      <p class="x-lead">РљРѕРЅС‚СЂРѕР»РёСЂСѓРµРјС‹Р№ Р·Р°РїСѓСЃРє: РѕРїСЂРµРґРµР»СЏРµРј РєСЂРёС‚РµСЂРёРё СѓСЃРїРµС…Р° Р·Р°СЂР°РЅРµРµ, РёР·РјРµСЂСЏРµРј, РґРѕРєСѓРјРµРЅС‚РёСЂСѓРµРј СЂРµР·СѓР»СЊС‚Р°С‚.</p>
+    <div class="x-wrap">
+        <div class="x-section__head">
+            <p class="x-section__label">Пилот</p>
+            <h2 class="x-h2">Пилот за 6-8 недель &mdash; с метриками, приёмкой и артефактами</h2>
+        </div>
+        <div class="x-cards">
+            <div class="x-card">
+                <h3 class="x-card__title">Критерии приёмки</h3>
+                <p class="x-card__text">Определяем KPI, пороги и метрики до старта пилота.</p>
+            </div>
+            <div class="x-card">
+                <h3 class="x-card__title">Измерение результата</h3>
+                <p class="x-card__text">Автоматический сбор данных. Дашборд пилота в реальном времени.</p>
+            </div>
+            <div class="x-card">
+                <h3 class="x-card__title">Выходные артефакты</h3>
+                <p class="x-card__text">Отчёт по пилоту, рекомендации по масштабированию, ROI-модель.</p>
+            </div>
+        </div>
+        <div style="text-align:center;margin-top:var(--x-sp-6)">
+            <a href="#" class="x-btn x-btn--secondary" data-doc="pilot-blueprint">Скачать Pilot Blueprint</a>
+        </div>
     </div>
-    <div class="x-cards">
-      <div class="x-card"><div class="x-card__icon">рџ“ђ</div><h3 class="x-card__title">РљСЂРёС‚РµСЂРёРё РїСЂРёС‘РјРєРё</h3><p class="x-card__text">РћРїСЂРµРґРµР»СЏРµРј KPI, РїРѕСЂРѕРіРё Рё РјРµС‚СЂРёРєРё РґРѕ СЃС‚Р°СЂС‚Р° РїРёР»РѕС‚Р°.</p></div>
-      <div class="x-card"><div class="x-card__icon">рџ“Љ</div><h3 class="x-card__title">РР·РјРµСЂРµРЅРёРµ СЂРµР·СѓР»СЊС‚Р°С‚Р°</h3><p class="x-card__text">РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРёР№ СЃР±РѕСЂ РґР°РЅРЅС‹С…. Р”Р°С€Р±РѕСЂРґ РїРёР»РѕС‚Р° РІ СЂРµР°Р»СЊРЅРѕРј РІСЂРµРјРµРЅРё.</p></div>
-      <div class="x-card"><div class="x-card__icon">рџ“„</div><h3 class="x-card__title">Р’С‹С…РѕРґРЅС‹Рµ Р°СЂС‚РµС„Р°РєС‚С‹</h3><p class="x-card__text">РћС‚С‡С‘С‚ РїРѕ РїРёР»РѕС‚Сѓ, СЂРµРєРѕРјРµРЅРґР°С†РёРё РїРѕ РјР°СЃС€С‚Р°Р±РёСЂРѕРІР°РЅРёСЋ, ROI-РјРѕРґРµР»СЊ.</p></div>
-    </div>
-    <div style="text-align:center;margin-top:var(--x-sp-6)">
-      <a href="#" class="x-btn x-btn--secondary" data-doc="pilot-blueprint">РЎРєР°С‡Р°С‚СЊ Pilot Blueprint в†—</a>
-    </div>
-  </div>
 </section>
 
-<!-- в•ђв•ђв•ђ S10: PROCUREMENT PACK в•ђв•ђв•ђ -->
+<!-- S10: PROCUREMENT PACK -->
 <section class="x-section" id="x-procurement">
-  <div class="x-wrap">
-    <div class="x-section__head">
-      <p class="x-section__label">Р”Р»СЏ Р·Р°РєСѓРїРєРё</p>
-      <h2 class="x-h2">Р”РѕРєСѓРјРµРЅС‚С‹ РґР»СЏ Р·Р°РєСѓРїРєРё вЂ” СЃРѕР±СЂР°РЅС‹ Рё РіРѕС‚РѕРІС‹</h2>
-      <p class="x-lead">Р’СЃС‘, С‡С‚Рѕ РЅСѓР¶РЅРѕ РґР»СЏ РІРЅСѓС‚СЂРµРЅРЅРµРіРѕ СЃРѕРіР»Р°СЃРѕРІР°РЅРёСЏ Рё РїСЂРѕС†РµРґСѓСЂС‹ Р·Р°РєСѓРїРєРё вЂ” РІ РѕРґРЅРѕРј РїР°РєРµС‚Рµ.</p>
+    <div class="x-wrap">
+        <div class="x-section__head">
+            <p class="x-section__label">Для закупки</p>
+            <h2 class="x-h2">Документы для закупки &mdash; собраны и готовы</h2>
+        </div>
+        <div class="x-cards" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+            <div class="x-card">
+                <h3 class="x-card__title">One-Pager</h3>
+                <p class="x-card__text">Краткое описание продукта для ЛПР.</p>
+            </div>
+            <div class="x-card">
+                <h3 class="x-card__title">Pilot Blueprint</h3>
+                <p class="x-card__text">План пилота с критериями приёмки.</p>
+            </div>
+            <div class="x-card">
+                <h3 class="x-card__title">Architecture Brief</h3>
+                <p class="x-card__text">Архитектурная схема для IT-блока.</p>
+            </div>
+            <div class="x-card">
+                <h3 class="x-card__title">Security Brief</h3>
+                <p class="x-card__text">Описание мер ИБ для службы безопасности.</p>
+            </div>
+            <div class="x-card">
+                <h3 class="x-card__title">Compliance Brief</h3>
+                <p class="x-card__text">Регуляторное соответствие для юристов.</p>
+            </div>
+        </div>
+        <div
+            style="text-align:center;margin-top:var(--x-sp-6);display:flex;gap:var(--x-sp-4);justify-content:center;flex-wrap:wrap">
+            <button class="x-btn x-btn--primary" id="x-open-procurement">Получить Procurement Pack</button>
+            <button class="x-btn x-btn--secondary"
+                onclick="document.getElementById('x-open-procurement').click()">Получить документы без звонка</button>
+        </div>
     </div>
-    <div class="x-cards" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
-      <div class="x-card x-card--doc"><div class="x-card__icon">рџ“„</div><h3 class="x-card__title">One-Pager</h3><p class="x-card__text">РљСЂР°С‚РєРѕРµ РѕРїРёСЃР°РЅРёРµ РїСЂРѕРґСѓРєС‚Р° РґР»СЏ Р›РџР .</p></div>
-      <div class="x-card x-card--doc"><div class="x-card__icon">рџ“ђ</div><h3 class="x-card__title">Pilot Blueprint</h3><p class="x-card__text">РџР»Р°РЅ РїРёР»РѕС‚Р° СЃ РєСЂРёС‚РµСЂРёСЏРјРё РїСЂРёС‘РјРєРё.</p></div>
-      <div class="x-card x-card--doc"><div class="x-card__icon">рџЏ—</div><h3 class="x-card__title">Architecture Brief</h3><p class="x-card__text">РђСЂС…РёС‚РµРєС‚СѓСЂРЅР°СЏ СЃС…РµРјР° РґР»СЏ IT-Р±Р»РѕРєР°.</p></div>
-      <div class="x-card x-card--doc"><div class="x-card__icon">рџ”ђ</div><h3 class="x-card__title">Security Brief</h3><p class="x-card__text">РћРїРёСЃР°РЅРёРµ РјРµСЂ РР‘ РґР»СЏ СЃР»СѓР¶Р±С‹ Р±РµР·РѕРїР°СЃРЅРѕСЃС‚Рё.</p></div>
-      <div class="x-card x-card--doc"><div class="x-card__icon">рџ“‹</div><h3 class="x-card__title">Compliance Brief</h3><p class="x-card__text">Р РµРіСѓР»СЏС‚РѕСЂРЅРѕРµ СЃРѕРѕС‚РІРµС‚СЃС‚РІРёРµ РґР»СЏ СЋСЂРёСЃС‚РѕРІ.</p></div>
-    </div>
-    <div style="text-align:center;margin-top:var(--x-sp-6);display:flex;gap:var(--x-sp-4);justify-content:center;flex-wrap:wrap">
-      <button class="x-btn x-btn--primary" id="x-open-procurement">РџРѕР»СѓС‡РёС‚СЊ Procurement Pack</button>
-      <button class="x-btn x-btn--secondary" onclick="document.getElementById('x-open-procurement').click()">РџРѕР»СѓС‡РёС‚СЊ РґРѕРєСѓРјРµРЅС‚С‹ Р±РµР· Р·РІРѕРЅРєР°</button>
-    </div>
-  </div>
 </section>
 
-<!-- в•ђв•ђв•ђ S11: Р¤РРќРђР›Р¬РќР«Р™ CTA в•ђв•ђв•ђ -->
+<!-- S11: ФИНАЛЬНЫЙ CTA -->
 <section class="x-form-cta" id="x-form-anchor">
-  <div class="x-wrap">
-    <p class="x-section__label" style="text-align:center">РЎР»РµРґСѓСЋС‰РёР№ С€Р°Рі</p>
-    <h2 class="x-h2" style="text-align:center">Р“РѕС‚РѕРІС‹ СѓРІРёРґРµС‚СЊ РєРѕРЅС‚СѓСЂ СѓРїСЂР°РІР»РµРЅРёСЏ<br>РІ РґРµР№СЃС‚РІРёРё?</h2>
-    <div style="display:flex;gap:var(--x-sp-4);justify-content:center;flex-wrap:wrap">
-      <!-- REPLACE #recFORM with real Tilda recID -->
-      <a class="x-btn x-btn--primary" href="#recFORM">Р—Р°РїСЂРѕСЃРёС‚СЊ РґРµРјРѕ / С‚РµС…СЃРµСЃСЃРёСЋ</a>
-      <button class="x-btn x-btn--secondary" id="x-open-drawer-2">РџРѕР»СѓС‡РёС‚СЊ РїР°РєРµС‚ РґРѕРєСѓРјРµРЅС‚РѕРІ</button>
+    <div class="x-wrap">
+        <p class="x-section__label" style="text-align:center">Следующий шаг</p>
+        <h2 class="x-h2" style="text-align:center">Готовы увидеть контур управления в действии?</h2>
+        <div style="display:flex;gap:var(--x-sp-4);justify-content:center;flex-wrap:wrap">
+            <a class="x-btn x-btn--primary" href="#recFORM">Запросить демо / техсессию</a>
+            <button class="x-btn x-btn--secondary" id="x-open-drawer-2">Получить пакет документов</button>
+        </div>
+        <div class="x-form-cta__steps">
+            <div class="x-form-cta__step"><strong>01</strong> Оставляете заявку</div>
+            <div class="x-form-cta__step"><strong>02</strong> Согласуем формат</div>
+            <div class="x-form-cta__step"><strong>03</strong> Получаете результат за 30 мин</div>
+        </div>
+        <p style="text-align:center;margin-top:var(--x-sp-4);font-size:var(--x-fs-6);color:var(--x-muted)">Без
+            обязательств &middot; NDA при необходимости &middot; Ваши данные не передаются третьим лицам</p>
     </div>
-    <div class="x-form-cta__steps">
-      <div class="x-form-cta__step"><strong>01</strong> РћСЃС‚Р°РІР»СЏРµС‚Рµ Р·Р°СЏРІРєСѓ</div>
-      <div class="x-form-cta__step"><strong>02</strong> РЎРѕРіР»Р°СЃСѓРµРј С„РѕСЂРјР°С‚ (РґРµРјРѕ / С‚РµС…СЃРµСЃСЃРёСЏ / РґРѕРєСѓРјРµРЅС‚С‹)</div>
-      <div class="x-form-cta__step"><strong>03</strong> РџРѕР»СѓС‡Р°РµС‚Рµ СЂРµР·СѓР»СЊС‚Р°С‚ Р·Р° 30 РјРёРЅСѓС‚</div>
-    </div>
-    <p style="text-align:center;margin-top:var(--x-sp-4);font-size:var(--x-fs-6);color:var(--x-muted)">
-      Р‘РµР· РѕР±СЏР·Р°С‚РµР»СЊСЃС‚РІ В· NDA РїСЂРё РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё В· Р’Р°С€Рё РґР°РЅРЅС‹Рµ РЅРµ РїРµСЂРµРґР°СЋС‚СЃСЏ С‚СЂРµС‚СЊРёРј Р»РёС†Р°Рј
-    </p>
-  </div>
-  <!-- PLACE A TILDA NATIVE FORM BLOCK DIRECTLY BELOW THIS SECTION. Use its #rec... ID for CTAs. -->
 </section>
 
-<!-- в•ђв•ђв•ђ S12: РљРћРќРўРђРљРўР« в•ђв•ђв•ђ -->
-<!-- REPLACE #recCONTACTS with real Tilda recID -->
+<!-- S12: КОНТАКТЫ -->
 <section class="x-contacts" id="recCONTACTS">
-  <div class="x-wrap">
-    <p class="x-section__label" style="text-align:center">РљРѕРЅС‚Р°РєС‚С‹</p>
-    <h2 class="x-h2" style="text-align:center">РЎРІСЏР¶РёС‚РµСЃСЊ СЃ РЅР°РјРё</h2>
-    <div class="x-contacts__row">
-      <div class="x-contacts__item">рџ“§ info@agrotaktik.ru</div>
-      <div class="x-contacts__item">рџ“ћ +7 (XXX) XXX-XX-XX</div>
-      <div class="x-contacts__item">рџ“Ќ РњРѕСЃРєРІР°, Р РѕСЃСЃРёСЏ</div>
+    <div class="x-wrap">
+        <p class="x-section__label" style="text-align:center">Контакты</p>
+        <h2 class="x-h2" style="text-align:center">Свяжитесь с нами</h2>
+        <div class="x-contacts__row">
+            <div class="x-contacts__item">info@agrotaktik.ru</div>
+            <div class="x-contacts__item">+7 (XXX) XXX-XX-XX</div>
+            <div class="x-contacts__item">Москва, Россия</div>
+        </div>
     </div>
-  </div>
 </section>
 
-<!-- в•ђв•ђв•ђ DRAWER (Trust Pack / Procurement Pack) в•ђв•ђв•ђ -->
-<div class="x-drawer" id="x-drawer" role="dialog" aria-modal="true" aria-label="РџР°РєРµС‚ РґРѕРєСѓРјРµРЅС‚РѕРІ">
-  <div class="x-drawer__overlay" id="x-drawer-overlay"></div>
-  <div class="x-drawer__panel">
-    <button class="x-drawer__close" id="x-drawer-close" aria-label="Р—Р°РєСЂС‹С‚СЊ">вњ•</button>
-    <h3 class="x-drawer__title">РџР°РєРµС‚ РґРѕРєСѓРјРµРЅС‚РѕРІ</h3>
-    <p style="font-size:var(--x-fs-5);color:var(--x-muted);margin-bottom:var(--x-sp-5)">РЎРєР°С‡Р°Р№С‚Рµ РЅСѓР¶РЅС‹Рµ РґРѕРєСѓРјРµРЅС‚С‹ РґР»СЏ РІРЅСѓС‚СЂРµРЅРЅРµРіРѕ СЃРѕРіР»Р°СЃРѕРІР°РЅРёСЏ. NDA вЂ” РїРѕ Р·Р°РїСЂРѕСЃСѓ.</p>
-    <ul class="x-drawer__docs">
-      <!-- UPLOAD PDFs TO TILDA в†’ REPLACE href="#" WITH REAL URLs -->
-      <li class="x-drawer__doc" data-doc="onepager">
-        <span class="x-drawer__doc-icon">рџ“„</span>
-        <div><div class="x-drawer__doc-name">One-Pager</div><div class="x-drawer__doc-desc">РћРїРёСЃР°РЅРёРµ РїСЂРѕРґСѓРєС‚Р° РґР»СЏ Р›РџР  (2 СЃС‚СЂ.)</div></div>
-        <a href="#" class="x-btn x-btn--tertiary" style="margin-left:auto">РЎРєР°С‡Р°С‚СЊ в†—</a>
-      </li>
-      <li class="x-drawer__doc" data-doc="pilot-blueprint">
-        <span class="x-drawer__doc-icon">рџ“ђ</span>
-        <div><div class="x-drawer__doc-name">Pilot Blueprint</div><div class="x-drawer__doc-desc">РџР»Р°РЅ РїРёР»РѕС‚Р° СЃ РєСЂРёС‚РµСЂРёСЏРјРё РїСЂРёС‘РјРєРё</div></div>
-        <a href="#" class="x-btn x-btn--tertiary" style="margin-left:auto">РЎРєР°С‡Р°С‚СЊ в†—</a>
-      </li>
-      <li class="x-drawer__doc" data-doc="architecture">
-        <span class="x-drawer__doc-icon">рџЏ—</span>
-        <div><div class="x-drawer__doc-name">Architecture Brief</div><div class="x-drawer__doc-desc">РђСЂС…РёС‚РµРєС‚СѓСЂРЅР°СЏ СЃС…РµРјР° РґР»СЏ IT-Р±Р»РѕРєР°</div></div>
-        <a href="#" class="x-btn x-btn--tertiary" style="margin-left:auto">РЎРєР°С‡Р°С‚СЊ в†—</a>
-      </li>
-      <li class="x-drawer__doc" data-doc="security">
-        <span class="x-drawer__doc-icon">рџ”ђ</span>
-        <div><div class="x-drawer__doc-name">Security Brief</div><div class="x-drawer__doc-desc">РњРµСЂС‹ РР‘ РґР»СЏ СЃР»СѓР¶Р±С‹ Р±РµР·РѕРїР°СЃРЅРѕСЃС‚Рё</div></div>
-        <a href="#" class="x-btn x-btn--tertiary" style="margin-left:auto">РЎРєР°С‡Р°С‚СЊ в†—</a>
-      </li>
-      <li class="x-drawer__doc" data-doc="compliance">
-        <span class="x-drawer__doc-icon">рџ“‹</span>
-        <div><div class="x-drawer__doc-name">Compliance Brief</div><div class="x-drawer__doc-desc">Р РµРіСѓР»СЏС‚РѕСЂРЅРѕРµ СЃРѕРѕС‚РІРµС‚СЃС‚РІРёРµ</div></div>
-        <a href="#" class="x-btn x-btn--tertiary" style="margin-left:auto">РЎРєР°С‡Р°С‚СЊ в†—</a>
-      </li>
-    </ul>
-    <div style="margin-top:var(--x-sp-6);display:flex;gap:var(--x-sp-4);flex-wrap:wrap">
-      <a class="x-btn x-btn--primary" href="#recFORM">Р—Р°РїСЂРѕСЃРёС‚СЊ РґРµРјРѕ</a>
-      <button class="x-btn x-btn--secondary" id="x-drawer-close-2">Р—Р°РєСЂС‹С‚СЊ</button>
+<!-- DRAWER -->
+<div class="x-drawer" id="x-drawer" role="dialog" aria-modal="true" aria-label="Пакет документов">
+    <div class="x-drawer__overlay" id="x-drawer-overlay"></div>
+    <div class="x-drawer__panel">
+        <button class="x-drawer__close" id="x-drawer-close" aria-label="Закрыть">&#10005;</button>
+        <h3 class="x-drawer__title">Пакет документов</h3>
+        <p style="font-size:var(--x-fs-5);color:var(--x-muted);margin-bottom:var(--x-sp-5)">Скачайте нужные документы
+            для внутреннего согласования. NDA &mdash; по запросу.</p>
+        <ul class="x-drawer__docs">
+            <li class="x-drawer__doc" data-doc="onepager"><span class="x-drawer__doc-icon">&#128196;</span>
+                <div>
+                    <div class="x-drawer__doc-name">One-Pager</div>
+                    <div class="x-drawer__doc-desc">Описание продукта для ЛПР (2 стр.)</div>
+                </div><a href="#" class="x-btn x-btn--tertiary" style="margin-left:auto">Скачать</a>
+            </li>
+            <li class="x-drawer__doc" data-doc="pilot-blueprint"><span class="x-drawer__doc-icon">&#128208;</span>
+                <div>
+                    <div class="x-drawer__doc-name">Pilot Blueprint</div>
+                    <div class="x-drawer__doc-desc">План пилота с критериями приёмки</div>
+                </div><a href="#" class="x-btn x-btn--tertiary" style="margin-left:auto">Скачать</a>
+            </li>
+            <li class="x-drawer__doc" data-doc="architecture"><span class="x-drawer__doc-icon">&#127959;</span>
+                <div>
+                    <div class="x-drawer__doc-name">Architecture Brief</div>
+                    <div class="x-drawer__doc-desc">Архитектурная схема для IT-блока</div>
+                </div><a href="#" class="x-btn x-btn--tertiary" style="margin-left:auto">Скачать</a>
+            </li>
+            <li class="x-drawer__doc" data-doc="security"><span class="x-drawer__doc-icon">&#128274;</span>
+                <div>
+                    <div class="x-drawer__doc-name">Security Brief</div>
+                    <div class="x-drawer__doc-desc">Меры ИБ для службы безопасности</div>
+                </div><a href="#" class="x-btn x-btn--tertiary" style="margin-left:auto">Скачать</a>
+            </li>
+            <li class="x-drawer__doc" data-doc="compliance"><span class="x-drawer__doc-icon">&#128203;</span>
+                <div>
+                    <div class="x-drawer__doc-name">Compliance Brief</div>
+                    <div class="x-drawer__doc-desc">Регуляторное соответствие</div>
+                </div><a href="#" class="x-btn x-btn--tertiary" style="margin-left:auto">Скачать</a>
+            </li>
+        </ul>
+        <div style="margin-top:var(--x-sp-6);display:flex;gap:var(--x-sp-4);flex-wrap:wrap">
+            <a class="x-btn x-btn--primary" href="#recFORM">Запросить демо</a>
+            <button class="x-btn x-btn--secondary" id="x-drawer-close-2">Закрыть</button>
+        </div>
     </div>
-  </div>
 </div>
 
 </div><!-- /.x-site -->
 
 <script>
-(function(){
-  'use strict';
-  /* в•ђв•ђв•ђ STICKY HEADER в•ђв•ђв•ђ */
-  const header = document.getElementById('x-header');
-  if(header){
-    let ticking = false;
-    window.addEventListener('scroll', function(){
-      if(!ticking){
-        window.requestAnimationFrame(function(){
-          header.classList.toggle('x-header--sticky', window.scrollY > 140);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    });
-  }
-
-  /* в•ђв•ђв•ђ MOBILE MENU в•ђв•ђв•ђ */
-  const burger = document.getElementById('x-burger');
-  if(burger){
-    burger.addEventListener('click', function(){
-      header.classList.toggle('x-header--menu-open');
-      burger.textContent = header.classList.contains('x-header--menu-open') ? 'вњ•' : 'в°';
-    });
-  }
-
-  /* в•ђв•ђв•ђ TABS (ROLE SWITCHER) в•ђв•ђв•ђ */
-  const tabs = document.querySelectorAll('.x-site .x-tab');
-  tabs.forEach(function(tab){
-    tab.addEventListener('click', function(){
-      tabs.forEach(function(t){ t.classList.remove('x-tab--active'); t.setAttribute('aria-selected','false'); });
-      tab.classList.add('x-tab--active');
-      tab.setAttribute('aria-selected','true');
-      var panels = document.querySelectorAll('.x-site .x-tab-panel');
-      panels.forEach(function(p){ p.classList.remove('x-tab-panel--active'); });
-      var target = document.getElementById('panel-' + tab.getAttribute('data-panel'));
-      if(target) target.classList.add('x-tab-panel--active');
-    });
-  });
-
-  /* в•ђв•ђв•ђ ACCORDION в•ђв•ђв•ђ */
-  document.querySelectorAll('.x-site .x-acc-item__head').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      btn.parentElement.classList.toggle('x-acc-item--open');
-    });
-  });
-
-  /* в•ђв•ђв•ђ DRAWER в•ђв•ђв•ђ */
-  var drawer = document.getElementById('x-drawer');
-  var overlay = document.getElementById('x-drawer-overlay');
-  var openers = ['x-open-drawer','x-open-drawer-2','x-open-trust','x-open-procurement'];
-  function openDrawer(){
-    drawer.classList.add('x-drawer--open');
-    document.documentElement.style.overflow = 'hidden';
-    document.getElementById('x-drawer-close').focus();
-  }
-  function closeDrawer(){
-    drawer.classList.remove('x-drawer--open');
-    document.documentElement.style.overflow = '';
-  }
-  openers.forEach(function(id){
-    var el = document.getElementById(id);
-    if(el) el.addEventListener('click', openDrawer);
-  });
-  if(overlay) overlay.addEventListener('click', closeDrawer);
-  var closers = ['x-drawer-close','x-drawer-close-2'];
-  closers.forEach(function(id){
-    var el = document.getElementById(id);
-    if(el) el.addEventListener('click', closeDrawer);
-  });
-  /* Badges open drawer too */
-  document.querySelectorAll('.x-site .x-badge').forEach(function(b){
-    b.addEventListener('click', openDrawer);
-  });
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape' && drawer.classList.contains('x-drawer--open')) closeDrawer();
-  });
-
-  /* в•ђв•ђв•ђ HOTSPOTS в•ђв•ђв•ђ */
-  document.querySelectorAll('.x-site .x-hotspot').forEach(function(h){
-    var tip = null;
-    function showTip(){
-      if(tip) return;
-      tip = document.createElement('div');
-      tip.className = 'x-tooltip';
-      tip.textContent = h.getAttribute('data-tip');
-      tip.style.cssText = 'position:absolute;bottom:110%;left:50%;transform:translateX(-50%);background:var(--x-surface-2);color:var(--x-text);padding:8px 12px;border-radius:4px;font-size:12px;white-space:nowrap;border:1px solid var(--x-line);z-index:10;pointer-events:none;max-width:220px;white-space:normal;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.4)';
-      h.style.position = 'absolute';
-      h.appendChild(tip);
-    }
-    function hideTip(){
-      if(tip){ tip.remove(); tip = null; }
-    }
-    h.addEventListener('mouseenter', showTip);
-    h.addEventListener('mouseleave', hideTip);
-    h.addEventListener('click', function(e){ e.stopPropagation(); tip ? hideTip() : showTip(); });
-    h.addEventListener('focus', showTip);
-    h.addEventListener('blur', hideTip);
-    h.addEventListener('keydown', function(e){ if(e.key === 'Escape') hideTip(); });
-  });
-
-  /* в•ђв•ђв•ђ SELF-CHECK в•ђв•ђв•ђ */
-  var checks = document.querySelectorAll('.x-site .x-selfcheck input');
-  var resultEl = document.getElementById('x-selfcheck-result');
-  if(checks.length && resultEl){
-    checks.forEach(function(c){
-      c.addEventListener('change', function(){
-        var total = 0;
-        checks.forEach(function(ch){ if(ch.checked) total++; });
-        if(total === 0){
-          resultEl.classList.remove('x-selfcheck__result--visible');
-          return;
-        }
-        var msg = '';
-        if(total <= 2) msg = 'Р РµРєРѕРјРµРЅРґР°С†РёСЏ: РЅР°С‡РЅРёС‚Рµ СЃ СѓСЂРѕРІРЅСЏ A2 (РЅР°Р±Р»СЋРґР°РµРјРѕСЃС‚СЊ). РџРѕРґРєР»СЋС‡РµРЅРёРµ Р·Р° 2вЂ“4 РЅРµРґРµР»Рё.';
-        else if(total <= 4) msg = 'Р РµРєРѕРјРµРЅРґР°С†РёСЏ: СѓСЂРѕРІРµРЅСЊ A3 (СЂРµРєРѕРјРµРЅРґР°С†РёРё). РђРІС‚РѕРјР°С‚РёР·Р°С†РёСЏ Р°Р»РµСЂС‚РѕРІ Рё KPI. РџРёР»РѕС‚ 6 РЅРµРґРµР»СЊ.';
-        else msg = 'Р РµРєРѕРјРµРЅРґР°С†РёСЏ: РїРѕР»РЅС‹Р№ РєРѕРЅС‚СѓСЂ A3в†’A4. РџРѕС‚РµРЅС†РёР°Р» Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕР№ РѕСЂРєРµСЃС‚СЂР°С†РёРё. Р—Р°РїСЂРѕСЃРёС‚Рµ С‚РµС…СЃРµСЃСЃРёСЋ.';
-        resultEl.textContent = 'в†’ ' + msg;
-        resultEl.classList.add('x-selfcheck__result--visible');
-      });
-    });
-  }
-})();
+    (function () {
+        'use strict';
+        var header = document.getElementById('x-header');
+        if (header) { var t = false; window.addEventListener('scroll', function () { if (!t) { window.requestAnimationFrame(function () { header.classList.toggle('x-header--sticky', window.scrollY > 140); t = false }); t = true } }) }
+        var burger = document.getElementById('x-burger');
+        if (burger) burger.addEventListener('click', function () { header.classList.toggle('x-header--menu-open'); burger.innerHTML = header.classList.contains('x-header--menu-open') ? '&#10005;' : '&#9776;' });
+        document.querySelectorAll('.x-site .x-tab').forEach(function (tab) { tab.addEventListener('click', function () { document.querySelectorAll('.x-site .x-tab').forEach(function (t) { t.classList.remove('x-tab--active'); t.setAttribute('aria-selected', 'false') }); tab.classList.add('x-tab--active'); tab.setAttribute('aria-selected', 'true'); document.querySelectorAll('.x-site .x-tab-panel').forEach(function (p) { p.classList.remove('x-tab-panel--active') }); var tgt = document.getElementById('panel-' + tab.getAttribute('data-panel')); if (tgt) tgt.classList.add('x-tab-panel--active') }) });
+        document.querySelectorAll('.x-site .x-acc-item__head').forEach(function (b) { b.addEventListener('click', function () { b.parentElement.classList.toggle('x-acc-item--open') }) });
+        var drawer = document.getElementById('x-drawer');
+        function openDrawer() { drawer.classList.add('x-drawer--open'); document.documentElement.style.overflow = 'hidden'; document.getElementById('x-drawer-close').focus() }
+        function closeDrawer() { drawer.classList.remove('x-drawer--open'); document.documentElement.style.overflow = '' }
+        ['x-open-drawer', 'x-open-drawer-2', 'x-open-trust', 'x-open-procurement'].forEach(function (id) { var el = document.getElementById(id); if (el) el.addEventListener('click', openDrawer) });
+        document.getElementById('x-drawer-overlay').addEventListener('click', closeDrawer);
+        ['x-drawer-close', 'x-drawer-close-2'].forEach(function (id) { var el = document.getElementById(id); if (el) el.addEventListener('click', closeDrawer) });
+        document.querySelectorAll('.x-site .x-badge').forEach(function (b) { b.addEventListener('click', openDrawer) });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && drawer.classList.contains('x-drawer--open')) closeDrawer() });
+        document.querySelectorAll('.x-site .x-hotspot').forEach(function (h) { var tip = null; function show() { if (tip) return; tip = document.createElement('div'); tip.textContent = h.getAttribute('data-tip'); tip.style.cssText = 'position:absolute;bottom:110%;left:50%;transform:translateX(-50%);background:#1a2332;color:#e8edf4;padding:8px 12px;border-radius:4px;font-size:12px;border:1px solid #1e293b;z-index:10;max-width:220px;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.4)'; h.appendChild(tip) } function hide() { if (tip) { tip.remove(); tip = null } } h.addEventListener('mouseenter', show); h.addEventListener('mouseleave', hide); h.addEventListener('click', function (e) { e.stopPropagation(); tip ? hide() : show() }); h.addEventListener('focus', show); h.addEventListener('blur', hide); h.addEventListener('keydown', function (e) { if (e.key === 'Escape') hide() }) });
+        var checks = document.querySelectorAll('.x-site .x-selfcheck input');
+        var res = document.getElementById('x-selfcheck-result');
+        if (checks.length && res) { checks.forEach(function (c) { c.addEventListener('change', function () { var n = 0; checks.forEach(function (ch) { if (ch.checked) n++ }); if (!n) { res.classList.remove('x-selfcheck__result--visible'); return } var m = ''; if (n <= 2) m = 'Рекомендация: начните с уровня A2 (наблюдаемость). Подключение за 2-4 недели.'; else if (n <= 4) m = 'Рекомендация: уровень A3 (рекомендации). Пилот 6 недель.'; else m = 'Рекомендация: полный контур A3-A4. Запросите техсессию.'; res.textContent = m; res.classList.add('x-selfcheck__result--visible') }) }) }
+    })();
 </script>
