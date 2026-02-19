@@ -331,7 +331,7 @@
     display: grid;
     grid-template-columns: 1fr 0.9fr;
     gap: var(--x-sp-8);
-    align-items: center;
+    align-items: stretch;
   }
 
   .x-site .x-hero__eyebrow {
@@ -369,14 +369,27 @@
     color: var(--x-text);
     font-family: var(--x-ff-mono);
     font-size: var(--x-fs-5);
+    list-style: none !important;
   }
 
+  /* Tech Square Marker */
   .x-site .x-hero__bullets li::before {
-    content: '/';
+    content: '';
     position: absolute;
     left: 0;
-    color: var(--x-accent);
-    font-weight: bold;
+    top: 9px;
+    width: 6px;
+    height: 6px;
+    background: var(--x-accent);
+    box-shadow: 0 0 8px var(--x-accent);
+    border-radius: 1px;
+  }
+
+  /* Remove default UL padding/margin if not already done */
+  .x-site .x-hero__bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
 
   .x-site .x-hero__ctas {
@@ -455,10 +468,18 @@
     background: rgba(19, 27, 46, 0.5);
     border: 1px solid var(--x-line);
     min-height: 400px;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+  }
+
+  @media (min-width: 1200px) {
+    .x-site .x-hero__visual {
+      min-height: 520px;
+    }
   }
 
   /* Corner Brackets */
@@ -479,6 +500,36 @@
     background-repeat: no-repeat;
     background-size: 20px 20px;
     opacity: 0.7;
+    z-index: 2;
+  }
+
+  .x-site .x-radar {
+    width: 80%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    position: relative;
+    border: 1px solid rgba(0, 229, 255, 0.1);
+    background: radial-gradient(circle, transparent 60%, rgba(0, 229, 255, 0.05) 61%, transparent 62%);
+    z-index: 1;
+  }
+
+  .x-site .x-radar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, transparent 0deg, rgba(0, 229, 255, 0.15) 80deg, transparent 80deg);
+    animation: radar-spin 4s linear infinite;
+  }
+
+  @keyframes radar-spin {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   .x-site .x-hotspot {
@@ -486,29 +537,87 @@
     height: 24px;
     border: 1px solid var(--x-accent);
     border-radius: 50%;
-    background: rgba(0, 229, 255, 0.1);
+    background: var(--x-surface);
+    color: var(--x-accent);
     cursor: pointer;
     position: absolute;
-    box-shadow: 0 0 10px var(--x-accent);
-    animation: pulse 2s infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--x-ff-mono);
+    font-size: 11px;
+    font-weight: 700;
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+    transition: all .2s;
+    z-index: 10;
   }
 
-  .x-site .x-hotspot:hover {
+  .x-site .x-hotspot:hover,
+  .x-site .x-hotspot:focus,
+  .x-site .x-hotspot[aria-expanded="true"] {
     background: var(--x-accent);
+    color: #000;
+    box-shadow: 0 0 15px var(--x-accent);
   }
 
-  @keyframes pulse {
-    0% {
-      box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4);
-    }
+  .x-site .x-hotspot::after {
+    content: attr(data-n);
+  }
 
-    70% {
-      box-shadow: 0 0 0 10px rgba(0, 229, 255, 0);
-    }
+  .x-site .x-hotspot__tip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translate(-50%, 0) scale(0.9);
+    width: max-content;
+    max-width: 260px;
+    background: var(--x-surface-2);
+    border: 1px solid var(--x-accent);
+    padding: 10px 14px;
+    border-radius: 4px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 100;
+    text-align: left;
+    margin-bottom: 12px;
+  }
 
-    100% {
-      box-shadow: 0 0 0 0 rgba(0, 229, 255, 0);
-    }
+  .x-site .x-hotspot__tip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--x-accent) transparent transparent transparent;
+  }
+
+  .x-site .x-hotspot__tip strong {
+    display: block;
+    color: var(--x-accent);
+    font-family: var(--x-ff-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  .x-site .x-hotspot__tip span {
+    display: block;
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--x-text);
+  }
+
+  .x-site .x-hotspot[aria-expanded="true"] .x-hotspot__tip,
+  .x-site .x-hotspot:hover .x-hotspot__tip,
+  .x-site .x-hotspot:focus .x-hotspot__tip {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, 0) scale(1);
   }
 
   /* === CARDS (Mission Control) === */
@@ -1104,14 +1213,46 @@
           <!-- Role Switcher -->
           <div class="x-tabs" role="tablist">
             <button aria-selected="true" class="x-tab x-tab--active" data-panel="coo" role="tab">Руководителю</button>
-            <button aria-selected="false" class="x-tab" data-panel="it" role="tab">IT + ИБ</button>
+            <button aria-selected="false" class="x-tab" data-panel="agro" role="tab">Агроному</button>
+            <button aria-selected="false" class="x-tab" data-panel="zoo" role="tab">Зоотехнику</button>
+            <button aria-selected="false" class="x-tab" data-panel="mech" role="tab">Гл. механику</button>
             <button aria-selected="false" class="x-tab" data-panel="eng" role="tab">Инженеру</button>
+            <button aria-selected="false" class="x-tab" data-panel="it" role="tab">IT + ИБ</button>
           </div>
           <div class="x-tab-panel x-tab-panel--active" id="panel-coo">
             <ul class="x-hero__bullets">
               <li>План-факт и KPI по каждому подразделению в реальном времени</li>
               <li>Очередь отклонений с приоритетами и ответственными</li>
               <li>Готовые пакеты для правления и совета директоров</li>
+            </ul>
+          </div>
+          <div class="x-tab-panel" id="panel-agro">
+            <ul class="x-hero__bullets">
+              <li>План-факт работ по полям в разрезе культур: окна операций, отклонения, причины, ответственность</li>
+              <li>Контроль качества агроопераций: скорости/перекрытия/пропуски/нормы внесения + карта фактического
+                выполнения</li>
+              <li>Риски сезона и прогноз потерь: погодные/технологические/ресурсные — с алертами и сценариями
+                реагирования</li>
+            </ul>
+          </div>
+          <div class="x-tab-panel" id="panel-zoo">
+            <ul class="x-hero__bullets">
+              <li>Управление кормовой логистикой: план-факт заготовки/доставки, отклонения, очереди задач и
+                ответственные</li>
+              <li>Контроль качества кормов и рационов: партии/показатели/события отклонений + трассировка “партия →
+                рацион → результат”</li>
+              <li>Операционная прозрачность по фермам: журнал событий и нарушений регламента
+                (кормление/перемещения/вет-события) с аудитом</li>
+            </ul>
+          </div>
+          <div class="x-tab-panel" id="panel-mech">
+            <ul class="x-hero__bullets">
+              <li>Профилактика вместо аварий: алерты по отклонениям телематики и датчиков
+                (температуры/давления/вибрации/нагрузки) + ранние признаки поломок</li>
+              <li>Единый контур ТОиР по парку: наработка/моточасы → регламент → очередь работ → назначение исполнителя →
+                контроль выполнения и простаев</li>
+              <li>Запчасти и простои под контролем: потребность по ТО/инцидентам, критичность, сроки поставки, история
+                замен и причин — с прозрачным audit trail</li>
             </ul>
           </div>
           <div class="x-tab-panel" id="panel-it">
@@ -1123,9 +1264,12 @@
           </div>
           <div class="x-tab-panel" id="panel-eng">
             <ul class="x-hero__bullets">
-              <li>Алерты на отклонения техники в поле — до поломки</li>
-              <li>Единая картина парка: телематика + датчики + GPS</li>
-              <li>Журнал обслуживания с привязкой к нормативам</li>
+              <li>Безопасное выполнение работ в поле: геозоны, ограничения условий (ODD), контроль режимов и сценарии
+                деградации (fail-safe)</li>
+              <li>Управление миссиями и технологическими операциями: задания, маршруты, статусы выполнения, контроль
+                отклонений “по месту и времени”</li>
+              <li>Инциденты и разбор причин: журнал событий “что произошло → кто принял решение → какое действие
+                выполнено” с привязкой к миссии/участку/технике</li>
             </ul>
           </div>
           <div class="x-hero__ctas">
@@ -1136,44 +1280,28 @@
         </div>
         <div class="x-hero__visual x-dash-grid">
           <div class="x-radar"></div>
-          <!-- DATA LAYER: LIVE MAP -->
-          <svg style="width:100%; height:100%; position:absolute; inset:0; pointer-events:none;" viewbox="0 0 400 300">
-            <!-- Grid Lines -->
-            <path d="M0,75 L400,75 M0,150 L400,150 M0,225 L400,225 M100,0 L100,300 M200,0 L200,300 M300,0 L300,300"
-              opacity="0.3" stroke="var(--x-line)" stroke-width="0.5"></path>
-            <!-- Zones (Fields) -->
-            <path d="M50,180 L140,180 L160,240 L40,240 Z" fill="rgba(0,229,255,0.05)" stroke="var(--x-accent)"
-              stroke-width="1" vector-effect="non-scaling-stroke"></path>
-            <path d="M180,50 L280,50 L280,120 L180,120 Z" fill="rgba(0,229,255,0.02)" stroke="var(--x-muted)"
-              stroke-dasharray="4 2" stroke-width="1"></path>
-            <path d="M300,150 L380,150 L350,250 L280,250 Z" fill="none" opacity="0.5" stroke="var(--x-accent)"
-              stroke-width="1"></path>
-            <!-- Active Units (Dots) -->
-            <circle cx="100" cy="210" fill="var(--x-accent)" r="3">
-              <animate attributename="opacity" dur="2s" repeatcount="indefinite" values="1;0.2;1"></animate>
-            </circle>
-            <circle cx="230" cy="85" fill="var(--x-accent-2)" r="3"></circle>
-            <!-- Use foreignObject for HTML labels inside SVG if needed, but absolute overlaid divs are safer for Tilda -->
-          </svg>
-          <!-- UI OVERLAY -->
-          <div
-            style="position:absolute; top:20px; left:20px; font-family:var(--x-ff-mono); font-size:10px; color:var(--x-accent);">
-            LIVE_FEED :: ZONE_4 ACTIVE<br />
-            <span style="color:var(--x-muted)">LAT: 45.021 LON: 38.991</span>
+          <!-- Clean Hotspots -->
+          <div class="x-hotspot" data-n="1" data-title="KPI" data-tip="План-факт и отклонения — в одном экране."
+            style="top:30%;left:30%;" tabindex="0">
+            <div class="x-hotspot__tip"><strong>KPI</strong><span>План-факт и отклонения — в одном экране.</span></div>
           </div>
-          <!-- HOTSPOTS (Retained & Enhanced) -->
-          <div class="x-hotspot" data-tip="Очередь отклонений: алерты, приоритеты, ответственные"
-            style="top:25%;left:20%;" tabindex="0">
-            <div
-              style="position:absolute; top:-20px; left:14px; width:1px; height:20px; background:var(--x-accent); transform:rotate(-45deg); opacity:0.5;">
+          <div class="x-hotspot" data-n="2" data-title="Alerts"
+            data-tip="Очередь алертов: приоритет → ответственный → действие → закрытие." style="top:45%;left:60%;"
+            tabindex="0">
+            <div class="x-hotspot__tip"><strong>Alerts</strong><span>Очередь алертов: приоритет → ответственный →
+                действие →
+                закрытие.</span></div>
+          </div>
+          <div class="x-hotspot" data-n="3" data-title="Audit" data-tip="Журнал действий: кто, что, когда и почему."
+            style="top:65%;left:35%;" tabindex="0">
+            <div class="x-hotspot__tip"><strong>Audit</strong><span>Журнал действий: кто, что, когда и почему.</span>
             </div>
           </div>
-          <div class="x-hotspot" data-tip="KPI-дашборд: план-факт по подразделениям" style="top:45%;left:65%;"
-            tabindex="0"></div>
-          <div class="x-hotspot" data-tip="Интеграционный хаб: ERP, телематика, датчики" style="top:70%;left:35%;"
-            tabindex="0"></div>
-          <div class="x-hotspot" data-tip="Комплаенс: Меркурий, документооборот, аудит" style="top:60%;left:80%;"
-            tabindex="0"></div>
+          <div class="x-hotspot" data-n="4" data-title="Map"
+            data-tip="Поля, маршруты, геозоны и миссии — слойно и прозрачно." style="top:60%;left:65%;" tabindex="0">
+            <div class="x-hotspot__tip"><strong>Map</strong><span>Поля, маршруты, геозоны и миссии — слойно и
+                прозрачно.</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -1547,7 +1675,7 @@
     </div>
   </section>
   <!-- S11: ФИНАЛЬНЫЙ CTA -->
-  <section class="x-form-cta" id="x-form-anchor">
+  <section class="x-form-cta" id="x-request-demo">
     <div class="x-wrap">
       <p class="x-section__label" style="text-align:center">Следующий шаг</p>
       <h2 class="x-h2" style="text-align:center">Готовы увидеть контур управления в действии?</h2>
@@ -1720,23 +1848,50 @@
       });
     });
 
-    /* === HOTSPOTS === */
-    document.querySelectorAll('.x-site .x-hotspot').forEach(function (h) {
-      var tip = null;
-      function show() {
-        if (tip) return;
-        tip = document.createElement('div');
-        tip.textContent = h.getAttribute('data-tip');
-        tip.style.cssText = 'position:absolute;bottom:110%;left:50%;transform:translateX(-50%);background:#1a2332;color:#e8edf4;padding:8px 12px;border-radius:4px;font-size:12px;border:1px solid #1e293b;z-index:10;max-width:220px;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.4)';
-        h.appendChild(tip);
-      }
-      function hide() { if (tip) { tip.remove(); tip = null; } }
-      h.addEventListener('mouseenter', show);
-      h.addEventListener('mouseleave', hide);
-      h.addEventListener('click', function (e) { e.stopPropagation(); tip ? hide() : show(); });
-      h.addEventListener('focus', show);
-      h.addEventListener('blur', hide);
-      h.addEventListener('keydown', function (e) { if (e.key === 'Escape') hide(); });
+    /* === HOTSPOTS (Interactive) === */
+    var hotspots = document.querySelectorAll('.x-site .x-hotspot');
+    var closeAllTips = function () {
+      hotspots.forEach(function (h) { h.setAttribute('aria-expanded', 'false'); });
+    };
+
+    hotspots.forEach(function (h) {
+      // Hover (Desktop)
+      h.addEventListener('mouseenter', function () {
+        if (window.matchMedia('(hover: hover)').matches) {
+          closeAllTips();
+          h.setAttribute('aria-expanded', 'true');
+        }
+      });
+      h.addEventListener('mouseleave', function () {
+        if (window.matchMedia('(hover: hover)').matches) {
+          h.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Focus
+      h.addEventListener('focus', function () {
+        closeAllTips();
+        h.setAttribute('aria-expanded', 'true');
+      });
+      h.addEventListener('blur', function () {
+        h.setAttribute('aria-expanded', 'false');
+      });
+
+      // Click / Tap (Mobile)
+      h.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var wasOpen = h.getAttribute('aria-expanded') === 'true';
+        closeAllTips();
+        if (!wasOpen) h.setAttribute('aria-expanded', 'true');
+      });
+
+      h.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeAllTips();
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.x-hotspot')) closeAllTips();
     });
 
     /* === SELF-CHECK === */
