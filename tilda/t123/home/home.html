@@ -647,198 +647,126 @@
   /* === CARDS (Mission Control) === */
   .x-site .x-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--x-sp-5);
-  }
-
-  .x-site .x-card {
-    background: var(--x-surface);
-    border: 1px solid var(--x-line);
-    padding: var(--x-sp-5);
-    position: relative;
-    transition: all .2s;
-  }
-
-  .x-site .x-card:hover {
-    border-color: var(--x-muted);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  }
-
-  .x-site .x-card__title {
-    font-family: var(--x-ff-head);
-    font-size: var(--x-fs-4);
-    font-weight: 700;
-    color: var(--x-text);
-    margin-bottom: var(--x-sp-3);
-    display: flex;
-    align-items: center;
-    gap: var(--x-sp-2);
-  }
-
-  .x-site .x-card__text {
-    font-size: var(--x-fs-5);
-    color: var(--x-muted);
-    line-height: 1.5;
-  }
-
-  /* Corner bracket decoration for cards */
-  .x-site .x-card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 12px 12px 0;
-    border-color: transparent var(--x-accent) transparent transparent;
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-
-  .x-site .x-card:hover::after {
-    opacity: 1;
-  }
-
-  /* === NEW 2x2 ARCHITECTURE CARDS FUI === */
-  .x-site .x-cards--2x2 {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--x-sp-6);
   }
 
   @media(max-width: 900px) {
-    .x-site .x-cards--2x2 {
+    .x-site .x-cards {
       grid-template-columns: 1fr;
     }
   }
 
-  .x-site .x-card--layer {
-    background: linear-gradient(145deg, rgba(19, 27, 46, 0.8), rgba(11, 17, 32, 0.95));
+  .x-site .x-card {
+    background: linear-gradient(135deg, rgba(19, 27, 46, 0.4), rgba(11, 17, 32, 0.6));
     border: 1px solid rgba(0, 229, 255, 0.15);
-    border-radius: var(--x-r-3);
     padding: var(--x-sp-6);
     position: relative;
+    border-radius: var(--x-r-3);
+    backdrop-filter: blur(12px);
     overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
     display: flex;
     flex-direction: column;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 0 transparent;
   }
 
-  /* FUI Background Grid */
-  .x-site .x-card--layer::before {
+  /* Inner glow effect for premium feel */
+  .x-site .x-card::before {
     content: '';
     position: absolute;
     inset: 0;
-    background-image:
-      linear-gradient(rgba(0, 229, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
-    background-size: 20px 20px;
-    opacity: 0.5;
     pointer-events: none;
-    transition: opacity 0.4s ease;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(0, 229, 255, 0.4), transparent 40%, transparent 60%, rgba(255, 107, 53, 0.2));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.5;
+    transition: opacity 0.5s ease;
   }
 
-  /* Animated Scanline / Glow on Hover */
-  .x-site .x-card--layer::after {
+  /* Scanline hover inside the card */
+  .x-site .x-card::after {
     content: '';
     position: absolute;
-    top: 0;
+    top: -100%;
     left: -100%;
     width: 50%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.1), transparent);
-    transform: skewX(-20deg);
-    transition: left 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    height: 300%;
+    background: linear-gradient(to right, transparent, rgba(0, 229, 255, 0.1), transparent);
+    transform: rotate(45deg);
+    transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
     pointer-events: none;
     z-index: 1;
   }
 
-  .x-site .x-card--layer:hover {
+  .x-site .x-card:hover {
     border-color: rgba(0, 229, 255, 0.5);
-    transform: translateY(-4px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0, 229, 255, 0.05);
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 229, 255, 0.15);
+    background: linear-gradient(135deg, rgba(19, 27, 46, 0.7), rgba(11, 17, 32, 0.9));
   }
 
-  .x-site .x-card--layer:hover::before {
+  .x-site .x-card:hover::before {
     opacity: 1;
   }
 
-  .x-site .x-card--layer:hover::after {
+  .x-site .x-card:hover::after {
     left: 200%;
+    top: -100%;
   }
 
-  /* Custom Tech Icons for Layers */
-  .x-site .x-card--layer .x-icon-fui {
-    width: 48px;
-    height: 48px;
-    margin-bottom: var(--x-sp-4);
-    position: relative;
-    display: flex;
+  /* Advanced styling for the card icon */
+  .x-site .x-card__icon {
+    font-size: 28px;
+    width: 56px;
+    height: 56px;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
-    background: rgba(0, 229, 255, 0.1);
-    border: 1px solid rgba(0, 229, 255, 0.3);
+    background: rgba(0, 229, 255, 0.08);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-radius: 12px;
     color: var(--x-accent);
-    box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
-    transition: all 0.4s ease;
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    margin-bottom: var(--x-sp-4);
+    position: relative;
     z-index: 2;
   }
 
-  .x-site .x-card--layer .x-icon-fui svg {
-    width: 24px;
-    height: 24px;
-    fill: currentColor;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  .x-site .x-card:hover .x-card__icon {
+    background: var(--x-accent);
+    color: #000;
+    box-shadow: 0 0 20px var(--x-accent);
+    transform: scale(1.1) rotate(5deg);
   }
 
-  .x-site .x-card--layer:hover .x-icon-fui {
-    background: rgba(0, 229, 255, 0.2);
-    border-color: var(--x-accent);
-    box-shadow: 0 0 25px rgba(0, 229, 255, 0.4);
-    transform: scale(1.05);
-  }
-
-  .x-site .x-card--layer:hover .x-icon-fui svg {
-    transform: scale(1.15);
-  }
-
-  /* Corner accents for FUI cards */
-  .x-site .x-card--layer .x-corner-tl,
-  .x-site .x-card--layer .x-corner-br {
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    border: 2px solid var(--x-accent);
-    opacity: 0.5;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+  .x-site .x-card__title {
+    font-family: var(--x-ff-head);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--x-text);
+    margin-bottom: var(--x-sp-3);
+    position: relative;
     z-index: 2;
+    transition: color 0.3s ease;
   }
 
-  .x-site .x-card--layer .x-corner-tl {
-    top: -1px;
-    left: -1px;
-    border-right: none;
-    border-bottom: none;
+  .x-site .x-card:hover .x-card__title {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
   }
 
-  .x-site .x-card--layer .x-corner-br {
-    bottom: -1px;
-    right: -1px;
-    border-left: none;
-    border-top: none;
-  }
-
-  .x-site .x-card--layer:hover .x-corner-tl {
-    opacity: 1;
-    transform: translate(-2px, -2px);
-  }
-
-  .x-site .x-card--layer:hover .x-corner-br {
-    opacity: 1;
-    transform: translate(2px, 2px);
+  .x-site .x-card__text {
+    font-size: var(--x-fs-5);
+    color: var(--x-muted);
+    line-height: 1.6;
+    position: relative;
+    z-index: 2;
   }
 
   /* === COMPONENTS === */
@@ -1969,15 +1897,18 @@
         <p class="x-lead">Агротактик построен на четырёх независимых, но взаимосвязанных слоях — каждый работает
           автономно и усиливает следующий.</p>
       </div>
-      <div class="x-cards x-cards--2x2">
-        <div class="x-card x-card--layer">
-          <div class="x-corner-tl"></div>
-          <div class="x-corner-br"></div>
-          <div class="x-icon-fui">
-            <!-- Server / Network Data Icon -->
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 6h16v4H4zm0 8h16v4H4zm2-6h2v2H6zm0 8h2v2H6z" />
-              <path d="M12 2v2m0 16v2m8-10h2M2 12h2" opacity="0.5" />
+      <div class="x-cards">
+        <div class="x-card">
+          <div class="x-card__icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect>
+              <line x1="6" y1="8" x2="6" y2="8"></line>
+              <line x1="10" y1="8" x2="18" y2="8"></line>
+              <line x1="6" y1="12" x2="6" y2="12"></line>
+              <line x1="10" y1="12" x2="18" y2="12"></line>
+              <line x1="6" y1="16" x2="6" y2="16"></line>
+              <line x1="10" y1="16" x2="18" y2="16"></line>
             </svg>
           </div>
           <h3 class="x-card__title">Слой 1 — Сбор и нормализация данных</h3>
@@ -1990,15 +1921,13 @@
             <li>Хранение сырых данных с полным audit trail</li>
           </ul>
         </div>
-        <div class="x-card x-card--layer">
-          <div class="x-corner-tl"></div>
-          <div class="x-corner-br"></div>
-          <div class="x-icon-fui">
-            <!-- AI Core / Neural Node Icon -->
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="12" cy="12" r="3" />
-              <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4" />
-              <path d="M12 4V1m0 22v-3m8-8h3M1 12h3" stroke="currentColor" stroke-width="2" />
+        <div class="x-card">
+          <div class="x-card__icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
             </svg>
           </div>
           <h3 class="x-card__title">Слой 2 — AI-аналитика и прогнозирование</h3>
@@ -2011,15 +1940,14 @@
             <li>Персонализированные дашборды: агроном, диспетчер, директор</li>
           </ul>
         </div>
-        <div class="x-card x-card--layer">
-          <div class="x-corner-tl"></div>
-          <div class="x-corner-br"></div>
-          <div class="x-icon-fui">
-            <!-- Ops / Radar Target Icon -->
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="2" />
-              <path d="M12 2v6m0 8v6m8-10h-6m-8 0H2" stroke="currentColor" stroke-width="2" />
-              <circle cx="12" cy="12" r="2" />
+        <div class="x-card">
+          <div class="x-card__icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+              </path>
             </svg>
           </div>
           <h3 class="x-card__title">Слой 3 — Операционный контур</h3>
@@ -2032,19 +1960,12 @@
             <li>Встроенные регламенты эскалации и уведомлений</li>
           </ul>
         </div>
-        <div class="x-card x-card--layer">
-          <div class="x-corner-tl"></div>
-          <div class="x-corner-br"></div>
-          <div class="x-icon-fui">
-            <!-- Compliance / Secured Document Icon -->
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-              <path d="M14 2v6h6" />
-              <path d="M16 13H8" />
-              <path d="M16 17H8" />
-              <path d="M10 9H8" />
-              <path d="M12 22v-4a2 2 0 0 1 2-2h4" opacity="0.4" />
+        <div class="x-card">
+          <div class="x-card__icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <polyline points="9 12 11 14 15 10"></polyline>
             </svg>
           </div>
           <h3 class="x-card__title">Слой 4 — Документирование и комплаенс</h3>
