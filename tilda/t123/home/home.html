@@ -1179,6 +1179,245 @@
       width: 100%
     }
   }
+
+  /* === NEW DYNAMIC HOTSPOTS === */
+  .x-site .x-hotspots {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .x-site .x-hotspot {
+    position: absolute;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    outline: none;
+    width: max-content;
+  }
+
+  /* Target predefined spots for the 5 dynamic items */
+  .x-site .x-hotspot:nth-child(1) {
+    top: 12%;
+    left: 20px;
+    flex-direction: row;
+  }
+
+  .x-site .x-hotspot:nth-child(2) {
+    top: 32%;
+    right: 20px;
+    left: auto;
+    flex-direction: row-reverse;
+    text-align: right;
+  }
+
+  .x-site .x-hotspot:nth-child(3) {
+    top: 52%;
+    left: 20px;
+    flex-direction: row;
+  }
+
+  .x-site .x-hotspot:nth-child(4) {
+    top: 72%;
+    right: 20px;
+    left: auto;
+    flex-direction: row-reverse;
+    text-align: right;
+  }
+
+  .x-site .x-hotspot:nth-child(5) {
+    top: 88%;
+    left: 20px;
+    flex-direction: row;
+  }
+
+  .x-site .x-hotspot::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 229, 255, 0.5) 50%, transparent 50%);
+    background-size: 8px 1px;
+    background-repeat: repeat-x;
+    animation: dash-move 1s linear infinite;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .x-site .x-hotspot:nth-child(even)::before {
+    animation-direction: reverse;
+  }
+
+  @keyframes dash-move {
+    from {
+      background-position: 0 0;
+    }
+
+    to {
+      background-position: 8px 0;
+    }
+  }
+
+  .x-site .x-hotspot__beacon {
+    width: 16px;
+    height: 16px;
+    border: 1px solid rgba(0, 229, 255, 0.4);
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.1);
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    background: rgba(19, 27, 46, 0.5);
+  }
+
+  .x-site .x-hotspot__beacon::after {
+    content: '';
+    width: 4px;
+    height: 4px;
+    background: var(--x-accent);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--x-accent);
+    animation: beacon-pulse 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes beacon-pulse {
+    from {
+      opacity: 0.5;
+      transform: scale(0.8);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1.5);
+    }
+  }
+
+  .x-site .x-hotspot__callout {
+    background: rgba(19, 27, 46, 0.85);
+    border: 1px solid var(--x-line);
+    padding: 10px 14px;
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+    max-width: 240px;
+    transition: all 0.3s ease;
+  }
+
+  .x-site .x-hotspot__key {
+    font-family: var(--x-ff-mono);
+    color: var(--x-accent);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+
+  .x-site .x-hotspot__text {
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--x-text);
+  }
+
+  .x-site .x-hotspot:hover .x-hotspot__callout,
+  .x-site .x-hotspot:focus .x-hotspot__callout,
+  .x-site .x-hotspot.is-active .x-hotspot__callout {
+    border-color: var(--x-accent);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    background: rgba(19, 27, 46, 0.95);
+  }
+
+  .x-site .x-hotspot:hover .x-hotspot__beacon,
+  .x-site .x-hotspot:focus .x-hotspot__beacon,
+  .x-site .x-hotspot.is-active .x-hotspot__beacon {
+    transform: scale(1.2);
+    box-shadow: 0 0 15px var(--x-accent);
+    background: rgba(0, 229, 255, 0.1);
+    border-color: var(--x-accent);
+  }
+
+  .x-site .x-hotspot:hover::before,
+  .x-site .x-hotspot:focus::before,
+  .x-site .x-hotspot.is-active::before {
+    opacity: 1;
+    background-image: linear-gradient(to right, rgba(0, 229, 255, 1) 50%, transparent 50%);
+  }
+
+  /* Mobile Interactivity */
+  @media(max-width:768px) {
+    .x-site .x-hotspot::before {
+      display: none;
+    }
+
+    .x-site .x-hotspot {
+      flex-direction: column !important;
+      position: absolute;
+    }
+
+    .x-site .x-hotspot:nth-child(1) {
+      top: 15%;
+      left: 30%;
+    }
+
+    .x-site .x-hotspot:nth-child(2) {
+      top: 35%;
+      right: auto;
+      left: 55%;
+    }
+
+    .x-site .x-hotspot:nth-child(3) {
+      top: 55%;
+      left: 25%;
+    }
+
+    .x-site .x-hotspot:nth-child(4) {
+      top: 75%;
+      right: auto;
+      left: 60%;
+    }
+
+    .x-site .x-hotspot:nth-child(5) {
+      top: 85%;
+      left: 35%;
+    }
+
+    .x-site .x-hotspot__callout {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      margin-top: 10px;
+      opacity: 0;
+      pointer-events: none;
+      width: max-content;
+      max-width: 260px;
+      z-index: 100;
+      text-align: left !important;
+    }
+
+    .x-site .x-hotspot.is-active .x-hotspot__callout {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  @media(prefers-reduced-motion:reduce) {
+
+    .x-site .x-hotspot::before,
+    .x-site .x-hotspot__beacon::after {
+      animation: none !important;
+    }
+  }
 </style>
 <div class="x-site">
   <div class="x-scanline"></div>
@@ -1279,6 +1518,7 @@
           <p class="x-hero__micro">Без обязательств · 30 минут · NDA при необходимости</p>
         </div>
         <div class="x-hero__visual x-dash-grid">
+          <div class="x-hotspots" id="x-hotspots"></div>
         </div>
       </div>
     </div>
@@ -1768,8 +2008,10 @@
         document.querySelectorAll('.x-site .x-tab-panel').forEach(function (p) {
           p.classList.remove('x-tab-panel--active');
         });
-        var tgt = document.getElementById('panel-' + tab.getAttribute('data-panel'));
+        var panelK = tab.getAttribute('data-panel');
+        var tgt = document.getElementById('panel-' + panelK);
         if (tgt) tgt.classList.add('x-tab-panel--active');
+        if (window.renderHotspots) window.renderHotspots(panelK);
       });
     });
 
@@ -1825,51 +2067,136 @@
       });
     });
 
-    /* === HOTSPOTS (Interactive) === */
-    var hotspots = document.querySelectorAll('.x-site .x-hotspot');
-    var closeAllTips = function () {
-      hotspots.forEach(function (h) { h.setAttribute('aria-expanded', 'false'); });
+    /* === DYNAMIC HOTSPOTS DATA & LOGIC === */
+    var HOTSPOT_DATA = {
+      coo: [
+        { key: "KPI", text: "План-факт и KPI по подразделениям/кластерам в одном экране." },
+        { key: "Exceptions", text: "Очередь отклонений: приоритет → ответственный → срок реакции → статус." },
+        { key: "Economics", text: "Экономический эффект по сценариям: простои, логистика, дисциплина процессов, ошибки." },
+        { key: "Pilot Status", text: "Пилот 6–8 недель: метрики, критерии приёмки, текущий прогресс, артефакты." },
+        { key: "Board Pack", text: "Готовые материалы для комитета: KPI, риски, план внедрения, решения по следующему шагу." }
+      ],
+      it: [
+        { key: "Integrations", text: "ERP/1С, телематика, BI, API: подключение поверх существующего контура без замены." },
+        { key: "Access", text: "Роли и права, минимальные привилегии, SSO/MFA (если есть) — управляемый доступ." },
+        { key: "Audit Trail", text: "Кто-что-когда-почему: полная трассировка действий пользователей и системных событий." },
+        { key: "Security Controls", text: "Шифрование, сегментация, ключи/токены, политика передачи/хранения данных." },
+        { key: "Observability", text: "Мониторинг интеграций: статусы коннектекторов, ошибки обмена, SLA и алерты по данным." }
+      ],
+      eng: [
+        { key: "Missions", text: "Задания, маршруты, статусы выполнения и контроль отклонений “по месту и времени”." },
+        { key: "Safety/ODD", text: "Геозоны, ограничения применимости, безопасные режимы, сценарии деградации (fail-safe)." },
+        { key: "Alerts", text: "Алерты по рискам выполнения: отклонение траектории/режима/условий → действие → закрытие." },
+        { key: "Map Layers", text: "Поля, геозоны, маршруты, участки работ — слойно и прозрачно для управления." },
+        { key: "Incident Review", text: "Журнал событий и решений: что произошло → кто вмешался → какое действие выполнено → результат." }
+      ],
+      mech: [
+        { key: "Diagnostics", text: "Отклонения телематики/датчиков: ранние признаки поломки до простоя." },
+        { key: "Maintenance Queue", text: "Наработка/регламент → очередь работ → назначение исполнителя → контроль выполнения." },
+        { key: "Downtime", text: "Причины простоев, длительность, влияние на план-факт, ответственность и статус устранения." },
+        { key: "Parts", text: "Потребность по ТО/инцидентам, критичность, сроки, история замен и причин." },
+        { key: "Service Log", text: "Журнал обслуживаний по нормативам: когда/что/кем/почему, с прозрачным audit trail." }
+      ],
+      agro: [
+        { key: "Field Plan-Fact", text: "План-факт работ в разрезе культур/полей: окна операций, отклонения, причины." },
+        { key: "Ops Quality", text: "Перекрытия/пропуски/скорости/нормы внесения + карта фактического выполнения." },
+        { key: "Windows", text: "Контроль “окон” и готовности ресурсов: риск срыва сроков и сценарии реагирования." },
+        { key: "Map", text: "Карта полей и участков: где сделано/не сделано, где риск, где нужно вмешательство." },
+        { key: "Season Risks", text: "Погодные/технологические/ресурсные риски: алерты, приоритеты, ответственные, план действий." }
+      ],
+      zoo: [
+        { key: "Feed Logistics", text: "План-факт заготовки/доставки, очередь задач, отклонения и ответственные." },
+        { key: "Feed Quality", text: "Партии/показатели/события отклонений: контроль качества и реакции." },
+        { key: "Traceability", text: "Трассировка “партия → рацион → событие → результат” для разборов и контроля." },
+        { key: "Farm Ops", text: "Журнал событий: кормление/перемещения/вет-события, нарушения регламентов, аудит." },
+        { key: "KPI", text: "KPI по фермам/участкам: отклонения, динамика, точки риска и управленческие действия." }
+      ]
     };
 
-    hotspots.forEach(function (h) {
-      // Hover (Desktop)
-      h.addEventListener('mouseenter', function () {
-        if (window.matchMedia('(hover: hover)').matches) {
-          closeAllTips();
-          h.setAttribute('aria-expanded', 'true');
+    window.renderHotspots = function (roleKey) {
+      var container = document.getElementById('x-hotspots');
+      if (!container) return;
+      var data = HOTSPOT_DATA[roleKey] || [];
+      container.innerHTML = '';
+      data.forEach(function (item) {
+        var btn = document.createElement('button');
+        btn.className = 'x-hotspot';
+        btn.type = 'button';
+        btn.innerHTML =
+          '<div class="x-hotspot__beacon"></div>' +
+          '<div class="x-hotspot__callout">' +
+          '<div class="x-hotspot__key">' + item.key + '</div>' +
+          '<div class="x-hotspot__text">' + item.text + '</div>' +
+          '</div>';
+        container.appendChild(btn);
+      });
+    };
+
+    var hotspotsContainer = document.getElementById('x-hotspots');
+    if (hotspotsContainer) {
+      function closeAllHotspots() {
+        var all = hotspotsContainer.querySelectorAll('.x-hotspot.is-active');
+        all.forEach(function (el) { el.classList.remove('is-active'); });
+      }
+
+      hotspotsContainer.addEventListener('click', function (e) {
+        var btn = e.target.closest('.x-hotspot');
+        if (!btn) return;
+        var wasActive = btn.classList.contains('is-active');
+        closeAllHotspots();
+        if (!wasActive) btn.classList.add('is-active');
+      });
+
+      hotspotsContainer.addEventListener('mouseover', function (e) {
+        if (!window.matchMedia('(hover: hover)').matches) return;
+        var btn = e.target.closest('.x-hotspot');
+        if (btn) {
+          closeAllHotspots();
+          btn.classList.add('is-active');
         }
       });
-      h.addEventListener('mouseleave', function () {
-        if (window.matchMedia('(hover: hover)').matches) {
-          h.setAttribute('aria-expanded', 'false');
+
+      hotspotsContainer.addEventListener('mouseout', function (e) {
+        if (!window.matchMedia('(hover: hover)').matches) return;
+        var btn = e.target.closest('.x-hotspot');
+        if (btn) {
+          btn.classList.remove('is-active');
         }
       });
 
-      // Focus
-      h.addEventListener('focus', function () {
-        closeAllTips();
-        h.setAttribute('aria-expanded', 'true');
-      });
-      h.addEventListener('blur', function () {
-        h.setAttribute('aria-expanded', 'false');
-      });
-
-      // Click / Tap (Mobile)
-      h.addEventListener('click', function (e) {
-        e.stopPropagation();
-        var wasOpen = h.getAttribute('aria-expanded') === 'true';
-        closeAllTips();
-        if (!wasOpen) h.setAttribute('aria-expanded', 'true');
+      hotspotsContainer.addEventListener('focusin', function (e) {
+        var btn = e.target.closest('.x-hotspot');
+        if (btn) {
+          closeAllHotspots();
+          btn.classList.add('is-active');
+        }
       });
 
-      h.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') closeAllTips();
+      hotspotsContainer.addEventListener('focusout', function (e) {
+        var btn = e.target.closest('.x-hotspot');
+        if (btn) btn.classList.remove('is-active');
       });
-    });
+    }
 
     document.addEventListener('click', function (e) {
-      if (!e.target.closest('.x-hotspot')) closeAllTips();
+      if (!e.target.closest('.x-hotspot') && hotspotsContainer) {
+        var all = hotspotsContainer.querySelectorAll('.x-hotspot.is-active');
+        all.forEach(function (el) { el.classList.remove('is-active'); });
+      }
     });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && hotspotsContainer) {
+        var all = hotspotsContainer.querySelectorAll('.x-hotspot.is-active');
+        all.forEach(function (el) { el.classList.remove('is-active'); });
+      }
+    });
+
+    /* Init on page load */
+    var activePanelTab = document.querySelector('.x-site .x-tab--active');
+    if (activePanelTab) {
+      window.renderHotspots(activePanelTab.getAttribute('data-panel'));
+    }
 
     /* === SELF-CHECK === */
     var checks = document.querySelectorAll('.x-site .x-selfcheck input');
