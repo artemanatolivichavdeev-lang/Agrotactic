@@ -465,20 +465,42 @@
   /* Hero Visual */
   .x-site .x-hero__visual {
     position: relative;
-    background: rgba(19, 27, 46, 0.5);
+    background: rgba(19, 27, 46, 0.3);
     border: 1px solid var(--x-line);
     min-height: 400px;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.5), 0 10px 40px rgba(0, 0, 0, 0.4);
     overflow: hidden;
   }
 
   @media (min-width: 1200px) {
     .x-site .x-hero__visual {
       min-height: 520px;
+    }
+  }
+
+  /* Scanline effect entirely inside the visual block */
+  .x-site .x-hero__visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(0, 229, 255, 0) 0%, rgba(0, 229, 255, 0.05) 50%, rgba(0, 229, 255, 0) 100%);
+    background-size: 100% 200%;
+    animation: visual-scanline 6s linear infinite;
+    z-index: 5;
+  }
+
+  @keyframes visual-scanline {
+    from {
+      background-position: 0 -100%;
+    }
+
+    to {
+      background-position: 0 200%;
     }
   }
 
@@ -1202,107 +1224,222 @@
     gap: 12px;
     outline: none;
     width: max-content;
+    /* initial state for entry animation */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fade-up-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
   /* Target predefined spots for the 5 dynamic items */
   .x-site .x-hotspot:nth-child(1) {
     top: 12%;
     left: 30px;
+    animation-delay: 0.1s;
   }
 
   .x-site .x-hotspot:nth-child(2) {
     top: 31%;
     left: 60px;
+    animation-delay: 0.2s;
   }
 
   .x-site .x-hotspot:nth-child(3) {
     top: 50%;
     left: 90px;
+    animation-delay: 0.3s;
   }
 
   .x-site .x-hotspot:nth-child(4) {
     top: 69%;
     left: 60px;
+    animation-delay: 0.4s;
   }
 
   .x-site .x-hotspot:nth-child(5) {
     top: 88%;
     left: 30px;
+    animation-delay: 0.5s;
+  }
+
+  @keyframes fade-up-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .x-site .x-hotspot::before {
     content: '';
     display: block;
-    width: 40px;
+    width: 60px;
     height: 1px;
-    background-image: linear-gradient(to right, rgba(0, 229, 255, 0.5) 50%, transparent 50%);
-    background-size: 8px 1px;
+    background-image: linear-gradient(to right, rgba(0, 229, 255, 0.8) 50%, transparent 50%);
+    background-size: 10px 1px;
     background-repeat: repeat-x;
-    animation: dash-move 1s linear infinite;
-    opacity: 0.5;
-    transition: all 0.3s ease;
+    animation: dash-flow 1.5s linear infinite;
+    opacity: 0.3;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     flex-shrink: 0;
+    transform-origin: left;
+    transform: scaleX(0);
+    animation: dash-flow 1.5s linear infinite, draw-line 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
   }
 
+  /* Only invert direction, keep the draw-line animation intact */
   .x-site .x-hotspot:nth-child(even)::before {
-    animation-direction: reverse;
+    animation: dash-flow-reverse 1.5s linear infinite, draw-line 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
   }
 
-  @keyframes dash-move {
+  @keyframes draw-line {
+    from {
+      transform: scaleX(0);
+      opacity: 0;
+    }
+
+    to {
+      transform: scaleX(1);
+      opacity: 0.3;
+    }
+  }
+
+  @keyframes dash-flow {
     from {
       background-position: 0 0;
     }
 
     to {
-      background-position: 8px 0;
+      background-position: -20px 0;
+    }
+  }
+
+  @keyframes dash-flow-reverse {
+    from {
+      background-position: 0 0;
+    }
+
+    to {
+      background-position: 20px 0;
     }
   }
 
   .x-site .x-hotspot__beacon {
-    width: 16px;
-    height: 16px;
-    border: 1px solid rgba(0, 229, 255, 0.4);
+    width: 14px;
+    height: 14px;
+    border: 1px solid rgba(0, 229, 255, 0.6);
     border-radius: 50%;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 10px rgba(0, 229, 255, 0.1);
-    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.2), inset 0 0 8px rgba(0, 229, 255, 0.2);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     flex-shrink: 0;
-    background: rgba(19, 27, 46, 0.5);
+    background: rgba(19, 27, 46, 0.8);
+    z-index: 2;
+  }
+
+  .x-site .x-hotspot__beacon::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1px solid var(--x-accent);
+    opacity: 0;
+    transform: scale(0.5);
+    animation: radar-ring 3s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  }
+
+  /* Stagger radar rings slightly based on nth-child */
+  .x-site .x-hotspot:nth-child(2) .x-hotspot__beacon::before {
+    animation-delay: 0.5s;
+  }
+
+  .x-site .x-hotspot:nth-child(3) .x-hotspot__beacon::before {
+    animation-delay: 1.0s;
+  }
+
+  .x-site .x-hotspot:nth-child(4) .x-hotspot__beacon::before {
+    animation-delay: 1.5s;
+  }
+
+  .x-site .x-hotspot:nth-child(5) .x-hotspot__beacon::before {
+    animation-delay: 2.0s;
+  }
+
+  @keyframes radar-ring {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+      border-width: 2px;
+    }
+
+    20% {
+      opacity: 0.6;
+      transform: scale(1.2);
+    }
+
+    100% {
+      opacity: 0;
+      transform: scale(3.5);
+      border-width: 0px;
+    }
   }
 
   .x-site .x-hotspot__beacon::after {
     content: '';
-    width: 4px;
-    height: 4px;
+    width: 6px;
+    height: 6px;
     background: var(--x-accent);
     border-radius: 50%;
-    box-shadow: 0 0 8px var(--x-accent);
-    animation: beacon-pulse 2s ease-in-out infinite alternate;
+    box-shadow: 0 0 12px var(--x-accent);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  @keyframes beacon-pulse {
+  .x-site .x-hotspot__callout {
+    background: linear-gradient(135deg, rgba(19, 27, 46, 0.95), rgba(11, 17, 32, 0.98));
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-left: 3px solid var(--x-accent);
+    padding: 14px 18px;
+    border-radius: 6px;
+    backdrop-filter: blur(10px);
+    max-width: 320px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: left center;
+    opacity: 0;
+    transform: translateX(-10px) scale(0.95);
+    animation: callout-enter 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Sleek shine effect on the callout */
+  .x-site .x-hotspot__callout::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(0, 229, 255, 0.1), transparent);
+    transform: skewX(-20deg);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes callout-enter {
     from {
-      opacity: 0.5;
-      transform: scale(0.8);
+      opacity: 0;
+      transform: translateX(-10px) scale(0.95);
     }
 
     to {
       opacity: 1;
-      transform: scale(1.5);
+      transform: translateX(0) scale(1);
     }
-  }
-
-  .x-site .x-hotspot__callout {
-    background: rgba(19, 27, 46, 0.85);
-    border: 1px solid var(--x-line);
-    padding: 12px 16px;
-    border-radius: 4px;
-    backdrop-filter: blur(4px);
-    max-width: 280px;
-    transition: all 0.3s ease;
   }
 
   .x-site .x-hotspot__key {
@@ -1311,38 +1448,79 @@
     font-size: 14px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.1em;
     margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Tech purely decorative dot next to KEY */
+  .x-site .x-hotspot__key::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background: var(--x-accent);
+    border-radius: 1px;
+    box-shadow: 0 0 6px var(--x-accent);
   }
 
   .x-site .x-hotspot__text {
     font-size: 14px;
-    line-height: 1.5;
+    line-height: 1.6;
     color: var(--x-text);
+    opacity: 0.85;
+    transition: opacity 0.3s ease;
   }
 
+  /* === HOVER & ACTIVE STATES === */
   .x-site .x-hotspot:hover .x-hotspot__callout,
   .x-site .x-hotspot:focus .x-hotspot__callout,
   .x-site .x-hotspot.is-active .x-hotspot__callout {
-    border-color: var(--x-accent);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    background: rgba(19, 27, 46, 0.95);
+    border-color: rgba(0, 229, 255, 0.6);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 229, 255, 0.1);
+    transform: translateX(5px) scale(1.02);
+  }
+
+  .x-site .x-hotspot:hover .x-hotspot__callout::after,
+  .x-site .x-hotspot:focus .x-hotspot__callout::after,
+  .x-site .x-hotspot.is-active .x-hotspot__callout::after {
+    left: 200%;
+    transition: left 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .x-site .x-hotspot:hover .x-hotspot__text,
+  .x-site .x-hotspot:focus .x-hotspot__text,
+  .x-site .x-hotspot.is-active .x-hotspot__text {
+    opacity: 1;
   }
 
   .x-site .x-hotspot:hover .x-hotspot__beacon,
   .x-site .x-hotspot:focus .x-hotspot__beacon,
   .x-site .x-hotspot.is-active .x-hotspot__beacon {
-    transform: scale(1.2);
-    box-shadow: 0 0 15px var(--x-accent);
-    background: rgba(0, 229, 255, 0.1);
+    background: rgba(0, 229, 255, 0.15);
     border-color: var(--x-accent);
+    transform: scale(1.3);
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
+  }
+
+  /* Intensify beacon center on hover */
+  .x-site .x-hotspot:hover .x-hotspot__beacon::after,
+  .x-site .x-hotspot:focus .x-hotspot__beacon::after,
+  .x-site .x-hotspot.is-active .x-hotspot__beacon::after {
+    transform: scale(1.5);
+    background: #fff;
+    box-shadow: 0 0 15px var(--x-accent), 0 0 5px #fff;
   }
 
   .x-site .x-hotspot:hover::before,
   .x-site .x-hotspot:focus::before,
   .x-site .x-hotspot.is-active::before {
-    opacity: 1;
+    opacity: 0.8;
     background-image: linear-gradient(to right, rgba(0, 229, 255, 1) 50%, transparent 50%);
+    width: 80px;
+    transform: scaleX(1) !important;
   }
 
   /* Mobile Interactivity */
