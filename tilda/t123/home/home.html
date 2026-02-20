@@ -1196,6 +1196,8 @@
     cursor: pointer;
     pointer-events: auto;
     display: flex;
+    flex-direction: row;
+    text-align: left;
     align-items: center;
     gap: 12px;
     outline: none;
@@ -1205,36 +1207,27 @@
   /* Target predefined spots for the 5 dynamic items */
   .x-site .x-hotspot:nth-child(1) {
     top: 12%;
-    left: 20px;
-    flex-direction: row;
+    left: 30px;
   }
 
   .x-site .x-hotspot:nth-child(2) {
-    top: 32%;
-    right: 20px;
-    left: auto;
-    flex-direction: row-reverse;
-    text-align: right;
+    top: 31%;
+    left: 60px;
   }
 
   .x-site .x-hotspot:nth-child(3) {
-    top: 52%;
-    left: 20px;
-    flex-direction: row;
+    top: 50%;
+    left: 90px;
   }
 
   .x-site .x-hotspot:nth-child(4) {
-    top: 72%;
-    right: 20px;
-    left: auto;
-    flex-direction: row-reverse;
-    text-align: right;
+    top: 69%;
+    left: 60px;
   }
 
   .x-site .x-hotspot:nth-child(5) {
     top: 88%;
-    left: 20px;
-    flex-direction: row;
+    left: 30px;
   }
 
   .x-site .x-hotspot::before {
@@ -1305,26 +1298,26 @@
   .x-site .x-hotspot__callout {
     background: rgba(19, 27, 46, 0.85);
     border: 1px solid var(--x-line);
-    padding: 10px 14px;
+    padding: 12px 16px;
     border-radius: 4px;
     backdrop-filter: blur(4px);
-    max-width: 240px;
+    max-width: 280px;
     transition: all 0.3s ease;
   }
 
   .x-site .x-hotspot__key {
     font-family: var(--x-ff-mono);
     color: var(--x-accent);
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
 
   .x-site .x-hotspot__text {
-    font-size: 12px;
-    line-height: 1.4;
+    font-size: 14px;
+    line-height: 1.5;
     color: var(--x-text);
   }
 
@@ -1364,30 +1357,28 @@
     }
 
     .x-site .x-hotspot:nth-child(1) {
-      top: 15%;
-      left: 30%;
+      top: 12%;
+      left: 20%;
     }
 
     .x-site .x-hotspot:nth-child(2) {
-      top: 35%;
-      right: auto;
-      left: 55%;
+      top: 31%;
+      left: 35%;
     }
 
     .x-site .x-hotspot:nth-child(3) {
-      top: 55%;
-      left: 25%;
+      top: 50%;
+      left: 50%;
     }
 
     .x-site .x-hotspot:nth-child(4) {
-      top: 75%;
-      right: auto;
-      left: 60%;
+      top: 69%;
+      left: 35%;
     }
 
     .x-site .x-hotspot:nth-child(5) {
-      top: 85%;
-      left: 35%;
+      top: 88%;
+      left: 20%;
     }
 
     .x-site .x-hotspot__callout {
