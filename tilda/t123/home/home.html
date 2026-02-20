@@ -1236,30 +1236,35 @@
   .x-site .x-hotspot:nth-child(1) {
     top: 12%;
     left: 20px;
+    --h-delay: 0.1s;
     animation-delay: 0.1s;
   }
 
   .x-site .x-hotspot:nth-child(2) {
     top: 31%;
     left: 20px;
+    --h-delay: 0.2s;
     animation-delay: 0.2s;
   }
 
   .x-site .x-hotspot:nth-child(3) {
     top: 50%;
     left: 20px;
+    --h-delay: 0.3s;
     animation-delay: 0.3s;
   }
 
   .x-site .x-hotspot:nth-child(4) {
     top: 69%;
     left: 20px;
+    --h-delay: 0.4s;
     animation-delay: 0.4s;
   }
 
   .x-site .x-hotspot:nth-child(5) {
     top: 88%;
     left: 20px;
+    --h-delay: 0.5s;
     animation-delay: 0.5s;
   }
 
@@ -1289,12 +1294,12 @@
     flex-shrink: 0;
     transform-origin: left;
     transform: scaleX(0);
-    animation: dash-flow 1.5s linear infinite, draw-line 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+    animation: dash-flow 1.5s linear infinite, draw-line 0.6s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--h-delay, 0s) + 0.5s) forwards;
   }
 
   /* Only invert direction, keep the draw-line animation intact */
   .x-site .x-hotspot:nth-child(even)::before {
-    animation: dash-flow-reverse 1.5s linear infinite, draw-line 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+    animation: dash-flow-reverse 1.5s linear infinite, draw-line 0.6s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--h-delay, 0s) + 0.5s) forwards;
   }
 
   @keyframes draw-line {
@@ -1414,7 +1419,7 @@
     transform-origin: left center;
     opacity: 0;
     transform: translateX(-10px) scale(0.95);
-    animation: callout-enter 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+    animation: callout-enter 0.6s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--h-delay, 0s) + 0.6s) forwards;
     position: relative;
     overflow: hidden;
   }
