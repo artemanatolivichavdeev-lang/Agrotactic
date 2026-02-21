@@ -803,77 +803,234 @@
     }
   }
 
-  /* Stepper */
-  .x-site .x-stepper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--x-sp-4);
-  }
-
-  @media(max-width: 768px) {
-    .x-site .x-stepper {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .x-site .x-step {
-    flex: 1;
-    padding: var(--x-sp-5);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    background: rgba(19, 27, 46, 0.3);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 16px;
-    cursor: pointer;
+  /* === AUTONOMY SWITCHER (v0.6 Redesign) === */
+  .x-site .x-autonomy-switcher {
     position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin: var(--x-sp-7) auto var(--x-sp-6);
+    max-width: 800px;
+    padding: 0;
+  }
+
+
+
+  .x-site .x-auto-btn {
+    position: relative;
+    z-index: 3;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    outline: none;
+    flex: 1;
+  }
+
+  .x-site .x-auto-btn__ring {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--x-surface);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    overflow: hidden;
+    position: relative;
   }
 
-  .x-site .x-step:hover {
-    border-color: rgba(0, 229, 255, 0.3);
-    transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-  }
-
-  .x-site .x-step--active {
-    border-color: var(--x-accent);
-    background: radial-gradient(circle at top right, rgba(0, 229, 255, 0.1), rgba(19, 27, 46, 0.4) 60%);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 229, 255, 0.2);
-    transform: translateY(-2px);
-  }
-
-  .x-site .x-step__level {
-    font-family: var(--x-ff-mono);
-    font-size: 3rem;
-    color: rgba(255, 255, 255, 0.05);
+  .x-site .x-auto-btn__ring::before {
+    content: '';
     position: absolute;
-    top: var(--x-sp-2);
-    right: var(--x-sp-3);
-    font-weight: 800;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 0;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1px dashed var(--x-accent);
+    opacity: 0;
+    transform: rotate(0deg);
+    transition: all 0.4s ease;
   }
 
-  .x-site .x-step--active .x-step__level {
-    color: var(--x-accent);
-    opacity: 0.15;
+  .x-site .x-auto-btn--active .x-auto-btn__ring {
+    border-color: var(--x-accent);
+    background: rgba(0, 229, 255, 0.1);
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.3), inset 0 0 10px rgba(0, 229, 255, 0.2);
     transform: scale(1.1);
   }
 
-  .x-site .x-step__title {
-    font-size: var(--x-fs-4);
+  .x-site .x-auto-btn--active .x-auto-btn__ring::before {
+    opacity: 1;
+    animation: auto-spin 10s linear infinite;
+  }
+
+  @keyframes auto-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .x-site .x-auto-btn__text {
+    font-family: var(--x-ff-mono);
+    font-size: 1.1rem;
     font-weight: 700;
-    margin-bottom: var(--x-sp-3);
+    color: var(--x-muted);
+    transition: color 0.3s ease;
+  }
+
+  .x-site .x-auto-btn--active .x-auto-btn__text {
+    color: var(--x-accent);
+    text-shadow: 0 0 8px var(--x-accent);
+  }
+
+  .x-site .x-auto-btn__label {
+    font-family: var(--x-ff-head);
+    font-size: var(--x-fs-5);
+    font-weight: 600;
+    color: var(--x-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+
+  .x-site .x-auto-btn--active .x-auto-btn__label {
+    color: var(--x-text);
+  }
+
+  .x-site .x-auto-btn:hover .x-auto-btn__ring {
+    border-color: rgba(0, 229, 255, 0.5);
+    transform: scale(1.05);
+  }
+
+  .x-site .x-auto-btn:hover .x-auto-btn__text {
+    color: #fff;
+  }
+
+  .x-site .x-auto-panel {
+    display: none;
+    animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .x-site .x-auto-panel--active {
+    display: block;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .x-site .x-auto-panel__inner {
+    position: relative;
+    background: rgba(19, 27, 46, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-radius: 16px;
+    padding: var(--x-sp-7);
+    overflow: hidden;
+    min-height: 280px;
+  }
+
+  .x-site .x-auto-panel__inner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--x-accent), transparent);
+    opacity: 0.5;
+  }
+
+  .x-site .x-auto-panel__bg-level {
+    position: absolute;
+    top: -30px;
+    right: 20px;
+    font-family: var(--x-ff-mono);
+    font-size: 12rem;
+    font-weight: 800;
+    line-height: 1;
+    color: rgba(0, 229, 255, 0.03);
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+  }
+
+  .x-site .x-auto-panel__content {
     position: relative;
     z-index: 1;
+    max-width: 850px;
+  }
+
+  .x-site .x-auto-panel__title {
+    font-size: var(--x-fs-3);
+    font-weight: 700;
+    margin-bottom: var(--x-sp-4);
+    color: var(--x-text);
+  }
+
+  @media(max-width: 768px) {
+    .x-site .x-autonomy-switcher {
+      flex-direction: column;
+      gap: 16px;
+      padding: 0;
+      margin-bottom: var(--x-sp-6);
+    }
+
+    .x-site .x-auto-track,
+    .x-site .x-auto-progress {
+      display: none;
+    }
+
+    .x-site .x-auto-btn {
+      flex-direction: row;
+      justify-content: flex-start;
+      padding: 12px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      background: rgba(19, 27, 46, 0.3);
+    }
+
+    .x-site .x-auto-btn__ring {
+      width: 32px;
+      height: 32px;
+    }
+
+    .x-site .x-auto-btn__text {
+      font-size: 1rem;
+    }
+
+    .x-site .x-auto-btn--active {
+      border-color: rgba(0, 229, 255, 0.3);
+      background: rgba(0, 229, 255, 0.05);
+    }
+
+    .x-site .x-auto-panel__inner {
+      padding: var(--x-sp-5);
+    }
+
+    .x-site .x-auto-panel__bg-level {
+      font-size: 6rem;
+      top: 10px;
+      right: 10px;
+    }
   }
 
   .x-site .x-card__text,
   .x-site .x-hero__bullets,
   .x-site .x-step__chips,
-  .x-site .x-step>p,
-  .x-site .x-step>a {
+  .x-site .x-auto-panel__content>p,
+  .x-site .x-auto-panel__content>a {
     position: relative;
     z-index: 1;
   }
@@ -2094,76 +2251,124 @@
         <p class="x-hero__micro" style="margin-top: var(--x-sp-4);">Выберите уровень — увидите эффект, границы
           ответственности, требования к внедрению и документы для согласования.</p>
       </div>
-      <div class="x-stepper">
-        <div class="x-step x-step--active">
-          <div class="x-step__level">A1</div>
-          <h3 class="x-step__title">Ассистенты: качество операций и дисциплина данных</h3>
-          <ul class="x-hero__bullets" style="margin-bottom: var(--x-sp-4);">
-            <li>Стабильное выполнение работ: меньше ошибок, ручных отклонений и потерь на качестве</li>
-            <li>Данные становятся пригодными для управления: моточасы, операции, базовые статусы и события фиксируются
-              системно</li>
-            <li>Готовность к A2: определяем минимальный набор телематики, каналов связи и правил реакции</li>
-          </ul>
-          <div class="x-step__chips" style="margin-bottom: var(--x-sp-5);">
-            <span class="x-chip">Качество работ</span>
-            <span class="x-chip">Дисциплина данных</span>
-            <span class="x-chip">Подготовка к следующему уровню</span>
+      <!-- NEW SWITCHER -->
+      <div class="x-autonomy-switcher">
+        <button class="x-auto-btn x-auto-btn--active" data-level="1">
+          <span class="x-auto-btn__ring"><span class="x-auto-btn__text">A1</span></span>
+          <span class="x-auto-btn__label">Ассистент</span>
+        </button>
+        <button class="x-auto-btn" data-level="2">
+          <span class="x-auto-btn__ring"><span class="x-auto-btn__text">A2</span></span>
+          <span class="x-auto-btn__label">Супервизор</span>
+        </button>
+        <button class="x-auto-btn" data-level="3">
+          <span class="x-auto-btn__ring"><span class="x-auto-btn__text">A3</span></span>
+          <span class="x-auto-btn__label">Агент</span>
+        </button>
+        <button class="x-auto-btn" data-level="4">
+          <span class="x-auto-btn__ring"><span class="x-auto-btn__text">A4</span></span>
+          <span class="x-auto-btn__label">Оркетсратор</span>
+        </button>
+      </div>
+
+      <!-- NEW PANELS -->
+      <div class="x-autonomy-panels">
+        <!-- Panel 1 -->
+        <div class="x-auto-panel x-auto-panel--active" id="auto-panel-1">
+          <div class="x-auto-panel__inner">
+            <div class="x-auto-panel__bg-level">A1</div>
+            <div class="x-auto-panel__content">
+              <h3 class="x-auto-panel__title">Ассистент: качество операций и дисциплина данных</h3>
+              <ul class="x-hero__bullets" style="margin-bottom: var(--x-sp-4);">
+                <li>Стабильное выполнение работ: меньше ошибок, ручных отклонений и потерь на качестве</li>
+                <li>Данные становятся пригодными для управления: моточасы, операции, базовые статусы и события
+                  фиксируются системно</li>
+                <li>Готовность к A2: определяем минимальный набор телематики, каналов связи и правил реакции</li>
+              </ul>
+              <div class="x-step__chips" style="margin-bottom: var(--x-sp-5);">
+                <span class="x-chip">Качество работ</span>
+                <span class="x-chip">Дисциплина данных</span>
+                <span class="x-chip">Подготовка к следующему уровню</span>
+              </div>
+              <p style="margin-top:var(--x-sp-4);font-size:var(--x-fs-6);color:var(--x-muted)">Этот уровень часто
+                проходят «незаметно» — но именно он снижает риски при переходе к A2 и формирует фундамент для всей
+                автоматизации.</p>
+            </div>
           </div>
-          <p style="margin-top:var(--x-sp-4);font-size:var(--x-fs-6);color:var(--x-muted)">Этот уровень часто проходят
-            «незаметно» — но именно он снижает риски при переходе к A2 и формирует фундамент для всей автоматизации.</p>
         </div>
-        <div class="x-step">
-          <div class="x-step__level">A2</div>
-          <h3 class="x-step__title">Наблюдаемость: командный центр, контроль отклонений и ручные решения</h3>
-          <ul class="x-hero__bullets" style="margin-bottom: var(--x-sp-4);">
-            <li>План-факт и отклонения в реальном времени: видно, где срыв, кто отвечает и что делать прямо сейчас</li>
-            <li>Очередь отклонений с ответственными: приоритет → назначение → срок реакции → статус закрытия</li>
-            <li>Карта и слои: поля, маршруты, геозоны, задачи — прозрачная картина всего парка на одном экране</li>
-          </ul>
-          <div class="x-step__chips" style="margin-bottom: var(--x-sp-5);">
-            <span class="x-chip">Командный центр</span>
-            <span class="x-chip">Контроль отклонений</span>
-            <span class="x-chip">Карта парка</span>
+
+        <!-- Panel 2 -->
+        <div class="x-auto-panel" id="auto-panel-2">
+          <div class="x-auto-panel__inner">
+            <div class="x-auto-panel__bg-level">A2</div>
+            <div class="x-auto-panel__content">
+              <h3 class="x-auto-panel__title">Супервизор: командный центр, контроль отклонений и ручные решения</h3>
+              <ul class="x-hero__bullets" style="margin-bottom: var(--x-sp-4);">
+                <li>План-факт и отклонения в реальном времени: видно, где срыв, кто отвечает и что делать прямо сейчас
+                </li>
+                <li>Очередь отклонений с ответственными: приоритет → назначение → срок реакции → статус закрытия</li>
+                <li>Карта и слои: поля, маршруты, геозоны, задачи — прозрачная картина всего парка на одном экране</li>
+              </ul>
+              <div class="x-step__chips" style="margin-bottom: var(--x-sp-5);">
+                <span class="x-chip">Командный центр</span>
+                <span class="x-chip">Контроль отклонений</span>
+                <span class="x-chip">Карта парка</span>
+              </div>
+              <p style="margin-top:var(--x-sp-4);font-size:var(--x-fs-6);color:var(--x-muted)">Самый безопасный старт:
+                полная видимость и управление без автоматического исполнения. Человек принимает все решения — система
+                только обеспечивает картину.</p>
+            </div>
           </div>
-          <p style="margin-top:var(--x-sp-4);font-size:var(--x-fs-6);color:var(--x-muted)">Самый безопасный старт:
-            полная видимость и управление без автоматического исполнения. Человек принимает все решения — система только
-            обеспечивает картину.</p>
         </div>
-        <div class="x-step">
-          <div class="x-step__level">A3</div>
-          <h3 class="x-step__title">Рекомендации: система предлагает решения, руководитель утверждает</h3>
-          <ul class="x-hero__bullets" style="margin-bottom: var(--x-sp-4);">
-            <li>Приоритизация действий: что делать прямо сейчас и почему — на основе данных, истории и регламентов</li>
-            <li>Снижение простоев и потерь: рекомендации по маршрутам, ресурсам, очерёдности задач и реакции на
-              отклонения</li>
-            <li>Проверяемость каждого решения: журнал «кто — что — почему» для разборов, отчётности и распределения
-              ответственности</li>
-          </ul>
-          <div class="x-step__chips" style="margin-bottom: var(--x-sp-5);">
-            <span class="x-chip">Рекомендации AI</span>
-            <span class="x-chip">Регламенты</span>
-            <span class="x-chip">Подтверждение руководителем</span>
+
+        <!-- Panel 3 -->
+        <div class="x-auto-panel" id="auto-panel-3">
+          <div class="x-auto-panel__inner">
+            <div class="x-auto-panel__bg-level">A3</div>
+            <div class="x-auto-panel__content">
+              <h3 class="x-auto-panel__title">Агент: система предлагает решения, руководитель утверждает</h3>
+              <ul class="x-hero__bullets" style="margin-bottom: var(--x-sp-4);">
+                <li>Приоритизация действий: что делать прямо сейчас и почему — на основе данных, истории и регламентов
+                </li>
+                <li>Снижение простоев и потерь: рекомендации по маршрутам, ресурсам, очерёдности задач и реакции на
+                  отклонения</li>
+                <li>Проверяемость каждого решения: журнал «кто — что — почему» для разборов, отчётности и распределения
+                  ответственности</li>
+              </ul>
+              <div class="x-step__chips" style="margin-bottom: var(--x-sp-5);">
+                <span class="x-chip">Рекомендации AI</span>
+                <span class="x-chip">Регламенты</span>
+                <span class="x-chip">Подтверждение руководителем</span>
+              </div>
+              <p style="margin-top:var(--x-sp-4);font-size:var(--x-fs-6);color:var(--x-muted)">Человек остаётся в
+                контуре управления. Система ускоряет и стандартизирует решения — но не забирает контроль.</p>
+            </div>
           </div>
-          <p style="margin-top:var(--x-sp-4);font-size:var(--x-fs-6);color:var(--x-muted)">Человек остаётся в контуре
-            управления. Система ускоряет и стандартизирует решения — но не забирает контроль.</p>
         </div>
-        <div class="x-step">
-          <div class="x-step__level">A4</div>
-          <h3 class="x-step__title">Оркестрация: автоматическое исполнение в рамках утверждённых правил</h3>
-          <ul class="x-hero__bullets" style="margin-bottom: var(--x-sp-4);">
-            <li>Авторасчёт и распределение задач: система назначает исполнителей по регламенту, руководитель управляет
-              только исключениями</li>
-            <li>Сквозная трассировка: от события и действия — до закрывающего документа с полным audit trail</li>
-            <li>Готовность к проверкам: информационная безопасность, аудит и комплаенс — включая «Меркурий» — как часть
-              штатного процесса</li>
-          </ul>
-          <div class="x-step__chips" style="margin-bottom: var(--x-sp-5);">
-            <span class="x-chip">Оркестрация процессов</span>
-            <span class="x-chip">Аудит</span>
-            <span class="x-chip">Регуляторный комплаенс</span>
+
+        <!-- Panel 4 -->
+        <div class="x-auto-panel" id="auto-panel-4">
+          <div class="x-auto-panel__inner">
+            <div class="x-auto-panel__bg-level">A4</div>
+            <div class="x-auto-panel__content">
+              <h3 class="x-auto-panel__title">Оркетсратор: автоматическое исполнение в рамках утверждённых правил</h3>
+              <ul class="x-hero__bullets" style="margin-bottom: var(--x-sp-4);">
+                <li>Авторасчёт и распределение задач: система назначает исполнителей по регламенту, руководитель
+                  управляет только исключениями</li>
+                <li>Сквозная трассировка: от события и действия — до закрывающего документа с полным audit trail</li>
+                <li>Готовность к проверкам: информационная безопасность, аудит и комплаенс — включая «Меркурий» — как
+                  часть штатного процесса</li>
+              </ul>
+              <div class="x-step__chips" style="margin-bottom: var(--x-sp-5);">
+                <span class="x-chip">Оркестрация процессов</span>
+                <span class="x-chip">Аудит</span>
+                <span class="x-chip">Регуляторный комплаенс</span>
+              </div>
+              <p style="margin-top:var(--x-sp-4);font-size:var(--x-fs-6);color:var(--x-muted)">Этот уровень активируется
+                только после фиксации правил, ролей и критериев приёмки. Никаких скачков — только управляемый переход.
+              </p>
+            </div>
           </div>
-          <p style="margin-top:var(--x-sp-4);font-size:var(--x-fs-6);color:var(--x-muted)">Этот уровень активируется
-            только после фиксации правил, ролей и критериев приёмки. Никаких скачков — только управляемый переход.</p>
         </div>
       </div>
       <p style="text-align:center;margin-top:var(--x-sp-5);font-size:var(--x-fs-6);color:var(--x-muted)">Кликните на
@@ -2509,13 +2714,20 @@
       });
     });
 
-    /* === STEPPER (A2/A3/A4) — click to highlight === */
-    document.querySelectorAll('.x-site .x-step').forEach(function (step) {
-      step.addEventListener('click', function () {
-        document.querySelectorAll('.x-site .x-step').forEach(function (s) {
-          s.classList.remove('x-step--active');
-        });
-        step.classList.add('x-step--active');
+    /* === AUTONOMY SWITCHER === */
+    var autoBtns = document.querySelectorAll('.x-site .x-auto-btn');
+    var autoPanels = document.querySelectorAll('.x-site .x-auto-panel');
+    var autoProgress = document.getElementById('x-auto-progress');
+
+    autoBtns.forEach(function (btn, index) {
+      btn.addEventListener('click', function () {
+        autoBtns.forEach(function (b) { b.classList.remove('x-auto-btn--active'); });
+        autoPanels.forEach(function (p) { p.classList.remove('x-auto-panel--active'); });
+
+        btn.classList.add('x-auto-btn--active');
+        var level = btn.getAttribute('data-level');
+        var panel = document.getElementById('auto-panel-' + level);
+        if (panel) panel.classList.add('x-auto-panel--active');
       });
     });
 
