@@ -2371,8 +2371,10 @@
           </div>
         </div>
       </div>
-      <p style="text-align:center;margin-top:var(--x-sp-5);font-size:var(--x-fs-6);color:var(--x-muted)">Кликните на
-        уровень, чтобы узнать подробности</p>
+      <div style="display:flex;gap:var(--x-sp-4);justify-content:center;flex-wrap:wrap;margin-top:var(--x-sp-6);">
+        <a class="x-btn x-btn--primary x-btn--demo" href="#x-request-demo">Запросить демо / техсессию</a>
+        <button class="x-btn x-btn--secondary" id="x-open-drawer-3">Получить пакет документов</button>
+      </div>
     </div>
   </section>
   <!-- S5: КОМАНДНЫЙ ЦЕНТР -->
@@ -2749,7 +2751,7 @@
       drawer.classList.remove('x-drawer--open');
       document.documentElement.style.overflow = '';
     }
-    ['x-open-drawer', 'x-open-drawer-2', 'x-open-trust', 'x-open-procurement'].forEach(function (id) {
+    ['x-open-drawer', 'x-open-drawer-2', 'x-open-drawer-3', 'x-open-trust', 'x-open-procurement'].forEach(function (id) {
       var el = document.getElementById(id);
       if (el) el.addEventListener('click', openDrawer);
     });
