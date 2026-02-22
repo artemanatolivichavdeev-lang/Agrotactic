@@ -3784,7 +3784,6 @@
         grid-template-columns: 1fr 1fr;
         gap: 14px;
         margin-bottom: var(--x-sp-7);
-        counter-reset: comp-feat;
       }
 
       @media(max-width:768px) {
@@ -3797,8 +3796,7 @@
         background: linear-gradient(165deg, rgba(19, 27, 46, 0.55), rgba(11, 17, 32, 0.75));
         border: 1px solid rgba(51, 65, 85, 0.45);
         border-radius: 14px;
-        padding: 22px 24px;
-        counter-increment: comp-feat;
+        padding: 24px 24px;
         transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
       }
 
@@ -3808,24 +3806,18 @@
         box-shadow: 0 6px 24px rgba(0, 229, 255, 0.05);
       }
 
-      #x-compliance .x-comp-feat__num {
+      #x-compliance .x-comp-feat__icon {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        font-family: var(--x-ff-mono);
-        font-size: 12px;
-        font-weight: 700;
-        color: var(--x-accent);
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        font-size: 20px;
         background: rgba(0, 229, 255, 0.06);
-        border: 1px solid rgba(0, 229, 255, 0.18);
-        margin-bottom: 12px;
-      }
-
-      #x-compliance .x-comp-feat__num::after {
-        content: counter(comp-feat);
+        border: 1px solid rgba(0, 229, 255, 0.15);
+        margin-bottom: 14px;
+        box-shadow: 0 0 12px rgba(0, 229, 255, 0.04);
       }
 
       #x-compliance .x-comp-feat__title {
@@ -3999,6 +3991,9 @@
         font-weight: 700;
         color: var(--x-accent);
         margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
       }
 
       #x-compliance .x-comp-scenario__flow {
@@ -4039,26 +4034,26 @@
       <h3 class="x-comp-subhead">Что делает система</h3>
       <div class="x-comp-features">
         <div class="x-comp-feat">
-          <div class="x-comp-feat__num"></div>
+          <div class="x-comp-feat__icon">&#129302;</div>
           <div class="x-comp-feat__title">AI-генерация документов</div>
           <p class="x-comp-feat__text">AI автоматически формирует внутренние документы (наряды, акты, журналы)
             и внешние (отчёты для регуляторов, документы ВетИС). Документы живут как задачи:
             приоритет, ответственный, срок, статус.</p>
         </div>
         <div class="x-comp-feat">
-          <div class="x-comp-feat__num"></div>
+          <div class="x-comp-feat__icon">&#9989;</div>
           <div class="x-comp-feat__title">Валидация и контроль ошибок</div>
           <p class="x-comp-feat__text">Проверки заполнения и логики до отправки/подписания: меньше возвратов,
             меньше ручных правок, меньше &laquo;человеческого фактора&raquo;.</p>
         </div>
         <div class="x-comp-feat">
-          <div class="x-comp-feat__num"></div>
+          <div class="x-comp-feat__icon">&#128279;</div>
           <div class="x-comp-feat__title">Полная трассировка (audit trail)</div>
           <p class="x-comp-feat__text">Фиксируется цепочка: <strong>кто &rarr; что сделал &rarr; когда &rarr;
               на основании каких данных &rarr; какой результат</strong>. Это основа для разборов и проверок.</p>
         </div>
         <div class="x-comp-feat">
-          <div class="x-comp-feat__num"></div>
+          <div class="x-comp-feat__icon">&#128274;</div>
           <div class="x-comp-feat__title">Роли и доступы</div>
           <p class="x-comp-feat__text">Ролевой доступ к данным и документам: кто может создать,
             кто подтвердить, кто подписать, кто видеть историю.</p>
@@ -4069,6 +4064,7 @@
       <div class="x-comp-mercury">
         <div class="x-comp-mercury__head">
           <span class="x-comp-mercury__badge">ВетИС</span>
+          <span class="x-comp-mercury__badge">&#127963; Меркурий</span>
         </div>
         <div class="x-comp-mercury__title">AI формирует документы &laquo;Меркурий&raquo; как часть операционного
           процесса</div>
@@ -4119,19 +4115,19 @@
       <h3 class="x-comp-subhead">Типовые сценарии</h3>
       <div class="x-comp-scenarios">
         <div class="x-comp-scenario">
-          <div class="x-comp-scenario__title">Ошибка в документе</div>
+          <div class="x-comp-scenario__title"><span>&#9888;&#65039;</span> Ошибка в документе</div>
           <div class="x-comp-scenario__flow">Валидатор показывает причину<span class="x-arr">&rarr;</span>назначение
             ответственного<span class="x-arr">&rarr;</span>исправление<span
               class="x-arr">&rarr;</span>подтверждение<span class="x-arr">&rarr;</span>запись в журнал</div>
         </div>
         <div class="x-comp-scenario">
-          <div class="x-comp-scenario__title">Запрос на проверку</div>
+          <div class="x-comp-scenario__title"><span>&#128269;</span> Запрос на проверку</div>
           <div class="x-comp-scenario__flow">Выгрузка по периоду/партии/подразделению<span
               class="x-arr">&rarr;</span>приложенный audit trail<span class="x-arr">&rarr;</span>готово к предоставлению
           </div>
         </div>
         <div class="x-comp-scenario">
-          <div class="x-comp-scenario__title">Смена ответственного</div>
+          <div class="x-comp-scenario__title"><span>&#128260;</span> Смена ответственного</div>
           <div class="x-comp-scenario__flow">Перепоручение с фиксацией причины и времени<span
               class="x-arr">&rarr;</span>прозрачная ответственность</div>
         </div>
