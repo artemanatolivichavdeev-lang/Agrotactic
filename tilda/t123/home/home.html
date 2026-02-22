@@ -3079,20 +3079,347 @@
           </div>
         </div>
       </div>
-      <div class="x-selfcheck" style="margin-top:var(--x-sp-7)">
-        <h3 class="x-card__title" style="margin-bottom:var(--x-sp-4)">Экспресс-проверка за 2 минуты</h3>
-        <label class="x-check"><input data-score="1" type="checkbox" /> Используем ERP/1С</label>
-        <label class="x-check"><input data-score="1" type="checkbox" /> Есть телематика на технике</label>
-        <label class="x-check"><input data-score="1" type="checkbox" /> Нужен мониторинг датчиков</label>
-        <label class="x-check"><input data-score="1" type="checkbox" /> Хотим видеть KPI в реальном времени</label>
-        <label class="x-check"><input data-score="1" type="checkbox" /> Нужна отчётность (Меркурий и др.)</label>
-        <div class="x-selfcheck__result" id="x-selfcheck-result"></div>
+      <div class="x-calc-wrap" id="int-calc">
+        <div class="x-calc-head">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+          <h3 class="x-h3" style="margin:0;">Экспресс-проверка готовности</h3>
+        </div>
+
+        <div class="x-calc-grid">
+          <div class="x-calc-form" id="int-form">
+            <p class="x-card__text" style="margin-bottom:var(--x-sp-3)">Отметьте, что актуально для вас:</p>
+
+            <label class="x-calc-check">
+              <input type="checkbox" name="ERP" />
+              <span>Используем ERP/1С</span>
+            </label>
+            <label class="x-calc-check">
+              <input type="checkbox" name="TEL" />
+              <span>Есть телематика на технике</span>
+            </label>
+            <label class="x-calc-check">
+              <input type="checkbox" name="IOT" />
+              <span>Нужен мониторинг датчиков (IoT)</span>
+            </label>
+            <label class="x-calc-check">
+              <input type="checkbox" name="KPI" />
+              <span>Хотим видеть план-факт и KPI в реальном времени</span>
+            </label>
+            <label class="x-calc-check">
+              <input type="checkbox" name="DOC" />
+              <span>Нужны документы/отчётность (включая «Меркурий», если актуально)</span>
+            </label>
+            <label class="x-calc-check">
+              <input type="checkbox" name="SEC" />
+              <span>Есть требования ИБ (роли/аудит/шифрование)</span>
+            </label>
+            <label class="x-calc-check">
+              <input type="checkbox" name="WB" />
+              <span>Нужно “писать назад” в ERP/1С (статусы/документы по регламенту)</span>
+            </label>
+          </div>
+
+          <div class="x-calc-out" id="int-result">
+            <!-- Populated by JS -->
+          </div>
+        </div>
       </div>
+
       <div style="text-align:center;margin-top:var(--x-sp-6)">
         <a class="x-btn x-btn--secondary x-doc-link" data-doc="integration" href="javascript:void(0)">Скачать
           Integration Checklist</a>
       </div>
     </div>
+
+    <style>
+      .x-calc-wrap {
+        background: rgba(19, 27, 46, 0.5);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(0, 229, 255, 0.15);
+        border-radius: 16px;
+        padding: var(--x-sp-6);
+        margin-top: var(--x-sp-8);
+      }
+
+      .x-calc-head {
+        display: flex;
+        align-items: center;
+        gap: var(--x-sp-3);
+        margin-bottom: var(--x-sp-5);
+        border-bottom: 1px solid var(--x-line);
+        padding-bottom: var(--x-sp-4);
+      }
+
+      .x-calc-head svg {
+        color: var(--x-accent);
+      }
+
+      .x-calc-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--x-sp-6);
+      }
+
+      @media(min-width: 992px) {
+        .x-calc-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .x-calc-form {
+        display: flex;
+        flex-direction: column;
+        gap: var(--x-sp-3);
+      }
+
+      .x-calc-check {
+        display: flex;
+        align-items: center;
+        gap: var(--x-sp-3);
+        cursor: pointer;
+        padding: var(--x-sp-3);
+        border: 1px dashed var(--x-line);
+        border-radius: var(--x-r-2);
+        transition: all 0.2s;
+        background: rgba(19, 27, 46, 0.2);
+      }
+
+      .x-calc-check:hover {
+        border-color: rgba(0, 229, 255, 0.4);
+        background: rgba(0, 229, 255, 0.05);
+      }
+
+      .x-calc-check input {
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border: 2px solid var(--x-muted);
+        border-radius: 4px;
+        position: relative;
+        cursor: pointer;
+        outline: none;
+        transition: all 0.2s;
+        flex-shrink: 0;
+      }
+
+      .x-calc-check input:checked {
+        border-color: var(--x-accent);
+        background-color: var(--x-accent);
+        box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
+      }
+
+      .x-calc-check input:checked::after {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 6px;
+        width: 4px;
+        height: 10px;
+        border: solid var(--x-bg);
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+
+      .x-calc-check span {
+        color: var(--x-text);
+        font-size: var(--x-fs-6);
+        line-height: 1.3;
+      }
+
+      .x-calc-out {
+        background: #0f1625;
+        border: 1px dashed var(--x-line);
+        border-radius: var(--x-r-3);
+        padding: var(--x-sp-5);
+        display: flex;
+        flex-direction: column;
+        gap: var(--x-sp-4);
+      }
+
+      .x-calc-out__level {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--x-sp-2);
+        font-family: var(--x-ff-mono);
+        color: var(--x-accent);
+        font-size: var(--x-fs-5);
+        font-weight: 700;
+        padding: var(--x-sp-2) var(--x-sp-3);
+        background: rgba(0, 229, 255, 0.1);
+        border-radius: var(--x-r-1);
+        border-left: 3px solid var(--x-accent);
+        align-self: flex-start;
+      }
+
+      .x-calc-out__metrics {
+        display: flex;
+        gap: var(--x-sp-4);
+        flex-wrap: wrap;
+      }
+
+      .x-calc-metric {
+        background: rgba(19, 27, 46, 0.4);
+        padding: var(--x-sp-2) var(--x-sp-3);
+        border-radius: var(--x-r-2);
+        font-size: var(--x-fs-7);
+        color: var(--x-muted);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .x-calc-metric span {
+        color: var(--x-text);
+        font-weight: 600;
+        font-family: var(--x-ff-mono);
+      }
+
+      .x-calc-out__title {
+        color: #fff;
+        font-family: var(--x-ff-head);
+        font-size: var(--x-fs-4);
+        font-weight: 700;
+        margin-top: var(--x-sp-2);
+        margin-bottom: var(--x-sp-2);
+      }
+
+      .x-calc-out__desc ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .x-calc-out__desc li {
+        color: var(--x-text);
+        font-size: 0.95rem;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        line-height: 1.4;
+      }
+
+      .x-calc-out__desc li::before {
+        content: '▹';
+        color: var(--x-accent);
+        font-weight: bold;
+      }
+    </style>
+
+    <script>
+      (function () {
+        const form = document.getElementById('int-form');
+        const out = document.getElementById('int-result');
+        if (!form || !out) return;
+
+        const templates = {
+          'A0': {
+            level: 'A0',
+            title: 'Точка отсчёта',
+            recommend: 'начните с A0 (снимок готовности).',
+            get: 'инвентаризацию контуров данных, ролей и требований.',
+            time: '1 неделя (снимок готовности)',
+            next: 'перейти к A1/A2 по чек-листу.'
+          },
+          'A1': {
+            level: 'A1',
+            title: 'Подготовка данных и дисциплины',
+            recommend: 'начните с A1 (база данных и дисциплины).',
+            get: 'стабильные исходные данные и основу для управляемого контура.',
+            time: '1–3 недели',
+            next: 'подключение A2.'
+          },
+          'A2': {
+            level: 'A2',
+            title: 'Наблюдаемость (командный центр)',
+            recommend: 'начните с A2 (наблюдаемость).',
+            get: 'план-факт, KPI, карта, очередь отклонений.',
+            time: '2–4 недели (1 площадка, 1–2 источника, read-only)',
+            next: 'A3 по готовности регламентов и ролей.'
+          },
+          'A3': {
+            level: 'A3',
+            title: 'Рекомендации и контроль решений',
+            recommend: 'вам подходит A3 (рекомендации + контроль).',
+            get: 'приоритизация действий, регламенты реакции, проверяемость решений.',
+            time: '4–6 недель (роли/аудит/правила)',
+            next: 'A4 при необходимости автоматизации по регламенту.'
+          },
+          'A4': {
+            level: 'A4',
+            title: 'Оркестрация (по регламенту)',
+            recommend: 'цель — A4 (оркестрация), начните с A2/A3 как этапа.',
+            get: 'автоматическое исполнение в рамках регламента + аудит + документы.',
+            time: 'по техсессии (зависит от масштаба, ИБ и обратной записи)',
+            next: 'согласование обратной записи, ИБ и комплаенса.'
+          }
+        };
+
+        function updateCalc() {
+          const checks = Array.from(form.querySelectorAll('input[type="checkbox"]'));
+          const state = {};
+          let selectedCount = 0;
+          let sourceCount = 0; // ERP, TEL, IOT
+
+          checks.forEach(cb => {
+            state[cb.name] = cb.checked;
+            if (cb.checked) selectedCount++;
+            if (cb.checked && ['ERP', 'TEL', 'IOT'].includes(cb.name)) sourceCount++;
+          });
+
+          const { ERP, TEL, IOT, KPI, DOC, SEC, WB } = state;
+
+          let resLvl = 'A0';
+          if (WB) {
+            resLvl = 'A4';
+          } else if (DOC && (SEC || KPI)) {
+            resLvl = 'A3';
+          } else if (KPI && (ERP || TEL || IOT)) {
+            resLvl = 'A2';
+          } else if (ERP || TEL || IOT) {
+            resLvl = 'A1';
+          }
+
+          let complexity = '—';
+          if (selectedCount > 0) {
+            if (WB || selectedCount >= 5) {
+              complexity = 'Сложная';
+            } else if (selectedCount >= 3) {
+              complexity = 'Средняя';
+            } else {
+              complexity = 'Лёгкая';
+            }
+          }
+
+          const tpl = templates[resLvl];
+
+          out.innerHTML = `
+            <div class="x-calc-out__level">[Уровень ${tpl.level}]</div>
+            <h4 class="x-calc-out__title">${tpl.title}</h4>
+            
+            <div class="x-calc-out__metrics">
+              <div class="x-calc-metric">Сложность: <span style="color:var(--x-text);">${complexity}</span></div>
+              <div class="x-calc-metric">Срок: <span style="color:var(--x-accent);">${tpl.time}</span></div>
+            </div>
+
+            <div class="x-calc-out__desc">
+              <ul>
+                <li><strong>Рекомендация:</strong> ${tpl.recommend}</li>
+                <li><strong>Что получите:</strong> ${tpl.get}</li>
+                <li><strong>Дальше:</strong> ${tpl.next}</li>
+              </ul>
+            </div>
+          `;
+        }
+
+        form.addEventListener('change', updateCalc);
+        updateCalc();
+      })();
+    </script>
   </section><!-- S7: КОМПЛАЕНС -->
   <section class="x-section" id="x-compliance">
     <div class="x-wrap">
