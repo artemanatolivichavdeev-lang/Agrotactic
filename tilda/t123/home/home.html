@@ -2390,50 +2390,107 @@
 
       .x-scen-btn {
         background: rgba(19, 27, 46, 0.4);
-        border: 1px solid var(--x-line);
-        border-radius: var(--x-r-2);
+        border: 1px dashed var(--x-line);
+        border-radius: var(--x-r-3);
         padding: var(--x-sp-3) var(--x-sp-4);
         color: var(--x-muted);
         font-size: var(--x-fs-5);
         font-family: var(--x-ff-mono);
         font-weight: 600;
         cursor: pointer;
-        transition: all 0.2s;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .x-scen-btn::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.1), transparent);
+        transform: translateX(-100%) skewX(-15deg);
+        transition: transform 0.6s ease;
       }
 
       .x-scen-btn:hover {
         border-color: rgba(0, 229, 255, 0.5);
-        color: var(--x-text);
+        color: #fff;
+        transform: translateY(-2px);
+      }
+
+      .x-scen-btn:hover::before {
+        transform: translateX(100%) skewX(-15deg);
       }
 
       .x-scen-btn--active {
         background: rgba(0, 229, 255, 0.05);
-        border-color: var(--x-accent);
-        color: var(--x-accent);
-        box-shadow: 0 0 15px rgba(0, 229, 255, 0.1);
+        border: 1px solid var(--x-accent);
+        color: #fff;
+        box-shadow: 0 0 20px rgba(0, 229, 255, 0.2), inset 0 0 10px rgba(0, 229, 255, 0.1);
+        text-shadow: 0 0 8px var(--x-accent);
       }
 
       .x-scen-panel {
         display: none;
-        animation: fadeIn 0.3s ease;
       }
 
       .x-scen-panel--active {
         display: block;
       }
 
+      /* Premium Glass Container */
+      .x-scen-panel__inner {
+        position: relative;
+        background: rgba(19, 27, 46, 0.5);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(0, 229, 255, 0.15);
+        border-radius: 16px;
+        padding: var(--x-sp-7);
+        overflow: hidden;
+      }
+
+      .x-scen-panel__inner::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--x-accent), transparent);
+        opacity: 0.6;
+      }
+
       .x-stepper-wrap {
         position: relative;
       }
 
+      /* Animated Connecting Line */
       .x-stepper-line {
         position: absolute;
         top: 24px;
         left: 32px;
         right: 32px;
         height: 1px;
-        background: var(--x-line);
+        background-image: linear-gradient(to right, rgba(0, 229, 255, 0.6) 50%, transparent 50%);
+        background-size: 10px 1px;
+        background-repeat: repeat-x;
         z-index: 0;
+        opacity: 0.4;
+      }
+
+      .x-scen-panel--active .x-stepper-line {
+        animation: dash-flow 1.5s linear infinite;
+      }
+
+      @keyframes dash-flow {
+        from {
+          background-position: 0 0;
+        }
+
+        to {
+          background-position: -20px 0;
+        }
       }
 
       @media(max-width: 768px) {
@@ -2444,6 +2501,27 @@
           bottom: 32px;
           width: 1px;
           height: auto;
+          background-image: linear-gradient(to bottom, rgba(0, 229, 255, 0.6) 50%, transparent 50%);
+          background-size: 1px 10px;
+          background-repeat: repeat-y;
+        }
+
+        .x-scen-panel--active .x-stepper-line {
+          animation: dash-flow-y 1.5s linear infinite;
+        }
+
+        @keyframes dash-flow-y {
+          from {
+            background-position: 0 0;
+          }
+
+          to {
+            background-position: 0 -20px;
+          }
+        }
+
+        .x-scen-panel__inner {
+          padding: var(--x-sp-5);
         }
       }
 
@@ -2464,6 +2542,8 @@
       .x-step {
         display: flex;
         flex-direction: column;
+        opacity: 0;
+        transform: translateY(20px);
       }
 
       @media(max-width: 768px) {
@@ -2473,28 +2553,85 @@
         }
       }
 
+      /* Sequential Stagger Animation */
+      .x-scen-panel--active .x-step {
+        animation: fade-up-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      .x-scen-panel--active .x-step:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+
+      .x-scen-panel--active .x-step:nth-child(2) {
+        animation-delay: 0.25s;
+      }
+
+      .x-scen-panel--active .x-step:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+
+      .x-scen-panel--active .x-step:nth-child(4) {
+        animation-delay: 0.55s;
+      }
+
+      @keyframes fade-up-in {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Glowing Beacon Node */
       .x-step__num {
         width: 48px;
         height: 48px;
         border-radius: 50%;
         background: var(--x-bg);
-        border: 2px solid var(--x-line);
+        border: 1px solid rgba(0, 229, 255, 0.4);
         display: flex;
         align-items: center;
         justify-content: center;
         font-family: var(--x-ff-head);
         font-size: 1.25rem;
         font-weight: 700;
-        color: var(--x-muted);
+        color: var(--x-accent);
         margin-bottom: var(--x-sp-4);
-        transition: all 0.3s;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         flex-shrink: 0;
+        position: relative;
+        box-shadow: 0 0 15px rgba(0, 229, 255, 0.1), inset 0 0 8px rgba(0, 229, 255, 0.1);
+      }
+
+      .x-step__num::before {
+        content: '';
+        position: absolute;
+        inset: -6px;
+        border-radius: 50%;
+        border: 1px dashed var(--x-accent);
+        opacity: 0.3;
+        transform: rotate(0deg);
+        transition: all 1s linear;
+      }
+
+      .x-scen-panel--active .x-step__num::before {
+        animation: auto-spin 10s linear infinite;
       }
 
       .x-step:hover .x-step__num {
         border-color: var(--x-accent);
-        color: var(--x-accent);
-        box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+        color: #fff;
+        background: rgba(0, 229, 255, 0.15);
+        box-shadow: 0 0 20px rgba(0, 229, 255, 0.3), inset 0 0 10px rgba(0, 229, 255, 0.2);
+        transform: scale(1.1);
+      }
+
+      .x-step:hover .x-step__num::before {
+        opacity: 0.8;
       }
 
       .x-step__title {
@@ -2503,6 +2640,12 @@
         font-weight: 700;
         color: var(--x-text);
         margin-bottom: var(--x-sp-2);
+        transition: color 0.3s ease;
+      }
+
+      .x-step:hover .x-step__title {
+        color: #fff;
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
       }
 
       .x-step__text {
@@ -2525,41 +2668,42 @@
       </div>
 
       <div class="x-stepper-wrap">
-        <div class="x-stepper-line"></div>
-
         <!-- Panel 1 -->
         <div class="x-scen-panel x-scen-panel--active" id="scen-panel-1">
-          <div class="x-stepper">
-            <div class="x-step">
-              <div class="x-step__num">1</div>
-              <div>
-                <h3 class="x-step__title">Факт отклоняется</h3>
-                <p class="x-step__text">Система фиксирует, что операция отстаёт от плана: темп ниже нормы, окно работ
-                  сужается, риск срыва растёт.</p>
+          <div class="x-scen-panel__inner">
+            <div class="x-stepper-line"></div>
+            <div class="x-stepper">
+              <div class="x-step">
+                <div class="x-step__num">1</div>
+                <div>
+                  <h3 class="x-step__title">Факт отклоняется</h3>
+                  <p class="x-step__text">Система фиксирует, что операция отстаёт от плана: темп ниже нормы, окно работ
+                    сужается, риск срыва растёт.</p>
+                </div>
               </div>
-            </div>
-            <div class="x-step">
-              <div class="x-step__num">2</div>
-              <div>
-                <h3 class="x-step__title">Отклонение в очереди</h3>
-                <p class="x-step__text">Отклонение попадает в очередь: приоритет, ответственный, срок реакции.
-                  Предлагается действие по регламенту (перераспределить технику/смену/маршрут).</p>
+              <div class="x-step">
+                <div class="x-step__num">2</div>
+                <div>
+                  <h3 class="x-step__title">Отклонение в очереди</h3>
+                  <p class="x-step__text">Отклонение попадает в очередь: приоритет, ответственный, срок реакции.
+                    Предлагается действие по регламенту (перераспределить технику/смену/маршрут).</p>
+                </div>
               </div>
-            </div>
-            <div class="x-step">
-              <div class="x-step__num">3</div>
-              <div>
-                <h3 class="x-step__title">Решение и контроль</h3>
-                <p class="x-step__text">Ответственный подтверждает действие, система отслеживает выполнение: изменение
-                  плана, статус задачи, устранение причины отставания.</p>
+              <div class="x-step">
+                <div class="x-step__num">3</div>
+                <div>
+                  <h3 class="x-step__title">Решение и контроль</h3>
+                  <p class="x-step__text">Ответственный подтверждает действие, система отслеживает выполнение: изменение
+                    плана, статус задачи, устранение причины отставания.</p>
+                </div>
               </div>
-            </div>
-            <div class="x-step">
-              <div class="x-step__num">4</div>
-              <div>
-                <h3 class="x-step__title">Итог и доказательство</h3>
-                <p class="x-step__text">Результат фиксируется в KPI и журнале: что изменили, кто утвердил, что
-                  получилось. При необходимости формируется отчёт по смене/кластеру.</p>
+              <div class="x-step">
+                <div class="x-step__num">4</div>
+                <div>
+                  <h3 class="x-step__title">Итог и доказательство</h3>
+                  <p class="x-step__text">Результат фиксируется в KPI и журнале: что изменили, кто утвердил, что
+                    получилось. При необходимости формируется отчёт по смене/кластеру.</p>
+                </div>
               </div>
             </div>
           </div>
@@ -2567,38 +2711,41 @@
 
         <!-- Panel 2 -->
         <div class="x-scen-panel" id="scen-panel-2">
-          <div class="x-stepper">
-            <div class="x-step">
-              <div class="x-step__num">1</div>
-              <div>
-                <h3 class="x-step__title">Сигнал риска</h3>
-                <p class="x-step__text">Телематика/датчик фиксирует аномалию: перегрев, давление, уход с траектории,
-                  нарушение режима или геозоны.</p>
+          <div class="x-scen-panel__inner">
+            <div class="x-stepper-line"></div>
+            <div class="x-stepper">
+              <div class="x-step">
+                <div class="x-step__num">1</div>
+                <div>
+                  <h3 class="x-step__title">Сигнал риска</h3>
+                  <p class="x-step__text">Телематика/датчик фиксирует аномалию: перегрев, давление, уход с траектории,
+                    нарушение режима или геозоны.</p>
+                </div>
               </div>
-            </div>
-            <div class="x-step">
-              <div class="x-step__num">2</div>
-              <div>
-                <h3 class="x-step__title">Алерт и назначение</h3>
-                <p class="x-step__text">Система создаёт алерт, задаёт приоритет и назначает ответственного
-                  (инженер/механик/диспетчер) со сроком реакции. Подсказывает безопасный сценарий (остановка/перевод в
-                  режим/проверка).</p>
+              <div class="x-step">
+                <div class="x-step__num">2</div>
+                <div>
+                  <h3 class="x-step__title">Алерт и назначение</h3>
+                  <p class="x-step__text">Система создаёт алерт, задаёт приоритет и назначает ответственного
+                    (инженер/механик/диспетчер) со сроком реакции. Подсказывает безопасный сценарий (остановка/перевод в
+                    режим/проверка).</p>
+                </div>
               </div>
-            </div>
-            <div class="x-step">
-              <div class="x-step__num">3</div>
-              <div>
-                <h3 class="x-step__title">Действие и проверка</h3>
-                <p class="x-step__text">Ответственный подтверждает действие, система контролирует статус техники и
-                  результат: риск устранён/техника остановлена/задача переназначена.</p>
+              <div class="x-step">
+                <div class="x-step__num">3</div>
+                <div>
+                  <h3 class="x-step__title">Действие и проверка</h3>
+                  <p class="x-step__text">Ответственный подтверждает действие, система контролирует статус техники и
+                    результат: риск устранён/техника остановлена/задача переназначена.</p>
+                </div>
               </div>
-            </div>
-            <div class="x-step">
-              <div class="x-step__num">4</div>
-              <div>
-                <h3 class="x-step__title">Разбор и журнал</h3>
-                <p class="x-step__text">В журнал попадает цепочка: что случилось → кто вмешался → какое действие
-                  выполнено → чем закрыто. Это основа для разборов и профилактики.</p>
+              <div class="x-step">
+                <div class="x-step__num">4</div>
+                <div>
+                  <h3 class="x-step__title">Разбор и журнал</h3>
+                  <p class="x-step__text">В журнал попадает цепочка: что случилось → кто вмешался → какое действие
+                    выполнено → чем закрыто. Это основа для разборов и профилактики.</p>
+                </div>
               </div>
             </div>
           </div>
@@ -2606,37 +2753,40 @@
 
         <!-- Panel 3 -->
         <div class="x-scen-panel" id="scen-panel-3">
-          <div class="x-stepper">
-            <div class="x-step">
-              <div class="x-step__num">1</div>
-              <div>
-                <h3 class="x-step__title">Узкое место</h3>
-                <p class="x-step__text">Система фиксирует простой или “бутылочное горлышко”: ожидание на
-                  разгрузке/подвозе, конфликт маршрутов, задержка прибытия.</p>
+          <div class="x-scen-panel__inner">
+            <div class="x-stepper-line"></div>
+            <div class="x-stepper">
+              <div class="x-step">
+                <div class="x-step__num">1</div>
+                <div>
+                  <h3 class="x-step__title">Узкое место</h3>
+                  <p class="x-step__text">Система фиксирует простой или “бутылочное горлышко”: ожидание на
+                    разгрузке/подвозе, конфликт маршрутов, задержка прибытия.</p>
+                </div>
               </div>
-            </div>
-            <div class="x-step">
-              <div class="x-step__num">2</div>
-              <div>
-                <h3 class="x-step__title">Отклонение в приоритете</h3>
-                <p class="x-step__text">Отклонение ставится в очередь с приоритетом и ответственным. Система предлагает
-                  корректировку: переназначить ресурс, перестроить маршрут, изменить порядок задач.</p>
+              <div class="x-step">
+                <div class="x-step__num">2</div>
+                <div>
+                  <h3 class="x-step__title">Отклонение в приоритете</h3>
+                  <p class="x-step__text">Отклонение ставится в очередь с приоритетом и ответственным. Система
+                    предлагает корректировку: переназначить ресурс, перестроить маршрут, изменить порядок задач.</p>
+                </div>
               </div>
-            </div>
-            <div class="x-step">
-              <div class="x-step__num">3</div>
-              <div>
-                <h3 class="x-step__title">Перепланирование и контроль</h3>
-                <p class="x-step__text">После подтверждения система обновляет назначения и маршруты, отслеживает
-                  сокращение ожидания и восстановление темпа работ.</p>
+              <div class="x-step">
+                <div class="x-step__num">3</div>
+                <div>
+                  <h3 class="x-step__title">Перепланирование и контроль</h3>
+                  <p class="x-step__text">После подтверждения система обновляет назначения и маршруты, отслеживает
+                    сокращение ожидания и восстановление темпа работ.</p>
+                </div>
               </div>
-            </div>
-            <div class="x-step">
-              <div class="x-step__num">4</div>
-              <div>
-                <h3 class="x-step__title">KPI и отчёт по простоям</h3>
-                <p class="x-step__text">Изменения отражаются в KPI (время ожидания/простой/оборачиваемость). В отчёте
-                  видно: причина, решение, эффект.</p>
+              <div class="x-step">
+                <div class="x-step__num">4</div>
+                <div>
+                  <h3 class="x-step__title">KPI и отчёт по простоям</h3>
+                  <p class="x-step__text">Изменения отражаются в KPI (время ожидания/простой/оборачиваемость). В отчёте
+                    видно: причина, решение, эффект.</p>
+                </div>
               </div>
             </div>
           </div>
@@ -2644,37 +2794,40 @@
 
         <!-- Panel 4 -->
         <div class="x-scen-panel" id="scen-panel-4">
-          <div class="x-stepper">
-            <div class="x-step">
-              <div class="x-step__num">1</div>
-              <div>
-                <h3 class="x-step__title">Риск в документах</h3>
-                <p class="x-step__text">Система фиксирует ошибку или неполноту: не хватает данных, неверный статус,
-                  несоответствие регламенту, риск отказа/возврата.</p>
+          <div class="x-scen-panel__inner">
+            <div class="x-stepper-line"></div>
+            <div class="x-stepper">
+              <div class="x-step">
+                <div class="x-step__num">1</div>
+                <div>
+                  <h3 class="x-step__title">Риск в документах</h3>
+                  <p class="x-step__text">Система фиксирует ошибку или неполноту: не хватает данных, неверный статус,
+                    несоответствие регламенту, риск отказа/возврата.</p>
+                </div>
               </div>
-            </div>
-            <div class="x-step">
-              <div class="x-step__num">2</div>
-              <div>
-                <h3 class="x-step__title">Задача на исправление</h3>
-                <p class="x-step__text">Ошибка попадает в очередь с ответственным и сроком. Валидатор подсказывает, что
-                  именно нужно исправить и какие данные подтянуть из контуров.</p>
+              <div class="x-step">
+                <div class="x-step__num">2</div>
+                <div>
+                  <h3 class="x-step__title">Задача на исправление</h3>
+                  <p class="x-step__text">Ошибка попадает в очередь с ответственным и сроком. Валидатор подсказывает,
+                    что именно нужно исправить и какие данные подтянуть из контуров.</p>
+                </div>
               </div>
-            </div>
-            <div class="x-step">
-              <div class="x-step__num">3</div>
-              <div>
-                <h3 class="x-step__title">Исправление и подтверждение</h3>
-                <p class="x-step__text">Ответственный вносит правку/подтверждает, система проверяет условия и фиксирует
-                  действие в журнале.</p>
+              <div class="x-step">
+                <div class="x-step__num">3</div>
+                <div>
+                  <h3 class="x-step__title">Исправление и подтверждение</h3>
+                  <p class="x-step__text">Ответственный вносит правку/подтверждает, система проверяет условия и
+                    фиксирует действие в журнале.</p>
+                </div>
               </div>
-            </div>
-            <div class="x-step">
-              <div class="x-step__num">4</div>
-              <div>
-                <h3 class="x-step__title">Документ готов и проверяем</h3>
-                <p class="x-step__text">Документ получает корректный статус, сохраняется трассировка
-                  “кто-что-когда-почему”. По запросу формируется выгрузка/отчёт.</p>
+              <div class="x-step">
+                <div class="x-step__num">4</div>
+                <div>
+                  <h3 class="x-step__title">Документ готов и проверяем</h3>
+                  <p class="x-step__text">Документ получает корректный статус, сохраняется трассировка
+                    “кто-что-когда-почему”. По запросу формируется выгрузка/отчёт.</p>
+                </div>
               </div>
             </div>
           </div>
@@ -2689,15 +2842,25 @@
       (function () {
         var btns = document.querySelectorAll('.x-scen-btn');
         var panels = document.querySelectorAll('.x-scen-panel');
+
         btns.forEach(function (btn) {
           btn.addEventListener('click', function () {
+            // Remove active classes
             btns.forEach(function (b) { b.classList.remove('x-scen-btn--active'); });
-            panels.forEach(function (p) { p.classList.remove('x-scen-panel--active'); });
+            panels.forEach(function (p) {
+              p.classList.remove('x-scen-panel--active');
+            });
 
+            // Set current active
             btn.classList.add('x-scen-btn--active');
             var scen = btn.getAttribute('data-scen');
             var panel = document.getElementById('scen-panel-' + scen);
-            if (panel) panel.classList.add('x-scen-panel--active');
+
+            // Re-trigger reflow to restart CSS animations
+            if (panel) {
+              void panel.offsetWidth;
+              panel.classList.add('x-scen-panel--active');
+            }
           });
         });
       })();
