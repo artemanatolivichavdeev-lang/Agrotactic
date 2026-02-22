@@ -2932,47 +2932,6 @@
         font-size: var(--x-fs-6);
         line-height: 1.5;
       }
-
-      .x-stepper--horizontal {
-        margin-top: var(--x-sp-7);
-        position: relative;
-      }
-
-      .x-stepper--horizontal::before {
-        content: '';
-        position: absolute;
-        top: 24px;
-        left: 32px;
-        right: 32px;
-        height: 1px;
-        background: var(--x-line);
-        z-index: 0;
-      }
-
-      @media(max-width: 768px) {
-        .x-stepper--horizontal::before {
-          top: 32px;
-          left: 24px;
-          right: auto;
-          bottom: 32px;
-          width: 1px;
-          height: auto;
-        }
-      }
-
-      .x-stepper-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: var(--x-sp-5);
-        position: relative;
-        z-index: 1;
-      }
-
-      @media(min-width: 769px) {
-        .x-stepper-grid {
-          grid-template-columns: repeat(3, 1fr);
-        }
-      }
     </style>
     <div class="x-wrap">
       <div class="x-section__head">
@@ -3025,43 +2984,101 @@
         </div>
       </div>
 
+      <style>
+        .x-stepper-list {
+          margin-top: var(--x-sp-7);
+          margin-bottom: var(--x-sp-7);
+        }
+
+        .x-stepper-item {
+          display: flex;
+          align-items: flex-start;
+          gap: var(--x-sp-4);
+          background: rgba(19, 27, 46, 0.4);
+          border: 1px dashed var(--x-line);
+          border-radius: var(--x-r-3);
+          padding: var(--x-sp-5);
+          margin-bottom: var(--x-sp-4);
+          position: relative;
+          transition: border-color 0.3s, background 0.3s;
+        }
+
+        .x-stepper-item:hover {
+          border-color: rgba(0, 229, 255, 0.4);
+          background: rgba(19, 27, 46, 0.6);
+        }
+
+        .x-stepper-item__num {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 48px;
+          height: 48px;
+          flex-shrink: 0;
+          border-radius: 50%;
+          background: rgba(0, 229, 255, 0.1);
+          color: var(--x-accent);
+          font-family: var(--x-ff-mono);
+          font-weight: 700;
+          font-size: var(--x-fs-4);
+          border: 1px solid rgba(0, 229, 255, 0.3);
+          box-shadow: 0 0 15px rgba(0, 229, 255, 0.1);
+        }
+
+        .x-stepper-item__content h4 {
+          color: var(--x-text);
+          font-family: var(--x-ff-head);
+          font-weight: 700;
+          font-size: var(--x-fs-5);
+          margin-bottom: 4px;
+        }
+
+        .x-stepper-item__time {
+          color: var(--x-accent);
+          font-family: var(--x-ff-mono);
+          font-size: var(--x-fs-7);
+          margin-bottom: var(--x-sp-2);
+          display: inline-block;
+          background: rgba(0, 229, 255, 0.05);
+          padding: 2px 8px;
+          border-radius: 4px;
+        }
+
+        .x-stepper-item__text {
+          color: var(--x-muted);
+          font-size: var(--x-fs-6);
+          line-height: 1.5;
+        }
+      </style>
+
       <h3 class="x-h3" style="margin-bottom:var(--x-sp-5); margin-top:var(--x-sp-8)">Подключение в 3 шага</h3>
-      <div class="x-stepper--horizontal">
-        <div class="x-stepper-grid">
-          <div class="x-step">
-            <div class="x-step__num">1</div>
-            <div>
-              <h3 class="x-step__title">Диагностика контура</h3>
-              <p class="x-step__text"
-                style="color:var(--x-accent); font-family:var(--x-ff-mono); font-size:var(--x-fs-7); margin-bottom:4px;">
-                30–60 минут</p>
-              <p class="x-step__text">Источники данных, “источник истины”, KPI и события, роли и ограничения.</p>
-            </div>
+      <div class="x-stepper-list">
+        <div class="x-stepper-item">
+          <div class="x-stepper-item__num">1</div>
+          <div class="x-stepper-item__content">
+            <h4>Диагностика контура</h4>
+            <span class="x-stepper-item__time">30–60 минут</span>
+            <p class="x-stepper-item__text">Источники данных, “источник истины”, KPI и события, роли и ограничения.</p>
           </div>
-          <div class="x-step">
-            <div class="x-step__num">2</div>
-            <div>
-              <h3 class="x-step__title">Подключение источников</h3>
-              <p class="x-step__text"
-                style="color:var(--x-accent); font-family:var(--x-ff-mono); font-size:var(--x-fs-7); margin-bottom:4px;">
-                1–2 недели</p>
-              <p class="x-step__text">ERP/1С + телематика/датчики/BI в режиме read-only.</p>
-            </div>
+        </div>
+        <div class="x-stepper-item">
+          <div class="x-stepper-item__num">2</div>
+          <div class="x-stepper-item__content">
+            <h4>Подключение источников</h4>
+            <span class="x-stepper-item__time">1–2 недели</span>
+            <p class="x-stepper-item__text">ERP/1С + телематика/датчики/BI в режиме read-only.</p>
           </div>
-          <div class="x-step">
-            <div class="x-step__num">3</div>
-            <div>
-              <h3 class="x-step__title">Настройка правил и артефактов</h3>
-              <p class="x-step__text"
-                style="color:var(--x-accent); font-family:var(--x-ff-mono); font-size:var(--x-fs-7); margin-bottom:4px;">
-                1–2 недели</p>
-              <p class="x-step__text">Алерты, роли, аудит, отчёты; при необходимости — согласованная обратная запись.
-              </p>
-            </div>
+        </div>
+        <div class="x-stepper-item">
+          <div class="x-stepper-item__num">3</div>
+          <div class="x-stepper-item__content">
+            <h4>Настройка правил и артефактов</h4>
+            <span class="x-stepper-item__time">1–2 недели</span>
+            <p class="x-stepper-item__text">Алерты, роли, аудит, отчёты; при необходимости — согласованная обратная
+              запись.</p>
           </div>
         </div>
       </div>
-
       <div class="x-selfcheck" style="margin-top:var(--x-sp-7)">
         <h3 class="x-card__title" style="margin-bottom:var(--x-sp-4)">Экспресс-проверка за 2 минуты</h3>
         <label class="x-check"><input data-score="1" type="checkbox" /> Используем ERP/1С</label>
