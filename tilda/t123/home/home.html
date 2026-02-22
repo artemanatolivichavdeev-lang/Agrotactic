@@ -4403,29 +4403,422 @@
   </section>
   <!-- S9: ПИЛОТ -->
   <section class="x-section" id="x-pilot">
+    <style>
+      /* === PILOT BLOCK (Premium v1) === */
+
+      /* Stepper */
+      #x-pilot .x-pil-stepper {
+        display: flex;
+        align-items: flex-start;
+        gap: 0;
+        margin-bottom: var(--x-sp-7);
+        position: relative;
+      }
+
+      #x-pilot .x-pil-step {
+        flex: 1;
+        text-align: center;
+        position: relative;
+      }
+
+      #x-pilot .x-pil-step__num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        font-family: var(--x-ff-mono);
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--x-accent);
+        background: rgba(0, 229, 255, 0.06);
+        border: 1.5px solid rgba(0, 229, 255, 0.25);
+        margin: 0 auto 10px;
+        position: relative;
+        z-index: 1;
+        box-shadow: 0 0 12px rgba(0, 229, 255, 0.06);
+      }
+
+      #x-pilot .x-pil-step__title {
+        font-family: var(--x-ff-head);
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 4px;
+      }
+
+      #x-pilot .x-pil-step__sub {
+        font-size: 0.75rem;
+        color: var(--x-muted);
+      }
+
+      #x-pilot .x-pil-step+.x-pil-step::before {
+        content: '';
+        position: absolute;
+        top: 19px;
+        left: -50%;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, rgba(0, 229, 255, 0.15), rgba(0, 229, 255, 0.3), rgba(0, 229, 255, 0.15));
+        z-index: 0;
+      }
+
+      @media(max-width:600px) {
+        #x-pilot .x-pil-stepper {
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        #x-pilot .x-pil-step {
+          text-align: left;
+          display: flex;
+          align-items: center;
+          gap: 14px;
+        }
+
+        #x-pilot .x-pil-step__num {
+          margin: 0;
+          flex-shrink: 0;
+        }
+
+        #x-pilot .x-pil-step+.x-pil-step::before {
+          display: none;
+        }
+      }
+
+      /* Sub-headings */
+      #x-pilot .x-pil-subhead {
+        font-family: var(--x-ff-head);
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: var(--x-sp-4);
+        padding-bottom: var(--x-sp-3);
+        border-bottom: 1px solid rgba(51, 65, 85, 0.4);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      #x-pilot .x-pil-subhead svg {
+        width: 20px;
+        height: 20px;
+        stroke: var(--x-accent);
+        stroke-width: 1.8;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        flex-shrink: 0;
+      }
+
+      /* Content card */
+      #x-pilot .x-pil-card {
+        background: linear-gradient(165deg, rgba(19, 27, 46, 0.55), rgba(11, 17, 32, 0.75));
+        border: 1px solid rgba(51, 65, 85, 0.45);
+        border-radius: 14px;
+        padding: 24px 26px;
+        margin-bottom: var(--x-sp-5);
+      }
+
+      #x-pilot .x-pil-card__title {
+        font-family: var(--x-ff-head);
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 12px;
+      }
+
+      #x-pilot .x-pil-card__text {
+        color: var(--x-muted);
+        font-size: 0.88rem;
+        line-height: 1.65;
+      }
+
+      #x-pilot .x-pil-card__list {
+        list-style: none;
+        padding: 0;
+        margin: 8px 0 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      #x-pilot .x-pil-card__list li {
+        color: var(--x-text);
+        font-size: 0.88rem;
+        line-height: 1.55;
+        padding-left: 18px;
+        position: relative;
+      }
+
+      #x-pilot .x-pil-card__list li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 8px;
+        width: 6px;
+        height: 6px;
+        background: var(--x-accent);
+        border-radius: 1px;
+        box-shadow: 0 0 6px var(--x-accent);
+      }
+
+      /* Measurement info */
+      #x-pilot .x-pil-measure {
+        background: linear-gradient(165deg, rgba(19, 27, 46, 0.6), rgba(11, 17, 32, 0.8));
+        border: 1px solid rgba(0, 229, 255, 0.15);
+        border-left: 3px solid var(--x-accent);
+        border-radius: 14px;
+        padding: 24px 26px;
+        margin-bottom: var(--x-sp-7);
+        box-shadow: 0 0 16px rgba(0, 229, 255, 0.03);
+      }
+
+      #x-pilot .x-pil-measure__text {
+        color: var(--x-text);
+        font-size: 0.88rem;
+        line-height: 1.7;
+      }
+
+      #x-pilot .x-pil-measure__text strong {
+        color: #fff;
+        font-weight: 600;
+      }
+
+      /* Artifacts grid */
+      #x-pilot .x-pil-artifacts {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-bottom: var(--x-sp-7);
+      }
+
+      @media(max-width:768px) {
+        #x-pilot .x-pil-artifacts {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      #x-pilot .x-pil-artifact {
+        background: rgba(19, 27, 46, 0.4);
+        border: 1px solid rgba(51, 65, 85, 0.35);
+        border-radius: 10px;
+        padding: 16px 18px;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        transition: border-color 0.3s;
+      }
+
+      #x-pilot .x-pil-artifact:hover {
+        border-color: rgba(0, 229, 255, 0.2);
+      }
+
+      #x-pilot .x-pil-artifact__check {
+        color: var(--x-accent);
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+
+      #x-pilot .x-pil-artifact__check svg {
+        width: 16px;
+        height: 16px;
+        stroke: var(--x-accent);
+        stroke-width: 2.2;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      #x-pilot .x-pil-artifact__body {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      #x-pilot .x-pil-artifact__name {
+        font-family: var(--x-ff-head);
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: #fff;
+      }
+
+      #x-pilot .x-pil-artifact__desc {
+        font-size: 0.82rem;
+        color: var(--x-muted);
+        line-height: 1.5;
+      }
+
+      /* CTA */
+      #x-pilot .x-pil-cta {
+        text-align: center;
+        margin-bottom: var(--x-sp-5);
+      }
+
+      #x-pilot .x-pil-cta__micro {
+        font-family: var(--x-ff-mono);
+        font-size: 11px;
+        text-transform: uppercase;
+        color: var(--x-muted);
+        opacity: 0.65;
+        letter-spacing: 0.05em;
+        margin-top: var(--x-sp-3);
+      }
+
+      /* Footer note */
+      #x-pilot .x-pil-note {
+        font-family: var(--x-ff-mono);
+        font-size: 12px;
+        color: var(--x-muted);
+        opacity: 0.55;
+        text-align: center;
+        border-top: 1px solid rgba(51, 65, 85, 0.3);
+        padding-top: var(--x-sp-4);
+      }
+    </style>
+
     <div class="x-wrap">
       <div class="x-section__head">
         <p class="x-section__label">Пилот</p>
-        <h2 class="x-h2">Пилот за 6-8 недель — с метриками, приёмкой и артефактами</h2>
+        <h2 class="x-h2">Пилот за 6&ndash;8 недель &mdash; измеримо, с приёмкой и документами</h2>
+        <p class="x-lead">Пилот нужен не &laquo;поиграться&raquo;, а доказать эффект и снять риски:
+          мы заранее фиксируем метрики, источники данных и критерии приёмки.
+          На выходе &mdash; отчёт, план масштабирования и пакет артефактов для согласования.</p>
       </div>
-      <div class="x-cards">
-        <div class="x-card">
-          <h3 class="x-card__title">Критерии приёмки</h3>
-          <p class="x-card__text">Определяем KPI, пороги и метрики до старта пилота.</p>
+
+      <!-- 1. Stepper -->
+      <h3 class="x-pil-subhead">
+        <svg viewBox="0 0 24 24">
+          <polyline points="4 17 10 11 4 5" />
+          <line x1="12" y1="19" x2="20" y2="19" />
+        </svg>
+        Как проходит пилот
+      </h3>
+      <div class="x-pil-stepper">
+        <div class="x-pil-step">
+          <div class="x-pil-step__num">1</div>
+          <div>
+            <div class="x-pil-step__title">Диагностика и цели</div>
+            <div class="x-pil-step__sub">KPI, источники, границы</div>
+          </div>
         </div>
-        <div class="x-card">
-          <h3 class="x-card__title">Измерение результата</h3>
-          <p class="x-card__text">Автоматический сбор данных. Дашборд пилота в реальном времени.</p>
+        <div class="x-pil-step">
+          <div class="x-pil-step__num">2</div>
+          <div>
+            <div class="x-pil-step__title">Подключение контуров</div>
+            <div class="x-pil-step__sub">ERP, телематика, датчики</div>
+          </div>
         </div>
-        <div class="x-card">
-          <h3 class="x-card__title">Выходные артефакты</h3>
-          <p class="x-card__text">Отчёт по пилоту, рекомендации по масштабированию, ROI-модель.</p>
+        <div class="x-pil-step">
+          <div class="x-pil-step__num">3</div>
+          <div>
+            <div class="x-pil-step__title">Испытание сценариев</div>
+            <div class="x-pil-step__sub">Отклонения и реакция</div>
+          </div>
+        </div>
+        <div class="x-pil-step">
+          <div class="x-pil-step__num">4</div>
+          <div>
+            <div class="x-pil-step__title">Приёмка и отчёт</div>
+            <div class="x-pil-step__sub">Метрики, решение, план</div>
+          </div>
         </div>
       </div>
-      <div style="text-align:center;margin-top:var(--x-sp-6)">
+
+      <!-- 2. Критерии приёмки -->
+      <h3 class="x-pil-subhead">
+        <svg viewBox="0 0 24 24">
+          <path d="M9 11l3 3L22 4" />
+          <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+        </svg>
+        Критерии приёмки (DoD пилота)
+      </h3>
+      <div class="x-pil-card">
+        <div class="x-pil-card__title">До старта фиксируем:</div>
+        <ul class="x-pil-card__list">
+          <li>KPI и пороги &mdash; что считаем успехом</li>
+          <li>Источники данных &mdash; откуда берём факт, кто &laquo;источник истины&raquo;</li>
+          <li>Сценарии демо/испытаний &mdash; какие отклонения и как закрываем</li>
+        </ul>
+        <p class="x-pil-card__text" style="margin-top:12px"><strong>Результат:</strong> пилот можно защитить на комитете
+          &mdash;
+          без споров &laquo;как мерили&raquo;.</p>
+      </div>
+
+      <!-- 3. Измерение результата -->
+      <h3 class="x-pil-subhead">
+        <svg viewBox="0 0 24 24">
+          <line x1="18" y1="20" x2="18" y2="10" />
+          <line x1="12" y1="20" x2="12" y2="4" />
+          <line x1="6" y1="20" x2="6" y2="14" />
+        </svg>
+        Измерение результата
+      </h3>
+      <div class="x-pil-measure">
+        <p class="x-pil-measure__text">Автоматический сбор факта из согласованных контуров
+          (ERP/1С, телематика, датчики, журналы).<br>
+          В пилотном дашборде видно: <strong>план-факт, отклонения, время реакции, простои,
+            статус закрытия, качество данных</strong>.</p>
+      </div>
+
+      <!-- 4. Артефакты -->
+      <h3 class="x-pil-subhead">
+        <svg viewBox="0 0 24 24">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+          <polyline points="14 2 14 8 20 8" />
+        </svg>
+        Выходные артефакты
+      </h3>
+      <div class="x-pil-artifacts">
+        <div class="x-pil-artifact">
+          <span class="x-pil-artifact__check"><svg viewBox="0 0 24 24">
+              <polyline points="20 6 9 17 4 12" />
+            </svg></span>
+          <div class="x-pil-artifact__body">
+            <span class="x-pil-artifact__name">Отчёт пилота</span>
+            <span class="x-pil-artifact__desc">Метрики, эффект, риски, рекомендации</span>
+          </div>
+        </div>
+        <div class="x-pil-artifact">
+          <span class="x-pil-artifact__check"><svg viewBox="0 0 24 24">
+              <polyline points="20 6 9 17 4 12" />
+            </svg></span>
+          <div class="x-pil-artifact__body">
+            <span class="x-pil-artifact__name">Матрица KPI и источников</span>
+            <span class="x-pil-artifact__desc">Что мерим и откуда берём</span>
+          </div>
+        </div>
+        <div class="x-pil-artifact">
+          <span class="x-pil-artifact__check"><svg viewBox="0 0 24 24">
+              <polyline points="20 6 9 17 4 12" />
+            </svg></span>
+          <div class="x-pil-artifact__body">
+            <span class="x-pil-artifact__name">План масштабирования</span>
+            <span class="x-pil-artifact__desc">A2 &rarr; A3 &rarr; A4 по готовности</span>
+          </div>
+        </div>
+        <div class="x-pil-artifact">
+          <span class="x-pil-artifact__check"><svg viewBox="0 0 24 24">
+              <polyline points="20 6 9 17 4 12" />
+            </svg></span>
+          <div class="x-pil-artifact__body">
+            <span class="x-pil-artifact__name">ROI-модель с допущениями</span>
+            <span class="x-pil-artifact__desc">Прозрачная методика расчёта</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="x-pil-cta">
         <a class="x-btn x-btn--secondary x-doc-link" data-doc="pilot-blueprint" href="javascript:void(0)">Скачать Pilot
           Blueprint</a>
+        <p class="x-pil-cta__micro">2&ndash;4 страницы: этапы, метрики, критерии приёмки, артефакты и требования к
+          пилоту.</p>
       </div>
+
+      <p class="x-pil-note">Пилот оформляется как понятный пакет: этапы, ответственность, сроки, критерии приёмки и
+        документы.</p>
     </div>
   </section>
   <!-- S10: PROCUREMENT PACK -->
