@@ -702,76 +702,107 @@
   }
 
   /* === COMPONENTS === */
-  /* Accordion (Premium AI UX Redesign) */
+  /* Accordion (Premium Redesign v2) */
   .x-site .x-accordion {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
+    counter-reset: acc-counter;
   }
 
   .x-site .x-acc-item {
-    background: rgba(19, 27, 46, 0.4);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(0, 229, 255, 0.1);
-    border-radius: 12px;
+    background: linear-gradient(165deg, rgba(19, 27, 46, 0.55), rgba(11, 17, 32, 0.75));
+    border: 1px solid rgba(51, 65, 85, 0.45);
+    border-radius: 14px;
     overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: border-color 0.35s, box-shadow 0.35s, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    counter-increment: acc-counter;
+  }
+
+  .x-site .x-acc-item:hover {
+    transform: translateY(-2px);
+    border-color: rgba(0, 229, 255, 0.2);
   }
 
   .x-site .x-acc-item--open {
-    border-color: rgba(0, 229, 255, 0.4);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 229, 255, 0.1);
+    border-color: rgba(0, 229, 255, 0.35);
+    box-shadow: 0 6px 28px rgba(0, 229, 255, 0.06), 0 0 0 1px rgba(0, 229, 255, 0.08);
+    transform: translateY(0);
   }
 
   .x-site .x-acc-item__head {
     width: 100%;
     text-align: left;
-    padding: var(--x-sp-4) var(--x-sp-5);
-    font-family: var(--x-ff-mono);
-    font-size: 1.1rem;
-    font-weight: 600;
+    padding: 18px 24px;
+    font-family: var(--x-ff-head);
+    font-size: 1rem;
+    font-weight: 700;
     background: transparent;
     border: none;
-    border-left: 2px solid transparent;
-    color: var(--x-text);
+    color: var(--x-muted);
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 16px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: color 0.3s, background 0.3s;
+    position: relative;
+  }
+
+  .x-site .x-acc-item__head::before {
+    content: counter(acc-counter);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    font-family: var(--x-ff-mono);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--x-accent);
+    background: rgba(0, 229, 255, 0.06);
+    border: 1px solid rgba(0, 229, 255, 0.18);
+    transition: background 0.3s, box-shadow 0.3s, border-color 0.3s;
   }
 
   .x-site .x-acc-item__head::after {
     content: '';
     display: block;
-    width: 10px;
-    height: 10px;
+    width: 9px;
+    height: 9px;
     border-right: 2px solid var(--x-accent);
     border-bottom: 2px solid var(--x-accent);
     transform: rotate(45deg);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    opacity: 0.7;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
+    opacity: 0.5;
     flex-shrink: 0;
-    margin-left: 16px;
+    margin-left: auto;
   }
 
   .x-site .x-acc-item__head:hover {
-    background: rgba(0, 229, 255, 0.03);
+    background: rgba(0, 229, 255, 0.02);
     color: #fff;
-    border-left-color: rgba(0, 229, 255, 0.5);
+  }
+
+  .x-site .x-acc-item__head:hover::before {
+    background: rgba(0, 229, 255, 0.1);
+    border-color: rgba(0, 229, 255, 0.3);
   }
 
   .x-site .x-acc-item__head:hover::after {
     opacity: 1;
-    transform: rotate(45deg) scale(1.1);
   }
 
   .x-site .x-acc-item--open .x-acc-item__head {
     color: #fff;
-    background: linear-gradient(90deg, rgba(0, 229, 255, 0.08), transparent);
-    border-left-color: var(--x-accent);
-    text-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+    background: linear-gradient(90deg, rgba(0, 229, 255, 0.06), transparent);
+  }
+
+  .x-site .x-acc-item--open .x-acc-item__head::before {
+    background: rgba(0, 229, 255, 0.15);
+    border-color: rgba(0, 229, 255, 0.4);
+    box-shadow: 0 0 14px rgba(0, 229, 255, 0.15);
   }
 
   .x-site .x-acc-item--open .x-acc-item__head::after {
@@ -781,20 +812,58 @@
 
   .x-site .x-acc-item__body {
     display: none;
-    padding: 0 var(--x-sp-5) var(--x-sp-5) var(--x-sp-5);
+    padding: 0 24px 22px 72px;
     background: transparent;
-    border-top: none;
   }
 
   .x-site .x-acc-item--open .x-acc-item__body {
     display: block;
-    animation: acc-fade-in 0.5s ease forwards;
+    animation: acc-fade-in 0.45s ease forwards;
+  }
+
+  .x-site .x-acc-body-row {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(51, 65, 85, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .x-site .x-acc-body-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .x-site .x-acc-body-row__label {
+    font-size: 11px;
+    font-family: var(--x-ff-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--x-accent);
+    font-weight: 700;
+  }
+
+  .x-site .x-acc-body-row__value {
+    color: var(--x-text);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .x-site .x-acc-body-row__value a {
+    color: var(--x-accent);
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(0, 229, 255, 0.3);
+    transition: border-color 0.2s;
+  }
+
+  .x-site .x-acc-body-row__value a:hover {
+    border-bottom-color: var(--x-accent);
   }
 
   @keyframes acc-fade-in {
     from {
       opacity: 0;
-      transform: translateY(-5px);
+      transform: translateY(-6px);
     }
 
     to {
@@ -2113,51 +2182,99 @@
       </div>
       <div class="x-accordion">
         <div class="x-acc-item">
-          <button class="x-acc-item__head">1. Планирование и нормирование</button>
+          <button class="x-acc-item__head">Планирование и нормирование</button>
           <div class="x-acc-item__body">
-            <p><strong>Контролируем:</strong> сезонный план, нормативы расхода ресурсов, графики выхода техники по
-              хозяйствам.</p>
-            <p><strong>Измеряем:</strong> отклонение план/факт по операциям, загрузка ресурсов в разрезе подразделений.
-            </p>
-            <p><strong>Документ:</strong> <a class="x-doc-link" data-doc="pilot-blueprint"
-                href="javascript:void(0)">Pilot Blueprint</a></p>
+            <div class="x-acc-body-row">
+              <span class="x-acc-body-row__label">Контролируем</span>
+              <span class="x-acc-body-row__value">Сезонный план, нормативы расхода ресурсов, графики выхода техники по
+                хозяйствам.</span>
+            </div>
+            <div class="x-acc-body-row">
+              <span class="x-acc-body-row__label">Измеряем</span>
+              <span class="x-acc-body-row__value">Отклонение план/факт по операциям, загрузка ресурсов в разрезе
+                подразделений.</span>
+            </div>
+            <div class="x-acc-body-row">
+              <span class="x-acc-body-row__label">Документ</span>
+              <span class="x-acc-body-row__value"><a class="x-doc-link" data-doc="pilot-blueprint"
+                  href="javascript:void(0)">Pilot Blueprint</a></span>
+            </div>
           </div>
         </div>
         <div class="x-acc-item">
-          <button class="x-acc-item__head">2. Диспетчеризация и управление отклонениями</button>
+          <button class="x-acc-item__head">Диспетчеризация и управление отклонениями</button>
           <div class="x-acc-item__body">
-            <p><strong>Контролируем:</strong> очередь отклонений, приоритеты реагирования, назначение ответственных.</p>
-            <p><strong>Измеряем:</strong> время реакции на инцидент, % отклонений, закрытых за смену.</p>
-            <p><strong>Документ:</strong> <a class="x-doc-link" data-doc="architecture"
-                href="javascript:void(0)">Architecture Brief</a></p>
+            <div class="x-acc-body-row">
+              <span class="x-acc-body-row__label">Контролируем</span>
+              <span class="x-acc-body-row__value">Очередь отклонений, приоритеты реагирования, назначение
+                ответственных.</span>
+            </div>
+            <div class="x-acc-body-row">
+              <span class="x-acc-body-row__label">Измеряем</span>
+              <span class="x-acc-body-row__value">Время реакции на инцидент, % отклонений, закрытых за смену.</span>
+            </div>
+            <div class="x-acc-body-row">
+              <span class="x-acc-body-row__label">Документ</span>
+              <span class="x-acc-body-row__value"><a class="x-doc-link" data-doc="architecture"
+                  href="javascript:void(0)">Architecture Brief</a></span>
+            </div>
           </div>
         </div>
         <div class="x-acc-item">
-          <button class="x-acc-item__head">3. Исполнение и контроль в поле</button>
+          <button class="x-acc-item__head">Исполнение и контроль в поле</button>
           <div class="x-acc-item__body">
-            <p><strong>Контролируем:</strong> статус задач, GPS-треки техники, фотоотчёты с привязкой к операции.</p>
-            <p><strong>Измеряем:</strong> % операций, выполненных в срок; точность покрытия площади.</p>
-            <p><strong>Документ:</strong> <a class="x-doc-link" data-doc="onepager"
-                href="javascript:void(0)">One-Pager</a></p>
+            <div class="x-acc-body-row">
+              <span class="x-acc-body-row__label">Контролируем</span>
+              <span class="x-acc-body-row__value">Статус задач, GPS-треки техники, фотоотчёты с привязкой к
+                операции.</span>
+            </div>
+            <div class="x-acc-body-row">
+              <span class="x-acc-body-row__label">Измеряем</span>
+              <span class="x-acc-body-row__value">% операций, выполненных в срок; точность покрытия площади.</span>
+            </div>
+            <div class="x-acc-body-row">
+              <span class="x-acc-body-row__label">Документ</span>
+              <span class="x-acc-body-row__value"><a class="x-doc-link" data-doc="onepager"
+                  href="javascript:void(0)">One-Pager</a></span>
+            </div>
           </div>
         </div>
         <div class="x-acc-item">
-          <button class="x-acc-item__head">4. Интеграция и синхронизация данных</button>
+          <button class="x-acc-item__head">Интеграция и синхронизация данных</button>
           <div class="x-acc-item__body">
-            <p><strong>Контролируем:</strong> потоки данных из ERP, телематики, датчиков и BI-систем.</p>
-            <p><strong>Измеряем:</strong> задержка синхронизации, % автоматически проведённых операций.</p>
-            <p><strong>Документ:</strong> <a class="x-doc-link" data-doc="integration"
-                href="javascript:void(0)">Integration Checklist</a></p>
+            <div class="x-acc-body-row">
+              <span class="x-acc-body-row__label">Контролируем</span>
+              <span class="x-acc-body-row__value">Потоки данных из ERP, телематики, датчиков и BI-систем.</span>
+            </div>
+            <div class="x-acc-body-row">
+              <span class="x-acc-body-row__label">Измеряем</span>
+              <span class="x-acc-body-row__value">Задержка синхронизации, % автоматически проведённых операций.</span>
+            </div>
+            <div class="x-acc-body-row">
+              <span class="x-acc-body-row__label">Документ</span>
+              <span class="x-acc-body-row__value"><a class="x-doc-link" data-doc="integration"
+                  href="javascript:void(0)">Integration Checklist</a></span>
+            </div>
           </div>
         </div>
         <div class="x-acc-item">
-          <button class="x-acc-item__head">5. Документация и регуляторная отчётность</button>
+          <button class="x-acc-item__head">Документация и регуляторная отчётность</button>
           <div class="x-acc-item__body">
-            <p><strong>Контролируем:</strong> соответствие требованиям регуляторов, интеграция с Меркурием, полный audit
-              trail.</p>
-            <p><strong>Измеряем:</strong> полнота журнала событий, % операций с документальным подтверждением.</p>
-            <p><strong>Документ:</strong> <a class="x-doc-link" data-doc="compliance"
-                href="javascript:void(0)">Compliance Brief</a></p>
+            <div class="x-acc-body-row">
+              <span class="x-acc-body-row__label">Контролируем</span>
+              <span class="x-acc-body-row__value">Соответствие требованиям регуляторов, интеграция с Меркурием, полный
+                audit trail.</span>
+            </div>
+            <div class="x-acc-body-row">
+              <span class="x-acc-body-row__label">Измеряем</span>
+              <span class="x-acc-body-row__value">Полнота журнала событий, % операций с документальным
+                подтверждением.</span>
+            </div>
+            <div class="x-acc-body-row">
+              <span class="x-acc-body-row__label">Документ</span>
+              <span class="x-acc-body-row__value"><a class="x-doc-link" data-doc="compliance"
+                  href="javascript:void(0)">Compliance Brief</a></span>
+            </div>
           </div>
         </div>
       </div>
