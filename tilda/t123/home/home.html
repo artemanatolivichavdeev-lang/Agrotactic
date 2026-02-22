@@ -2868,12 +2868,97 @@
   </section>
   <!-- S6: ИНТЕГРАЦИИ -->
   <section class="x-section" id="x-integrations">
+    <style>
+      .x-int-modes {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--x-sp-5);
+        margin-bottom: var(--x-sp-8);
+      }
+
+      @media(min-width: 768px) {
+        .x-int-modes {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .x-int-mode {
+        background: rgba(19, 27, 46, 0.4);
+        border: 1px dashed var(--x-line);
+        border-radius: var(--x-r-3);
+        padding: var(--x-sp-5);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .x-int-mode::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--x-line);
+        transition: background 0.3s;
+      }
+
+      .x-int-mode:hover::before {
+        background: var(--x-accent);
+        box-shadow: 0 0 10px var(--x-accent);
+      }
+
+      .x-int-mode__title {
+        color: var(--x-text);
+        font-family: var(--x-ff-head);
+        font-weight: 700;
+        font-size: var(--x-fs-5);
+        margin-bottom: var(--x-sp-2);
+        display: flex;
+        align-items: center;
+        gap: var(--x-sp-3);
+      }
+
+      .x-int-mode__num {
+        color: var(--x-accent);
+        font-family: var(--x-ff-mono);
+        font-size: var(--x-fs-6);
+        background: rgba(0, 229, 255, 0.1);
+        padding: 4px 8px;
+        border-radius: var(--x-r-1);
+      }
+
+      .x-int-mode__text {
+        color: var(--x-muted);
+        font-size: var(--x-fs-6);
+        line-height: 1.5;
+      }
+    </style>
     <div class="x-wrap">
       <div class="x-section__head">
         <p class="x-section__label">Интеграции</p>
         <h2 class="x-h2">Подключаемся поверх — не заменяем</h2>
-        <p class="x-lead">Работаем с тем, что уже есть: ERP/1С, телематика, датчики, BI. API-first.</p>
+        <p class="x-lead">Работаем с тем, что уже есть: ERP/1С, телематика, датчики, BI. Начинаем безопасно — с
+          наблюдаемости (read-only), затем расширяем контур по регламенту.</p>
       </div>
+
+      <h3 class="x-h3" style="margin-bottom:var(--x-sp-5)">Режимы подключения</h3>
+      <div class="x-int-modes">
+        <div class="x-int-mode">
+          <h4 class="x-int-mode__title"><span class="x-int-mode__num">1</span> Read-only (наблюдаемость)</h4>
+          <p class="x-int-mode__text">Читаем данные, строим KPI, алерты и карту. Ничего не “пишем назад”.</p>
+        </div>
+        <div class="x-int-mode">
+          <h4 class="x-int-mode__title"><span class="x-int-mode__num">2</span> Синхронизация (контролируемая)</h4>
+          <p class="x-int-mode__text">Согласованные справочники и статусы операций: техника, поля, задания, факт
+            выполнения.</p>
+        </div>
+        <div class="x-int-mode">
+          <h4 class="x-int-mode__title"><span class="x-int-mode__num">3</span> Обратная запись (по регламенту)</h4>
+          <p class="x-int-mode__text">Только разрешённые объекты: статусы, задания, документы/события. С ролями и
+            аудитом.</p>
+        </div>
+      </div>
+
       <div class="x-cards" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
         <div class="x-card">
           <h3 class="x-card__title">ERP / 1С</h3>
