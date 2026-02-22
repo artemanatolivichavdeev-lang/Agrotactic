@@ -324,7 +324,7 @@
   .x-site .x-hero {
     padding-top: 140px;
     padding-bottom: var(--x-sp-8);
-    background: radial-gradient(circle at 50% 30%, rgba(0, 229, 255, 0.05), transparent 60%);
+    background: radial-gradient(ellipse at 50% 20%, rgba(0, 229, 255, 0.04), transparent 65%);
   }
 
   .x-site .x-hero__grid {
@@ -335,14 +335,21 @@
   }
 
   .x-site .x-hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     font-family: var(--x-ff-mono);
-    font-size: var(--x-fs-6);
+    font-size: 11px;
     color: var(--x-accent);
     text-transform: uppercase;
-    letter-spacing: 0.2em;
-    margin-bottom: var(--x-sp-4);
-    border-left: 2px solid var(--x-accent);
-    padding-left: var(--x-sp-3);
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    margin-bottom: var(--x-sp-5);
+    padding: 6px 16px;
+    background: rgba(0, 229, 255, 0.06);
+    border: 1px solid rgba(0, 229, 255, 0.18);
+    border-radius: 6px;
+    box-shadow: 0 0 16px rgba(0, 229, 255, 0.06);
   }
 
   .x-site .x-hero h1 {
@@ -351,54 +358,53 @@
     font-weight: 700;
     line-height: var(--x-lh-tight);
     margin-bottom: var(--x-sp-5);
-    text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
   }
 
   .x-site .x-hero__sub {
     font-size: var(--x-fs-3);
     color: var(--x-muted);
     margin-bottom: var(--x-sp-7);
-    max-width: 560px;
+    max-width: 580px;
     font-weight: 300;
+    line-height: 1.65;
   }
 
   .x-site .x-hero__bullets li {
     position: relative;
-    padding-left: var(--x-sp-4);
-    margin-bottom: var(--x-sp-2);
+    padding-left: 20px;
+    margin-bottom: 10px;
     color: var(--x-text);
-    font-family: var(--x-ff-mono);
     font-size: var(--x-fs-5);
     list-style: none !important;
+    line-height: 1.55;
   }
 
-  /* Tech Square Marker */
+  /* Glowing square marker */
   .x-site .x-hero__bullets li::before {
     content: '';
     position: absolute;
     left: 0;
-    top: 9px;
-    width: 6px;
-    height: 6px;
+    top: 10px;
+    width: 7px;
+    height: 7px;
     background: var(--x-accent);
-    box-shadow: 0 0 8px var(--x-accent);
+    box-shadow: 0 0 10px var(--x-accent), 0 0 3px var(--x-accent);
     border-radius: 1px;
   }
 
-  /* Remove default UL padding/margin if not already done */
   .x-site .x-hero__bullets {
     list-style: none;
     padding: 0;
     margin: 0;
     margin-bottom: var(--x-sp-6);
-    /* Push CTAs further down */
   }
 
   .x-site .x-hero__ctas {
     display: flex;
     gap: var(--x-sp-4);
     flex-wrap: wrap;
-    margin-bottom: var(--x-sp-4);
+    margin-bottom: var(--x-sp-5);
   }
 
   .x-site .x-hero__micro {
@@ -406,41 +412,47 @@
     font-size: 11px;
     text-transform: uppercase;
     color: var(--x-muted);
-    opacity: 0.7;
+    opacity: 0.65;
     letter-spacing: 0.05em;
   }
 
-  /* Role Switcher */
+  /* Role Switcher — capsule tabs */
   .x-site .x-tabs {
     display: flex;
-    gap: 0;
-    border-bottom: 1px solid var(--x-line);
+    gap: 6px;
+    flex-wrap: wrap;
     margin-bottom: var(--x-sp-6);
+    padding: 4px;
+    background: rgba(11, 17, 32, 0.5);
+    border: 1px solid rgba(51, 65, 85, 0.4);
+    border-radius: 10px;
   }
 
   .x-site .x-tab {
     font-family: var(--x-ff-mono);
-    font-size: var(--x-fs-6);
+    font-size: 11px;
     text-transform: uppercase;
     font-weight: 700;
-    padding: var(--x-sp-2) var(--x-sp-4);
+    letter-spacing: 0.04em;
+    padding: 8px 14px;
     background: transparent;
     color: var(--x-muted);
     border: none;
-    border-bottom: 2px solid transparent;
+    border-radius: 7px;
     cursor: pointer;
-    transition: all .2s;
-    position: relative;
-    top: 1px;
+    transition: color 0.25s, background 0.25s, box-shadow 0.25s;
   }
 
   .x-site .x-tab:hover {
     color: var(--x-text);
+    background: rgba(0, 229, 255, 0.04);
   }
 
   .x-site .x-tab--active {
     color: var(--x-accent);
-    border-bottom-color: var(--x-accent);
+    background: rgba(0, 229, 255, 0.08);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    box-shadow: 0 0 12px rgba(0, 229, 255, 0.08);
   }
 
   .x-site .x-tab-panel {
