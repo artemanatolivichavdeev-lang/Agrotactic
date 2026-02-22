@@ -2932,6 +2932,47 @@
         font-size: var(--x-fs-6);
         line-height: 1.5;
       }
+
+      .x-stepper--horizontal {
+        margin-top: var(--x-sp-7);
+        position: relative;
+      }
+
+      .x-stepper--horizontal::before {
+        content: '';
+        position: absolute;
+        top: 24px;
+        left: 32px;
+        right: 32px;
+        height: 1px;
+        background: var(--x-line);
+        z-index: 0;
+      }
+
+      @media(max-width: 768px) {
+        .x-stepper--horizontal::before {
+          top: 32px;
+          left: 24px;
+          right: auto;
+          bottom: 32px;
+          width: 1px;
+          height: auto;
+        }
+      }
+
+      .x-stepper-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--x-sp-5);
+        position: relative;
+        z-index: 1;
+      }
+
+      @media(min-width: 769px) {
+        .x-stepper-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
     </style>
     <div class="x-wrap">
       <div class="x-section__head">
@@ -2983,6 +3024,44 @@
           <p class="x-card__text">Документированный API для ваших систем и подрядчиков (с авторизацией и аудитом).</p>
         </div>
       </div>
+
+      <h3 class="x-h3" style="margin-bottom:var(--x-sp-5); margin-top:var(--x-sp-8)">Подключение в 3 шага</h3>
+      <div class="x-stepper--horizontal">
+        <div class="x-stepper-grid">
+          <div class="x-step">
+            <div class="x-step__num">1</div>
+            <div>
+              <h3 class="x-step__title">Диагностика контура</h3>
+              <p class="x-step__text"
+                style="color:var(--x-accent); font-family:var(--x-ff-mono); font-size:var(--x-fs-7); margin-bottom:4px;">
+                30–60 минут</p>
+              <p class="x-step__text">Источники данных, “источник истины”, KPI и события, роли и ограничения.</p>
+            </div>
+          </div>
+          <div class="x-step">
+            <div class="x-step__num">2</div>
+            <div>
+              <h3 class="x-step__title">Подключение источников</h3>
+              <p class="x-step__text"
+                style="color:var(--x-accent); font-family:var(--x-ff-mono); font-size:var(--x-fs-7); margin-bottom:4px;">
+                1–2 недели</p>
+              <p class="x-step__text">ERP/1С + телематика/датчики/BI в режиме read-only.</p>
+            </div>
+          </div>
+          <div class="x-step">
+            <div class="x-step__num">3</div>
+            <div>
+              <h3 class="x-step__title">Настройка правил и артефактов</h3>
+              <p class="x-step__text"
+                style="color:var(--x-accent); font-family:var(--x-ff-mono); font-size:var(--x-fs-7); margin-bottom:4px;">
+                1–2 недели</p>
+              <p class="x-step__text">Алерты, роли, аудит, отчёты; при необходимости — согласованная обратная запись.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="x-selfcheck" style="margin-top:var(--x-sp-7)">
         <h3 class="x-card__title" style="margin-bottom:var(--x-sp-4)">Экспресс-проверка за 2 минуты</h3>
         <label class="x-check"><input data-score="1" type="checkbox" /> Используем ERP/1С</label>
