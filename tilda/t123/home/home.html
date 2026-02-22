@@ -3044,132 +3044,230 @@
         </div>
       </div>
 
-      <h3 class="x-h3" style="margin-bottom:var(--x-sp-5); margin-top:var(--x-sp-8)">Что подключаем</h3>
-      <div class="x-cards" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
-        <div class="x-card">
-          <h3 class="x-card__title">ERP / 1С</h3>
-          <p class="x-card__text">Справочники, планы/задания, статусы операций, документы — по согласованному списку.
-          </p>
-        </div>
-        <div class="x-card">
-          <h3 class="x-card__title">Телематика</h3>
-          <p class="x-card__text">GPS, режимы, моточасы, топливо, CAN-события и аномалии.</p>
-        </div>
-        <div class="x-card">
-          <h3 class="x-card__title">Датчики IoT</h3>
-          <p class="x-card__text">Температура, влажность, уровни, давление — показатели и события отклонений.</p>
-        </div>
-        <div class="x-card">
-          <h3 class="x-card__title">BI / отчётность</h3>
-          <p class="x-card__text">Экспорт KPI и событий в Power BI / Tableau и ваши витрины.</p>
-        </div>
-        <div class="x-card">
-          <h3 class="x-card__title">API для интеграций</h3>
-          <p class="x-card__text">Документированный API для ваших систем и подрядчиков (с авторизацией и аудитом).</p>
-        </div>
-      </div>
-
       <style>
-        .x-stepper-list {
+        /* === Scoped: Integration Cards === */
+        .x-int-cards {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: var(--x-sp-4);
+          margin-bottom: var(--x-sp-8);
+        }
+
+        .x-int-card {
+          background: linear-gradient(165deg, rgba(19, 27, 46, 0.65), rgba(11, 17, 32, 0.8));
+          border: 1px solid rgba(51, 65, 85, 0.4);
+          border-radius: 12px;
+          padding: 22px 20px 20px;
+          position: relative;
+          overflow: hidden;
+          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .x-int-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          opacity: 0.5;
+          transition: opacity 0.3s;
+        }
+
+        .x-int-card:hover {
+          transform: translateY(-3px);
+          border-color: rgba(0, 229, 255, 0.3);
+          box-shadow: 0 6px 24px rgba(0, 229, 255, 0.06);
+        }
+
+        .x-int-card:hover::before {
+          opacity: 1;
+        }
+
+        .x-int-card--erp::before {
+          background: linear-gradient(90deg, #00e5ff, transparent);
+        }
+
+        .x-int-card--tel::before {
+          background: linear-gradient(90deg, #a855f7, transparent);
+        }
+
+        .x-int-card--iot::before {
+          background: linear-gradient(90deg, #22c55e, transparent);
+        }
+
+        .x-int-card--bi::before {
+          background: linear-gradient(90deg, #f59e0b, transparent);
+        }
+
+        .x-int-card--api::before {
+          background: linear-gradient(90deg, #ff6b35, transparent);
+        }
+
+        .x-int-card__icon {
+          font-size: 28px;
+          line-height: 1;
+          margin-bottom: 14px;
+          display: block;
+        }
+
+        .x-int-card__title {
+          color: #fff;
+          font-family: var(--x-ff-head);
+          font-weight: 700;
+          font-size: 0.95rem;
+          margin-bottom: 6px;
+        }
+
+        .x-int-card__text {
+          color: var(--x-muted);
+          font-size: var(--x-fs-6);
+          line-height: 1.55;
+        }
+
+        /* === Scoped: Stepper v2 === */
+        .x-int-steps {
           margin-top: var(--x-sp-7);
           margin-bottom: var(--x-sp-7);
+          position: relative;
         }
 
-        .x-stepper-item {
+        .x-int-step {
           display: flex;
           align-items: flex-start;
-          gap: var(--x-sp-4);
-          background: rgba(19, 27, 46, 0.4);
-          border: 1px dashed var(--x-line);
-          border-radius: var(--x-r-3);
-          padding: var(--x-sp-5);
+          gap: 20px;
+          padding: 24px;
+          background: linear-gradient(165deg, rgba(19, 27, 46, 0.5), rgba(11, 17, 32, 0.7));
+          border: 1px solid rgba(51, 65, 85, 0.4);
+          border-radius: 12px;
           margin-bottom: var(--x-sp-4);
           position: relative;
-          transition: border-color 0.3s, background 0.3s;
+          transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .x-stepper-item:hover {
-          border-color: rgba(0, 229, 255, 0.4);
-          background: rgba(19, 27, 46, 0.6);
+        .x-int-step:hover {
+          border-color: rgba(0, 229, 255, 0.3);
+          box-shadow: 0 6px 24px rgba(0, 229, 255, 0.06);
+          transform: translateY(-2px);
         }
 
-        .x-stepper-item__num {
-          display: flex;
-          align-items: center;
-          justify-content: center;
+        .x-int-step__num {
           width: 48px;
           height: 48px;
           flex-shrink: 0;
           border-radius: 50%;
-          background: rgba(0, 229, 255, 0.1);
-          color: var(--x-accent);
+          display: flex;
+          align-items: center;
+          justify-content: center;
           font-family: var(--x-ff-mono);
           font-weight: 700;
-          font-size: var(--x-fs-4);
-          border: 1px solid rgba(0, 229, 255, 0.3);
-          box-shadow: 0 0 15px rgba(0, 229, 255, 0.1);
+          font-size: 1.1rem;
+          color: var(--x-accent);
+          background: rgba(0, 229, 255, 0.08);
+          border: 1px solid rgba(0, 229, 255, 0.25);
+          box-shadow: 0 0 16px rgba(0, 229, 255, 0.1);
+          transition: box-shadow 0.3s, background 0.3s;
         }
 
-        .x-stepper-item__content h4 {
-          color: var(--x-text);
+        .x-int-step:hover .x-int-step__num {
+          box-shadow: 0 0 24px rgba(0, 229, 255, 0.2);
+          background: rgba(0, 229, 255, 0.14);
+        }
+
+        .x-int-step__body h4 {
+          color: #fff;
           font-family: var(--x-ff-head);
           font-weight: 700;
-          font-size: var(--x-fs-5);
-          margin-bottom: 4px;
+          font-size: 1rem;
+          margin-bottom: 6px;
         }
 
-        .x-stepper-item__time {
-          color: var(--x-accent);
-          font-family: var(--x-ff-mono);
-          font-size: var(--x-fs-7);
-          margin-bottom: var(--x-sp-2);
+        .x-int-step__time {
           display: inline-block;
-          background: rgba(0, 229, 255, 0.05);
-          padding: 2px 8px;
+          font-family: var(--x-ff-mono);
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.05em;
+          color: var(--x-accent);
+          background: rgba(0, 229, 255, 0.06);
+          border: 1px solid rgba(0, 229, 255, 0.15);
+          padding: 2px 10px;
           border-radius: 4px;
+          margin-bottom: 8px;
         }
 
-        .x-stepper-item__text {
+        .x-int-step__text {
           color: var(--x-muted);
           font-size: var(--x-fs-6);
-          line-height: 1.5;
+          line-height: 1.55;
         }
       </style>
 
+      <h3 class="x-h3" style="margin-bottom:var(--x-sp-5); margin-top:var(--x-sp-8)">Что подключаем</h3>
+      <div class="x-int-cards">
+        <div class="x-int-card x-int-card--erp">
+          <span class="x-int-card__icon">&#9881;</span>
+          <h4 class="x-int-card__title">ERP / 1С</h4>
+          <p class="x-int-card__text">Справочники, планы/задания, статусы операций, документы &mdash; по согласованному
+            списку.</p>
+        </div>
+        <div class="x-int-card x-int-card--tel">
+          <span class="x-int-card__icon">&#128225;</span>
+          <h4 class="x-int-card__title">Телематика</h4>
+          <p class="x-int-card__text">GPS, режимы, моточасы, топливо, CAN-события и аномалии.</p>
+        </div>
+        <div class="x-int-card x-int-card--iot">
+          <span class="x-int-card__icon">&#127777;</span>
+          <h4 class="x-int-card__title">Датчики IoT</h4>
+          <p class="x-int-card__text">Температура, влажность, уровни, давление &mdash; показатели и события отклонений.
+          </p>
+        </div>
+        <div class="x-int-card x-int-card--bi">
+          <span class="x-int-card__icon">&#128202;</span>
+          <h4 class="x-int-card__title">BI / отчётность</h4>
+          <p class="x-int-card__text">Экспорт KPI и событий в Power BI / Tableau и ваши витрины.</p>
+        </div>
+        <div class="x-int-card x-int-card--api">
+          <span class="x-int-card__icon">&#128268;</span>
+          <h4 class="x-int-card__title">API для интеграций</h4>
+          <p class="x-int-card__text">Документированный API для ваших систем и подрядчиков (с авторизацией и аудитом).
+          </p>
+        </div>
+      </div>
+
       <h3 class="x-h3" style="margin-bottom:var(--x-sp-5); margin-top:var(--x-sp-8)">Подключение в 3 шага</h3>
-      <div class="x-stepper-list">
-        <div class="x-stepper-item">
-          <div class="x-stepper-item__num">1</div>
-          <div class="x-stepper-item__content">
+      <div class="x-int-steps">
+        <div class="x-int-step">
+          <div class="x-int-step__num">1</div>
+          <div class="x-int-step__body">
             <h4>Диагностика контура</h4>
-            <span class="x-stepper-item__time">30–60 минут</span>
-            <p class="x-stepper-item__text">Источники данных, “источник истины”, KPI и события, роли и ограничения.</p>
+            <span class="x-int-step__time">30&ndash;60 минут</span>
+            <p class="x-int-step__text">Источники данных, &laquo;источник истины&raquo;, KPI и события, роли и
+              ограничения.</p>
           </div>
         </div>
-        <div class="x-stepper-item">
-          <div class="x-stepper-item__num">2</div>
-          <div class="x-stepper-item__content">
+        <div class="x-int-step">
+          <div class="x-int-step__num">2</div>
+          <div class="x-int-step__body">
             <h4>Подключение источников</h4>
-            <span class="x-stepper-item__time">1–2 недели</span>
-            <p class="x-stepper-item__text">ERP/1С + телематика/датчики/BI в режиме read-only.</p>
+            <span class="x-int-step__time">1&ndash;2 недели</span>
+            <p class="x-int-step__text">ERP/1С + телематика/датчики/BI в режиме read-only.</p>
           </div>
         </div>
-        <div class="x-stepper-item">
-          <div class="x-stepper-item__num">3</div>
-          <div class="x-stepper-item__content">
+        <div class="x-int-step">
+          <div class="x-int-step__num">3</div>
+          <div class="x-int-step__body">
             <h4>Настройка правил и артефактов</h4>
-            <span class="x-stepper-item__time">1–2 недели</span>
-            <p class="x-stepper-item__text">Алерты, роли, аудит, отчёты; при необходимости — согласованная обратная
+            <span class="x-int-step__time">1&ndash;2 недели</span>
+            <p class="x-int-step__text">Алерты, роли, аудит, отчёты; при необходимости &mdash; согласованная обратная
               запись.</p>
           </div>
         </div>
       </div>
+
       <div class="x-calc-wrap" id="int-calc">
         <div class="x-calc-head">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-          </svg>
+          <span style="font-size:22px;line-height:1">&#9889;</span>
           <h3 class="x-h3" style="margin:0;">Экспресс-проверка готовности</h3>
         </div>
 
@@ -3195,7 +3293,7 @@
             </label>
             <label class="x-calc-check">
               <input type="checkbox" name="DOC" />
-              <span>Нужны документы/отчётность (включая «Меркурий», если актуально)</span>
+              <span>Нужны документы/отчётность (включая &laquo;Меркурий&raquo;, если актуально)</span>
             </label>
             <label class="x-calc-check">
               <input type="checkbox" name="SEC" />
@@ -3203,7 +3301,7 @@
             </label>
             <label class="x-calc-check">
               <input type="checkbox" name="WB" />
-              <span>Нужно “писать назад” в ERP/1С (статусы/документы по регламенту)</span>
+              <span>Нужно &laquo;писать назад&raquo; в ERP/1С (статусы/документы по регламенту)</span>
             </label>
           </div>
 
