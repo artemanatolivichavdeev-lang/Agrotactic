@@ -3414,82 +3414,107 @@
       }
 
       .x-calc-out {
-        background: #0f1625;
-        border: 1px dashed var(--x-line);
-        border-radius: var(--x-r-3);
-        padding: var(--x-sp-5);
+        background: linear-gradient(170deg, rgba(15, 22, 37, 0.95), rgba(11, 17, 32, 0.98));
+        border: 1px solid rgba(51, 65, 85, 0.5);
+        border-radius: 14px;
+        padding: 24px;
         display: flex;
         flex-direction: column;
-        gap: var(--x-sp-4);
+        gap: 0;
       }
 
       .x-calc-out__level {
         display: inline-flex;
         align-items: center;
-        gap: var(--x-sp-2);
+        gap: 8px;
         font-family: var(--x-ff-mono);
         color: var(--x-accent);
-        font-size: var(--x-fs-5);
+        font-size: 1rem;
         font-weight: 700;
-        padding: var(--x-sp-2) var(--x-sp-3);
-        background: rgba(0, 229, 255, 0.1);
-        border-radius: var(--x-r-1);
+        padding: 8px 16px;
+        background: rgba(0, 229, 255, 0.08);
+        border-radius: 8px;
         border-left: 3px solid var(--x-accent);
+        box-shadow: 0 0 20px rgba(0, 229, 255, 0.08);
         align-self: flex-start;
-      }
-
-      .x-calc-out__metrics {
-        display: flex;
-        gap: var(--x-sp-4);
-        flex-wrap: wrap;
-      }
-
-      .x-calc-metric {
-        background: rgba(19, 27, 46, 0.4);
-        padding: var(--x-sp-2) var(--x-sp-3);
-        border-radius: var(--x-r-2);
-        font-size: var(--x-fs-7);
-        color: var(--x-muted);
-        display: flex;
-        align-items: center;
-        gap: 6px;
-      }
-
-      .x-calc-metric span {
-        color: var(--x-text);
-        font-weight: 600;
-        font-family: var(--x-ff-mono);
+        margin-bottom: 12px;
       }
 
       .x-calc-out__title {
         color: #fff;
         font-family: var(--x-ff-head);
-        font-size: var(--x-fs-4);
+        font-size: 1.25rem;
         font-weight: 700;
-        margin-top: var(--x-sp-2);
-        margin-bottom: var(--x-sp-2);
+        margin-bottom: 16px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid rgba(51, 65, 85, 0.5);
       }
 
-      .x-calc-out__desc ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
+      .x-calc-out__metrics {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 16px;
       }
 
-      .x-calc-out__desc li {
-        color: var(--x-text);
-        font-size: 0.95rem;
-        margin-bottom: 8px;
+      .x-calc-metric {
+        background: rgba(19, 27, 46, 0.5);
+        border: 1px solid rgba(51, 65, 85, 0.4);
+        border-radius: 10px;
+        padding: 14px 16px;
         display: flex;
-        align-items: flex-start;
-        gap: 8px;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .x-calc-metric__label {
+        font-size: 11px;
+        font-family: var(--x-ff-mono);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--x-muted);
+      }
+
+      .x-calc-metric__value {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--x-text);
+        font-family: var(--x-ff-mono);
         line-height: 1.4;
       }
 
-      .x-calc-out__desc li::before {
-        content: '▹';
+      .x-calc-out__rows {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .x-calc-out__row {
+        padding: 14px 0;
+        border-bottom: 1px solid rgba(51, 65, 85, 0.35);
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .x-calc-out__row:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .x-calc-out__row-label {
+        font-size: 11px;
+        font-family: var(--x-ff-mono);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
         color: var(--x-accent);
-        font-weight: bold;
+        font-weight: 700;
+      }
+
+      .x-calc-out__row-value {
+        color: var(--x-text);
+        font-size: 0.9rem;
+        line-height: 1.6;
       }
     </style>
 
@@ -3607,15 +3632,13 @@
             '<div class="x-calc-out__level">[Уровень ' + tpl.level + ']</div>' +
             '<h4 class="x-calc-out__title">' + tpl.title + '</h4>' +
             '<div class="x-calc-out__metrics">' +
-            '<div class="x-calc-metric">Сложность: <span style="color:var(--x-text);">' + complexity + '</span></div>' +
-            '<div class="x-calc-metric">Срок: <span style="color:var(--x-accent);">' + tpl.time + '</span></div>' +
+            '<div class="x-calc-metric"><span class="x-calc-metric__label">Сложность</span><span class="x-calc-metric__value">' + complexity + '</span></div>' +
+            '<div class="x-calc-metric"><span class="x-calc-metric__label">Срок</span><span class="x-calc-metric__value" style="color:var(--x-accent)">' + tpl.time + '</span></div>' +
             '</div>' +
-            '<div class="x-calc-out__desc">' +
-            '<ul>' +
-            '<li><strong>Рекомендация:</strong> ' + tpl.recommend + '</li>' +
-            '<li><strong>Что получите:</strong> ' + tpl.get + '</li>' +
-            '<li><strong>Дальше:</strong> ' + tpl.next + '</li>' +
-            '</ul>' +
+            '<div class="x-calc-out__rows">' +
+            '<div class="x-calc-out__row"><span class="x-calc-out__row-label">Рекомендация</span><span class="x-calc-out__row-value">' + tpl.recommend + '</span></div>' +
+            '<div class="x-calc-out__row"><span class="x-calc-out__row-label">Что получите</span><span class="x-calc-out__row-value">' + tpl.get + '</span></div>' +
+            '<div class="x-calc-out__row"><span class="x-calc-out__row-label">Дальше</span><span class="x-calc-out__row-value">' + tpl.next + '</span></div>' +
             '</div>';
         }
 
