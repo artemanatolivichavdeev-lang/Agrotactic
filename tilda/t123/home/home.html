@@ -7337,22 +7337,429 @@
     </script>
   </section>
   <!-- S11: ФИНАЛЬНЫЙ CTA -->
-  <section class="x-form-cta" id="x-request-demo">
+  <section class="x-section" id="x-request-demo">
+    <style>
+      /* === FINAL CTA (Premium v2 — scoped overrides) === */
+
+      /* --- Lead --- */
+      #x-request-demo .x-cta-lead {
+        font-size: var(--x-fs-5);
+        color: var(--x-muted);
+        text-align: center;
+        max-width: 680px;
+        margin: 0 auto var(--x-sp-7);
+        line-height: 1.6;
+      }
+
+      /* --- CTA cards grid --- */
+      #x-request-demo .x-cta-cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--x-sp-5);
+        margin-bottom: var(--x-sp-4);
+      }
+
+      @media (max-width: 768px) {
+        #x-request-demo .x-cta-cards {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* --- CTA card base --- */
+      #x-request-demo .x-cta-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: var(--x-sp-6) var(--x-sp-5);
+        background: linear-gradient(165deg, rgba(19, 27, 46, 0.55), rgba(11, 17, 32, 0.75));
+        border: 1px solid rgba(51, 65, 85, 0.45);
+        border-radius: 14px;
+        overflow: hidden;
+        position: relative;
+        transition: border-color 0.35s, box-shadow 0.35s, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      #x-request-demo .x-cta-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        border-radius: 14px 14px 0 0;
+      }
+
+      #x-request-demo .x-cta-card:hover {
+        transform: translateY(-4px);
+      }
+
+      /* --- Card icon --- */
+      #x-request-demo .x-cta-card__icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: var(--x-sp-4);
+        transition: box-shadow 0.35s, transform 0.35s;
+      }
+
+      #x-request-demo .x-cta-card__icon svg {
+        width: 24px;
+        height: 24px;
+        stroke-width: 1.5;
+        fill: none;
+        stroke: currentColor;
+      }
+
+      /* --- Card meta --- */
+      #x-request-demo .x-cta-card__desc {
+        font-size: var(--x-fs-6);
+        color: var(--x-muted);
+        line-height: 1.5;
+        margin-top: var(--x-sp-3);
+        max-width: 340px;
+      }
+
+      #x-request-demo .x-cta-card .x-btn {
+        margin-top: var(--x-sp-4);
+      }
+
+      /* --- Demo card: Cyan --- */
+      #x-request-demo .x-cta-card--demo::before {
+        background: linear-gradient(90deg, rgba(0, 229, 255, 0.6), rgba(0, 229, 255, 0.1));
+      }
+
+      #x-request-demo .x-cta-card--demo .x-cta-card__icon {
+        color: #00e5ff;
+        background: rgba(0, 229, 255, 0.06);
+        border: 1px solid rgba(0, 229, 255, 0.2);
+      }
+
+      #x-request-demo .x-cta-card--demo:hover {
+        border-color: rgba(0, 229, 255, 0.35);
+        box-shadow: 0 6px 28px rgba(0, 229, 255, 0.06), 0 0 0 1px rgba(0, 229, 255, 0.08);
+      }
+
+      #x-request-demo .x-cta-card--demo:hover .x-cta-card__icon {
+        box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);
+        transform: scale(1.05);
+      }
+
+      /* --- Docs card: Green --- */
+      #x-request-demo .x-cta-card--docs::before {
+        background: linear-gradient(90deg, rgba(16, 185, 129, 0.6), rgba(16, 185, 129, 0.1));
+      }
+
+      #x-request-demo .x-cta-card--docs .x-cta-card__icon {
+        color: #10b981;
+        background: rgba(16, 185, 129, 0.06);
+        border: 1px solid rgba(16, 185, 129, 0.2);
+      }
+
+      #x-request-demo .x-cta-card--docs:hover {
+        border-color: rgba(16, 185, 129, 0.35);
+        box-shadow: 0 6px 28px rgba(16, 185, 129, 0.06), 0 0 0 1px rgba(16, 185, 129, 0.08);
+      }
+
+      #x-request-demo .x-cta-card--docs:hover .x-cta-card__icon {
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+        transform: scale(1.05);
+      }
+
+      /* --- Secondary link --- */
+      #x-request-demo .x-cta-alt {
+        text-align: center;
+        margin-bottom: var(--x-sp-7);
+      }
+
+      #x-request-demo .x-cta-alt a {
+        font-family: var(--x-ff-mono);
+        font-size: 12px;
+        color: var(--x-accent);
+        text-decoration: none;
+        border-bottom: 1px dashed rgba(0, 229, 255, 0.3);
+        transition: border-color 0.2s, color 0.2s;
+      }
+
+      #x-request-demo .x-cta-alt a:hover {
+        border-bottom-color: var(--x-accent);
+        color: #fff;
+      }
+
+      /* --- Stepper sub-heading --- */
+      #x-request-demo .x-cta-subhead {
+        font-family: var(--x-ff-head);
+        font-size: var(--x-fs-3);
+        font-weight: 700;
+        color: var(--x-text);
+        text-align: center;
+        margin-bottom: var(--x-sp-6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+      }
+
+      /* --- Stepper --- */
+      #x-request-demo .x-cta-steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--x-sp-5);
+        margin-bottom: var(--x-sp-6);
+      }
+
+      @media (max-width: 768px) {
+        #x-request-demo .x-cta-steps {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      #x-request-demo .x-cta-step {
+        padding: var(--x-sp-5) var(--x-sp-4);
+        background: linear-gradient(165deg, rgba(19, 27, 46, 0.55), rgba(11, 17, 32, 0.75));
+        border: 1px solid rgba(51, 65, 85, 0.45);
+        border-radius: 14px;
+        position: relative;
+        overflow: hidden;
+        transition: border-color 0.35s, box-shadow 0.35s;
+      }
+
+      #x-request-demo .x-cta-step::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        border-radius: 14px 14px 0 0;
+      }
+
+      #x-request-demo .x-cta-step__num {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: var(--x-sp-3);
+      }
+
+      #x-request-demo .x-cta-step__num strong {
+        font-family: var(--x-ff-mono);
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      #x-request-demo .x-cta-step__num svg {
+        width: 20px;
+        height: 20px;
+        stroke-width: 1.5;
+        fill: none;
+        stroke: currentColor;
+      }
+
+      #x-request-demo .x-cta-step__title {
+        font-family: var(--x-ff-head);
+        font-weight: 700;
+        font-size: 0.95rem;
+        color: var(--x-text);
+        margin-bottom: 6px;
+      }
+
+      #x-request-demo .x-cta-step__text {
+        font-size: var(--x-fs-6);
+        color: var(--x-muted);
+        line-height: 1.5;
+      }
+
+      #x-request-demo .x-cta-step__list {
+        list-style: none;
+        padding: 0;
+        margin: 6px 0 0;
+        font-size: var(--x-fs-6);
+        color: var(--x-muted);
+        line-height: 1.6;
+      }
+
+      #x-request-demo .x-cta-step__list li::before {
+        content: '→ ';
+        color: #00e5ff;
+      }
+
+      /* Step 1: Green */
+      #x-request-demo .x-cta-step--1::before {
+        background: #10b981;
+      }
+
+      #x-request-demo .x-cta-step--1 .x-cta-step__num {
+        color: #10b981;
+      }
+
+      /* Step 2: Amber */
+      #x-request-demo .x-cta-step--2::before {
+        background: #f59e0b;
+      }
+
+      #x-request-demo .x-cta-step--2 .x-cta-step__num {
+        color: #f59e0b;
+      }
+
+      /* Step 3: Cyan */
+      #x-request-demo .x-cta-step--3::before {
+        background: #00e5ff;
+      }
+
+      #x-request-demo .x-cta-step--3 .x-cta-step__num {
+        color: #00e5ff;
+      }
+
+      /* --- Guarantees --- */
+      #x-request-demo .x-cta-guarantee {
+        text-align: center;
+        font-family: var(--x-ff-mono);
+        font-size: 11px;
+        color: var(--x-muted);
+        opacity: 0.6;
+        letter-spacing: 0.04em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      #x-request-demo .x-cta-guarantee svg {
+        width: 14px;
+        height: 14px;
+        stroke-width: 1.5;
+        fill: none;
+        stroke: currentColor;
+        opacity: 0.5;
+        flex-shrink: 0;
+      }
+
+      /* --- Scroll-reveal --- */
+      #x-request-demo .cta-anim {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      #x-request-demo .cta-anim--visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+
     <div class="x-wrap">
       <p class="x-section__label" style="text-align:center">Следующий шаг</p>
-      <h2 class="x-h2" style="text-align:center">Готовы увидеть контур управления в действии?</h2>
-      <div style="display:flex;gap:var(--x-sp-4);justify-content:center;flex-wrap:wrap">
-        <a class="x-btn x-btn--primary x-btn--demo" href="#x-request-demo">Запросить демо / техсессию</a>
-        <button class="x-btn x-btn--secondary" id="x-open-drawer-2">Получить пакет документов</button>
+      <h2 class="x-h2" style="text-align:center">Хотите увидеть контур управления в действии — на вашем сценарии?</h2>
+      <p class="x-cta-lead cta-anim">Выберите удобный формат: демо по ситуации в сезоне, техсессия для IT/ИБ или
+        обсуждение пилота. Без лишних звонков и «продажных презентаций».</p>
+
+      <div class="x-cta-cards cta-anim">
+        <!-- Demo card -->
+        <div class="x-cta-card x-cta-card--demo">
+          <div class="x-cta-card__icon">
+            <svg viewBox="0 0 24 24">
+              <polygon points="5 3 19 12 5 21 5 3" />
+            </svg>
+          </div>
+          <a class="x-btn x-btn--primary x-btn--demo" href="#x-request-demo">Запросить демо / техсессию</a>
+          <p class="x-cta-card__desc">30–45 минут. Покажем цепочку «отклонение → ответственный → решение → результат».
+          </p>
+        </div>
+        <!-- Docs card -->
+        <div class="x-cta-card x-cta-card--docs">
+          <div class="x-cta-card__icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+            </svg>
+          </div>
+          <button class="x-btn x-btn--secondary" id="x-open-drawer-2">Получить пакет документов</button>
+          <p class="x-cta-card__desc">One-pager · Pilot Blueprint · Architecture / Security / Compliance briefs.</p>
+        </div>
       </div>
-      <div class="x-form-cta__steps">
-        <div class="x-form-cta__step"><strong>01</strong> Оставляете заявку</div>
-        <div class="x-form-cta__step"><strong>02</strong> Согласуем формат</div>
-        <div class="x-form-cta__step"><strong>03</strong> Получаете результат за 30 мин</div>
+
+      <div class="x-cta-alt cta-anim">
+        <a href="javascript:void(0)" id="x-open-drawer-4">Получить документы без звонка</a>
       </div>
-      <p style="text-align:center;margin-top:var(--x-sp-4);font-size:var(--x-fs-6);color:var(--x-muted)">Без
-        обязательств · NDA при необходимости · Ваши данные не передаются третьим лицам</p>
+
+      <h3 class="x-cta-subhead cta-anim">Как это проходит</h3>
+
+      <div class="x-cta-steps cta-anim">
+        <!-- Step 1 -->
+        <div class="x-cta-step x-cta-step--1">
+          <div class="x-cta-step__num">
+            <strong>01</strong>
+            <svg viewBox="0 0 24 24">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+            </svg>
+          </div>
+          <div class="x-cta-step__title">Оставляете заявку</div>
+          <div class="x-cta-step__text">Выбираете роль и цель: сезон / интеграции / ИБ / комплаенс / пилот.</div>
+        </div>
+        <!-- Step 2 -->
+        <div class="x-cta-step x-cta-step--2">
+          <div class="x-cta-step__num">
+            <strong>02</strong>
+            <svg viewBox="0 0 24 24">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+          </div>
+          <div class="x-cta-step__title">Мы согласуем формат</div>
+          <div class="x-cta-step__text">Демо по сценарию / техсессия (IT+ИБ) / обсуждение пилота — под ваш контур.</div>
+        </div>
+        <!-- Step 3 -->
+        <div class="x-cta-step x-cta-step--3">
+          <div class="x-cta-step__num">
+            <strong>03</strong>
+            <svg viewBox="0 0 24 24">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="22 4 12 14.01 9 11.01" />
+            </svg>
+          </div>
+          <div class="x-cta-step__title">Получаете конкретный результат</div>
+          <ul class="x-cta-step__list">
+            <li>запись / материалы демо (по запросу)</li>
+            <li>список требований и следующий шаг (пилотный план или пакет согласований)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="x-cta-guarantee cta-anim">
+        <svg viewBox="0 0 24 24">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+          <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+        </svg>
+        Без обязательств · NDA при необходимости · Ваши данные не передаются третьим лицам
+      </div>
     </div>
+
+    <script>
+      (function () {
+        var els = document.querySelectorAll('#x-request-demo .cta-anim');
+        if (!els.length) return;
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('cta-anim--visible');
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        els.forEach(function (el, i) {
+          el.style.transitionDelay = (i * 0.1) + 's';
+          io.observe(el);
+        });
+      })();
+    </script>
   </section>
   <!-- S12: КОНТАКТЫ -->
   <section class="x-contacts" id="recCONTACTS">
