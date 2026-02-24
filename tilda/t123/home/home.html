@@ -8024,6 +8024,188 @@
       })();
     </script>
   </section>
+  <!-- S13: ПАРТНЁРЫ -->
+  <section class="x-section" id="x-partners">
+    <style>
+      /* === PARTNERS (Premium v2 — scoped overrides) === */
+
+      #x-partners .x-partners__grid {
+        display: flex;
+        justify-content: center;
+        margin-top: var(--x-sp-6);
+      }
+
+      #x-partners .x-partner-card {
+        display: flex;
+        align-items: center;
+        gap: var(--x-sp-5);
+        max-width: 720px;
+        width: 100%;
+        padding: var(--x-sp-6);
+        background: linear-gradient(165deg, rgba(19, 27, 46, 0.55), rgba(11, 17, 32, 0.75));
+        border: 1px solid rgba(51, 65, 85, 0.45);
+        border-radius: 14px;
+        overflow: hidden;
+        position: relative;
+        text-decoration: none;
+        color: inherit;
+        transition: border-color 0.35s, box-shadow 0.35s, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      #x-partners .x-partner-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        border-radius: 14px 14px 0 0;
+        background: linear-gradient(90deg, rgba(14, 165, 233, 0.6), rgba(14, 165, 233, 0.1));
+      }
+
+      #x-partners .x-partner-card:hover {
+        border-color: rgba(14, 165, 233, 0.35);
+        box-shadow: 0 6px 28px rgba(14, 165, 233, 0.06), 0 0 0 1px rgba(14, 165, 233, 0.08);
+        transform: translateY(-4px);
+      }
+
+      @media (max-width: 640px) {
+        #x-partners .x-partner-card {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+
+      /* --- Logo --- */
+      #x-partners .x-partner-card__logo {
+        width: 72px;
+        height: 72px;
+        flex-shrink: 0;
+        border-radius: 14px;
+        background: rgba(14, 165, 233, 0.06);
+        border: 1px solid rgba(14, 165, 233, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--x-ff-head);
+        font-size: 32px;
+        font-weight: 700;
+        color: #0ea5e9;
+        transition: box-shadow 0.35s, transform 0.35s;
+      }
+
+      #x-partners .x-partner-card:hover .x-partner-card__logo {
+        box-shadow: 0 0 20px rgba(14, 165, 233, 0.15);
+        transform: scale(1.05);
+      }
+
+      /* --- Info --- */
+      #x-partners .x-partner-card__name {
+        font-family: var(--x-ff-head);
+        font-size: var(--x-fs-3);
+        font-weight: 700;
+        color: var(--x-text);
+        margin-bottom: 4px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      #x-partners .x-partner-card__name svg {
+        width: 16px;
+        height: 16px;
+        stroke-width: 1.5;
+        fill: none;
+        stroke: #0ea5e9;
+        opacity: 0.6;
+        transition: opacity 0.3s;
+      }
+
+      #x-partners .x-partner-card:hover .x-partner-card__name svg {
+        opacity: 1;
+      }
+
+      #x-partners .x-partner-card__tag {
+        font-family: var(--x-ff-mono);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-weight: 700;
+        color: #0ea5e9;
+        margin-bottom: 6px;
+      }
+
+      #x-partners .x-partner-card__text {
+        font-size: var(--x-fs-5);
+        color: var(--x-muted);
+        line-height: 1.55;
+      }
+
+      /* --- Scroll-reveal --- */
+      #x-partners .prt-anim {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      #x-partners .prt-anim--visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+
+    <div class="x-wrap">
+      <p class="x-section__label" style="text-align:center">Партнёры</p>
+      <h2 class="x-h2" style="text-align:center">Технологические партнёры</h2>
+
+      <div class="x-partners__grid">
+        <a class="x-partner-card prt-anim" href="http://ecoforwardgroup.ru/" target="_blank" rel="noopener noreferrer">
+          <div class="x-partner-card__logo">
+            <svg viewBox="0 0 40 40" width="40" height="40" fill="none">
+              <rect x="2" y="2" width="36" height="36" rx="8" fill="rgba(14,165,233,0.1)" stroke="#0ea5e9"
+                stroke-width="1.5" />
+              <text x="20" y="28" text-anchor="middle" font-family="Inter,sans-serif" font-weight="700" font-size="22"
+                fill="#0ea5e9">R</text>
+            </svg>
+          </div>
+          <div>
+            <div class="x-partner-card__tag">Промышленная оптимизация</div>
+            <div class="x-partner-card__name">
+              РАССАР | ГК «ЭкоФорвард»
+              <svg viewBox="0 0 24 24">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+            </div>
+            <p class="x-partner-card__text">Команда инженеров и программистов, объединяющая советскую научную школу и
+              современные IT-алгоритмы. Снижение себестоимости и возврат контроля над производством через глубокий
+              инжиниринг и ТРИЗ-методологию.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var els = document.querySelectorAll('#x-partners .prt-anim');
+        if (!els.length) return;
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('prt-anim--visible');
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        els.forEach(function (el, i) {
+          el.style.transitionDelay = (i * 0.1) + 's';
+          io.observe(el);
+        });
+      })();
+    </script>
+  </section>
   <!-- DRAWER -->
   <div aria-label="Пакет документов" aria-modal="true" class="x-drawer" id="x-drawer" role="dialog">
     <div class="x-drawer__overlay" id="x-drawer-overlay"></div>
