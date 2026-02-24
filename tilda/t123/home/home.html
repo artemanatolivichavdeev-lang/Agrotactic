@@ -8252,245 +8252,1465 @@
       </div>
     </div>
   </div>
-</div><!-- /.x-site -->
-<script>
-  (function () {
-    'use strict';
+  <!-- DEMO FORM DRAWER (slides from LEFT) -->
+  <div aria-label="Заявка на демо" aria-modal="true" class="x-drawer-demo" id="x-drawer-demo" role="dialog">
+    <style>
+      /* === LEFT-SLIDE DRAWER === */
+      .x-drawer-demo {
+        display: flex;
+        position: fixed;
+        inset: 0;
+        z-index: 210;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity .25s;
+      }
 
-    /* === STICKY HEADER === */
-    var header = document.getElementById('x-header');
-    if (header) {
-      var ticking = false;
-      window.addEventListener('scroll', function () {
-        if (!ticking) {
-          window.requestAnimationFrame(function () {
-            header.classList.toggle('x-header--sticky', window.scrollY > 140);
-            ticking = false;
+      .x-drawer-demo--open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .x-drawer-demo__overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.82);
+        backdrop-filter: blur(4px);
+      }
+
+      .x-drawer-demo__panel {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 640px;
+        max-width: 100%;
+        background: #0b1120;
+        border-right: 1px solid var(--x-line, #334155);
+        transform: translateX(-100%);
+        transition: transform .35s cubic-bezier(0.16, 1, 0.3, 1);
+        overflow-y: auto;
+        padding: 32px 28px 40px;
+      }
+
+      .x-drawer-demo--open .x-drawer-demo__panel {
+        transform: translateX(0);
+      }
+
+      .x-drawer-demo__close {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background: none;
+        border: 1px solid rgba(51, 65, 85, .5);
+        border-radius: 6px;
+        width: 36px;
+        height: 36px;
+        color: #94a3b8;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        transition: border-color .2s, color .2s;
+        z-index: 2;
+      }
+
+      .x-drawer-demo__close:hover {
+        border-color: #00e5ff;
+        color: #00e5ff;
+      }
+
+      /* === FORM TOKENS === */
+      .x-form-wrap {
+        --f-bg: #0b1120;
+        --f-surface: #131b2e;
+        --f-surface-2: #1a2340;
+        --f-text: #e2e8f0;
+        --f-muted: #94a3b8;
+        --f-line: #334155;
+        --f-accent: #00e5ff;
+        --f-error: #ef4444;
+        --f-success: #10b981;
+        --f-ff-head: 'Inter', system-ui, sans-serif;
+        --f-ff-body: 'Inter', system-ui, sans-serif;
+        --f-ff-mono: 'JetBrains Mono', monospace;
+        --f-radius: 10px;
+        --f-radius-sm: 6px;
+        font-family: var(--f-ff-body);
+        color: var(--f-text);
+        box-sizing: border-box;
+        max-width: 100%;
+      }
+
+      .x-form-wrap *,
+      .x-form-wrap *::before,
+      .x-form-wrap *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* === FORM CONTAINER === */
+      .x-form {
+        position: relative;
+        background: linear-gradient(170deg, rgba(19, 27, 46, .6), rgba(11, 17, 32, .85));
+        border: 1px solid rgba(51, 65, 85, .5);
+        border-radius: 18px;
+        padding: 32px 28px 28px;
+        overflow: hidden;
+        backdrop-filter: blur(12px);
+      }
+
+      .x-form::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, transparent 5%, var(--f-accent) 50%, transparent 95%);
+        opacity: 0.6;
+      }
+
+      /* === HEADER === */
+      .x-form__header {
+        text-align: center;
+        margin-bottom: 24px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(51, 65, 85, .4);
+      }
+
+      .x-form__badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-family: var(--f-ff-mono);
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--f-accent);
+        background: rgba(0, 229, 255, .06);
+        border: 1px solid rgba(0, 229, 255, .18);
+        border-radius: 6px;
+        padding: 5px 14px;
+        margin-bottom: 12px;
+      }
+
+      .x-form__title {
+        font-family: var(--f-ff-head);
+        font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+        font-weight: 700;
+        color: #fff;
+        line-height: 1.25;
+        margin-bottom: 8px;
+      }
+
+      .x-form__subtitle {
+        font-size: 0.8rem;
+        color: var(--f-muted);
+        line-height: 1.55;
+        max-width: 480px;
+        margin: 0 auto;
+      }
+
+      /* === STEPPER === */
+      .x-form__stepper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        margin-bottom: 22px;
+      }
+
+      .x-form__step-dot {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--f-ff-mono);
+        font-size: 12px;
+        font-weight: 700;
+        border: 2px solid rgba(255, 255, 255, .1);
+        background: var(--f-surface);
+        color: var(--f-muted);
+        transition: all .4s cubic-bezier(.16, 1, .3, 1);
+        flex-shrink: 0;
+      }
+
+      .x-form__step-dot--active {
+        border-color: var(--f-accent);
+        background: rgba(0, 229, 255, .12);
+        color: var(--f-accent);
+        box-shadow: 0 0 14px rgba(0, 229, 255, .2);
+      }
+
+      .x-form__step-dot--done {
+        border-color: var(--f-success);
+        background: rgba(16, 185, 129, .15);
+        color: var(--f-success);
+      }
+
+      .x-form__step-line {
+        width: 40px;
+        height: 1px;
+        background: rgba(255, 255, 255, .08);
+        transition: background .4s;
+      }
+
+      .x-form__step-line--done {
+        background: rgba(16, 185, 129, .4);
+      }
+
+      /* === PAGES === */
+      .x-form__page {
+        display: none;
+        animation: formFadeIn .35s ease;
+      }
+
+      .x-form__page--active {
+        display: block;
+      }
+
+      @keyframes formFadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .x-form__page-label {
+        font-family: var(--f-ff-mono);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: .12em;
+        color: var(--f-accent);
+        margin-bottom: 16px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .x-form__page-label::before {
+        content: '';
+        width: 16px;
+        height: 1px;
+        background: var(--f-accent);
+        opacity: .5;
+      }
+
+      /* === ROWS === */
+      .x-form__row {
+        margin-bottom: 16px;
+      }
+
+      .x-form__row--grid2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      @media(max-width: 600px) {
+        .x-form__row--grid2 {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .x-form__row--hidden {
+        display: none;
+      }
+
+      /* === LABELS === */
+      .x-form__label {
+        display: block;
+        font-size: .78rem;
+        font-weight: 600;
+        color: var(--f-text);
+        margin-bottom: 5px;
+        line-height: 1.3;
+      }
+
+      .x-form__label-req {
+        color: var(--f-accent);
+        font-weight: 400;
+        margin-left: 2px;
+      }
+
+      .x-form__label-hint {
+        display: block;
+        font-size: 10px;
+        color: var(--f-muted);
+        font-weight: 400;
+        margin-top: 2px;
+        line-height: 1.4;
+      }
+
+      /* === INPUTS === */
+      .x-form__input,
+      .x-form__select,
+      .x-form__textarea {
+        width: 100%;
+        font-family: var(--f-ff-body);
+        font-size: .85rem;
+        color: var(--f-text);
+        background: var(--f-surface);
+        border: 1px solid rgba(51, 65, 85, .5);
+        border-radius: var(--f-radius-sm);
+        padding: 10px 12px;
+        outline: none;
+        transition: border-color .25s, box-shadow .25s, background .25s;
+        -webkit-appearance: none;
+      }
+
+      .x-form__input::placeholder,
+      .x-form__textarea::placeholder {
+        color: rgba(148, 163, 184, .5);
+      }
+
+      .x-form__input:hover,
+      .x-form__select:hover,
+      .x-form__textarea:hover {
+        border-color: rgba(0, 229, 255, .3);
+        background: var(--f-surface-2);
+      }
+
+      .x-form__input:focus,
+      .x-form__select:focus,
+      .x-form__textarea:focus {
+        border-color: var(--f-accent);
+        box-shadow: 0 0 0 3px rgba(0, 229, 255, .08), 0 0 12px rgba(0, 229, 255, .06);
+        background: var(--f-surface-2);
+      }
+
+      .x-form__input--error,
+      .x-form__select--error {
+        border-color: var(--f-error) !important;
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, .08) !important;
+      }
+
+      .x-form__error-msg {
+        font-size: 11px;
+        color: var(--f-error);
+        margin-top: 4px;
+        display: none;
+        line-height: 1.3;
+      }
+
+      .x-form__error-msg--visible {
+        display: block;
+      }
+
+      .x-form__select {
+        cursor: pointer;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%2394a3b8' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        padding-right: 36px;
+      }
+
+      .x-form__textarea {
+        resize: vertical;
+        min-height: 72px;
+      }
+
+      /* === ROLES === */
+      .x-form__roles {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+
+      @media(max-width: 600px) {
+        .x-form__roles {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      .x-form__role {
+        position: relative;
+        cursor: pointer;
+      }
+
+      .x-form__role input {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .x-form__role-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        padding: 12px 6px 10px;
+        background: var(--f-surface);
+        border: 1px solid rgba(51, 65, 85, .45);
+        border-radius: var(--f-radius);
+        text-align: center;
+        transition: all .3s cubic-bezier(.16, 1, .3, 1);
+      }
+
+      .x-form__role-card:hover {
+        border-color: rgba(0, 229, 255, .3);
+        background: var(--f-surface-2);
+        transform: translateY(-2px);
+      }
+
+      .x-form__role input:checked+.x-form__role-card {
+        border-color: var(--f-accent);
+        background: rgba(0, 229, 255, .06);
+        box-shadow: 0 0 16px rgba(0, 229, 255, .1), inset 0 0 8px rgba(0, 229, 255, .04);
+      }
+
+      .x-form__role-icon {
+        font-size: 20px;
+        line-height: 1;
+      }
+
+      .x-form__role-name {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--f-text);
+        line-height: 1.25;
+      }
+
+      /* === FORMAT CARDS === */
+      .x-form__formats {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .x-form__format {
+        position: relative;
+        cursor: pointer;
+      }
+
+      .x-form__format input {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .x-form__format-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 12px 14px;
+        background: var(--f-surface);
+        border: 1px solid rgba(51, 65, 85, .45);
+        border-radius: var(--f-radius);
+        transition: all .3s cubic-bezier(.16, 1, .3, 1);
+      }
+
+      .x-form__format-card:hover {
+        border-color: rgba(0, 229, 255, .3);
+        background: var(--f-surface-2);
+      }
+
+      .x-form__format input:checked+.x-form__format-card {
+        border-color: var(--f-accent);
+        background: rgba(0, 229, 255, .05);
+        box-shadow: 0 0 14px rgba(0, 229, 255, .08);
+      }
+
+      .x-form__format-radio {
+        width: 16px;
+        height: 16px;
+        border: 2px solid rgba(148, 163, 184, .4);
+        border-radius: 50%;
+        flex-shrink: 0;
+        margin-top: 1px;
+        transition: all .25s;
+        position: relative;
+      }
+
+      .x-form__format input:checked+.x-form__format-card .x-form__format-radio {
+        border-color: var(--f-accent);
+      }
+
+      .x-form__format input:checked+.x-form__format-card .x-form__format-radio::after {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 8px;
+        height: 8px;
+        background: var(--f-accent);
+        border-radius: 50%;
+        box-shadow: 0 0 6px var(--f-accent);
+      }
+
+      .x-form__format-body {
+        flex: 1;
+      }
+
+      .x-form__format-title {
+        font-size: .82rem;
+        font-weight: 700;
+        color: var(--f-text);
+        margin-bottom: 2px;
+      }
+
+      .x-form__format-desc {
+        font-size: 10px;
+        color: var(--f-muted);
+        line-height: 1.45;
+      }
+
+      .x-form__format-time {
+        font-family: var(--f-ff-mono);
+        font-size: 10px;
+        font-weight: 700;
+        color: var(--f-accent);
+        background: rgba(0, 229, 255, .06);
+        border: 1px solid rgba(0, 229, 255, .15);
+        padding: 2px 7px;
+        border-radius: 4px;
+        margin-top: 5px;
+        display: inline-block;
+      }
+
+      /* === CHECKBOXES === */
+      .x-form__check {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        cursor: pointer;
+        margin-bottom: 8px;
+      }
+
+      .x-form__check input {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 16px;
+        height: 16px;
+        border: 2px solid rgba(148, 163, 184, .4);
+        border-radius: 4px;
+        flex-shrink: 0;
+        margin-top: 1px;
+        cursor: pointer;
+        transition: all .2s;
+        position: relative;
+      }
+
+      .x-form__check input:checked {
+        border-color: var(--f-accent);
+        background: var(--f-accent);
+        box-shadow: 0 0 8px rgba(0, 229, 255, .3);
+      }
+
+      .x-form__check input:checked::after {
+        content: '';
+        position: absolute;
+        top: 0px;
+        left: 4px;
+        width: 4px;
+        height: 8px;
+        border: solid #0b1120;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+
+      .x-form__check-text {
+        font-size: .78rem;
+        color: var(--f-muted);
+        line-height: 1.45;
+      }
+
+      .x-form__check-text a {
+        color: var(--f-accent);
+        text-decoration: none;
+        border-bottom: 1px dashed rgba(0, 229, 255, .3);
+      }
+
+      /* === ACTIONS === */
+      .x-form__actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+        padding-top: 16px;
+        border-top: 1px solid rgba(51, 65, 85, .35);
+      }
+
+      .x-form__btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        font-family: var(--f-ff-mono);
+        font-size: .78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .05em;
+        padding: 10px 22px;
+        border-radius: var(--f-radius-sm);
+        cursor: pointer;
+        transition: all .25s;
+        border: 1px solid transparent;
+      }
+
+      .x-form__btn--next {
+        background: var(--f-accent);
+        color: #000;
+        border-color: var(--f-accent);
+      }
+
+      .x-form__btn--next:hover {
+        background: #fff;
+        border-color: #fff;
+        box-shadow: 0 0 14px rgba(0, 229, 255, .4);
+      }
+
+      .x-form__btn--back {
+        background: transparent;
+        color: var(--f-muted);
+        border: none;
+        padding-left: 0;
+      }
+
+      .x-form__btn--back:hover {
+        color: var(--f-accent);
+      }
+
+      .x-form__btn--submit {
+        background: #facc15;
+        color: #b91c1c;
+        border-color: #facc15;
+        font-size: .82rem;
+        padding: 12px 28px;
+      }
+
+      .x-form__btn--submit:hover {
+        background: #fff;
+        color: #000;
+        border-color: #fff;
+        box-shadow: 0 0 16px rgba(250, 204, 21, .4);
+      }
+
+      .x-form__btn svg {
+        width: 14px;
+        height: 14px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      /* === TRUST === */
+      .x-form__trust {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-top: 14px;
+        padding: 12px;
+        background: rgba(19, 27, 46, .4);
+        border-radius: var(--f-radius);
+        border: 1px dashed rgba(51, 65, 85, .35);
+      }
+
+      .x-form__trust-item {
+        font-size: 10px;
+        color: var(--f-muted);
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .x-form__trust-item svg {
+        width: 12px;
+        height: 12px;
+        stroke: var(--f-success);
+        fill: none;
+        stroke-width: 2;
+        flex-shrink: 0;
+      }
+
+      /* === SUCCESS === */
+      .x-form__success {
+        display: none;
+        text-align: center;
+        padding: 28px 16px;
+        animation: formFadeIn .5s ease;
+      }
+
+      .x-form__success--visible {
+        display: block;
+      }
+
+      .x-form__success-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        background: rgba(16, 185, 129, .1);
+        border: 2px solid rgba(16, 185, 129, .3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 16px;
+        box-shadow: 0 0 20px rgba(16, 185, 129, .15);
+      }
+
+      .x-form__success-icon svg {
+        width: 24px;
+        height: 24px;
+        stroke: var(--f-success);
+        fill: none;
+        stroke-width: 2;
+      }
+
+      .x-form__success h3 {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 8px;
+      }
+
+      .x-form__success p {
+        font-size: .82rem;
+        color: var(--f-muted);
+        line-height: 1.6;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      .x-form__success-detail {
+        margin-top: 16px;
+        padding: 14px;
+        background: var(--f-surface);
+        border: 1px solid rgba(51, 65, 85, .4);
+        border-radius: var(--f-radius);
+        text-align: left;
+        font-size: .78rem;
+        color: var(--f-muted);
+        line-height: 1.55;
+      }
+
+      .x-form__success-detail strong {
+        color: var(--f-text);
+      }
+    </style>
+
+    <div class="x-drawer-demo__overlay" id="x-demo-overlay"></div>
+    <div class="x-drawer-demo__panel">
+      <button aria-label="Закрыть" class="x-drawer-demo__close" id="x-demo-close">✕</button>
+
+      <div class="x-form-wrap" id="x-demo-form-wrap">
+        <div class="x-form" id="x-demo-form">
+
+          <!-- HEADER -->
+          <div class="x-form__header">
+            <div class="x-form__badge">Заявка</div>
+            <h3 class="x-form__title">Запросить демо или техсессию</h3>
+            <p class="x-form__subtitle">Заполните форму — мы подберём формат, адаптируем сценарий под вашу ситуацию и
+              свяжемся в течение одного рабочего дня.</p>
+          </div>
+
+          <!-- STEPPER -->
+          <div class="x-form__stepper" id="x-stepper">
+            <div class="x-form__step-dot x-form__step-dot--active" data-step="1">1</div>
+            <div class="x-form__step-line" data-line="1"></div>
+            <div class="x-form__step-dot" data-step="2">2</div>
+            <div class="x-form__step-line" data-line="2"></div>
+            <div class="x-form__step-dot" data-step="3">3</div>
+          </div>
+
+          <!-- PAGE 1: КТО ВЫ -->
+          <div class="x-form__page x-form__page--active" data-page="1">
+            <div class="x-form__page-label">Шаг 1 — О вас и компании</div>
+            <div class="x-form__row x-form__row--grid2">
+              <div>
+                <label class="x-form__label" for="f-name">Имя <span class="x-form__label-req">*</span></label>
+                <input autocomplete="given-name" class="x-form__input" id="f-name" name="name" placeholder="Иван"
+                  required type="text">
+                <div class="x-form__error-msg" id="err-name">Укажите имя</div>
+              </div>
+              <div>
+                <label class="x-form__label" for="f-surname">Фамилия</label>
+                <input autocomplete="family-name" class="x-form__input" id="f-surname" name="surname"
+                  placeholder="Петров" type="text">
+              </div>
+            </div>
+            <div class="x-form__row x-form__row--grid2">
+              <div>
+                <label class="x-form__label" for="f-email">Рабочий email <span
+                    class="x-form__label-req">*</span></label>
+                <input autocomplete="email" class="x-form__input" id="f-email" name="email"
+                  placeholder="i.petrov@agro.ru" required type="email">
+                <div class="x-form__error-msg" id="err-email">Укажите корректный рабочий email</div>
+              </div>
+              <div>
+                <label class="x-form__label" for="f-phone">Телефон <span
+                    class="x-form__label-hint">Необязательно</span></label>
+                <input autocomplete="tel" class="x-form__input" id="f-phone" name="phone"
+                  placeholder="+7 (___) ___-__-__" type="tel">
+              </div>
+            </div>
+            <div class="x-form__row x-form__row--grid2">
+              <div>
+                <label class="x-form__label" for="f-company">Компания <span class="x-form__label-req">*</span></label>
+                <input autocomplete="organization" class="x-form__input" id="f-company" name="company"
+                  placeholder="АО «Агросоюз»" required type="text">
+                <div class="x-form__error-msg" id="err-company">Укажите компанию</div>
+              </div>
+              <div>
+                <label class="x-form__label" for="f-title">Должность</label>
+                <input autocomplete="organization-title" class="x-form__input" id="f-title" name="title"
+                  placeholder="Директор по операциям" type="text">
+              </div>
+            </div>
+            <div class="x-form__row">
+              <label class="x-form__label">Ваша роль <span class="x-form__label-req">*</span><span
+                  class="x-form__label-hint">Мы адаптируем демо под вашу зону ответственности</span></label>
+              <div class="x-form__roles" id="f-roles">
+                <label class="x-form__role"><input name="role" required type="radio" value="coo">
+                  <div class="x-form__role-card"><span class="x-form__role-icon">📊</span><span
+                      class="x-form__role-name">Руководитель / COO</span></div>
+                </label>
+                <label class="x-form__role"><input name="role" type="radio" value="agro">
+                  <div class="x-form__role-card"><span class="x-form__role-icon">🌾</span><span
+                      class="x-form__role-name">Агроном</span></div>
+                </label>
+                <label class="x-form__role"><input name="role" type="radio" value="zoo">
+                  <div class="x-form__role-card"><span class="x-form__role-icon">🐄</span><span
+                      class="x-form__role-name">Зоотехник</span></div>
+                </label>
+                <label class="x-form__role"><input name="role" type="radio" value="mech">
+                  <div class="x-form__role-card"><span class="x-form__role-icon">⚙️</span><span
+                      class="x-form__role-name">Гл. механик</span></div>
+                </label>
+                <label class="x-form__role"><input name="role" type="radio" value="it">
+                  <div class="x-form__role-card"><span class="x-form__role-icon">🔒</span><span
+                      class="x-form__role-name">IT / ИБ</span></div>
+                </label>
+                <label class="x-form__role"><input name="role" type="radio" value="other">
+                  <div class="x-form__role-card"><span class="x-form__role-icon">👤</span><span
+                      class="x-form__role-name">Другая</span></div>
+                </label>
+              </div>
+              <div class="x-form__error-msg" id="err-role">Выберите вашу роль</div>
+            </div>
+          </div>
+
+          <!-- PAGE 2: ЧТО НУЖНО -->
+          <div class="x-form__page" data-page="2">
+            <div class="x-form__page-label">Шаг 2 — Что вам нужно</div>
+            <div class="x-form__row">
+              <label class="x-form__label">Формат <span class="x-form__label-req">*</span></label>
+              <div class="x-form__formats" id="f-formats">
+                <label class="x-form__format"><input checked name="format" required type="radio" value="demo">
+                  <div class="x-form__format-card">
+                    <div class="x-form__format-radio"></div>
+                    <div class="x-form__format-body">
+                      <div class="x-form__format-title">Демо по сценарию</div>
+                      <div class="x-form__format-desc">Покажем цепочку «отклонение → ответственный → решение →
+                        результат» на вашей ситуации.</div><span class="x-form__format-time">30–45 мин</span>
+                    </div>
+                  </div>
+                </label>
+                <label class="x-form__format"><input name="format" type="radio" value="tech">
+                  <div class="x-form__format-card">
+                    <div class="x-form__format-radio"></div>
+                    <div class="x-form__format-body">
+                      <div class="x-form__format-title">Техсессия (IT + ИБ)</div>
+                      <div class="x-form__format-desc">Архитектура, интеграции, безопасность, требования к
+                        инфраструктуре.</div><span class="x-form__format-time">45–60 мин</span>
+                    </div>
+                  </div>
+                </label>
+                <label class="x-form__format"><input name="format" type="radio" value="pilot">
+                  <div class="x-form__format-card">
+                    <div class="x-form__format-radio"></div>
+                    <div class="x-form__format-body">
+                      <div class="x-form__format-title">Обсуждение пилота</div>
+                      <div class="x-form__format-desc">KPI, метрики, источники данных, границы пилота, критерии приёмки.
+                      </div><span class="x-form__format-time">30–45 мин</span>
+                    </div>
+                  </div>
+                </label>
+                <label class="x-form__format"><input name="format" type="radio" value="docs">
+                  <div class="x-form__format-card">
+                    <div class="x-form__format-radio"></div>
+                    <div class="x-form__format-body">
+                      <div class="x-form__format-title">Только документы</div>
+                      <div class="x-form__format-desc">One-pager, Pilot Blueprint, Architecture / Security / Compliance
+                        — без звонка.</div><span class="x-form__format-time">Отправим на email</span>
+                    </div>
+                  </div>
+                </label>
+              </div>
+            </div>
+            <div class="x-form__row" id="row-focus">
+              <label class="x-form__label" for="f-focus">Фокус / что сейчас актуально<span
+                  class="x-form__label-hint">Чтобы мы подготовили релевантный сценарий</span></label>
+              <select class="x-form__select" id="f-focus" name="focus">
+                <option value="">— Выберите —</option>
+                <option value="season">Сезонная кампания: окна работ, сроки, техника</option>
+                <option value="equipment">Мониторинг и ТОиР техники</option>
+                <option value="logistics">Логистика и простои</option>
+                <option value="compliance">Комплаенс и документооборот (в т.ч. «Меркурий»)</option>
+                <option value="livestock">Животноводство: кормовая логистика, KPI ферм</option>
+                <option value="integration">Интеграции с ERP/1С/телематикой</option>
+                <option value="security">ИБ, роли и контроль доступа</option>
+                <option value="general">Общий обзор платформы</option>
+              </select>
+            </div>
+            <div class="x-form__row x-form__row--grid2">
+              <div>
+                <label class="x-form__label" for="f-scale">Масштаб хозяйства<span class="x-form__label-hint">Площадь
+                    обработки или поголовье</span></label>
+                <select class="x-form__select" id="f-scale" name="scale">
+                  <option value="">— Необязательно —</option>
+                  <option value="small">До 10 000 га / до 1 000 голов</option>
+                  <option value="medium">10 000 – 50 000 га / 1 000 – 10 000 голов</option>
+                  <option value="large">50 000 – 200 000 га / 10 000+ голов</option>
+                  <option value="xlarge">200 000+ га / холдинг</option>
+                </select>
+              </div>
+              <div>
+                <label class="x-form__label" for="f-fleet">Парк техники<span class="x-form__label-hint">Примерное кол-во
+                    единиц</span></label>
+                <select class="x-form__select" id="f-fleet" name="fleet">
+                  <option value="">— Необязательно —</option>
+                  <option value="<50">До 50 единиц</option>
+                  <option value="50-200">50 – 200</option>
+                  <option value="200-500">200 – 500</option>
+                  <option value="500+">500+</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- PAGE 3: ДЕТАЛИ -->
+          <div class="x-form__page" data-page="3">
+            <div class="x-form__page-label">Шаг 3 — Детали и отправка</div>
+            <div class="x-form__row">
+              <label class="x-form__label">Какие системы уже используете?<span class="x-form__label-hint">Отметьте
+                  актуальное — поможет подготовить интеграционный сценарий</span></label>
+              <div class="x-form__row--grid2" style="gap:5px;">
+                <label class="x-form__check"><input name="sys" type="checkbox" value="erp"><span
+                    class="x-form__check-text">ERP / 1С</span></label>
+                <label class="x-form__check"><input name="sys" type="checkbox" value="telemetry"><span
+                    class="x-form__check-text">Телематика (GPS/CAN)</span></label>
+                <label class="x-form__check"><input name="sys" type="checkbox" value="iot"><span
+                    class="x-form__check-text">Датчики IoT</span></label>
+                <label class="x-form__check"><input name="sys" type="checkbox" value="bi"><span
+                    class="x-form__check-text">BI (Power BI / Tableau)</span></label>
+                <label class="x-form__check"><input name="sys" type="checkbox" value="mercury"><span
+                    class="x-form__check-text">«Меркурий» / ФГИС</span></label>
+                <label class="x-form__check"><input name="sys" type="checkbox" value="none"><span
+                    class="x-form__check-text">Пока ничего из этого</span></label>
+              </div>
+            </div>
+            <div class="x-form__row">
+              <label class="x-form__label" for="f-urgency">Горизонт решения</label>
+              <select class="x-form__select" id="f-urgency" name="urgency">
+                <option value="">— Не определён —</option>
+                <option value="asap">Нужно к сезону (ближайшие 1–2 месяца)</option>
+                <option value="quarter">В ближайший квартал</option>
+                <option value="research">Исследуем рынок / собираем информацию</option>
+                <option value="nextyr">Планируем на следующий год</option>
+              </select>
+            </div>
+            <div class="x-form__row">
+              <label class="x-form__label" for="f-comment">Комментарий<span class="x-form__label-hint">Что важно учесть?
+                  Специфика, ограничения, вопросы</span></label>
+              <textarea class="x-form__textarea" id="f-comment" name="comment"
+                placeholder="Например: «Интересует мониторинг 120 комбайнов в сезон уборки, сейчас на Wialon + 1С:УПП»"></textarea>
+            </div>
+            <div class="x-form__row">
+              <label class="x-form__check"><input name="nda" type="checkbox" value="yes"><span
+                  class="x-form__check-text">Потребуется NDA перед обменом данными</span></label>
+            </div>
+            <div class="x-form__row">
+              <label class="x-form__check"><input id="f-consent" name="consent" required type="checkbox"
+                  value="yes"><span class="x-form__check-text">Я согласен на обработку персональных данных. <a
+                    href="#">Политика конфиденциальности</a></span></label>
+              <div class="x-form__error-msg" id="err-consent">Необходимо дать согласие</div>
+            </div>
+          </div>
+
+          <!-- SUCCESS -->
+          <div class="x-form__success" id="x-form-success">
+            <div class="x-form__success-icon"><svg viewBox="0 0 24 24">
+                <polyline points="20 6 9 17 4 12" />
+              </svg></div>
+            <h3>Заявка отправлена</h3>
+            <p>Мы свяжемся с вами в течение одного рабочего дня, чтобы согласовать формат и время.</p>
+            <div class="x-form__success-detail" id="x-success-summary"></div>
+          </div>
+
+          <!-- ACTIONS -->
+          <div class="x-form__actions" id="x-form-actions">
+            <button class="x-form__btn x-form__btn--back" id="btn-back" style="visibility:hidden" type="button"><svg
+                viewBox="0 0 24 24">
+                <polyline points="15 18 9 12 15 6" />
+              </svg> Назад</button>
+            <button class="x-form__btn x-form__btn--next" id="btn-next" type="button">Далее <svg viewBox="0 0 24 24">
+                <polyline points="9 18 15 12 9 6" />
+              </svg></button>
+            <button class="x-form__btn x-form__btn--submit" id="btn-submit" style="display:none" type="button">Отправить
+              заявку</button>
+          </div>
+
+          <!-- TRUST -->
+          <div class="x-form__trust">
+            <span class="x-form__trust-item"><svg viewBox="0 0 24 24">
+                <polyline points="20 6 9 17 4 12" />
+              </svg> Без обязательств</span>
+            <span class="x-form__trust-item"><svg viewBox="0 0 24 24">
+                <polyline points="20 6 9 17 4 12" />
+              </svg> NDA по запросу</span>
+            <span class="x-form__trust-item"><svg viewBox="0 0 24 24">
+                <polyline points="20 6 9 17 4 12" />
+              </svg> Данные не передаём</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      /* === DEMO FORM DRAWER OPEN/CLOSE === */
+      var demoDrawer = document.getElementById('x-drawer-demo');
+      if (!demoDrawer) return;
+
+      function openDemoDrawer(e) {
+        if (e) e.preventDefault();
+        demoDrawer.classList.add('x-drawer-demo--open');
+        document.documentElement.style.overflow = 'hidden';
+        document.getElementById('x-demo-close').focus();
+      }
+      function closeDemoDrawer() {
+        demoDrawer.classList.remove('x-drawer-demo--open');
+        document.documentElement.style.overflow = '';
+      }
+
+      // Wire all demo buttons (href="#x-request-demo" and class x-btn--demo)
+      document.querySelectorAll('a[href="#x-request-demo"]').forEach(function (a) {
+        a.addEventListener('click', openDemoDrawer);
+      });
+      // Also header button
+      document.querySelectorAll('.x-btn--demo').forEach(function (btn) {
+        btn.addEventListener('click', openDemoDrawer);
+      });
+
+      document.getElementById('x-demo-overlay').addEventListener('click', closeDemoDrawer);
+      document.getElementById('x-demo-close').addEventListener('click', closeDemoDrawer);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && demoDrawer.classList.contains('x-drawer-demo--open')) closeDemoDrawer();
+      });
+
+      /* === FORM WIZARD LOGIC === */
+      var TOTAL_PAGES = 3;
+      var currentPage = 1;
+      var wrap = document.getElementById('x-demo-form-wrap');
+      var pages = wrap.querySelectorAll('.x-form__page');
+      var dots = wrap.querySelectorAll('.x-form__step-dot');
+      var lines = wrap.querySelectorAll('.x-form__step-line');
+      var btnBack = document.getElementById('btn-back');
+      var btnNext = document.getElementById('btn-next');
+      var btnSubmit = document.getElementById('btn-submit');
+      var actions = document.getElementById('x-form-actions');
+      var successBlock = document.getElementById('x-form-success');
+      var successSummary = document.getElementById('x-success-summary');
+      var rowFocus = document.getElementById('row-focus');
+      var formatInputs = wrap.querySelectorAll('input[name="format"]');
+
+      function updateConditional() {
+        var sel = wrap.querySelector('input[name="format"]:checked');
+        if (sel && sel.value === 'docs') rowFocus.classList.add('x-form__row--hidden');
+        else rowFocus.classList.remove('x-form__row--hidden');
+      }
+      formatInputs.forEach(function (inp) { inp.addEventListener('change', updateConditional); });
+      updateConditional();
+
+      // "None" checkbox logic
+      var sysCbs = wrap.querySelectorAll('input[name="sys"]');
+      sysCbs.forEach(function (cb) {
+        cb.addEventListener('change', function () {
+          if (cb.value === 'none' && cb.checked) {
+            sysCbs.forEach(function (o) { if (o.value !== 'none') o.checked = false; });
+          } else if (cb.value !== 'none' && cb.checked) {
+            var n = wrap.querySelector('input[name="sys"][value="none"]');
+            if (n) n.checked = false;
+          }
+        });
+      });
+
+      function showPage(n) {
+        currentPage = n;
+        pages.forEach(function (p) { p.classList.remove('x-form__page--active'); });
+        var target = wrap.querySelector('.x-form__page[data-page="' + n + '"]');
+        if (target) target.classList.add('x-form__page--active');
+        dots.forEach(function (d) {
+          var s = parseInt(d.getAttribute('data-step'));
+          d.classList.remove('x-form__step-dot--active', 'x-form__step-dot--done');
+          if (s === n) d.classList.add('x-form__step-dot--active');
+          if (s < n) { d.classList.add('x-form__step-dot--done'); d.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>'; }
+          else d.textContent = s;
+        });
+        lines.forEach(function (l) { var ln = parseInt(l.getAttribute('data-line')); l.classList.toggle('x-form__step-line--done', ln < n); });
+        btnBack.style.visibility = n === 1 ? 'hidden' : 'visible';
+        if (n === TOTAL_PAGES) { btnNext.style.display = 'none'; btnSubmit.style.display = 'inline-flex'; }
+        else { btnNext.style.display = 'inline-flex'; btnSubmit.style.display = 'none'; }
+      }
+
+      function clearErrors() {
+        wrap.querySelectorAll('.x-form__error-msg').forEach(function (m) { m.classList.remove('x-form__error-msg--visible'); });
+        wrap.querySelectorAll('.x-form__input--error,.x-form__select--error').forEach(function (el) { el.classList.remove('x-form__input--error', 'x-form__select--error'); });
+      }
+      function showError(inputId, msgId) {
+        var inp = document.getElementById(inputId);
+        var msg = document.getElementById(msgId);
+        if (inp) inp.classList.add('x-form__input--error');
+        if (msg) msg.classList.add('x-form__error-msg--visible');
+      }
+      function validatePage(n) {
+        clearErrors();
+        var valid = true;
+        if (n === 1) {
+          var name = document.getElementById('f-name');
+          var email = document.getElementById('f-email');
+          var company = document.getElementById('f-company');
+          var roleSelected = wrap.querySelector('input[name="role"]:checked');
+          if (!name.value.trim()) { showError('f-name', 'err-name'); valid = false; }
+          var emailVal = email.value.trim();
+          var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          var freeProviders = ['gmail.com', 'mail.ru', 'yandex.ru', 'ya.ru', 'bk.ru', 'inbox.ru', 'list.ru', 'rambler.ru', 'hotmail.com', 'outlook.com', 'yahoo.com', 'icloud.com'];
+          if (!emailVal || !emailRe.test(emailVal)) { showError('f-email', 'err-email'); valid = false; }
+          else {
+            var domain = emailVal.split('@')[1].toLowerCase();
+            var isFree = false;
+            for (var i = 0; i < freeProviders.length; i++) { if (domain === freeProviders[i]) { isFree = true; break; } }
+            if (isFree) { document.getElementById('err-email').textContent = 'Пожалуйста, используйте рабочий email'; showError('f-email', 'err-email'); valid = false; }
+          }
+          if (!company.value.trim()) { showError('f-company', 'err-company'); valid = false; }
+          if (!roleSelected) { document.getElementById('err-role').classList.add('x-form__error-msg--visible'); valid = false; }
+        }
+        if (n === 3) {
+          var consent = document.getElementById('f-consent');
+          if (!consent.checked) { document.getElementById('err-consent').classList.add('x-form__error-msg--visible'); valid = false; }
+        }
+        return valid;
+      }
+
+      // Phone mask
+      var phoneInput = document.getElementById('f-phone');
+      if (phoneInput) {
+        phoneInput.addEventListener('input', function () {
+          var v = phoneInput.value.replace(/\D/g, '');
+          if (v.length === 0) { phoneInput.value = ''; return; }
+          if (v[0] === '8') v = '7' + v.slice(1);
+          if (v[0] !== '7') v = '7' + v;
+          var f = '+7';
+          if (v.length > 1) f += ' (' + v.slice(1, 4);
+          if (v.length > 4) f += ') ' + v.slice(4, 7);
+          if (v.length > 7) f += '-' + v.slice(7, 9);
+          if (v.length > 9) f += '-' + v.slice(9, 11);
+          phoneInput.value = f;
+        });
+      }
+
+      function gatherData() {
+        var d = {};
+        d.name = document.getElementById('f-name').value.trim();
+        d.surname = document.getElementById('f-surname').value.trim();
+        d.email = document.getElementById('f-email').value.trim();
+        d.phone = document.getElementById('f-phone').value.trim();
+        d.company = document.getElementById('f-company').value.trim();
+        d.title = document.getElementById('f-title').value.trim();
+        var r = wrap.querySelector('input[name="role"]:checked'); d.role = r ? r.value : '';
+        var fm = wrap.querySelector('input[name="format"]:checked'); d.format = fm ? fm.value : '';
+        d.focus = document.getElementById('f-focus').value;
+        d.scale = document.getElementById('f-scale').value;
+        d.fleet = document.getElementById('f-fleet').value;
+        var sys = []; wrap.querySelectorAll('input[name="sys"]:checked').forEach(function (cb) { sys.push(cb.value); }); d.systems = sys;
+        d.urgency = document.getElementById('f-urgency').value;
+        d.comment = document.getElementById('f-comment').value.trim();
+        d.nda = wrap.querySelector('input[name="nda"]').checked;
+        return d;
+      }
+
+      function showSuccess(data) {
+        var roleNames = { coo: 'Руководитель / COO', agro: 'Агроном', zoo: 'Зоотехник', mech: 'Гл. механик', it: 'IT / ИБ', other: 'Другая' };
+        var fmtNames = { demo: 'Демо по сценарию', tech: 'Техсессия (IT+ИБ)', pilot: 'Обсуждение пилота', docs: 'Только документы' };
+        pages.forEach(function (p) { p.classList.remove('x-form__page--active'); });
+        actions.style.display = 'none';
+        successBlock.classList.add('x-form__success--visible');
+        successSummary.innerHTML = '<strong>Формат:</strong> ' + (fmtNames[data.format] || data.format) + '<br><strong>Роль:</strong> ' + (roleNames[data.role] || data.role) + '<br><strong>Компания:</strong> ' + data.company + (data.nda ? '<br><strong>NDA:</strong> потребуется' : '');
+      }
+
+      btnNext.addEventListener('click', function () { if (validatePage(currentPage)) showPage(currentPage + 1); });
+      btnBack.addEventListener('click', function () { if (currentPage > 1) showPage(currentPage - 1); });
+      btnSubmit.addEventListener('click', function () {
+        if (!validatePage(currentPage)) return;
+        var data = gatherData();
+        // === STUB: future Google Sheets integration ===
+        console.log('[AgroTactic] Demo form submitted:', JSON.stringify(data, null, 2));
+        showSuccess(data);
+      });
+
+      // Clear errors on interaction
+      wrap.querySelectorAll('.x-form__input,.x-form__select,.x-form__textarea').forEach(function (el) {
+        el.addEventListener('input', function () { el.classList.remove('x-form__input--error', 'x-form__select--error'); });
+      });
+      wrap.querySelectorAll('input[name="role"]').forEach(function (r) {
+        r.addEventListener('change', function () { document.getElementById('err-role').classList.remove('x-form__error-msg--visible'); });
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      'use strict';
+
+      /* === STICKY HEADER === */
+      var header = document.getElementById('x-header');
+      if (header) {
+        var ticking = false;
+        window.addEventListener('scroll', function () {
+          if (!ticking) {
+            window.requestAnimationFrame(function () {
+              header.classList.toggle('x-header--sticky', window.scrollY > 140);
+              ticking = false;
+            });
+            ticking = true;
+          }
+        });
+      }
+
+      /* === BURGER MENU === */
+      var burger = document.getElementById('x-burger');
+      if (burger) {
+        burger.addEventListener('click', function () {
+          header.classList.toggle('x-header--menu-open');
+          burger.innerHTML = header.classList.contains('x-header--menu-open') ? '&#10005;' : '&#9776;';
+        });
+      }
+
+      /* === HERO ROLE TABS === */
+      document.querySelectorAll('.x-site .x-tab').forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          document.querySelectorAll('.x-site .x-tab').forEach(function (t) {
+            t.classList.remove('x-tab--active');
+            t.setAttribute('aria-selected', 'false');
           });
-          ticking = true;
-        }
-      });
-    }
-
-    /* === BURGER MENU === */
-    var burger = document.getElementById('x-burger');
-    if (burger) {
-      burger.addEventListener('click', function () {
-        header.classList.toggle('x-header--menu-open');
-        burger.innerHTML = header.classList.contains('x-header--menu-open') ? '&#10005;' : '&#9776;';
-      });
-    }
-
-    /* === HERO ROLE TABS === */
-    document.querySelectorAll('.x-site .x-tab').forEach(function (tab) {
-      tab.addEventListener('click', function () {
-        document.querySelectorAll('.x-site .x-tab').forEach(function (t) {
-          t.classList.remove('x-tab--active');
-          t.setAttribute('aria-selected', 'false');
+          tab.classList.add('x-tab--active');
+          tab.setAttribute('aria-selected', 'true');
+          document.querySelectorAll('.x-site .x-tab-panel').forEach(function (p) {
+            p.classList.remove('x-tab-panel--active');
+          });
+          var panelK = tab.getAttribute('data-panel');
+          var tgt = document.getElementById('panel-' + panelK);
+          if (tgt) tgt.classList.add('x-tab-panel--active');
+          if (window.renderHotspots) window.renderHotspots(panelK);
         });
-        tab.classList.add('x-tab--active');
-        tab.setAttribute('aria-selected', 'true');
-        document.querySelectorAll('.x-site .x-tab-panel').forEach(function (p) {
-          p.classList.remove('x-tab-panel--active');
+      });
+
+      /* === AUTONOMY SWITCHER === */
+      var autoBtns = document.querySelectorAll('.x-site .x-auto-btn');
+      var autoPanels = document.querySelectorAll('.x-site .x-auto-panel');
+      var autoProgress = document.getElementById('x-auto-progress');
+
+      autoBtns.forEach(function (btn, index) {
+        btn.addEventListener('click', function () {
+          autoBtns.forEach(function (b) { b.classList.remove('x-auto-btn--active'); });
+          autoPanels.forEach(function (p) { p.classList.remove('x-auto-panel--active'); });
+
+          btn.classList.add('x-auto-btn--active');
+          var level = btn.getAttribute('data-level');
+          var panel = document.getElementById('auto-panel-' + level);
+          if (panel) panel.classList.add('x-auto-panel--active');
         });
-        var panelK = tab.getAttribute('data-panel');
-        var tgt = document.getElementById('panel-' + panelK);
-        if (tgt) tgt.classList.add('x-tab-panel--active');
-        if (window.renderHotspots) window.renderHotspots(panelK);
       });
-    });
 
-    /* === AUTONOMY SWITCHER === */
-    var autoBtns = document.querySelectorAll('.x-site .x-auto-btn');
-    var autoPanels = document.querySelectorAll('.x-site .x-auto-panel');
-    var autoProgress = document.getElementById('x-auto-progress');
-
-    autoBtns.forEach(function (btn, index) {
-      btn.addEventListener('click', function () {
-        autoBtns.forEach(function (b) { b.classList.remove('x-auto-btn--active'); });
-        autoPanels.forEach(function (p) { p.classList.remove('x-auto-panel--active'); });
-
-        btn.classList.add('x-auto-btn--active');
-        var level = btn.getAttribute('data-level');
-        var panel = document.getElementById('auto-panel-' + level);
-        if (panel) panel.classList.add('x-auto-panel--active');
+      /* === ACCORDION === */
+      document.querySelectorAll('.x-site .x-acc-item__head').forEach(function (b) {
+        b.addEventListener('click', function () {
+          b.parentElement.classList.toggle('x-acc-item--open');
+        });
       });
-    });
 
-    /* === ACCORDION === */
-    document.querySelectorAll('.x-site .x-acc-item__head').forEach(function (b) {
-      b.addEventListener('click', function () {
-        b.parentElement.classList.toggle('x-acc-item--open');
-      });
-    });
-
-    /* === DRAWER === */
-    var drawer = document.getElementById('x-drawer');
-    function openDrawer() {
-      drawer.classList.add('x-drawer--open');
-      document.documentElement.style.overflow = 'hidden';
-      document.getElementById('x-drawer-close').focus();
-    }
-    function closeDrawer() {
-      drawer.classList.remove('x-drawer--open');
-      document.documentElement.style.overflow = '';
-    }
-    ['x-open-drawer', 'x-open-drawer-2', 'x-open-drawer-3', 'x-open-trust', 'x-open-procurement'].forEach(function (id) {
-      var el = document.getElementById(id);
-      if (el) el.addEventListener('click', openDrawer);
-    });
-    document.getElementById('x-drawer-overlay').addEventListener('click', closeDrawer);
-    ['x-drawer-close', 'x-drawer-close-2'].forEach(function (id) {
-      var el = document.getElementById(id);
-      if (el) el.addEventListener('click', closeDrawer);
-    });
-    document.querySelectorAll('.x-site .x-badge').forEach(function (b) {
-      b.addEventListener('click', openDrawer);
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && drawer.classList.contains('x-drawer--open')) closeDrawer();
-    });
-
-    /* === DOC-LINK placeholders → open drawer === */
-    document.querySelectorAll('.x-site .x-doc-link').forEach(function (link) {
-      link.addEventListener('click', function (e) {
-        e.preventDefault();
-        openDrawer();
-      });
-    });
-
-    /* === DYNAMIC HOTSPOTS DATA & LOGIC === */
-    var HOTSPOT_DATA = {
-      coo: [
-        { key: "KPI", text: "План-факт и KPI по подразделениям/кластерам в одном экране." },
-        { key: "Exceptions", text: "Очередь отклонений: приоритет → ответственный → срок реакции → статус." },
-        { key: "Economics", text: "Экономический эффект по сценариям: простои, логистика, дисциплина процессов, ошибки." },
-        { key: "Pilot Status", text: "Пилот 6–8 недель: метрики, критерии приёмки, текущий прогресс, артефакты." },
-        { key: "Board Pack", text: "Готовые материалы для комитета: KPI, риски, план внедрения, решения по следующему шагу." }
-      ],
-      it: [
-        { key: "Integrations", text: "ERP/1С, телематика, BI, API: подключение поверх существующего контура без замены." },
-        { key: "Access", text: "Роли и права, минимальные привилегии, SSO/MFA (если есть) — управляемый доступ." },
-        { key: "Audit Trail", text: "Кто-что-когда-почему: полная трассировка действий пользователей и системных событий." },
-        { key: "Security Controls", text: "Шифрование, сегментация, ключи/токены, политика передачи/хранения данных." },
-        { key: "Observability", text: "Мониторинг интеграций: статусы коннектекторов, ошибки обмена, SLA и алерты по данным." }
-      ],
-      eng: [
-        { key: "Missions", text: "Задания, маршруты, статусы выполнения и контроль отклонений “по месту и времени”." },
-        { key: "Safety/ODD", text: "Геозоны, ограничения применимости, безопасные режимы, сценарии деградации (fail-safe)." },
-        { key: "Alerts", text: "Алерты по рискам выполнения: отклонение траектории/режима/условий → действие → закрытие." },
-        { key: "Map Layers", text: "Поля, геозоны, маршруты, участки работ — слойно и прозрачно для управления." },
-        { key: "Incident Review", text: "Журнал событий и решений: что произошло → кто вмешался → какое действие выполнено → результат." }
-      ],
-      mech: [
-        { key: "Diagnostics", text: "Отклонения телематики/датчиков: ранние признаки поломки до простоя." },
-        { key: "Maintenance Queue", text: "Наработка/регламент → очередь работ → назначение исполнителя → контроль выполнения." },
-        { key: "Downtime", text: "Причины простоев, длительность, влияние на план-факт, ответственность и статус устранения." },
-        { key: "Parts", text: "Потребность по ТО/инцидентам, критичность, сроки, история замен и причин." },
-        { key: "Service Log", text: "Журнал обслуживаний по нормативам: когда/что/кем/почему, с прозрачным audit trail." }
-      ],
-      agro: [
-        { key: "Field Plan-Fact", text: "План-факт работ в разрезе культур/полей: окна операций, отклонения, причины." },
-        { key: "Ops Quality", text: "Перекрытия/пропуски/скорости/нормы внесения + карта фактического выполнения." },
-        { key: "Windows", text: "Контроль “окон” и готовности ресурсов: риск срыва сроков и сценарии реагирования." },
-        { key: "Map", text: "Карта полей и участков: где сделано/не сделано, где риск, где нужно вмешательство." },
-        { key: "Season Risks", text: "Погодные/технологические/ресурсные риски: алерты, приоритеты, ответственные, план действий." }
-      ],
-      zoo: [
-        { key: "Feed Logistics", text: "План-факт заготовки/доставки, очередь задач, отклонения и ответственные." },
-        { key: "Feed Quality", text: "Партии/показатели/события отклонений: контроль качества и реакции." },
-        { key: "Traceability", text: "Трассировка “партия → рацион → событие → результат” для разборов и контроля." },
-        { key: "Farm Ops", text: "Журнал событий: кормление/перемещения/вет-события, нарушения регламентов, аудит." },
-        { key: "KPI", text: "KPI по фермам/участкам: отклонения, динамика, точки риска и управленческие действия." }
-      ]
-    };
-
-    window.renderHotspots = function (roleKey) {
-      var container = document.getElementById('x-hotspots');
-      if (!container) return;
-      var data = HOTSPOT_DATA[roleKey] || [];
-      container.innerHTML = '';
-      data.forEach(function (item) {
-        var btn = document.createElement('button');
-        btn.className = 'x-hotspot';
-        btn.type = 'button';
-        btn.innerHTML =
-          '<div class="x-hotspot__beacon"></div>' +
-          '<div class="x-hotspot__callout">' +
-          '<div class="x-hotspot__key">' + item.key + '</div>' +
-          '<div class="x-hotspot__text">' + item.text + '</div>' +
-          '</div>';
-        container.appendChild(btn);
-      });
-    };
-
-    var hotspotsContainer = document.getElementById('x-hotspots');
-    if (hotspotsContainer) {
-      function closeAllHotspots() {
-        var all = hotspotsContainer.querySelectorAll('.x-hotspot.is-active');
-        all.forEach(function (el) { el.classList.remove('is-active'); });
+      /* === DRAWER === */
+      var drawer = document.getElementById('x-drawer');
+      function openDrawer() {
+        drawer.classList.add('x-drawer--open');
+        document.documentElement.style.overflow = 'hidden';
+        document.getElementById('x-drawer-close').focus();
       }
-
-      hotspotsContainer.addEventListener('click', function (e) {
-        var btn = e.target.closest('.x-hotspot');
-        if (!btn) return;
-        var wasActive = btn.classList.contains('is-active');
-        closeAllHotspots();
-        if (!wasActive) btn.classList.add('is-active');
+      function closeDrawer() {
+        drawer.classList.remove('x-drawer--open');
+        document.documentElement.style.overflow = '';
+      }
+      ['x-open-drawer', 'x-open-drawer-2', 'x-open-drawer-3', 'x-open-trust', 'x-open-procurement'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.addEventListener('click', openDrawer);
+      });
+      document.getElementById('x-drawer-overlay').addEventListener('click', closeDrawer);
+      ['x-drawer-close', 'x-drawer-close-2'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.addEventListener('click', closeDrawer);
+      });
+      document.querySelectorAll('.x-site .x-badge').forEach(function (b) {
+        b.addEventListener('click', openDrawer);
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && drawer.classList.contains('x-drawer--open')) closeDrawer();
       });
 
-      hotspotsContainer.addEventListener('mouseover', function (e) {
-        if (!window.matchMedia('(hover: hover)').matches) return;
-        var btn = e.target.closest('.x-hotspot');
-        if (btn) {
+      /* === DOC-LINK placeholders → open drawer === */
+      document.querySelectorAll('.x-site .x-doc-link').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          openDrawer();
+        });
+      });
+
+      /* === DYNAMIC HOTSPOTS DATA & LOGIC === */
+      var HOTSPOT_DATA = {
+        coo: [
+          { key: "KPI", text: "План-факт и KPI по подразделениям/кластерам в одном экране." },
+          { key: "Exceptions", text: "Очередь отклонений: приоритет → ответственный → срок реакции → статус." },
+          { key: "Economics", text: "Экономический эффект по сценариям: простои, логистика, дисциплина процессов, ошибки." },
+          { key: "Pilot Status", text: "Пилот 6–8 недель: метрики, критерии приёмки, текущий прогресс, артефакты." },
+          { key: "Board Pack", text: "Готовые материалы для комитета: KPI, риски, план внедрения, решения по следующему шагу." }
+        ],
+        it: [
+          { key: "Integrations", text: "ERP/1С, телематика, BI, API: подключение поверх существующего контура без замены." },
+          { key: "Access", text: "Роли и права, минимальные привилегии, SSO/MFA (если есть) — управляемый доступ." },
+          { key: "Audit Trail", text: "Кто-что-когда-почему: полная трассировка действий пользователей и системных событий." },
+          { key: "Security Controls", text: "Шифрование, сегментация, ключи/токены, политика передачи/хранения данных." },
+          { key: "Observability", text: "Мониторинг интеграций: статусы коннектекторов, ошибки обмена, SLA и алерты по данным." }
+        ],
+        eng: [
+          { key: "Missions", text: "Задания, маршруты, статусы выполнения и контроль отклонений “по месту и времени”." },
+          { key: "Safety/ODD", text: "Геозоны, ограничения применимости, безопасные режимы, сценарии деградации (fail-safe)." },
+          { key: "Alerts", text: "Алерты по рискам выполнения: отклонение траектории/режима/условий → действие → закрытие." },
+          { key: "Map Layers", text: "Поля, геозоны, маршруты, участки работ — слойно и прозрачно для управления." },
+          { key: "Incident Review", text: "Журнал событий и решений: что произошло → кто вмешался → какое действие выполнено → результат." }
+        ],
+        mech: [
+          { key: "Diagnostics", text: "Отклонения телематики/датчиков: ранние признаки поломки до простоя." },
+          { key: "Maintenance Queue", text: "Наработка/регламент → очередь работ → назначение исполнителя → контроль выполнения." },
+          { key: "Downtime", text: "Причины простоев, длительность, влияние на план-факт, ответственность и статус устранения." },
+          { key: "Parts", text: "Потребность по ТО/инцидентам, критичность, сроки, история замен и причин." },
+          { key: "Service Log", text: "Журнал обслуживаний по нормативам: когда/что/кем/почему, с прозрачным audit trail." }
+        ],
+        agro: [
+          { key: "Field Plan-Fact", text: "План-факт работ в разрезе культур/полей: окна операций, отклонения, причины." },
+          { key: "Ops Quality", text: "Перекрытия/пропуски/скорости/нормы внесения + карта фактического выполнения." },
+          { key: "Windows", text: "Контроль “окон” и готовности ресурсов: риск срыва сроков и сценарии реагирования." },
+          { key: "Map", text: "Карта полей и участков: где сделано/не сделано, где риск, где нужно вмешательство." },
+          { key: "Season Risks", text: "Погодные/технологические/ресурсные риски: алерты, приоритеты, ответственные, план действий." }
+        ],
+        zoo: [
+          { key: "Feed Logistics", text: "План-факт заготовки/доставки, очередь задач, отклонения и ответственные." },
+          { key: "Feed Quality", text: "Партии/показатели/события отклонений: контроль качества и реакции." },
+          { key: "Traceability", text: "Трассировка “партия → рацион → событие → результат” для разборов и контроля." },
+          { key: "Farm Ops", text: "Журнал событий: кормление/перемещения/вет-события, нарушения регламентов, аудит." },
+          { key: "KPI", text: "KPI по фермам/участкам: отклонения, динамика, точки риска и управленческие действия." }
+        ]
+      };
+
+      window.renderHotspots = function (roleKey) {
+        var container = document.getElementById('x-hotspots');
+        if (!container) return;
+        var data = HOTSPOT_DATA[roleKey] || [];
+        container.innerHTML = '';
+        data.forEach(function (item) {
+          var btn = document.createElement('button');
+          btn.className = 'x-hotspot';
+          btn.type = 'button';
+          btn.innerHTML =
+            '<div class="x-hotspot__beacon"></div>' +
+            '<div class="x-hotspot__callout">' +
+            '<div class="x-hotspot__key">' + item.key + '</div>' +
+            '<div class="x-hotspot__text">' + item.text + '</div>' +
+            '</div>';
+          container.appendChild(btn);
+        });
+      };
+
+      var hotspotsContainer = document.getElementById('x-hotspots');
+      if (hotspotsContainer) {
+        function closeAllHotspots() {
+          var all = hotspotsContainer.querySelectorAll('.x-hotspot.is-active');
+          all.forEach(function (el) { el.classList.remove('is-active'); });
+        }
+
+        hotspotsContainer.addEventListener('click', function (e) {
+          var btn = e.target.closest('.x-hotspot');
+          if (!btn) return;
+          var wasActive = btn.classList.contains('is-active');
           closeAllHotspots();
-          btn.classList.add('is-active');
-        }
-      });
+          if (!wasActive) btn.classList.add('is-active');
+        });
 
-      hotspotsContainer.addEventListener('mouseout', function (e) {
-        if (!window.matchMedia('(hover: hover)').matches) return;
-        var btn = e.target.closest('.x-hotspot');
-        if (btn) {
-          btn.classList.remove('is-active');
-        }
-      });
+        hotspotsContainer.addEventListener('mouseover', function (e) {
+          if (!window.matchMedia('(hover: hover)').matches) return;
+          var btn = e.target.closest('.x-hotspot');
+          if (btn) {
+            closeAllHotspots();
+            btn.classList.add('is-active');
+          }
+        });
 
-      hotspotsContainer.addEventListener('focusin', function (e) {
-        var btn = e.target.closest('.x-hotspot');
-        if (btn) {
-          closeAllHotspots();
-          btn.classList.add('is-active');
-        }
-      });
+        hotspotsContainer.addEventListener('mouseout', function (e) {
+          if (!window.matchMedia('(hover: hover)').matches) return;
+          var btn = e.target.closest('.x-hotspot');
+          if (btn) {
+            btn.classList.remove('is-active');
+          }
+        });
 
-      hotspotsContainer.addEventListener('focusout', function (e) {
-        var btn = e.target.closest('.x-hotspot');
-        if (btn) btn.classList.remove('is-active');
-      });
-    }
+        hotspotsContainer.addEventListener('focusin', function (e) {
+          var btn = e.target.closest('.x-hotspot');
+          if (btn) {
+            closeAllHotspots();
+            btn.classList.add('is-active');
+          }
+        });
 
-    document.addEventListener('click', function (e) {
-      if (!e.target.closest('.x-hotspot') && hotspotsContainer) {
-        var all = hotspotsContainer.querySelectorAll('.x-hotspot.is-active');
-        all.forEach(function (el) { el.classList.remove('is-active'); });
+        hotspotsContainer.addEventListener('focusout', function (e) {
+          var btn = e.target.closest('.x-hotspot');
+          if (btn) btn.classList.remove('is-active');
+        });
       }
-    });
 
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && hotspotsContainer) {
-        var all = hotspotsContainer.querySelectorAll('.x-hotspot.is-active');
-        all.forEach(function (el) { el.classList.remove('is-active'); });
+      document.addEventListener('click', function (e) {
+        if (!e.target.closest('.x-hotspot') && hotspotsContainer) {
+          var all = hotspotsContainer.querySelectorAll('.x-hotspot.is-active');
+          all.forEach(function (el) { el.classList.remove('is-active'); });
+        }
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && hotspotsContainer) {
+          var all = hotspotsContainer.querySelectorAll('.x-hotspot.is-active');
+          all.forEach(function (el) { el.classList.remove('is-active'); });
+        }
+      });
+
+      /* Init on page load */
+      var activePanelTab = document.querySelector('.x-site .x-tab--active');
+      if (activePanelTab) {
+        window.renderHotspots(activePanelTab.getAttribute('data-panel'));
       }
-    });
-
-    /* Init on page load */
-    var activePanelTab = document.querySelector('.x-site .x-tab--active');
-    if (activePanelTab) {
-      window.renderHotspots(activePanelTab.getAttribute('data-panel'));
-    }
 
 
 
-  })();
-</script>
+    })();
+  </script>
