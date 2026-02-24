@@ -6923,37 +6923,418 @@
   </section>
   <!-- S10: PROCUREMENT PACK -->
   <section class="x-section" id="x-procurement">
+    <style>
+      /* === PROCUREMENT PACK (Premium v2 — scoped overrides) === */
+
+      /* --- Sub-headings --- */
+      #x-procurement .x-proc-subhead {
+        font-family: var(--x-ff-head);
+        font-size: var(--x-fs-3);
+        font-weight: 700;
+        color: var(--x-text);
+        margin: var(--x-sp-7) 0 var(--x-sp-5);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      #x-procurement .x-proc-subhead::before {
+        content: '';
+        display: block;
+        width: 4px;
+        height: 24px;
+        border-radius: 2px;
+        background: var(--x-accent);
+        flex-shrink: 0;
+      }
+
+      /* --- Document cards grid --- */
+      #x-procurement .x-proc-docs {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      /* --- Document card --- */
+      #x-procurement .x-proc-doc {
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        gap: 16px;
+        align-items: start;
+        padding: 20px 24px;
+        background: linear-gradient(165deg, rgba(19, 27, 46, 0.55), rgba(11, 17, 32, 0.75));
+        border: 1px solid rgba(51, 65, 85, 0.45);
+        border-radius: 14px;
+        overflow: hidden;
+        position: relative;
+        transition: border-color 0.35s, box-shadow 0.35s, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      #x-procurement .x-proc-doc::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 3px;
+        height: 100%;
+        border-radius: 14px 0 0 14px;
+      }
+
+      #x-procurement .x-proc-doc:hover {
+        transform: translateY(-2px);
+      }
+
+      /* --- Number circle --- */
+      #x-procurement .x-proc-doc__num {
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-family: var(--x-ff-mono);
+        font-size: 16px;
+        font-weight: 700;
+        transition: box-shadow 0.35s, transform 0.35s;
+      }
+
+      /* --- Title + badge --- */
+      #x-procurement .x-proc-doc__title {
+        font-family: var(--x-ff-head);
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--x-text);
+        margin-bottom: 4px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      #x-procurement .x-proc-doc__badge {
+        font-family: var(--x-ff-mono);
+        font-size: 9px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-weight: 700;
+        padding: 3px 8px;
+        border-radius: 4px;
+        white-space: nowrap;
+      }
+
+      #x-procurement .x-proc-doc__text {
+        font-size: var(--x-fs-5);
+        color: var(--x-muted);
+        line-height: 1.55;
+      }
+
+      /* --- Doc 1: Cyan --- */
+      #x-procurement .x-proc-doc--1::before {
+        background: #00e5ff;
+      }
+
+      #x-procurement .x-proc-doc--1 .x-proc-doc__num {
+        color: #00e5ff;
+        background: rgba(0, 229, 255, 0.06);
+        border: 1px solid rgba(0, 229, 255, 0.2);
+      }
+
+      #x-procurement .x-proc-doc--1 .x-proc-doc__badge {
+        color: #00e5ff;
+        background: rgba(0, 229, 255, 0.08);
+        border: 1px solid rgba(0, 229, 255, 0.2);
+      }
+
+      #x-procurement .x-proc-doc--1:hover {
+        border-color: rgba(0, 229, 255, 0.3);
+        box-shadow: 0 6px 28px rgba(0, 229, 255, 0.06);
+      }
+
+      #x-procurement .x-proc-doc--1:hover .x-proc-doc__num {
+        box-shadow: 0 0 16px rgba(0, 229, 255, 0.15);
+      }
+
+      /* --- Doc 2: Green --- */
+      #x-procurement .x-proc-doc--2::before {
+        background: #10b981;
+      }
+
+      #x-procurement .x-proc-doc--2 .x-proc-doc__num {
+        color: #10b981;
+        background: rgba(16, 185, 129, 0.06);
+        border: 1px solid rgba(16, 185, 129, 0.2);
+      }
+
+      #x-procurement .x-proc-doc--2 .x-proc-doc__badge {
+        color: #10b981;
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.2);
+      }
+
+      #x-procurement .x-proc-doc--2:hover {
+        border-color: rgba(16, 185, 129, 0.3);
+        box-shadow: 0 6px 28px rgba(16, 185, 129, 0.06);
+      }
+
+      #x-procurement .x-proc-doc--2:hover .x-proc-doc__num {
+        box-shadow: 0 0 16px rgba(16, 185, 129, 0.15);
+      }
+
+      /* --- Doc 3: Amber --- */
+      #x-procurement .x-proc-doc--3::before {
+        background: #f59e0b;
+      }
+
+      #x-procurement .x-proc-doc--3 .x-proc-doc__num {
+        color: #f59e0b;
+        background: rgba(245, 158, 11, 0.06);
+        border: 1px solid rgba(245, 158, 11, 0.2);
+      }
+
+      #x-procurement .x-proc-doc--3 .x-proc-doc__badge {
+        color: #f59e0b;
+        background: rgba(245, 158, 11, 0.08);
+        border: 1px solid rgba(245, 158, 11, 0.2);
+      }
+
+      #x-procurement .x-proc-doc--3:hover {
+        border-color: rgba(245, 158, 11, 0.3);
+        box-shadow: 0 6px 28px rgba(245, 158, 11, 0.06);
+      }
+
+      #x-procurement .x-proc-doc--3:hover .x-proc-doc__num {
+        box-shadow: 0 0 16px rgba(245, 158, 11, 0.15);
+      }
+
+      /* --- Doc 4: Purple --- */
+      #x-procurement .x-proc-doc--4::before {
+        background: #a855f7;
+      }
+
+      #x-procurement .x-proc-doc--4 .x-proc-doc__num {
+        color: #a855f7;
+        background: rgba(168, 85, 247, 0.06);
+        border: 1px solid rgba(168, 85, 247, 0.2);
+      }
+
+      #x-procurement .x-proc-doc--4 .x-proc-doc__badge {
+        color: #a855f7;
+        background: rgba(168, 85, 247, 0.08);
+        border: 1px solid rgba(168, 85, 247, 0.2);
+      }
+
+      #x-procurement .x-proc-doc--4:hover {
+        border-color: rgba(168, 85, 247, 0.3);
+        box-shadow: 0 6px 28px rgba(168, 85, 247, 0.06);
+      }
+
+      #x-procurement .x-proc-doc--4:hover .x-proc-doc__num {
+        box-shadow: 0 0 16px rgba(168, 85, 247, 0.15);
+      }
+
+      /* --- Doc 5: Red --- */
+      #x-procurement .x-proc-doc--5::before {
+        background: #ef4444;
+      }
+
+      #x-procurement .x-proc-doc--5 .x-proc-doc__num {
+        color: #ef4444;
+        background: rgba(239, 68, 68, 0.06);
+        border: 1px solid rgba(239, 68, 68, 0.2);
+      }
+
+      #x-procurement .x-proc-doc--5 .x-proc-doc__badge {
+        color: #ef4444;
+        background: rgba(239, 68, 68, 0.08);
+        border: 1px solid rgba(239, 68, 68, 0.2);
+      }
+
+      #x-procurement .x-proc-doc--5:hover {
+        border-color: rgba(239, 68, 68, 0.3);
+        box-shadow: 0 6px 28px rgba(239, 68, 68, 0.06);
+      }
+
+      #x-procurement .x-proc-doc--5:hover .x-proc-doc__num {
+        box-shadow: 0 0 16px rgba(239, 68, 68, 0.15);
+      }
+
+      /* --- Outcomes list --- */
+      #x-procurement .x-proc-outcomes {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      #x-procurement .x-proc-outcomes li {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        font-size: var(--x-fs-5);
+        color: var(--x-text);
+        line-height: 1.55;
+      }
+
+      #x-procurement .x-proc-outcomes li::before {
+        content: '✓';
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+        border-radius: 50%;
+        font-size: 13px;
+        font-weight: 700;
+        color: #10b981;
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+        margin-top: 1px;
+      }
+
+      /* --- CTA area --- */
+      #x-procurement .x-proc-cta {
+        text-align: center;
+        margin-top: var(--x-sp-7);
+        padding-top: var(--x-sp-6);
+        border-top: 1px solid rgba(51, 65, 85, 0.3);
+      }
+
+      #x-procurement .x-proc-cta__micro {
+        margin-top: var(--x-sp-3);
+        font-family: var(--x-ff-mono);
+        font-size: 11px;
+        color: var(--x-muted);
+        opacity: 0.65;
+        letter-spacing: 0.04em;
+      }
+
+      #x-procurement .x-proc-cta__link {
+        display: inline-block;
+        margin-top: var(--x-sp-4);
+        font-family: var(--x-ff-mono);
+        font-size: 12px;
+        color: var(--x-accent);
+        text-decoration: none;
+        border-bottom: 1px dashed rgba(0, 229, 255, 0.3);
+        transition: border-color 0.2s, color 0.2s;
+        letter-spacing: 0.02em;
+      }
+
+      #x-procurement .x-proc-cta__link:hover {
+        border-bottom-color: var(--x-accent);
+        color: #fff;
+      }
+
+      /* --- Scroll-reveal --- */
+      #x-procurement .proc-anim {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      #x-procurement .proc-anim--visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+
     <div class="x-wrap">
       <div class="x-section__head">
         <p class="x-section__label">Для закупки</p>
-        <h2 class="x-h2">Документы для закупки — собраны и готовы</h2>
+        <h2 class="x-h2">Документы для закупки и согласований — собраны в один пакет</h2>
+        <p class="x-lead">Мы подготовили комплект, который обычно запрашивают руководство, IT, ИБ и юристы. Он ускоряет
+          внутреннее согласование: что именно покупаем, как проводим пилот, какие требования и как подтверждаем
+          результат.</p>
       </div>
-      <div class="x-cards" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
-        <div class="x-card">
-          <h3 class="x-card__title">One-Pager</h3>
-          <p class="x-card__text">Краткое описание продукта для ЛПР.</p>
+
+      <h3 class="x-proc-subhead proc-anim">Что входит в Procurement Pack</h3>
+
+      <div class="x-proc-docs">
+        <!-- 1 -->
+        <div class="x-proc-doc x-proc-doc--1 proc-anim">
+          <div class="x-proc-doc__num">1</div>
+          <div>
+            <div class="x-proc-doc__title">One-pager <span class="x-proc-doc__badge">для ЛПР / комитета</span></div>
+            <p class="x-proc-doc__text">Коротко: что такое «Агротактик», какие задачи закрывает, какой эффект и как
+              стартуем.</p>
+          </div>
         </div>
-        <div class="x-card">
-          <h3 class="x-card__title">Pilot Blueprint</h3>
-          <p class="x-card__text">План пилота с критериями приёмки.</p>
+        <!-- 2 -->
+        <div class="x-proc-doc x-proc-doc--2 proc-anim">
+          <div class="x-proc-doc__num">2</div>
+          <div>
+            <div class="x-proc-doc__title">Pilot Blueprint <span class="x-proc-doc__badge">для COO / проектного
+                офиса</span></div>
+            <p class="x-proc-doc__text">Пилот 6–8 недель: метрики, источники данных, этапы и критерии приёмки (DoD).</p>
+          </div>
         </div>
-        <div class="x-card">
-          <h3 class="x-card__title">Architecture Brief</h3>
-          <p class="x-card__text">Архитектурная схема для IT-блока.</p>
+        <!-- 3 -->
+        <div class="x-proc-doc x-proc-doc--3 proc-anim">
+          <div class="x-proc-doc__num">3</div>
+          <div>
+            <div class="x-proc-doc__title">Architecture Brief <span class="x-proc-doc__badge">для IT</span></div>
+            <p class="x-proc-doc__text">Контуры данных и интеграций (ERP/1С, телематика, датчики, BI), источники истины,
+              требования к инфраструктуре.</p>
+          </div>
         </div>
-        <div class="x-card">
-          <h3 class="x-card__title">Security Brief</h3>
-          <p class="x-card__text">Описание мер ИБ для службы безопасности.</p>
+        <!-- 4 -->
+        <div class="x-proc-doc x-proc-doc--4 proc-anim">
+          <div class="x-proc-doc__num">4</div>
+          <div>
+            <div class="x-proc-doc__title">Security Brief <span class="x-proc-doc__badge">для ИБ</span></div>
+            <p class="x-proc-doc__text">Роли и права (RBAC), журналирование, принципы защиты данных, требования к
+              доступам и проверке.</p>
+          </div>
         </div>
-        <div class="x-card">
-          <h3 class="x-card__title">Compliance Brief</h3>
-          <p class="x-card__text">Регуляторное соответствие для юристов.</p>
+        <!-- 5 -->
+        <div class="x-proc-doc x-proc-doc--5 proc-anim">
+          <div class="x-proc-doc__num">5</div>
+          <div>
+            <div class="x-proc-doc__title">Compliance Brief <span class="x-proc-doc__badge">для юристов /
+                комплаенса</span></div>
+            <p class="x-proc-doc__text">Трассировка «событие → документ → подтверждение → аудит», готовность к
+              проверкам,
+              поддержка «Меркурий» (если актуально).</p>
+          </div>
         </div>
       </div>
-      <div style="text-align:center;margin-top:var(--x-sp-6)">
+
+      <h3 class="x-proc-subhead proc-anim">Что вы получите на выходе</h3>
+
+      <ul class="x-proc-outcomes proc-anim">
+        <li>Понятный предмет закупки и маршрут «демо → пилот → масштабирование»</li>
+        <li>Критерии приёмки и артефакты пилота, которые можно положить в решение комитета</li>
+        <li>Пакет для IT/ИБ/юристов без долгих переписок</li>
+      </ul>
+
+      <div class="x-proc-cta proc-anim">
         <button class="x-btn x-btn--primary" id="x-open-procurement">Получить Procurement Pack</button>
+        <p class="x-proc-cta__micro">Отправим на email. Без обязательств. NDA — по запросу.</p>
+        <a class="x-proc-cta__link" href="javascript:void(0)" id="x-open-drawer-3">Получить документы без звонка</a>
       </div>
     </div>
+
+    <script>
+      (function () {
+        var els = document.querySelectorAll('#x-procurement .proc-anim');
+        if (!els.length) return;
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('proc-anim--visible');
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        els.forEach(function (el, i) {
+          el.style.transitionDelay = (i * 0.08) + 's';
+          io.observe(el);
+        });
+      })();
+    </script>
   </section>
   <!-- S11: ФИНАЛЬНЫЙ CTA -->
   <section class="x-form-cta" id="x-request-demo">
