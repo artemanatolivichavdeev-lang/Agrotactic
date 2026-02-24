@@ -4500,12 +4500,49 @@
   <!-- S8: БЕЗОПАСНОСТЬ + ИБ -->
   <section class="x-section" id="x-security">
     <style>
-      /* === SECURITY BLOCK (Premium v1) === */
+      /* === SECURITY BLOCK (Premium v2) === */
+
+      /* --- Animations --- */
+      @keyframes sec-reveal {
+        from {
+          opacity: 0;
+          transform: translateY(28px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes sec-shield-pulse {
+
+        0%,
+        100% {
+          box-shadow: 0 0 18px rgba(34, 197, 94, 0.12);
+        }
+
+        50% {
+          box-shadow: 0 0 8px rgba(34, 197, 94, 0.04);
+        }
+      }
+
+      /* --- Reveal helper --- */
+      #x-security .sec-anim {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+
+      #x-security .sec-anim--visible {
+        animation: sec-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      /* --- Card grids --- */
       #x-security .x-sec-cards {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        gap: 14px;
-        margin-bottom: var(--x-sp-7);
+        gap: 16px;
+        margin-bottom: var(--x-sp-8);
       }
 
       #x-security .x-sec-cards--duo {
@@ -4520,77 +4557,234 @@
         }
       }
 
+      /* --- Base card --- */
       #x-security .x-sec-card {
-        background: linear-gradient(165deg, rgba(19, 27, 46, 0.55), rgba(11, 17, 32, 0.75));
+        background: linear-gradient(165deg, rgba(19, 27, 46, 0.6), rgba(11, 17, 32, 0.82));
         border: 1px solid rgba(51, 65, 85, 0.45);
         border-radius: 14px;
-        padding: 24px 24px;
-        transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        padding: 28px 26px 24px;
+        position: relative;
+        overflow: hidden;
+        transition: border-color 0.35s, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s;
+      }
+
+      #x-security .x-sec-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        opacity: 0.35;
+        transition: opacity 0.35s;
       }
 
       #x-security .x-sec-card:hover {
-        border-color: rgba(0, 229, 255, 0.3);
-        transform: translateY(-3px);
-        box-shadow: 0 8px 28px rgba(0, 229, 255, 0.07);
-        border-left-color: var(--x-accent);
+        transform: translateY(-4px);
       }
 
-      #x-security .x-sec-card:hover .x-sec-card__icon {
-        box-shadow: 0 0 20px rgba(0, 229, 255, 0.12), inset 0 0 10px rgba(0, 229, 255, 0.06);
-        border-color: rgba(0, 229, 255, 0.35);
+      #x-security .x-sec-card:hover::before {
+        opacity: 1;
       }
 
+      /* --- Card icon --- */
       #x-security .x-sec-card__icon {
-        display: inline-flex;
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        display: flex;
         align-items: center;
         justify-content: center;
-        width: 44px;
-        height: 44px;
-        border-radius: 12px;
-        font-size: 20px;
-        background: linear-gradient(135deg, rgba(0, 229, 255, 0.08), rgba(0, 229, 255, 0.02));
-        border: 1px solid rgba(0, 229, 255, 0.18);
-        margin-bottom: 16px;
-        box-shadow: 0 0 16px rgba(0, 229, 255, 0.06), inset 0 0 8px rgba(0, 229, 255, 0.03);
-        transition: box-shadow 0.3s, border-color 0.3s;
+        margin-bottom: 18px;
+        transition: box-shadow 0.35s, background 0.35s;
       }
 
       #x-security .x-sec-card__icon svg {
-        width: 22px;
-        height: 22px;
-        stroke: var(--x-accent);
-        stroke-width: 1.8;
+        width: 26px;
+        height: 26px;
         fill: none;
+        stroke-width: 1.8;
         stroke-linecap: round;
         stroke-linejoin: round;
       }
 
+      /* --- Color: Emerald (Защита данных) --- */
+      #x-security .x-sec-card--shield::before {
+        background: linear-gradient(90deg, #22c55e, rgba(34, 197, 94, 0.15));
+      }
+
+      #x-security .x-sec-card--shield .x-sec-card__icon {
+        background: rgba(34, 197, 94, 0.08);
+        border: 1px solid rgba(34, 197, 94, 0.2);
+      }
+
+      #x-security .x-sec-card--shield .x-sec-card__icon svg {
+        stroke: #22c55e;
+      }
+
+      #x-security .x-sec-card--shield:hover {
+        border-color: rgba(34, 197, 94, 0.35);
+        box-shadow: 0 8px 32px rgba(34, 197, 94, 0.08), 0 0 0 1px rgba(34, 197, 94, 0.1);
+      }
+
+      #x-security .x-sec-card--shield:hover .x-sec-card__icon {
+        box-shadow: 0 0 22px rgba(34, 197, 94, 0.25);
+        background: rgba(34, 197, 94, 0.14);
+      }
+
+      /* --- Color: Cyan (Доступы) --- */
+      #x-security .x-sec-card--access::before {
+        background: linear-gradient(90deg, #00e5ff, rgba(0, 229, 255, 0.15));
+      }
+
+      #x-security .x-sec-card--access .x-sec-card__icon {
+        background: rgba(0, 229, 255, 0.08);
+        border: 1px solid rgba(0, 229, 255, 0.2);
+      }
+
+      #x-security .x-sec-card--access .x-sec-card__icon svg {
+        stroke: #00e5ff;
+      }
+
+      #x-security .x-sec-card--access:hover {
+        border-color: rgba(0, 229, 255, 0.35);
+        box-shadow: 0 8px 32px rgba(0, 229, 255, 0.08), 0 0 0 1px rgba(0, 229, 255, 0.1);
+      }
+
+      #x-security .x-sec-card--access:hover .x-sec-card__icon {
+        box-shadow: 0 0 22px rgba(0, 229, 255, 0.25);
+        background: rgba(0, 229, 255, 0.14);
+      }
+
+      /* --- Color: Purple (Аудит) --- */
+      #x-security .x-sec-card--audit::before {
+        background: linear-gradient(90deg, #a855f7, rgba(168, 85, 247, 0.15));
+      }
+
+      #x-security .x-sec-card--audit .x-sec-card__icon {
+        background: rgba(168, 85, 247, 0.08);
+        border: 1px solid rgba(168, 85, 247, 0.2);
+      }
+
+      #x-security .x-sec-card--audit .x-sec-card__icon svg {
+        stroke: #a855f7;
+      }
+
+      #x-security .x-sec-card--audit:hover {
+        border-color: rgba(168, 85, 247, 0.35);
+        box-shadow: 0 8px 32px rgba(168, 85, 247, 0.08), 0 0 0 1px rgba(168, 85, 247, 0.1);
+      }
+
+      #x-security .x-sec-card--audit:hover .x-sec-card__icon {
+        box-shadow: 0 0 22px rgba(168, 85, 247, 0.25);
+        background: rgba(168, 85, 247, 0.14);
+      }
+
+      /* --- Color: Amber (Границы) --- */
+      #x-security .x-sec-card--boundary::before {
+        background: linear-gradient(90deg, #f59e0b, rgba(245, 158, 11, 0.15));
+      }
+
+      #x-security .x-sec-card--boundary .x-sec-card__icon {
+        background: rgba(245, 158, 11, 0.08);
+        border: 1px solid rgba(245, 158, 11, 0.2);
+      }
+
+      #x-security .x-sec-card--boundary .x-sec-card__icon svg {
+        stroke: #f59e0b;
+      }
+
+      #x-security .x-sec-card--boundary:hover {
+        border-color: rgba(245, 158, 11, 0.35);
+        box-shadow: 0 8px 32px rgba(245, 158, 11, 0.08), 0 0 0 1px rgba(245, 158, 11, 0.1);
+      }
+
+      #x-security .x-sec-card--boundary:hover .x-sec-card__icon {
+        box-shadow: 0 0 22px rgba(245, 158, 11, 0.25);
+        background: rgba(245, 158, 11, 0.14);
+      }
+
+      /* --- Color: Orange (Fail-safe) --- */
+      #x-security .x-sec-card--failsafe::before {
+        background: linear-gradient(90deg, #f97316, rgba(249, 115, 22, 0.15));
+      }
+
+      #x-security .x-sec-card--failsafe .x-sec-card__icon {
+        background: rgba(249, 115, 22, 0.08);
+        border: 1px solid rgba(249, 115, 22, 0.2);
+      }
+
+      #x-security .x-sec-card--failsafe .x-sec-card__icon svg {
+        stroke: #f97316;
+      }
+
+      #x-security .x-sec-card--failsafe:hover {
+        border-color: rgba(249, 115, 22, 0.35);
+        box-shadow: 0 8px 32px rgba(249, 115, 22, 0.08), 0 0 0 1px rgba(249, 115, 22, 0.1);
+      }
+
+      #x-security .x-sec-card--failsafe:hover .x-sec-card__icon {
+        box-shadow: 0 0 22px rgba(249, 115, 22, 0.25);
+        background: rgba(249, 115, 22, 0.14);
+      }
+
+      /* --- Card text --- */
       #x-security .x-sec-card__title {
         font-family: var(--x-ff-head);
-        font-size: 1rem;
+        font-size: 1.05rem;
         font-weight: 700;
         color: #fff;
         margin-bottom: 8px;
+        transition: text-shadow 0.3s;
+      }
+
+      #x-security .x-sec-card:hover .x-sec-card__title {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
       }
 
       #x-security .x-sec-card__text {
         color: var(--x-muted);
         font-size: 0.88rem;
-        line-height: 1.6;
+        line-height: 1.65;
       }
 
-      /* Sub-headings */
+      /* --- Sub-headings (accent bar) --- */
       #x-security .x-sec-subhead {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 12px;
         font-family: var(--x-ff-head);
         font-size: 1.15rem;
         font-weight: 700;
         color: #fff;
-        margin-bottom: var(--x-sp-4);
-        padding-bottom: var(--x-sp-3);
-        border-bottom: 1px solid rgba(51, 65, 85, 0.4);
+        margin-bottom: var(--x-sp-5);
+        padding-left: 16px;
+        position: relative;
+      }
+
+      #x-security .x-sec-subhead::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 2px;
+        width: 4px;
+        height: calc(100% - 4px);
+        border-radius: 2px;
+      }
+
+      #x-security .x-sec-subhead--infosec::before {
+        background: #22c55e;
+        box-shadow: 0 0 8px rgba(34, 197, 94, 0.3);
+      }
+
+      #x-security .x-sec-subhead--safety::before {
+        background: #f59e0b;
+        box-shadow: 0 0 8px rgba(245, 158, 11, 0.3);
+      }
+
+      #x-security .x-sec-subhead--artifacts::before {
+        background: var(--x-accent);
+        box-shadow: 0 0 8px rgba(0, 229, 255, 0.3);
       }
 
       #x-security .x-sec-subhead__badge {
@@ -4598,61 +4792,99 @@
         font-size: 10px;
         text-transform: uppercase;
         letter-spacing: 0.08em;
-        color: var(--x-accent);
         font-weight: 700;
-        padding: 4px 10px;
-        background: rgba(0, 229, 255, 0.08);
-        border: 1px solid rgba(0, 229, 255, 0.2);
+        padding: 4px 12px;
         border-radius: 5px;
       }
 
-      /* Artifacts list */
+      #x-security .x-sec-subhead--infosec .x-sec-subhead__badge {
+        color: #22c55e;
+        background: rgba(34, 197, 94, 0.08);
+        border: 1px solid rgba(34, 197, 94, 0.2);
+      }
+
+      #x-security .x-sec-subhead--safety .x-sec-subhead__badge {
+        color: #f59e0b;
+        background: rgba(245, 158, 11, 0.08);
+        border: 1px solid rgba(245, 158, 11, 0.2);
+      }
+
+      /* --- Artifacts grid --- */
       #x-security .x-sec-artifacts {
-        margin-bottom: var(--x-sp-7);
+        margin-bottom: var(--x-sp-8);
       }
 
-      #x-security .x-sec-artifacts__list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
+      #x-security .x-sec-artifacts__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
       }
 
-      #x-security .x-sec-artifacts__list li {
-        background: rgba(19, 27, 46, 0.4);
-        border: 1px solid rgba(51, 65, 85, 0.35);
-        border-radius: 10px;
-        padding: 14px 18px;
-        color: var(--x-text);
-        font-size: 0.88rem;
-        line-height: 1.55;
-        display: flex;
-        align-items: flex-start;
-        gap: 10px;
-        transition: border-color 0.3s;
+      @media(max-width:768px) {
+        #x-security .x-sec-artifacts__grid {
+          grid-template-columns: 1fr;
+        }
       }
 
-      #x-security .x-sec-artifacts__list li:hover {
-        border-color: rgba(0, 229, 255, 0.2);
+      #x-security .x-sec-artifact {
+        background: linear-gradient(165deg, rgba(19, 27, 46, 0.55), rgba(11, 17, 32, 0.75));
+        border: 1px solid rgba(51, 65, 85, 0.4);
+        border-radius: 12px;
+        padding: 22px 20px 20px;
+        text-align: center;
+        transition: border-color 0.3s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
+        position: relative;
       }
 
-      #x-security .x-sec-artifacts__list li strong {
-        color: #fff;
+      #x-security .x-sec-artifact:hover {
+        border-color: rgba(0, 229, 255, 0.3);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 24px rgba(0, 229, 255, 0.06);
+      }
+
+      #x-security .x-sec-artifact__check {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(34, 197, 94, 0.08);
+        border: 1px solid rgba(34, 197, 94, 0.25);
+        margin-bottom: 14px;
+        animation: sec-shield-pulse 3s ease-in-out infinite;
+      }
+
+      #x-security .x-sec-artifact__check svg {
+        width: 18px;
+        height: 18px;
+        stroke: #22c55e;
+        stroke-width: 2;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      #x-security .x-sec-artifact__name {
+        font-family: var(--x-ff-head);
+        font-size: 0.92rem;
         font-weight: 700;
+        color: #fff;
+        margin-bottom: 6px;
+        display: block;
       }
 
-      #x-security .x-sec-artifacts__list li .x-sec-check {
-        color: var(--x-accent);
-        font-size: 14px;
-        flex-shrink: 0;
-        margin-top: 2px;
+      #x-security .x-sec-artifact__desc {
+        font-size: 0.82rem;
+        color: var(--x-muted);
+        line-height: 1.5;
+        display: block;
       }
 
-      /* CTA area */
+      /* --- CTA area --- */
       #x-security .x-sec-cta {
         text-align: center;
+        margin-top: var(--x-sp-4);
       }
 
       #x-security .x-sec-cta__micro {
@@ -4676,12 +4908,12 @@
       </div>
 
       <!-- ИБ -->
-      <h3 class="x-sec-subhead">
+      <h3 class="x-sec-subhead x-sec-subhead--infosec">
         <span class="x-sec-subhead__badge">InfoSec</span>
         Информационная безопасность
       </h3>
       <div class="x-sec-cards">
-        <div class="x-sec-card">
+        <div class="x-sec-card x-sec-card--shield sec-anim">
           <div class="x-sec-card__icon"><svg viewBox="0 0 24 24">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
               <path d="M9 12l2 2 4-4" />
@@ -4690,7 +4922,7 @@
           <p class="x-sec-card__text">Данные защищены в передаче и хранении &mdash; по корпоративным стандартам,
             с контролем каналов и ключей.</p>
         </div>
-        <div class="x-sec-card">
+        <div class="x-sec-card x-sec-card--access sec-anim">
           <div class="x-sec-card__icon"><svg viewBox="0 0 24 24">
               <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
               <circle cx="9" cy="7" r="4" />
@@ -4701,7 +4933,7 @@
           <p class="x-sec-card__text">Ролевой доступ (RBAC), минимальные привилегии, прозрачность
             &laquo;кто что может&raquo;, опционально SSO/MFA по требованиям заказчика.</p>
         </div>
-        <div class="x-sec-card">
+        <div class="x-sec-card x-sec-card--audit sec-anim">
           <div class="x-sec-card__icon"><svg viewBox="0 0 24 24">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
               <polyline points="14 2 14 8 20 8" />
@@ -4715,12 +4947,12 @@
       </div>
 
       <!-- Safety -->
-      <h3 class="x-sec-subhead">
+      <h3 class="x-sec-subhead x-sec-subhead--safety">
         <span class="x-sec-subhead__badge">Safety</span>
         Безопасность эксплуатации
       </h3>
       <div class="x-sec-cards x-sec-cards--duo">
-        <div class="x-sec-card">
+        <div class="x-sec-card x-sec-card--boundary sec-anim">
           <div class="x-sec-card__icon"><svg viewBox="0 0 24 24">
               <circle cx="12" cy="10" r="3" />
               <path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 7 8 11.7z" />
@@ -4729,7 +4961,7 @@
           <p class="x-sec-card__text">Ограничения условий, геозоны, контроль режимов &mdash;
             чтобы исключить опасные сценарии выполнения работ.</p>
         </div>
-        <div class="x-sec-card">
+        <div class="x-sec-card x-sec-card--failsafe sec-anim">
           <div class="x-sec-card__icon"><svg viewBox="0 0 24 24">
               <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
             </svg></div>
@@ -4740,16 +4972,31 @@
       </div>
 
       <!-- Артефакты -->
-      <h3 class="x-sec-subhead">Что вы получаете на выходе</h3>
+      <h3 class="x-sec-subhead x-sec-subhead--artifacts">Что вы получаете на выходе</h3>
       <div class="x-sec-artifacts">
-        <ul class="x-sec-artifacts__list">
-          <li><span class="x-sec-check">&#10003;</span> <strong>Security brief:</strong> доступы, аудит, принципы защиты
-            данных и контуры</li>
-          <li><span class="x-sec-check">&#10003;</span> <strong>Architecture brief:</strong> где какие данные, кто
-            источник истины, какие интеграции</li>
-          <li><span class="x-sec-check">&#10003;</span> <strong>Чек-лист требований ИБ</strong> для пилота и
-            промышленной эксплуатации</li>
-        </ul>
+        <div class="x-sec-artifacts__grid">
+          <div class="x-sec-artifact sec-anim">
+            <div class="x-sec-artifact__check"><svg viewBox="0 0 24 24">
+                <polyline points="20 6 9 17 4 12" />
+              </svg></div>
+            <span class="x-sec-artifact__name">Security brief</span>
+            <span class="x-sec-artifact__desc">Доступы, аудит, принципы защиты данных и контуры</span>
+          </div>
+          <div class="x-sec-artifact sec-anim">
+            <div class="x-sec-artifact__check"><svg viewBox="0 0 24 24">
+                <polyline points="20 6 9 17 4 12" />
+              </svg></div>
+            <span class="x-sec-artifact__name">Architecture brief</span>
+            <span class="x-sec-artifact__desc">Где какие данные, кто источник истины, какие интеграции</span>
+          </div>
+          <div class="x-sec-artifact sec-anim">
+            <div class="x-sec-artifact__check"><svg viewBox="0 0 24 24">
+                <polyline points="20 6 9 17 4 12" />
+              </svg></div>
+            <span class="x-sec-artifact__name">Чек-лист требований ИБ</span>
+            <span class="x-sec-artifact__desc">Для пилота и промышленной эксплуатации</span>
+          </div>
+        </div>
       </div>
 
       <!-- CTA -->
@@ -4758,6 +5005,34 @@
         <p class="x-sec-cta__micro">Короткие документы для ИБ/IT/юристов и закупки. NDA &mdash; по запросу.</p>
       </div>
     </div>
+
+    <script>
+      (function () {
+        var section = document.getElementById('x-security');
+        if (!section) return;
+        var items = section.querySelectorAll('.sec-anim');
+        if (!items.length) return;
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var el = entry.target;
+              var siblings = Array.prototype.slice.call(el.parentElement.children).filter(function (c) {
+                return c.classList.contains('sec-anim');
+              });
+              var idx = siblings.indexOf(el);
+              el.style.animationDelay = (idx * 0.12) + 's';
+              el.classList.add('sec-anim--visible');
+              observer.unobserve(el);
+            }
+          });
+        }, { threshold: 0.15 });
+
+        items.forEach(function (item) {
+          observer.observe(item);
+        });
+      })();
+    </script>
   </section>
   <!-- S9: ПИЛОТ -->
   <section class="x-section" id="x-pilot">
