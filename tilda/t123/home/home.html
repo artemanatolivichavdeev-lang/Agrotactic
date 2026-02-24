@@ -2068,7 +2068,311 @@
     </div>
   </header>
   <!-- S1: HERO -->
-  <section class="x-hero">
+  <section class="x-hero" data-active-role="coo">
+    <style>
+      /* === HERO BLOCK (Premium v2 — scoped overrides) === */
+
+      /* --- H1 gradient text --- */
+      .x-hero h1 {
+        background: linear-gradient(135deg, #ffffff 30%, var(--x-accent) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      /* --- Eyebrow pulse dot --- */
+      .x-hero .x-hero__eyebrow::before {
+        content: '';
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #10b981;
+        box-shadow: 0 0 8px #10b981;
+        animation: hero-pulse 2s ease-in-out infinite;
+        margin-right: 6px;
+        flex-shrink: 0;
+      }
+
+      @keyframes hero-pulse {
+
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+
+        50% {
+          opacity: 0.4;
+          transform: scale(0.7);
+        }
+      }
+
+      /* --- Visual panel top glow --- */
+      .x-hero .x-hero__visual {
+        border-top: 2px solid rgba(0, 229, 255, 0.25);
+        box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.5), 0 10px 40px rgba(0, 0, 0, 0.4), 0 -4px 20px rgba(0, 229, 255, 0.06);
+      }
+
+      /* --- Per-role tab active colors --- */
+      /* COO: Red */
+      .x-hero .x-tab[data-panel="coo"].x-tab--active {
+        color: #ef4444;
+        background: rgba(239, 68, 68, 0.08);
+        border: 1px solid rgba(239, 68, 68, 0.2);
+        box-shadow: 0 0 12px rgba(239, 68, 68, 0.08);
+      }
+
+      /* Agro: Green */
+      .x-hero .x-tab[data-panel="agro"].x-tab--active {
+        color: #10b981;
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.2);
+        box-shadow: 0 0 12px rgba(16, 185, 129, 0.08);
+      }
+
+      /* Zoo: Amber */
+      .x-hero .x-tab[data-panel="zoo"].x-tab--active {
+        color: #f59e0b;
+        background: rgba(245, 158, 11, 0.08);
+        border: 1px solid rgba(245, 158, 11, 0.2);
+        box-shadow: 0 0 12px rgba(245, 158, 11, 0.08);
+      }
+
+      /* Mech: Cyan (default) */
+      /* Eng: Purple */
+      .x-hero .x-tab[data-panel="eng"].x-tab--active {
+        color: #a855f7;
+        background: rgba(168, 85, 247, 0.08);
+        border: 1px solid rgba(168, 85, 247, 0.2);
+        box-shadow: 0 0 12px rgba(168, 85, 247, 0.08);
+      }
+
+      /* IT: Silver */
+      .x-hero .x-tab[data-panel="it"].x-tab--active {
+        color: #94a3b8;
+        background: rgba(148, 163, 184, 0.08);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        box-shadow: 0 0 12px rgba(148, 163, 184, 0.08);
+      }
+
+      /* --- Per-role hotspot callout left-border colors --- */
+      .x-hero[data-active-role="coo"] .x-hotspot__callout {
+        border-left-color: #ef4444;
+      }
+
+      .x-hero[data-active-role="coo"] .x-hotspot__key {
+        color: #ef4444;
+      }
+
+      .x-hero[data-active-role="coo"] .x-hotspot__key::before {
+        background: #ef4444;
+        box-shadow: 0 0 6px #ef4444;
+      }
+
+      .x-hero[data-active-role="coo"] .x-hotspot__beacon {
+        border-color: rgba(239, 68, 68, 0.6);
+        box-shadow: 0 0 15px rgba(239, 68, 68, 0.2), inset 0 0 8px rgba(239, 68, 68, 0.2);
+      }
+
+      .x-hero[data-active-role="coo"] .x-hotspot__beacon::after {
+        background: #ef4444;
+        box-shadow: 0 0 12px #ef4444;
+      }
+
+      .x-hero[data-active-role="coo"] .x-hotspot__beacon::before {
+        border-color: #ef4444;
+      }
+
+      .x-hero[data-active-role="agro"] .x-hotspot__callout {
+        border-left-color: #10b981;
+      }
+
+      .x-hero[data-active-role="agro"] .x-hotspot__key {
+        color: #10b981;
+      }
+
+      .x-hero[data-active-role="agro"] .x-hotspot__key::before {
+        background: #10b981;
+        box-shadow: 0 0 6px #10b981;
+      }
+
+      .x-hero[data-active-role="agro"] .x-hotspot__beacon {
+        border-color: rgba(16, 185, 129, 0.6);
+        box-shadow: 0 0 15px rgba(16, 185, 129, 0.2), inset 0 0 8px rgba(16, 185, 129, 0.2);
+      }
+
+      .x-hero[data-active-role="agro"] .x-hotspot__beacon::after {
+        background: #10b981;
+        box-shadow: 0 0 12px #10b981;
+      }
+
+      .x-hero[data-active-role="agro"] .x-hotspot__beacon::before {
+        border-color: #10b981;
+      }
+
+      .x-hero[data-active-role="zoo"] .x-hotspot__callout {
+        border-left-color: #f59e0b;
+      }
+
+      .x-hero[data-active-role="zoo"] .x-hotspot__key {
+        color: #f59e0b;
+      }
+
+      .x-hero[data-active-role="zoo"] .x-hotspot__key::before {
+        background: #f59e0b;
+        box-shadow: 0 0 6px #f59e0b;
+      }
+
+      .x-hero[data-active-role="zoo"] .x-hotspot__beacon {
+        border-color: rgba(245, 158, 11, 0.6);
+        box-shadow: 0 0 15px rgba(245, 158, 11, 0.2), inset 0 0 8px rgba(245, 158, 11, 0.2);
+      }
+
+      .x-hero[data-active-role="zoo"] .x-hotspot__beacon::after {
+        background: #f59e0b;
+        box-shadow: 0 0 12px #f59e0b;
+      }
+
+      .x-hero[data-active-role="zoo"] .x-hotspot__beacon::before {
+        border-color: #f59e0b;
+      }
+
+      /* mech = default cyan, no override needed */
+
+      .x-hero[data-active-role="eng"] .x-hotspot__callout {
+        border-left-color: #a855f7;
+      }
+
+      .x-hero[data-active-role="eng"] .x-hotspot__key {
+        color: #a855f7;
+      }
+
+      .x-hero[data-active-role="eng"] .x-hotspot__key::before {
+        background: #a855f7;
+        box-shadow: 0 0 6px #a855f7;
+      }
+
+      .x-hero[data-active-role="eng"] .x-hotspot__beacon {
+        border-color: rgba(168, 85, 247, 0.6);
+        box-shadow: 0 0 15px rgba(168, 85, 247, 0.2), inset 0 0 8px rgba(168, 85, 247, 0.2);
+      }
+
+      .x-hero[data-active-role="eng"] .x-hotspot__beacon::after {
+        background: #a855f7;
+        box-shadow: 0 0 12px #a855f7;
+      }
+
+      .x-hero[data-active-role="eng"] .x-hotspot__beacon::before {
+        border-color: #a855f7;
+      }
+
+      .x-hero[data-active-role="it"] .x-hotspot__callout {
+        border-left-color: #94a3b8;
+      }
+
+      .x-hero[data-active-role="it"] .x-hotspot__key {
+        color: #94a3b8;
+      }
+
+      .x-hero[data-active-role="it"] .x-hotspot__key::before {
+        background: #94a3b8;
+        box-shadow: 0 0 6px #94a3b8;
+      }
+
+      .x-hero[data-active-role="it"] .x-hotspot__beacon {
+        border-color: rgba(148, 163, 184, 0.6);
+        box-shadow: 0 0 15px rgba(148, 163, 184, 0.2), inset 0 0 8px rgba(148, 163, 184, 0.2);
+      }
+
+      .x-hero[data-active-role="it"] .x-hotspot__beacon::after {
+        background: #94a3b8;
+        box-shadow: 0 0 12px #94a3b8;
+      }
+
+      .x-hero[data-active-role="it"] .x-hotspot__beacon::before {
+        border-color: #94a3b8;
+      }
+
+      /* --- Per-role hotspot dashed line color --- */
+      .x-hero[data-active-role="coo"] .x-hotspot::before {
+        background-image: linear-gradient(to right, rgba(239, 68, 68, 0.8) 50%, transparent 50%);
+      }
+
+      .x-hero[data-active-role="agro"] .x-hotspot::before {
+        background-image: linear-gradient(to right, rgba(16, 185, 129, 0.8) 50%, transparent 50%);
+      }
+
+      .x-hero[data-active-role="zoo"] .x-hotspot::before {
+        background-image: linear-gradient(to right, rgba(245, 158, 11, 0.8) 50%, transparent 50%);
+      }
+
+      .x-hero[data-active-role="eng"] .x-hotspot::before {
+        background-image: linear-gradient(to right, rgba(168, 85, 247, 0.8) 50%, transparent 50%);
+      }
+
+      .x-hero[data-active-role="it"] .x-hotspot::before {
+        background-image: linear-gradient(to right, rgba(148, 163, 184, 0.8) 50%, transparent 50%);
+      }
+
+      /* --- Per-role hover/active callout border --- */
+      .x-hero[data-active-role="coo"] .x-hotspot:hover .x-hotspot__callout,
+      .x-hero[data-active-role="coo"] .x-hotspot.is-active .x-hotspot__callout {
+        border-color: rgba(239, 68, 68, 0.6);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(239, 68, 68, 0.1);
+      }
+
+      .x-hero[data-active-role="agro"] .x-hotspot:hover .x-hotspot__callout,
+      .x-hero[data-active-role="agro"] .x-hotspot.is-active .x-hotspot__callout {
+        border-color: rgba(16, 185, 129, 0.6);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(16, 185, 129, 0.1);
+      }
+
+      .x-hero[data-active-role="zoo"] .x-hotspot:hover .x-hotspot__callout,
+      .x-hero[data-active-role="zoo"] .x-hotspot.is-active .x-hotspot__callout {
+        border-color: rgba(245, 158, 11, 0.6);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(245, 158, 11, 0.1);
+      }
+
+      .x-hero[data-active-role="eng"] .x-hotspot:hover .x-hotspot__callout,
+      .x-hero[data-active-role="eng"] .x-hotspot.is-active .x-hotspot__callout {
+        border-color: rgba(168, 85, 247, 0.6);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(168, 85, 247, 0.1);
+      }
+
+      .x-hero[data-active-role="it"] .x-hotspot:hover .x-hotspot__callout,
+      .x-hero[data-active-role="it"] .x-hotspot.is-active .x-hotspot__callout {
+        border-color: rgba(148, 163, 184, 0.6);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(148, 163, 184, 0.1);
+      }
+
+      /* --- Per-role bullet colors in tab panels --- */
+      #panel-coo .x-hero__bullets li::before {
+        background: #ef4444;
+        box-shadow: 0 0 10px #ef4444, 0 0 3px #ef4444;
+      }
+
+      #panel-agro .x-hero__bullets li::before {
+        background: #10b981;
+        box-shadow: 0 0 10px #10b981, 0 0 3px #10b981;
+      }
+
+      #panel-zoo .x-hero__bullets li::before {
+        background: #f59e0b;
+        box-shadow: 0 0 10px #f59e0b, 0 0 3px #f59e0b;
+      }
+
+      #panel-eng .x-hero__bullets li::before {
+        background: #a855f7;
+        box-shadow: 0 0 10px #a855f7, 0 0 3px #a855f7;
+      }
+
+      #panel-it .x-hero__bullets li::before {
+        background: #94a3b8;
+        box-shadow: 0 0 10px #94a3b8, 0 0 3px #94a3b8;
+      }
+    </style>
+
     <div class="x-wrap">
       <div class="x-hero__grid">
         <div class="x-hero__content">
@@ -2106,8 +2410,8 @@
             <ul class="x-hero__bullets">
               <li>Управление кормовой логистикой: план-факт заготовки/доставки, отклонения, очереди задач и
                 ответственные</li>
-              <li>Контроль качества кормов и рационов: партии/показатели/события отклонений + трассировка “партия →
-                рацион → результат”</li>
+              <li>Контроль качества кормов и рационов: партии/показатели/события отклонений + трассировка "партия →
+                рацион → результат"</li>
               <li>Операционная прозрачность по фермам: журнал событий и нарушений регламента
                 (кормление/перемещения/вет-события) с аудитом</li>
             </ul>
@@ -2134,9 +2438,9 @@
               <li>Безопасное выполнение работ в поле: геозоны, ограничения условий (ODD), контроль режимов и сценарии
                 деградации (fail-safe)</li>
               <li>Управление миссиями и технологическими операциями: задания, маршруты, статусы выполнения, контроль
-                отклонений “по месту и времени”</li>
-              <li>Инциденты и разбор причин: журнал событий “что произошло → кто принял решение → какое действие
-                выполнено” с привязкой к миссии/участку/технике</li>
+                отклонений "по месту и времени"</li>
+              <li>Инциденты и разбор причин: журнал событий "что произошло → кто принял решение → какое действие
+                выполнено" с привязкой к миссии/участку/технике</li>
             </ul>
           </div>
           <div class="x-hero__ctas">
@@ -2150,6 +2454,18 @@
         </div>
       </div>
     </div>
+    <script>
+      /* Sync data-active-role on hero for CSS-driven role colors */
+      (function () {
+        var hero = document.querySelector('.x-hero[data-active-role]');
+        if (!hero) return;
+        document.querySelectorAll('.x-hero .x-tab').forEach(function (tab) {
+          tab.addEventListener('click', function () {
+            hero.setAttribute('data-active-role', tab.getAttribute('data-panel'));
+          });
+        });
+      })();
+    </script>
   </section>
   <!-- TRUST STRIP -->
   <div class="x-trust">
