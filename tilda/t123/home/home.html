@@ -377,6 +377,26 @@
     box-shadow: 0 0 8px rgba(0, 229, 255, .3);
   }
 
+  /* Home nav icon */
+  .x-site .x-nav__item--home {
+    padding: 8px 10px;
+  }
+
+  .x-site .x-nav__item--home svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    display: block;
+  }
+
+  .x-site .x-nav__item--home::after {
+    display: none;
+  }
+
   /* Header CTA */
   .x-site .x-header__cta {
     display: inline-flex;
@@ -385,9 +405,9 @@
     font-family: var(--x-ff-body);
     font-size: 0.8rem;
     font-weight: 700;
-    color: #000;
-    background: linear-gradient(135deg, var(--x-accent), #22d3ee);
-    border: none;
+    color: #b91c1c;
+    background: #facc15;
+    border: 1px solid #facc15;
     border-radius: 10px;
     padding: 9px 20px;
     cursor: pointer;
@@ -403,7 +423,7 @@
     position: absolute;
     inset: -3px;
     border-radius: 13px;
-    background: linear-gradient(135deg, var(--x-accent), #22d3ee);
+    background: #facc15;
     opacity: 0;
     z-index: -1;
     transition: opacity .3s;
@@ -413,8 +433,9 @@
   .x-site .x-header__cta:hover {
     background: #fff;
     color: #000;
+    border-color: #fff;
     transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(0, 229, 255, .3);
+    box-shadow: 0 0 15px var(--x-accent);
   }
 
   .x-site .x-header__cta:hover::before {
@@ -2314,6 +2335,10 @@
       </a>
       <nav>
         <ul class="x-nav" id="x-nav">
+          <li><a class="x-nav__item x-nav__item--home" href="#x-header" title="На главную"><svg viewBox="0 0 24 24">
+                <path
+                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1h-2z" />
+              </svg></a></li>
           <li><a class="x-nav__item" href="#x-model">Продукт</a></li>
           <li><a class="x-nav__item" href="#x-scenarios">Сценарии</a></li>
           <li><a class="x-nav__item" href="#x-security">Безопасность</a></li>
@@ -2321,8 +2346,9 @@
           <li><a class="x-nav__item" href="#recCONTACTS">Контакты</a></li>
         </ul>
       </nav>
-      <a class="x-header__cta" href="#x-request-demo">
-        <svg viewBox="0 0 24 24">
+      <a class="x-btn x-btn--demo x-header__cta" href="#x-request-demo">
+        <svg viewBox="0 0 24 24"
+          style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round">
           <polygon points="5 3 19 12 5 21 5 3" />
         </svg>
         Демо
@@ -2646,7 +2672,7 @@
     <div class="x-wrap">
       <div class="x-hero__grid">
         <div class="x-hero__content">
-          <p class="x-hero__eyebrow">Операционный контур для агрохолдингов</p>
+          <p class="x-hero__eyebrow">Операционный контур для агрокомплексов</p>
           <h1>Единая система управления агропредприятием: AI автоматизирует рутинные процессы — вы решаете главное</h1>
           <p class="x-hero__sub">От мониторинга техники и контроля процессов — до прогнозирования, планирования и
             автоматической отчётности надзорным органам. AI координирует людей, оборудование и беспилотный парк в едином
@@ -3075,6 +3101,12 @@
       <p class="x-hero__micro mdl-anim" style="margin-top:var(--x-sp-5);">Сквозной контроль от первой задачи до
         закрывающего
         документа — без разрывов между планированием, действиями (процессом) и отчётностью.</p>
+
+      <div class="x-hero__ctas mdl-anim" style="margin-top:var(--x-sp-5);display:flex;gap:16px;flex-wrap:wrap;">
+        <a class="x-btn x-btn--primary x-btn--demo" href="#x-request-demo">Запросить демо / техсессию</a>
+        <button class="x-btn x-btn--secondary" onclick="document.getElementById('x-open-drawer').click()">Получить пакет
+          документов</button>
+      </div>
     </div>
 
     <script>
@@ -3380,6 +3412,14 @@
         });
       })();
     </script>
+
+    <div class="x-wrap" style="margin-top:var(--x-sp-6);">
+      <div class="x-hero__ctas" style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;">
+        <a class="x-btn x-btn--primary x-btn--demo" href="#x-request-demo">Запросить демо / техсессию</a>
+        <button class="x-btn x-btn--secondary" onclick="document.getElementById('x-open-drawer').click()">Получить пакет
+          документов</button>
+      </div>
+    </div>
   </section>
   <!-- S4: ЛЕСТНИЦА АВТОНОМИИ -->
   <section class="x-section" id="x-autonomy">
@@ -6566,7 +6606,7 @@
 
       <!-- CTA -->
       <div class="x-sec-cta">
-        <button class="x-btn x-btn--primary" id="x-open-trust">Открыть Trust Pack</button>
+        <button class="x-btn x-btn--secondary" id="x-open-trust">Открыть Trust Pack</button>
         <p class="x-sec-cta__micro">Короткие документы для ИБ/IT/юристов и закупки. NDA &mdash; по запросу.</p>
       </div>
     </div>
@@ -7582,7 +7622,7 @@
       </ul>
 
       <div class="x-proc-cta proc-anim">
-        <button class="x-btn x-btn--primary" id="x-open-procurement">Получить Procurement Pack</button>
+        <button class="x-btn x-btn--secondary" id="x-open-procurement">Получить Procurement Pack</button>
         <p class="x-proc-cta__micro">Отправим на email. Без обязательств. NDA — по запросу.</p>
         <a class="x-proc-cta__link" href="javascript:void(0)" id="x-open-drawer-3">Получить документы без звонка</a>
       </div>
@@ -8259,7 +8299,7 @@
             </svg>
           </div>
           <span class="x-contacts__label">Телефон</span>
-          <a class="x-contacts__value" href="tel:+7XXXXXXXXXX">+7 (XXX) XXX-XX-XX</a>
+          <a class="x-contacts__value" href="tel:+79954669422">+7 (995) 466-94-22</a>
         </div>
         <!-- Location -->
         <div class="x-contacts__card x-contacts__card--loc ct-anim">
@@ -9904,7 +9944,7 @@
                 var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
                 progressBar.style.width = pct + '%';
               }
-              // Active nav item
+              // Active nav item (skip first item = Home icon)
               var sections = ['x-model', 'x-scenarios', 'x-security', 'x-pilot', 'recCONTACTS'];
               var navItems = document.querySelectorAll('.x-nav__item');
               var found = false;
@@ -9912,7 +9952,7 @@
                 var sec = document.getElementById(sections[i]);
                 if (sec && sec.getBoundingClientRect().top <= 150) {
                   navItems.forEach(function (n) { n.classList.remove('x-nav__item--active'); });
-                  navItems[i].classList.add('x-nav__item--active');
+                  navItems[i + 1].classList.add('x-nav__item--active');
                   found = true;
                   break;
                 }
