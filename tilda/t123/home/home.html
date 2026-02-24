@@ -2486,6 +2486,216 @@
   </div>
   <!-- S2: ОПЕРАЦИОННАЯ МОДЕЛЬ -->
   <section class="x-section" id="x-model">
+    <style>
+      /* === OPERATIONAL MODEL (Premium v2 — scoped overrides) === */
+
+      /* --- Scroll-reveal --- */
+      #x-model .mdl-anim {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      #x-model .mdl-anim--visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* --- Step 1: Green (#10b981) — Планирование --- */
+      #x-model .x-acc-item:nth-child(1) .x-acc-item__head::before {
+        color: #10b981;
+        border-color: rgba(16, 185, 129, 0.2);
+        background: rgba(16, 185, 129, 0.06);
+      }
+
+      #x-model .x-acc-item:nth-child(1).x-acc-item--open {
+        border-color: rgba(16, 185, 129, 0.35);
+        box-shadow: 0 6px 28px rgba(16, 185, 129, 0.06), 0 0 0 1px rgba(16, 185, 129, 0.08);
+      }
+
+      #x-model .x-acc-item:nth-child(1):hover {
+        border-color: rgba(16, 185, 129, 0.2);
+      }
+
+      #x-model .x-acc-item:nth-child(1).x-acc-item--open .x-acc-item__head {
+        background: linear-gradient(90deg, rgba(16, 185, 129, 0.06), transparent);
+      }
+
+      #x-model .x-acc-item:nth-child(1).x-acc-item--open .x-acc-item__head::before {
+        background: rgba(16, 185, 129, 0.15);
+        border-color: rgba(16, 185, 129, 0.4);
+        box-shadow: 0 0 14px rgba(16, 185, 129, 0.15);
+      }
+
+      #x-model .x-acc-item:nth-child(1) .x-acc-item__head::after {
+        border-color: #10b981;
+      }
+
+      #x-model .x-acc-item:nth-child(1) .x-acc-body-row__label {
+        color: #10b981;
+      }
+
+      #x-model .x-acc-item:nth-child(1) .x-doc-link {
+        color: #10b981;
+        border-bottom-color: rgba(16, 185, 129, 0.3);
+      }
+
+      #x-model .x-acc-item:nth-child(1) .x-doc-link:hover {
+        border-bottom-color: #10b981;
+      }
+
+      #x-model .x-acc-item:nth-child(1):hover .x-acc-item__head::before {
+        background: rgba(16, 185, 129, 0.1);
+        border-color: rgba(16, 185, 129, 0.3);
+      }
+
+      /* --- Step 2: Cyan (default — no overrides needed) --- */
+
+      /* --- Step 3: Amber (#f59e0b) — Исполнение --- */
+      #x-model .x-acc-item:nth-child(3) .x-acc-item__head::before {
+        color: #f59e0b;
+        border-color: rgba(245, 158, 11, 0.2);
+        background: rgba(245, 158, 11, 0.06);
+      }
+
+      #x-model .x-acc-item:nth-child(3).x-acc-item--open {
+        border-color: rgba(245, 158, 11, 0.35);
+        box-shadow: 0 6px 28px rgba(245, 158, 11, 0.06), 0 0 0 1px rgba(245, 158, 11, 0.08);
+      }
+
+      #x-model .x-acc-item:nth-child(3):hover {
+        border-color: rgba(245, 158, 11, 0.2);
+      }
+
+      #x-model .x-acc-item:nth-child(3).x-acc-item--open .x-acc-item__head {
+        background: linear-gradient(90deg, rgba(245, 158, 11, 0.06), transparent);
+      }
+
+      #x-model .x-acc-item:nth-child(3).x-acc-item--open .x-acc-item__head::before {
+        background: rgba(245, 158, 11, 0.15);
+        border-color: rgba(245, 158, 11, 0.4);
+        box-shadow: 0 0 14px rgba(245, 158, 11, 0.15);
+      }
+
+      #x-model .x-acc-item:nth-child(3) .x-acc-item__head::after {
+        border-color: #f59e0b;
+      }
+
+      #x-model .x-acc-item:nth-child(3) .x-acc-body-row__label {
+        color: #f59e0b;
+      }
+
+      #x-model .x-acc-item:nth-child(3) .x-doc-link {
+        color: #f59e0b;
+        border-bottom-color: rgba(245, 158, 11, 0.3);
+      }
+
+      #x-model .x-acc-item:nth-child(3) .x-doc-link:hover {
+        border-bottom-color: #f59e0b;
+      }
+
+      #x-model .x-acc-item:nth-child(3):hover .x-acc-item__head::before {
+        background: rgba(245, 158, 11, 0.1);
+        border-color: rgba(245, 158, 11, 0.3);
+      }
+
+      /* --- Step 4: Purple (#a855f7) — Интеграция --- */
+      #x-model .x-acc-item:nth-child(4) .x-acc-item__head::before {
+        color: #a855f7;
+        border-color: rgba(168, 85, 247, 0.2);
+        background: rgba(168, 85, 247, 0.06);
+      }
+
+      #x-model .x-acc-item:nth-child(4).x-acc-item--open {
+        border-color: rgba(168, 85, 247, 0.35);
+        box-shadow: 0 6px 28px rgba(168, 85, 247, 0.06), 0 0 0 1px rgba(168, 85, 247, 0.08);
+      }
+
+      #x-model .x-acc-item:nth-child(4):hover {
+        border-color: rgba(168, 85, 247, 0.2);
+      }
+
+      #x-model .x-acc-item:nth-child(4).x-acc-item--open .x-acc-item__head {
+        background: linear-gradient(90deg, rgba(168, 85, 247, 0.06), transparent);
+      }
+
+      #x-model .x-acc-item:nth-child(4).x-acc-item--open .x-acc-item__head::before {
+        background: rgba(168, 85, 247, 0.15);
+        border-color: rgba(168, 85, 247, 0.4);
+        box-shadow: 0 0 14px rgba(168, 85, 247, 0.15);
+      }
+
+      #x-model .x-acc-item:nth-child(4) .x-acc-item__head::after {
+        border-color: #a855f7;
+      }
+
+      #x-model .x-acc-item:nth-child(4) .x-acc-body-row__label {
+        color: #a855f7;
+      }
+
+      #x-model .x-acc-item:nth-child(4) .x-doc-link {
+        color: #a855f7;
+        border-bottom-color: rgba(168, 85, 247, 0.3);
+      }
+
+      #x-model .x-acc-item:nth-child(4) .x-doc-link:hover {
+        border-bottom-color: #a855f7;
+      }
+
+      #x-model .x-acc-item:nth-child(4):hover .x-acc-item__head::before {
+        background: rgba(168, 85, 247, 0.1);
+        border-color: rgba(168, 85, 247, 0.3);
+      }
+
+      /* --- Step 5: Red (#ef4444) — Документация --- */
+      #x-model .x-acc-item:nth-child(5) .x-acc-item__head::before {
+        color: #ef4444;
+        border-color: rgba(239, 68, 68, 0.2);
+        background: rgba(239, 68, 68, 0.06);
+      }
+
+      #x-model .x-acc-item:nth-child(5).x-acc-item--open {
+        border-color: rgba(239, 68, 68, 0.35);
+        box-shadow: 0 6px 28px rgba(239, 68, 68, 0.06), 0 0 0 1px rgba(239, 68, 68, 0.08);
+      }
+
+      #x-model .x-acc-item:nth-child(5):hover {
+        border-color: rgba(239, 68, 68, 0.2);
+      }
+
+      #x-model .x-acc-item:nth-child(5).x-acc-item--open .x-acc-item__head {
+        background: linear-gradient(90deg, rgba(239, 68, 68, 0.06), transparent);
+      }
+
+      #x-model .x-acc-item:nth-child(5).x-acc-item--open .x-acc-item__head::before {
+        background: rgba(239, 68, 68, 0.15);
+        border-color: rgba(239, 68, 68, 0.4);
+        box-shadow: 0 0 14px rgba(239, 68, 68, 0.15);
+      }
+
+      #x-model .x-acc-item:nth-child(5) .x-acc-item__head::after {
+        border-color: #ef4444;
+      }
+
+      #x-model .x-acc-item:nth-child(5) .x-acc-body-row__label {
+        color: #ef4444;
+      }
+
+      #x-model .x-acc-item:nth-child(5) .x-doc-link {
+        color: #ef4444;
+        border-bottom-color: rgba(239, 68, 68, 0.3);
+      }
+
+      #x-model .x-acc-item:nth-child(5) .x-doc-link:hover {
+        border-bottom-color: #ef4444;
+      }
+
+      #x-model .x-acc-item:nth-child(5):hover .x-acc-item__head::before {
+        background: rgba(239, 68, 68, 0.1);
+        border-color: rgba(239, 68, 68, 0.3);
+      }
+    </style>
+
     <div class="x-wrap">
       <div class="x-section__head">
         <p class="x-section__label">Операционная модель</p>
@@ -2495,7 +2705,7 @@
           метрикам оцениваем результат и каким документом подтверждаем исполнение.</p>
       </div>
       <div class="x-accordion">
-        <div class="x-acc-item">
+        <div class="x-acc-item mdl-anim">
           <button class="x-acc-item__head">Планирование и нормирование</button>
           <div class="x-acc-item__body">
             <div class="x-acc-body-row">
@@ -2515,7 +2725,7 @@
             </div>
           </div>
         </div>
-        <div class="x-acc-item">
+        <div class="x-acc-item mdl-anim">
           <button class="x-acc-item__head">Диспетчеризация и управление отклонениями</button>
           <div class="x-acc-item__body">
             <div class="x-acc-body-row">
@@ -2534,7 +2744,7 @@
             </div>
           </div>
         </div>
-        <div class="x-acc-item">
+        <div class="x-acc-item mdl-anim">
           <button class="x-acc-item__head">Исполнение и контроль в поле</button>
           <div class="x-acc-item__body">
             <div class="x-acc-body-row">
@@ -2553,7 +2763,7 @@
             </div>
           </div>
         </div>
-        <div class="x-acc-item">
+        <div class="x-acc-item mdl-anim">
           <button class="x-acc-item__head">Интеграция и синхронизация данных</button>
           <div class="x-acc-item__body">
             <div class="x-acc-body-row">
@@ -2571,7 +2781,7 @@
             </div>
           </div>
         </div>
-        <div class="x-acc-item">
+        <div class="x-acc-item mdl-anim">
           <button class="x-acc-item__head">Документация и регуляторная отчётность</button>
           <div class="x-acc-item__body">
             <div class="x-acc-body-row">
@@ -2592,9 +2802,29 @@
           </div>
         </div>
       </div>
-      <p class="x-hero__micro" style="margin-top:var(--x-sp-5);">Сквозной контроль от первой задачи до закрывающего
+      <p class="x-hero__micro mdl-anim" style="margin-top:var(--x-sp-5);">Сквозной контроль от первой задачи до
+        закрывающего
         документа — без разрывов между планированием, действиями (процессом) и отчётностью.</p>
     </div>
+
+    <script>
+      (function () {
+        var els = document.querySelectorAll('#x-model .mdl-anim');
+        if (!els.length) return;
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('mdl-anim--visible');
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        els.forEach(function (el, i) {
+          el.style.transitionDelay = (i * 0.08) + 's';
+          io.observe(el);
+        });
+      })();
+    </script>
   </section>
   <!-- S3: 4 СЛОЯ ПЛАТФОРМЫ -->
   <section class="x-section" id="x-platform">
