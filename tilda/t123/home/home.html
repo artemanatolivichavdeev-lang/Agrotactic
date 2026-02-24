@@ -1436,21 +1436,7 @@
     border-radius: var(--x-r-3)
   }
 
-  .x-check {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 12px;
-    border: 1px solid var(--x-line);
-    border-radius: var(--x-r-2);
-    background: rgba(11, 17, 32, .25);
-    margin-bottom: var(--x-sp-2);
-    cursor: pointer
-  }
 
-  .x-check input {
-    accent-color: var(--x-accent)
-  }
 
   .x-selfcheck__result {
     margin-top: var(--x-sp-3);
@@ -2656,7 +2642,7 @@
 
       .x-stepper {
         display: grid;
-        grid-template-columns: repeat(minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: var(--x-sp-5);
         position: relative;
         z-index: 1;
@@ -5169,24 +5155,7 @@
       window.renderHotspots(activePanelTab.getAttribute('data-panel'));
     }
 
-    /* === SELF-CHECK === */
-    var checks = document.querySelectorAll('.x-site .x-selfcheck input');
-    var res = document.getElementById('x-selfcheck-result');
-    if (checks.length && res) {
-      checks.forEach(function (c) {
-        c.addEventListener('change', function () {
-          var n = 0;
-          checks.forEach(function (ch) { if (ch.checked) n++; });
-          if (!n) { res.classList.remove('x-selfcheck__result--visible'); return; }
-          var m = '';
-          if (n <= 2) m = 'Рекомендация: начните с уровня A2 (наблюдаемость). Подключение за 2-4 недели.';
-          else if (n <= 4) m = 'Рекомендация: уровень A3 (рекомендации). Пилот 6 недель.';
-          else m = 'Рекомендация: полный контур A3-A4. Запросите техсессию.';
-          res.textContent = m;
-          res.classList.add('x-selfcheck__result--visible');
-        });
-      });
-    }
+
 
   })();
 </script>
