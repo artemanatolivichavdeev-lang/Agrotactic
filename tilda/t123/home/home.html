@@ -6975,15 +6975,266 @@
   </section>
   <!-- S12: КОНТАКТЫ -->
   <section class="x-contacts" id="recCONTACTS">
+    <style>
+      /* === CONTACTS (Premium v2 — scoped overrides) === */
+
+      /* --- Card grid --- */
+      #recCONTACTS .x-contacts__row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--x-sp-5);
+        margin-top: var(--x-sp-6);
+      }
+
+      @media (max-width: 768px) {
+        #recCONTACTS .x-contacts__row {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* --- Card base --- */
+      #recCONTACTS .x-contacts__card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: var(--x-sp-6) var(--x-sp-5);
+        background: linear-gradient(165deg, rgba(19, 27, 46, 0.55), rgba(11, 17, 32, 0.75));
+        border: 1px solid rgba(51, 65, 85, 0.45);
+        border-radius: 14px;
+        overflow: hidden;
+        transition: border-color 0.35s, box-shadow 0.35s, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      #recCONTACTS .x-contacts__card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        border-radius: 14px 14px 0 0;
+      }
+
+      /* --- Icon circle --- */
+      #recCONTACTS .x-contacts__icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: var(--x-sp-4);
+        transition: box-shadow 0.35s, transform 0.35s;
+      }
+
+      #recCONTACTS .x-contacts__icon svg {
+        width: 24px;
+        height: 24px;
+        stroke-width: 1.5;
+        fill: none;
+        stroke: currentColor;
+      }
+
+      /* --- Label --- */
+      #recCONTACTS .x-contacts__label {
+        font-family: var(--x-ff-mono);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      /* --- Value --- */
+      #recCONTACTS .x-contacts__value {
+        font-size: var(--x-fs-4);
+        font-weight: 600;
+        color: var(--x-text);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      #recCONTACTS a.x-contacts__value:hover {
+        text-decoration: none;
+      }
+
+      /* --- Email: Cyan --- */
+      #recCONTACTS .x-contacts__card--email::before {
+        background: linear-gradient(90deg, rgba(0, 229, 255, 0.6), rgba(0, 229, 255, 0.1));
+      }
+
+      #recCONTACTS .x-contacts__card--email .x-contacts__icon {
+        color: #00e5ff;
+        background: rgba(0, 229, 255, 0.06);
+        border: 1px solid rgba(0, 229, 255, 0.2);
+      }
+
+      #recCONTACTS .x-contacts__card--email .x-contacts__label {
+        color: #00e5ff;
+      }
+
+      #recCONTACTS .x-contacts__card--email:hover {
+        border-color: rgba(0, 229, 255, 0.35);
+        box-shadow: 0 6px 28px rgba(0, 229, 255, 0.06), 0 0 0 1px rgba(0, 229, 255, 0.08);
+        transform: translateY(-4px);
+      }
+
+      #recCONTACTS .x-contacts__card--email:hover .x-contacts__icon {
+        box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);
+        transform: scale(1.05);
+      }
+
+      #recCONTACTS .x-contacts__card--email:hover .x-contacts__value {
+        color: #00e5ff;
+      }
+
+      /* --- Phone: Green --- */
+      #recCONTACTS .x-contacts__card--phone::before {
+        background: linear-gradient(90deg, rgba(16, 185, 129, 0.6), rgba(16, 185, 129, 0.1));
+      }
+
+      #recCONTACTS .x-contacts__card--phone .x-contacts__icon {
+        color: #10b981;
+        background: rgba(16, 185, 129, 0.06);
+        border: 1px solid rgba(16, 185, 129, 0.2);
+      }
+
+      #recCONTACTS .x-contacts__card--phone .x-contacts__label {
+        color: #10b981;
+      }
+
+      #recCONTACTS .x-contacts__card--phone:hover {
+        border-color: rgba(16, 185, 129, 0.35);
+        box-shadow: 0 6px 28px rgba(16, 185, 129, 0.06), 0 0 0 1px rgba(16, 185, 129, 0.08);
+        transform: translateY(-4px);
+      }
+
+      #recCONTACTS .x-contacts__card--phone:hover .x-contacts__icon {
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+        transform: scale(1.05);
+      }
+
+      #recCONTACTS .x-contacts__card--phone:hover .x-contacts__value {
+        color: #10b981;
+      }
+
+      /* --- Location: Amber --- */
+      #recCONTACTS .x-contacts__card--loc::before {
+        background: linear-gradient(90deg, rgba(245, 158, 11, 0.6), rgba(245, 158, 11, 0.1));
+      }
+
+      #recCONTACTS .x-contacts__card--loc .x-contacts__icon {
+        color: #f59e0b;
+        background: rgba(245, 158, 11, 0.06);
+        border: 1px solid rgba(245, 158, 11, 0.2);
+      }
+
+      #recCONTACTS .x-contacts__card--loc .x-contacts__label {
+        color: #f59e0b;
+      }
+
+      #recCONTACTS .x-contacts__card--loc:hover {
+        border-color: rgba(245, 158, 11, 0.35);
+        box-shadow: 0 6px 28px rgba(245, 158, 11, 0.06), 0 0 0 1px rgba(245, 158, 11, 0.08);
+        transform: translateY(-4px);
+      }
+
+      #recCONTACTS .x-contacts__card--loc:hover .x-contacts__icon {
+        box-shadow: 0 0 20px rgba(245, 158, 11, 0.15);
+        transform: scale(1.05);
+      }
+
+      #recCONTACTS .x-contacts__card--loc:hover .x-contacts__value {
+        color: #f59e0b;
+      }
+
+      /* --- Footer --- */
+      #recCONTACTS .x-contacts__footer {
+        margin-top: var(--x-sp-7);
+        padding-top: var(--x-sp-5);
+        border-top: 1px solid rgba(51, 65, 85, 0.3);
+        text-align: center;
+        font-family: var(--x-ff-mono);
+        font-size: 11px;
+        color: var(--x-muted);
+        opacity: 0.6;
+        letter-spacing: 0.04em;
+      }
+
+      /* --- Scroll-reveal --- */
+      #recCONTACTS .ct-anim {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      #recCONTACTS .ct-anim--visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+
     <div class="x-wrap">
       <p class="x-section__label" style="text-align:center">Контакты</p>
       <h2 class="x-h2" style="text-align:center">Свяжитесь с нами</h2>
       <div class="x-contacts__row">
-        <div class="x-contacts__item">info@agrotaktik.ru</div>
-        <div class="x-contacts__item">+7 (XXX) XXX-XX-XX</div>
-        <div class="x-contacts__item">Москва, Россия</div>
+        <!-- Email -->
+        <div class="x-contacts__card x-contacts__card--email ct-anim">
+          <div class="x-contacts__icon">
+            <svg viewBox="0 0 24 24">
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <polyline points="22,4 12,13 2,4" />
+            </svg>
+          </div>
+          <span class="x-contacts__label">Email</span>
+          <a class="x-contacts__value" href="mailto:info@agrotaktik.ru">info@agrotaktik.ru</a>
+        </div>
+        <!-- Phone -->
+        <div class="x-contacts__card x-contacts__card--phone ct-anim">
+          <div class="x-contacts__icon">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+            </svg>
+          </div>
+          <span class="x-contacts__label">Телефон</span>
+          <a class="x-contacts__value" href="tel:+7XXXXXXXXXX">+7 (XXX) XXX-XX-XX</a>
+        </div>
+        <!-- Location -->
+        <div class="x-contacts__card x-contacts__card--loc ct-anim">
+          <div class="x-contacts__icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+          </div>
+          <span class="x-contacts__label">Локация</span>
+          <span class="x-contacts__value">Москва, Россия</span>
+        </div>
       </div>
+      <div class="x-contacts__footer ct-anim">© 2025 Агротактик. Все права защищены.</div>
     </div>
+
+    <script>
+      (function () {
+        var els = document.querySelectorAll('#recCONTACTS .ct-anim');
+        if (!els.length) return;
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('ct-anim--visible');
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        els.forEach(function (el, i) {
+          el.style.transitionDelay = (i * 0.1) + 's';
+          io.observe(el);
+        });
+      })();
+    </script>
   </section>
   <!-- DRAWER -->
   <div aria-label="Пакет документов" aria-modal="true" class="x-drawer" id="x-drawer" role="dialog">
