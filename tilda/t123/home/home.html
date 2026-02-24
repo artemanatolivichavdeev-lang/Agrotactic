@@ -2356,6 +2356,250 @@
   </section>
   <!-- S4: ЛЕСТНИЦА АВТОНОМИИ -->
   <section class="x-section" id="x-autonomy">
+    <style>
+      /* === AUTONOMY LEVELS (Premium v2 — scoped overrides) === */
+
+      /* --- Animated connecting line between buttons --- */
+      #x-autonomy .x-autonomy-switcher {
+        position: relative;
+      }
+
+      #x-autonomy .x-autonomy-switcher::before {
+        content: '';
+        position: absolute;
+        top: 24px;
+        left: calc(12.5% + 24px);
+        right: calc(12.5% + 24px);
+        height: 1px;
+        background-image: linear-gradient(to right, rgba(0, 229, 255, 0.5) 50%, transparent 50%);
+        background-size: 10px 1px;
+        background-repeat: repeat-x;
+        z-index: 0;
+        animation: aut-dash-flow 1.5s linear infinite;
+      }
+
+      @keyframes aut-dash-flow {
+        from {
+          background-position: 0 0;
+        }
+
+        to {
+          background-position: -20px 0;
+        }
+      }
+
+      @media(max-width: 768px) {
+        #x-autonomy .x-autonomy-switcher::before {
+          display: none;
+        }
+      }
+
+      /* --- Per-level button ring colors --- */
+      /* A1: Green */
+      #x-autonomy .x-auto-btn[data-level="1"].x-auto-btn--active .x-auto-btn__ring {
+        border-color: #10b981;
+        background: rgba(16, 185, 129, 0.1);
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.3), inset 0 0 10px rgba(16, 185, 129, 0.2);
+      }
+
+      #x-autonomy .x-auto-btn[data-level="1"].x-auto-btn--active .x-auto-btn__ring::before {
+        border-color: #10b981;
+      }
+
+      #x-autonomy .x-auto-btn[data-level="1"].x-auto-btn--active .x-auto-btn__text {
+        color: #10b981;
+        text-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+      }
+
+      #x-autonomy .x-auto-btn[data-level="1"].x-auto-btn--active .x-auto-btn__label {
+        color: #10b981;
+      }
+
+      #x-autonomy .x-auto-btn[data-level="1"]:hover .x-auto-btn__ring {
+        border-color: rgba(16, 185, 129, 0.5);
+      }
+
+      /* A2: Cyan (default accent — keep as-is) */
+
+      /* A3: Amber */
+      #x-autonomy .x-auto-btn[data-level="3"].x-auto-btn--active .x-auto-btn__ring {
+        border-color: #f59e0b;
+        background: rgba(245, 158, 11, 0.1);
+        box-shadow: 0 0 20px rgba(245, 158, 11, 0.3), inset 0 0 10px rgba(245, 158, 11, 0.2);
+      }
+
+      #x-autonomy .x-auto-btn[data-level="3"].x-auto-btn--active .x-auto-btn__ring::before {
+        border-color: #f59e0b;
+      }
+
+      #x-autonomy .x-auto-btn[data-level="3"].x-auto-btn--active .x-auto-btn__text {
+        color: #f59e0b;
+        text-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
+      }
+
+      #x-autonomy .x-auto-btn[data-level="3"].x-auto-btn--active .x-auto-btn__label {
+        color: #f59e0b;
+      }
+
+      #x-autonomy .x-auto-btn[data-level="3"]:hover .x-auto-btn__ring {
+        border-color: rgba(245, 158, 11, 0.5);
+      }
+
+      /* A4: Purple */
+      #x-autonomy .x-auto-btn[data-level="4"].x-auto-btn--active .x-auto-btn__ring {
+        border-color: #a855f7;
+        background: rgba(168, 85, 247, 0.1);
+        box-shadow: 0 0 20px rgba(168, 85, 247, 0.3), inset 0 0 10px rgba(168, 85, 247, 0.2);
+      }
+
+      #x-autonomy .x-auto-btn[data-level="4"].x-auto-btn--active .x-auto-btn__ring::before {
+        border-color: #a855f7;
+      }
+
+      #x-autonomy .x-auto-btn[data-level="4"].x-auto-btn--active .x-auto-btn__text {
+        color: #a855f7;
+        text-shadow: 0 0 8px rgba(168, 85, 247, 0.6);
+      }
+
+      #x-autonomy .x-auto-btn[data-level="4"].x-auto-btn--active .x-auto-btn__label {
+        color: #a855f7;
+      }
+
+      #x-autonomy .x-auto-btn[data-level="4"]:hover .x-auto-btn__ring {
+        border-color: rgba(168, 85, 247, 0.5);
+      }
+
+      /* --- Per-level panel top line (3px colored gradient) --- */
+      #x-autonomy .x-auto-panel__inner::before {
+        height: 3px !important;
+      }
+
+      #x-autonomy #auto-panel-1 .x-auto-panel__inner {
+        border-color: rgba(16, 185, 129, 0.2);
+      }
+
+      #x-autonomy #auto-panel-1 .x-auto-panel__inner::before {
+        background: linear-gradient(90deg, transparent, #10b981, transparent) !important;
+      }
+
+      #x-autonomy #auto-panel-2 .x-auto-panel__inner {
+        border-color: rgba(0, 229, 255, 0.2);
+      }
+
+      #x-autonomy #auto-panel-2 .x-auto-panel__inner::before {
+        background: linear-gradient(90deg, transparent, var(--x-accent), transparent) !important;
+      }
+
+      #x-autonomy #auto-panel-3 .x-auto-panel__inner {
+        border-color: rgba(245, 158, 11, 0.2);
+      }
+
+      #x-autonomy #auto-panel-3 .x-auto-panel__inner::before {
+        background: linear-gradient(90deg, transparent, #f59e0b, transparent) !important;
+      }
+
+      #x-autonomy #auto-panel-4 .x-auto-panel__inner {
+        border-color: rgba(168, 85, 247, 0.2);
+      }
+
+      #x-autonomy #auto-panel-4 .x-auto-panel__inner::before {
+        background: linear-gradient(90deg, transparent, #a855f7, transparent) !important;
+      }
+
+      /* --- Per-level watermark tint --- */
+      #x-autonomy #auto-panel-1 .x-auto-panel__bg-level {
+        color: rgba(16, 185, 129, 0.04);
+      }
+
+      #x-autonomy #auto-panel-2 .x-auto-panel__bg-level {
+        color: rgba(0, 229, 255, 0.04);
+      }
+
+      #x-autonomy #auto-panel-3 .x-auto-panel__bg-level {
+        color: rgba(245, 158, 11, 0.04);
+      }
+
+      #x-autonomy #auto-panel-4 .x-auto-panel__bg-level {
+        color: rgba(168, 85, 247, 0.04);
+      }
+
+      /* --- Per-level panel title color --- */
+      #x-autonomy #auto-panel-1 .x-auto-panel__title {
+        color: #10b981;
+      }
+
+      #x-autonomy #auto-panel-2 .x-auto-panel__title {
+        color: var(--x-accent);
+      }
+
+      #x-autonomy #auto-panel-3 .x-auto-panel__title {
+        color: #f59e0b;
+      }
+
+      #x-autonomy #auto-panel-4 .x-auto-panel__title {
+        color: #a855f7;
+      }
+
+      /* --- Per-level bullet colors --- */
+      #x-autonomy #auto-panel-1 .x-hero__bullets li::before {
+        background: #10b981;
+        box-shadow: 0 0 6px rgba(16, 185, 129, 0.5);
+      }
+
+      #x-autonomy #auto-panel-2 .x-hero__bullets li::before {
+        background: var(--x-accent);
+        box-shadow: 0 0 6px rgba(0, 229, 255, 0.5);
+      }
+
+      #x-autonomy #auto-panel-3 .x-hero__bullets li::before {
+        background: #f59e0b;
+        box-shadow: 0 0 6px rgba(245, 158, 11, 0.5);
+      }
+
+      #x-autonomy #auto-panel-4 .x-hero__bullets li::before {
+        background: #a855f7;
+        box-shadow: 0 0 6px rgba(168, 85, 247, 0.5);
+      }
+
+      /* --- Per-level chip colors --- */
+      #x-autonomy #auto-panel-1 .x-chip {
+        border-color: rgba(16, 185, 129, 0.25);
+        color: #10b981;
+      }
+
+      #x-autonomy #auto-panel-2 .x-chip {
+        border-color: rgba(0, 229, 255, 0.25);
+        color: var(--x-accent);
+      }
+
+      #x-autonomy #auto-panel-3 .x-chip {
+        border-color: rgba(245, 158, 11, 0.25);
+        color: #f59e0b;
+      }
+
+      #x-autonomy #auto-panel-4 .x-chip {
+        border-color: rgba(168, 85, 247, 0.25);
+        color: #a855f7;
+      }
+
+      /* --- Mobile adjustments --- */
+      @media(max-width: 768px) {
+        #x-autonomy .x-auto-btn[data-level="1"].x-auto-btn--active {
+          border-color: rgba(16, 185, 129, 0.3);
+          background: rgba(16, 185, 129, 0.05);
+        }
+
+        #x-autonomy .x-auto-btn[data-level="3"].x-auto-btn--active {
+          border-color: rgba(245, 158, 11, 0.3);
+          background: rgba(245, 158, 11, 0.05);
+        }
+
+        #x-autonomy .x-auto-btn[data-level="4"].x-auto-btn--active {
+          border-color: rgba(168, 85, 247, 0.3);
+          background: rgba(168, 85, 247, 0.05);
+        }
+      }
+    </style>
     <div class="x-wrap">
       <div class="x-section__head">
         <p class="x-section__label">Уровни автономии</p>
@@ -2382,7 +2626,7 @@
         </button>
         <button class="x-auto-btn" data-level="4">
           <span class="x-auto-btn__ring"><span class="x-auto-btn__text">A4</span></span>
-          <span class="x-auto-btn__label">Оркетсратор</span>
+          <span class="x-auto-btn__label">Оркестратор</span>
         </button>
       </div>
 
@@ -2466,7 +2710,7 @@
           <div class="x-auto-panel__inner">
             <div class="x-auto-panel__bg-level">A4</div>
             <div class="x-auto-panel__content">
-              <h3 class="x-auto-panel__title">Оркетсратор: автоматическое исполнение в рамках утверждённых правил</h3>
+              <h3 class="x-auto-panel__title">Оркестратор: автоматическое исполнение в рамках утверждённых правил</h3>
               <ul class="x-hero__bullets" style="margin-bottom: var(--x-sp-4);">
                 <li>Авторасчёт и распределение задач: система назначает исполнителей по регламенту, руководитель
                   управляет только исключениями</li>
