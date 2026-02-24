@@ -2282,6 +2282,195 @@
   </section>
   <!-- S3: 4 СЛОЯ ПЛАТФОРМЫ -->
   <section class="x-section" id="x-platform">
+    <style>
+      /* === ARCHITECTURE BLOCK (Premium v2 — scoped overrides) === */
+
+      /* --- Scroll-reveal --- */
+      #x-platform .pla-anim {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      #x-platform .pla-anim--visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* --- Per-layer card top accents --- */
+      #x-platform .x-arch-card {
+        border-top: 2px solid transparent;
+      }
+
+      #x-platform .x-arch-card--layer1 {
+        border-top-color: rgba(16, 185, 129, 0.4);
+      }
+
+      #x-platform .x-arch-card--layer2 {
+        border-top-color: rgba(0, 229, 255, 0.4);
+      }
+
+      #x-platform .x-arch-card--layer3 {
+        border-top-color: rgba(245, 158, 11, 0.4);
+      }
+
+      #x-platform .x-arch-card--layer4 {
+        border-top-color: rgba(168, 85, 247, 0.4);
+      }
+
+      /* --- Per-layer icon colors --- */
+      #x-platform .x-arch-card--layer1 .x-arch-card__icon {
+        background: rgba(16, 185, 129, 0.06);
+        border-color: rgba(16, 185, 129, 0.25);
+        box-shadow: 0 0 10px rgba(16, 185, 129, 0.08);
+      }
+
+      #x-platform .x-arch-card--layer2 .x-arch-card__icon {
+        background: rgba(0, 229, 255, 0.06);
+        border-color: rgba(0, 229, 255, 0.25);
+        box-shadow: 0 0 10px rgba(0, 229, 255, 0.08);
+      }
+
+      #x-platform .x-arch-card--layer3 .x-arch-card__icon {
+        background: rgba(245, 158, 11, 0.06);
+        border-color: rgba(245, 158, 11, 0.25);
+        box-shadow: 0 0 10px rgba(245, 158, 11, 0.08);
+      }
+
+      #x-platform .x-arch-card--layer4 .x-arch-card__icon {
+        background: rgba(168, 85, 247, 0.06);
+        border-color: rgba(168, 85, 247, 0.25);
+        box-shadow: 0 0 10px rgba(168, 85, 247, 0.08);
+      }
+
+      /* --- Per-layer hover glow --- */
+      #x-platform .x-arch-card--layer1:hover {
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 20px rgba(16, 185, 129, 0.12);
+        border-top-color: #10b981;
+      }
+
+      #x-platform .x-arch-card--layer1:hover .x-arch-card__icon {
+        background: #10b981;
+        color: #000;
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+      }
+
+      #x-platform .x-arch-card--layer2:hover {
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 229, 255, 0.15);
+        border-top-color: var(--x-accent);
+      }
+
+      #x-platform .x-arch-card--layer3:hover {
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 20px rgba(245, 158, 11, 0.12);
+        border-top-color: #f59e0b;
+      }
+
+      #x-platform .x-arch-card--layer3:hover .x-arch-card__icon {
+        background: #f59e0b;
+        color: #000;
+        box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+      }
+
+      #x-platform .x-arch-card--layer4:hover {
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 20px rgba(168, 85, 247, 0.12);
+        border-top-color: #a855f7;
+      }
+
+      #x-platform .x-arch-card--layer4:hover .x-arch-card__icon {
+        background: #a855f7;
+        color: #000;
+        box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+      }
+
+      /* --- Per-layer bullet markers --- */
+      #x-platform .x-arch-card--layer1 .x-hero__bullets li::before {
+        background: #10b981;
+        box-shadow: 0 0 6px rgba(16, 185, 129, 0.5);
+      }
+
+      #x-platform .x-arch-card--layer2 .x-hero__bullets li::before {
+        background: var(--x-accent);
+        box-shadow: 0 0 6px rgba(0, 229, 255, 0.5);
+      }
+
+      #x-platform .x-arch-card--layer3 .x-hero__bullets li::before {
+        background: #f59e0b;
+        box-shadow: 0 0 6px rgba(245, 158, 11, 0.5);
+      }
+
+      #x-platform .x-arch-card--layer4 .x-hero__bullets li::before {
+        background: #a855f7;
+        box-shadow: 0 0 6px rgba(168, 85, 247, 0.5);
+      }
+
+      /* --- Layer badge --- */
+      #x-platform .x-arch-badge {
+        font-family: var(--x-ff-mono);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 4px;
+        display: inline-block;
+        margin-bottom: 8px;
+      }
+
+      #x-platform .x-arch-card--layer1 .x-arch-badge {
+        color: #10b981;
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.2);
+      }
+
+      #x-platform .x-arch-card--layer2 .x-arch-badge {
+        color: var(--x-accent);
+        background: rgba(0, 229, 255, 0.08);
+        border: 1px solid rgba(0, 229, 255, 0.2);
+      }
+
+      #x-platform .x-arch-card--layer3 .x-arch-badge {
+        color: #f59e0b;
+        background: rgba(245, 158, 11, 0.08);
+        border: 1px solid rgba(245, 158, 11, 0.2);
+      }
+
+      #x-platform .x-arch-card--layer4 .x-arch-badge {
+        color: #a855f7;
+        background: rgba(168, 85, 247, 0.08);
+        border: 1px solid rgba(168, 85, 247, 0.2);
+      }
+
+      /* --- Enhanced selfcheck callout --- */
+      #x-platform .x-pla-callout {
+        margin-top: var(--x-sp-6);
+        background: linear-gradient(165deg, rgba(19, 27, 46, 0.55), rgba(11, 17, 32, 0.75));
+        border: 1px solid rgba(16, 185, 129, 0.15);
+        border-left: 3px solid #10b981;
+        border-radius: 14px;
+        padding: 24px 26px;
+        transition: border-color 0.3s, box-shadow 0.3s;
+      }
+
+      #x-platform .x-pla-callout:hover {
+        border-color: rgba(16, 185, 129, 0.3);
+        box-shadow: 0 4px 20px rgba(16, 185, 129, 0.06);
+      }
+
+      #x-platform .x-pla-callout__title {
+        font-family: var(--x-ff-head);
+        font-size: var(--x-fs-4);
+        font-weight: 700;
+        color: #10b981;
+        margin-bottom: var(--x-sp-3);
+      }
+
+      #x-platform .x-pla-callout__text {
+        color: var(--x-text);
+        font-size: 0.88rem;
+        line-height: 1.7;
+      }
+    </style>
+
     <div class="x-wrap">
       <div class="x-section__head">
         <p class="x-section__label">Архитектура</p>
@@ -2290,9 +2479,10 @@
           автономно и усиливает следующий.</p>
       </div>
       <div class="x-arch-grid">
-        <div class="x-arch-card">
+        <div class="x-arch-card x-arch-card--layer1 pla-anim">
           <div class="x-arch-card__icon">⚡</div>
-          <h3 class="x-arch-card__title">Слой 1 — Сбор и нормализация данных</h3>
+          <span class="x-arch-badge">Слой 1</span>
+          <h3 class="x-arch-card__title">Сбор и нормализация данных</h3>
           <p class="x-card__text">Единая точка входа для всех источников: телематика техники, датчики поля, ERP, 1С,
             «Меркурий» и внешние API. Данные поступают в реальном времени, нормализуются и передаются в единую шину без
             дублирования и ручного переноса.</p>
@@ -2302,9 +2492,10 @@
             <li>Хранение сырых данных с полным audit trail</li>
           </ul>
         </div>
-        <div class="x-arch-card">
+        <div class="x-arch-card x-arch-card--layer2 pla-anim">
           <div class="x-arch-card__icon">📊</div>
-          <h3 class="x-arch-card__title">Слой 2 — AI-аналитика и прогнозирование</h3>
+          <span class="x-arch-badge">Слой 2</span>
+          <h3 class="x-arch-card__title">AI-аналитика и прогнозирование</h3>
           <p class="x-card__text">Интеллектуальное ядро системы. AI анализирует операционные данные, выявляет
             отклонения, строит прогнозы по урожайности, загрузке техники и расходу ресурсов — и формирует дашборды под
             роль каждого пользователя.</p>
@@ -2314,9 +2505,10 @@
             <li>Персонализированные дашборды: агроном, диспетчер, директор</li>
           </ul>
         </div>
-        <div class="x-arch-card">
+        <div class="x-arch-card x-arch-card--layer3 pla-anim">
           <div class="x-arch-card__icon">🔗</div>
-          <h3 class="x-arch-card__title">Слой 3 — Операционный контур</h3>
+          <span class="x-arch-badge">Слой 3</span>
+          <h3 class="x-arch-card__title">Операционный контур</h3>
           <p class="x-card__text">Исполнительный слой: управление задачами, диспетчеризация, назначение ответственных,
             контроль исполнения и коммуникация между участниками процесса. Люди, техника и беспилотный парк
             координируются в едином пространстве.</p>
@@ -2326,9 +2518,10 @@
             <li>Встроенные регламенты эскалации и уведомлений</li>
           </ul>
         </div>
-        <div class="x-arch-card">
+        <div class="x-arch-card x-arch-card--layer4 pla-anim">
           <div class="x-arch-card__icon">📋</div>
-          <h3 class="x-arch-card__title">Слой 4 — Документирование и комплаенс</h3>
+          <span class="x-arch-badge">Слой 4</span>
+          <h3 class="x-arch-card__title">Документирование и комплаенс</h3>
           <p class="x-card__text">Каждое действие в системе автоматически формирует документальный след. Отчётность для
             надзорных органов, журнал операций, первичная документация — генерируются системой без ручного оформления.
           </p>
@@ -2340,19 +2533,37 @@
         </div>
       </div>
 
-      <div class="x-selfcheck"
-        style="margin-top: var(--x-sp-6); border-color: var(--x-accent); background: rgba(0, 229, 255, 0.05);">
-        <h4
-          style="font-family: var(--x-ff-head); font-size: var(--x-fs-4); font-weight: 700; color: var(--x-accent); margin-bottom: var(--x-sp-3);">
-          Принцип оптимальной сборки под Ваши задачи</h4>
-        <p class="x-card__text">Агротактик не требует внедрения всех слоёв сразу. Архитектура модульная: начните с
+      <div class="x-pla-callout pla-anim">
+        <h4 class="x-pla-callout__title">Принцип оптимальной сборки под Ваши задачи</h4>
+        <p class="x-pla-callout__text">Агротактик не требует внедрения всех слоёв сразу. Архитектура модульная: начните
+          с
           операционного контура и диспетчеризации — и добавляйте слои по мере роста задач. Каждый модуль работает
           самостоятельно и усиливается при подключении соседних.</p>
       </div>
 
-      <p class="x-hero__micro" style="margin-top: var(--x-sp-6); text-align: center;">Начать с пилота → Фиксированные
+      <p class="x-hero__micro pla-anim" style="margin-top: var(--x-sp-6); text-align: center;">Начать с пилота →
+        Фиксированные
         метрики. Прозрачная приёмка. Результат за 30 дней</p>
     </div>
+
+    <script>
+      (function () {
+        var els = document.querySelectorAll('#x-platform .pla-anim');
+        if (!els.length) return;
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('pla-anim--visible');
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        els.forEach(function (el, i) {
+          el.style.transitionDelay = (i * 0.1) + 's';
+          io.observe(el);
+        });
+      })();
+    </script>
   </section>
   <!-- S4: ЛЕСТНИЦА АВТОНОМИИ -->
   <section class="x-section" id="x-autonomy">
