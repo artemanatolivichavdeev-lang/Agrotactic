@@ -230,93 +230,344 @@
     left: 0;
     right: 0;
     z-index: 100;
-    background: rgba(11, 17, 32, 0.9);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--x-line);
-    height: 80px;
-    transition: all 0.3s;
+    height: 72px;
+    transition: all .4s cubic-bezier(.16, 1, .3, 1);
+  }
+
+  .x-site .x-header__glass {
+    position: absolute;
+    inset: 8px 24px auto;
+    height: 56px;
+    background: rgba(11, 17, 32, .78);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 229, 255, .06);
+    border-radius: 16px;
+    box-shadow:
+      0 4px 24px rgba(0, 0, 0, .35),
+      inset 0 1px 0 rgba(255, 255, 255, .04);
+    transition: all .4s cubic-bezier(.16, 1, .3, 1);
   }
 
   .x-site .x-header--sticky {
     height: 60px;
-    background: rgba(11, 17, 32, 0.98);
+  }
+
+  .x-site .x-header--sticky .x-header__glass {
+    inset: 0 0 auto;
+    height: 60px;
+    border-radius: 0;
+    background: rgba(11, 17, 32, .95);
+    border-color: rgba(51, 65, 85, .3);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, .4);
   }
 
   .x-site .x-header__inner {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 100%;
     max-width: var(--x-container-wide);
     margin: 0 auto;
-    padding: 0 var(--x-sp-5);
+    padding: 0 48px;
+    z-index: 2;
   }
 
+  /* Logo */
   .x-site .x-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     font-family: var(--x-ff-head);
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--x-text);
+    letter-spacing: 0.12em;
+    color: #fff;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .x-site .x-logo__mark {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(0, 229, 255, .15), rgba(0, 229, 255, .06));
+    border: 1px solid rgba(0, 229, 255, .2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all .3s;
+  }
+
+  .x-site .x-logo__mark svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--x-accent);
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .x-site .x-logo:hover .x-logo__mark {
+    background: linear-gradient(135deg, rgba(0, 229, 255, .25), rgba(0, 229, 255, .12));
+    box-shadow: 0 0 12px rgba(0, 229, 255, .2);
+    transform: scale(1.05);
   }
 
   .x-site .x-logo span {
-    color: var(--x-accent);
+    background: linear-gradient(135deg, #fff 30%, var(--x-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
+  /* Navigation */
   .x-site .x-nav {
     display: flex;
-    gap: var(--x-sp-6);
+    align-items: center;
+    gap: 4px;
     list-style: none;
   }
 
   .x-site .x-nav__item {
-    font-family: var(--x-ff-mono);
-    font-size: var(--x-fs-6);
-    text-transform: uppercase;
-    color: var(--x-muted);
-    letter-spacing: 0.05em;
-    font-weight: 700;
+    font-family: var(--x-ff-body);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: rgba(226, 232, 240, .7);
+    letter-spacing: 0.02em;
+    padding: 8px 14px;
+    border-radius: 8px;
+    position: relative;
+    transition: all .25s;
+    text-decoration: none;
+  }
+
+  .x-site .x-nav__item::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--x-accent), #22d3ee);
+    border-radius: 1px;
+    transition: all .3s cubic-bezier(.16, 1, .3, 1);
+    transform: translateX(-50%);
   }
 
   .x-site .x-nav__item:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, .04);
+  }
+
+  .x-site .x-nav__item:hover::after {
+    width: 60%;
+  }
+
+  .x-site .x-nav__item--active {
     color: var(--x-accent);
   }
 
+  .x-site .x-nav__item--active::after {
+    width: 60%;
+    box-shadow: 0 0 8px rgba(0, 229, 255, .3);
+  }
+
+  /* Header CTA */
+  .x-site .x-header__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--x-ff-body);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #000;
+    background: linear-gradient(135deg, var(--x-accent), #22d3ee);
+    border: none;
+    border-radius: 10px;
+    padding: 9px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all .25s cubic-bezier(.16, 1, .3, 1);
+    position: relative;
+    flex-shrink: 0;
+    letter-spacing: .01em;
+  }
+
+  .x-site .x-header__cta::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 13px;
+    background: linear-gradient(135deg, var(--x-accent), #22d3ee);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity .3s;
+    filter: blur(8px);
+  }
+
+  .x-site .x-header__cta:hover {
+    background: #fff;
+    color: #000;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0, 229, 255, .3);
+  }
+
+  .x-site .x-header__cta:hover::before {
+    opacity: .4;
+  }
+
+  .x-site .x-header__cta svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* Scroll progress */
+  .x-site .x-header__progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--x-accent), #22d3ee, var(--x-accent));
+    border-radius: 1px;
+    transition: width .1s linear;
+    z-index: 3;
+  }
+
+  .x-site .x-header--sticky .x-header__progress {
+    bottom: 0;
+    border-radius: 0;
+  }
+
+  /* Burger */
   .x-site .x-burger {
     display: none;
     background: none;
-    border: none;
+    border: 1px solid rgba(51, 65, 85, .4);
+    border-radius: 8px;
+    width: 38px;
+    height: 38px;
     color: var(--x-text);
-    font-size: 1.5rem;
     cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    transition: all .25s;
+  }
+
+  .x-site .x-burger:hover {
+    border-color: var(--x-accent);
+    color: var(--x-accent);
+  }
+
+  .x-site .x-burger svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
   }
 
   @media(max-width:900px) {
+    .x-site .x-header__glass {
+      inset: 0;
+      border-radius: 0;
+    }
+
+    .x-site .x-header__inner {
+      padding: 0 20px;
+    }
+
     .x-site .x-nav {
       display: none;
-      position: absolute;
-      top: 100%;
+      position: fixed;
+      top: 0;
       left: 0;
       right: 0;
+      bottom: 0;
       flex-direction: column;
-      background: var(--x-bg);
-      border-bottom: 1px solid var(--x-line);
-      padding: var(--x-sp-5);
-      gap: var(--x-sp-4);
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(11, 17, 32, .97);
+      backdrop-filter: blur(24px);
+      z-index: 50;
+      padding: 80px 24px 40px;
     }
 
     .x-site .x-header--menu-open .x-nav {
       display: flex;
     }
 
-    .x-site .x-burger {
-      display: block;
+    .x-site .x-header--menu-open .x-nav li {
+      animation: navFadeIn .35s ease both;
     }
 
-    .x-site .x-header .x-btn {
+    .x-site .x-header--menu-open .x-nav li:nth-child(1) {
+      animation-delay: .05s;
+    }
+
+    .x-site .x-header--menu-open .x-nav li:nth-child(2) {
+      animation-delay: .1s;
+    }
+
+    .x-site .x-header--menu-open .x-nav li:nth-child(3) {
+      animation-delay: .15s;
+    }
+
+    .x-site .x-header--menu-open .x-nav li:nth-child(4) {
+      animation-delay: .2s;
+    }
+
+    .x-site .x-header--menu-open .x-nav li:nth-child(5) {
+      animation-delay: .25s;
+    }
+
+    @keyframes navFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .x-site .x-nav__item {
+      font-size: 1.1rem;
+      padding: 14px 24px;
+    }
+
+    .x-site .x-burger {
+      display: flex;
+    }
+
+    .x-site .x-header__cta {
       display: none;
+    }
+
+    .x-site .x-header--menu-open .x-header__cta {
+      display: inline-flex;
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 51;
+      font-size: .9rem;
+      padding: 12px 28px;
+      animation: navFadeIn .35s ease .3s both;
     }
   }
 
@@ -2051,21 +2302,40 @@
   <div class="x-scanline"></div>
   <!-- S0: HEADER -->
   <header class="x-header" id="x-header">
+    <div class="x-header__glass"></div>
     <div class="x-header__inner">
-      <a class="x-logo" href="/">АГРО<span>ТАКТИК</span></a>
+      <a class="x-logo" href="/">
+        <span class="x-logo__mark"><svg viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5z" />
+            <path d="M2 17l10 5 10-5" />
+            <path d="M2 12l10 5 10-5" />
+          </svg></span>
+        АГРО<span>ТАКТИК</span>
+      </a>
       <nav>
         <ul class="x-nav" id="x-nav">
-          <li><a class="x-nav__item" href="#x-model">Модель</a></li>
-          <li><a class="x-nav__item" href="#x-platform">Платформа</a></li>
-          <li><a class="x-nav__item" href="#x-integrations">Интеграции</a></li>
+          <li><a class="x-nav__item" href="#x-model">Продукт</a></li>
+          <li><a class="x-nav__item" href="#x-scenarios">Сценарии</a></li>
+          <li><a class="x-nav__item" href="#x-security">Безопасность</a></li>
           <li><a class="x-nav__item" href="#x-pilot">Пилот</a></li>
           <li><a class="x-nav__item" href="#recCONTACTS">Контакты</a></li>
         </ul>
       </nav>
-      <!-- REPLACE #recFORM with real Tilda recID -->
-      <a class="x-btn x-btn--primary x-btn--demo" href="#x-request-demo">Запросить демо</a>
-      <button aria-label="Меню" class="x-burger" id="x-burger">☰</button>
+      <a class="x-header__cta" href="#x-request-demo">
+        <svg viewBox="0 0 24 24">
+          <polygon points="5 3 19 12 5 21 5 3" />
+        </svg>
+        Демо
+      </a>
+      <button aria-label="Меню" class="x-burger" id="x-burger">
+        <svg viewBox="0 0 24 24">
+          <line x1="4" y1="6" x2="20" y2="6" />
+          <line x1="4" y1="12" x2="20" y2="12" />
+          <line x1="4" y1="18" x2="20" y2="18" />
+        </svg>
+      </button>
     </div>
+    <div class="x-header__progress" id="x-header-progress"></div>
   </header>
   <!-- S1: HERO -->
   <section class="x-hero" data-active-role="coo">
@@ -3494,6 +3764,7 @@
     </div>
   </section>
   <!-- S5: ЦЕНТР УПРАВЛЕНИЯ -->
+  <div id="x-scenarios"></div>
   <section class="x-section" id="x-command">
     <style>
       /* === COMMAND CENTER (Premium v2) === */
@@ -9443,8 +9714,8 @@
       document.querySelectorAll('a[href="#x-request-demo"]').forEach(function (a) {
         a.addEventListener('click', openDemoDrawer);
       });
-      // Also header button
-      document.querySelectorAll('.x-btn--demo').forEach(function (btn) {
+      // Also header CTA button
+      document.querySelectorAll('.x-header__cta, .x-btn--demo').forEach(function (btn) {
         btn.addEventListener('click', openDemoDrawer);
       });
 
@@ -9617,14 +9888,36 @@
     (function () {
       'use strict';
 
-      /* === STICKY HEADER === */
+      /* === STICKY HEADER + SCROLL PROGRESS === */
       var header = document.getElementById('x-header');
+      var progressBar = document.getElementById('x-header-progress');
       if (header) {
         var ticking = false;
         window.addEventListener('scroll', function () {
           if (!ticking) {
             window.requestAnimationFrame(function () {
-              header.classList.toggle('x-header--sticky', window.scrollY > 140);
+              header.classList.toggle('x-header--sticky', window.scrollY > 100);
+              // Scroll progress
+              if (progressBar) {
+                var scrollTop = window.scrollY;
+                var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+                progressBar.style.width = pct + '%';
+              }
+              // Active nav item
+              var sections = ['x-model', 'x-scenarios', 'x-security', 'x-pilot', 'recCONTACTS'];
+              var navItems = document.querySelectorAll('.x-nav__item');
+              var found = false;
+              for (var i = sections.length - 1; i >= 0; i--) {
+                var sec = document.getElementById(sections[i]);
+                if (sec && sec.getBoundingClientRect().top <= 150) {
+                  navItems.forEach(function (n) { n.classList.remove('x-nav__item--active'); });
+                  navItems[i].classList.add('x-nav__item--active');
+                  found = true;
+                  break;
+                }
+              }
+              if (!found) navItems.forEach(function (n) { n.classList.remove('x-nav__item--active'); });
               ticking = false;
             });
             ticking = true;
@@ -9634,10 +9927,12 @@
 
       /* === BURGER MENU === */
       var burger = document.getElementById('x-burger');
+      var burgerSvgOpen = '<svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>';
+      var burgerSvgClose = '<svg viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>';
       if (burger) {
         burger.addEventListener('click', function () {
           header.classList.toggle('x-header--menu-open');
-          burger.innerHTML = header.classList.contains('x-header--menu-open') ? '&#10005;' : '&#9776;';
+          burger.innerHTML = header.classList.contains('x-header--menu-open') ? burgerSvgClose : burgerSvgOpen;
         });
       }
 
