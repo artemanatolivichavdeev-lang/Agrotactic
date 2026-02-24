@@ -377,26 +377,6 @@
     box-shadow: 0 0 8px rgba(0, 229, 255, .3);
   }
 
-  /* Home nav icon */
-  .x-site .x-nav__item--home {
-    padding: 8px 10px;
-  }
-
-  .x-site .x-nav__item--home svg {
-    width: 18px;
-    height: 18px;
-    stroke: currentColor;
-    fill: none;
-    stroke-width: 1.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    display: block;
-  }
-
-  .x-site .x-nav__item--home::after {
-    display: none;
-  }
-
   /* Header CTA */
   .x-site .x-header__cta {
     display: inline-flex;
@@ -2319,13 +2299,13 @@
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
   }
 </style>
-<div class="x-site">
+<div class="x-site" id="agro-home">
   <div class="x-scanline"></div>
   <!-- S0: HEADER -->
   <header class="x-header" id="x-header">
     <div class="x-header__glass"></div>
     <div class="x-header__inner">
-      <a class="x-logo" href="/">
+      <a class="x-logo" href="#" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'})">
         <span class="x-logo__mark"><svg viewBox="0 0 24 24">
             <path d="M12 2L2 7l10 5 10-5-10-5z" />
             <path d="M2 17l10 5 10-5" />
@@ -2335,10 +2315,6 @@
       </a>
       <nav>
         <ul class="x-nav" id="x-nav">
-          <li><a class="x-nav__item x-nav__item--home" href="#x-header" title="На главную"><svg viewBox="0 0 24 24">
-                <path
-                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1h-2z" />
-              </svg></a></li>
           <li><a class="x-nav__item" href="#x-model">Продукт</a></li>
           <li><a class="x-nav__item" href="#x-scenarios">Сценарии</a></li>
           <li><a class="x-nav__item" href="#x-security">Безопасность</a></li>
@@ -8313,7 +8289,7 @@
           <span class="x-contacts__value">Москва, Россия</span>
         </div>
       </div>
-      <div class="x-contacts__footer ct-anim">© 2025 Агротактик. Все права защищены.</div>
+
     </div>
 
     <script>
@@ -8517,6 +8493,12 @@
       })();
     </script>
   </section>
+
+  <!-- FOOTER -->
+  <footer class="x-footer"
+    style="text-align:center;padding:var(--x-sp-6) var(--x-sp-5);border-top:1px solid var(--x-line);font-family:var(--x-ff-mono);font-size:11px;color:var(--x-muted);opacity:.6;letter-spacing:.04em;">
+    © 2025 Агротактик. Все права защищены.
+  </footer>
   <!-- DRAWER -->
   <div aria-label="Пакет документов" aria-modal="true" class="x-drawer" id="x-drawer" role="dialog">
     <div class="x-drawer__overlay" id="x-drawer-overlay"></div>
@@ -9944,7 +9926,7 @@
                 var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
                 progressBar.style.width = pct + '%';
               }
-              // Active nav item (skip first item = Home icon)
+              // Active nav item
               var sections = ['x-model', 'x-scenarios', 'x-security', 'x-pilot', 'recCONTACTS'];
               var navItems = document.querySelectorAll('.x-nav__item');
               var found = false;
@@ -9952,7 +9934,7 @@
                 var sec = document.getElementById(sections[i]);
                 if (sec && sec.getBoundingClientRect().top <= 150) {
                   navItems.forEach(function (n) { n.classList.remove('x-nav__item--active'); });
-                  navItems[i + 1].classList.add('x-nav__item--active');
+                  navItems[i].classList.add('x-nav__item--active');
                   found = true;
                   break;
                 }
