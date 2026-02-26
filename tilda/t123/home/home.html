@@ -682,15 +682,15 @@
 
   .x-site .x-tab {
     font-family: var(--x-ff-mono);
-    font-size: 11px;
+    font-size: 14px;
     text-transform: uppercase;
     font-weight: 700;
     letter-spacing: 0.04em;
-    padding: 8px 14px;
+    padding: 10px 18px;
     background: transparent;
     color: var(--x-muted);
     border: none;
-    border-radius: 7px;
+    border-radius: 8px;
     cursor: pointer;
     transition: color 0.25s, background 0.25s, box-shadow 0.25s;
   }
@@ -2643,16 +2643,358 @@
         background: #94a3b8;
         box-shadow: 0 0 10px #94a3b8, 0 0 3px #94a3b8;
       }
+
+      /* === HERO HEADLINE — Pain pills, loss accent, value lines === */
+
+      /* Pain-point row */
+      .x-hero .x-hero__pain-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: var(--x-sp-3);
+      }
+
+      .x-hero .x-hero__pain-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        font-family: var(--x-ff-mono);
+        font-size: 15px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: #fca5a5;
+        background:
+          linear-gradient(rgba(239, 68, 68, 0.10), rgba(239, 68, 68, 0.10)),
+          linear-gradient(105deg, transparent 40%, rgba(239, 68, 68, 0.12) 50%, transparent 60%);
+        background-size: 100% 100%, 250% 100%;
+        border: 1px solid rgba(239, 68, 68, 0.35);
+        border-radius: 24px;
+        padding: 11px 20px 11px 15px;
+        box-shadow: 0 0 14px rgba(239, 68, 68, 0.08), inset 0 0 12px rgba(239, 68, 68, 0.04);
+        position: relative;
+        overflow: hidden;
+        animation:
+          painSlideIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both,
+          painSweep 4s ease-in-out infinite;
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 0.35s ease,
+          border-color 0.35s ease;
+      }
+
+      .x-hero .x-hero__pain-pill:nth-child(1) {
+        animation-delay: 0s, 1s;
+      }
+
+      .x-hero .x-hero__pain-pill:nth-child(2) {
+        animation-delay: 0.15s, 1.8s;
+      }
+
+      .x-hero .x-hero__pain-pill:nth-child(3) {
+        animation-delay: 0.3s, 2.6s;
+      }
+
+      .x-hero .x-hero__pain-pill:hover {
+        transform: translateY(-3px) scale(1.03);
+        box-shadow: 0 6px 24px rgba(239, 68, 68, 0.18), 0 0 20px rgba(239, 68, 68, 0.12), inset 0 0 14px rgba(239, 68, 68, 0.06);
+        border-color: rgba(239, 68, 68, 0.6);
+      }
+
+      /* Glow ring on hover */
+      .x-hero .x-hero__pain-pill::after {
+        content: '';
+        position: absolute;
+        inset: -1px;
+        border-radius: 24px;
+        background: conic-gradient(from 0deg, transparent 0%, rgba(239, 68, 68, 0.3) 25%, transparent 50%);
+        opacity: 0;
+        animation: painBorderSpin 3s linear infinite;
+        transition: opacity 0.4s ease;
+        z-index: -1;
+      }
+
+      .x-hero .x-hero__pain-pill:hover::after {
+        opacity: 1;
+      }
+
+      @keyframes painSlideIn {
+        from {
+          opacity: 0;
+          transform: translateX(-28px);
+          filter: blur(6px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateX(0);
+          filter: blur(0);
+        }
+      }
+
+      @keyframes painSweep {
+
+        0%,
+        100% {
+          background-position: 0% 0%, -100% 0%;
+        }
+
+        50% {
+          background-position: 0% 0%, 200% 0%;
+        }
+      }
+
+      @keyframes painBorderSpin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .x-hero .x-hero__pain-pill svg {
+        width: 20px;
+        height: 20px;
+        stroke: #ef4444;
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        flex-shrink: 0;
+        filter: drop-shadow(0 0 6px rgba(239, 68, 68, 0.5));
+        animation: painIconPulse 2.5s ease-in-out infinite;
+      }
+
+      .x-hero .x-hero__pain-pill:nth-child(1) svg {
+        animation-delay: 0s;
+      }
+
+      .x-hero .x-hero__pain-pill:nth-child(2) svg {
+        animation-delay: 0.8s;
+      }
+
+      .x-hero .x-hero__pain-pill:nth-child(3) svg {
+        animation-delay: 1.6s;
+      }
+
+      @keyframes painIconPulse {
+
+        0%,
+        100% {
+          transform: scale(1);
+          filter: drop-shadow(0 0 6px rgba(239, 68, 68, 0.5));
+        }
+
+        50% {
+          transform: scale(1.18);
+          filter: drop-shadow(0 0 12px rgba(239, 68, 68, 0.8));
+        }
+      }
+
+      /* H1 loss accent */
+      .x-hero .x-hero__loss {
+        background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 800;
+        animation: heroPulseGlow 3s ease-in-out infinite;
+        filter: drop-shadow(0 0 18px rgba(239, 68, 68, 0.25));
+      }
+
+      @keyframes heroPulseGlow {
+
+        0%,
+        100% {
+          filter: drop-shadow(0 0 18px rgba(239, 68, 68, 0.25));
+        }
+
+        50% {
+          filter: drop-shadow(0 0 28px rgba(239, 68, 68, 0.45));
+        }
+      }
+
+      /* H1 first line — smaller */
+      .x-hero h1 {
+        font-size: clamp(1.1rem, 2vw, 1.45rem);
+      }
+
+      .x-hero .x-hero__h1-first {
+        display: block;
+        font-size: 0.5em;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        -webkit-text-fill-color: var(--x-muted);
+      }
+
+      .x-hero .x-hero__h1-first .x-hero__loss {
+        font-weight: 800;
+        font-size: 1.3em;
+      }
+
+      /* H1 second line — pushed down */
+      .x-hero .x-hero__h1-sub {
+        display: block;
+        margin-top: var(--x-sp-3);
+        -webkit-text-fill-color: var(--x-accent);
+        font-weight: 600;
+        font-size: 1.15em;
+        letter-spacing: -0.01em;
+      }
+
+      /* Value-proposition lines */
+      .x-hero .x-hero__value-lines {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin-bottom: var(--x-sp-7);
+        max-width: 620px;
+      }
+
+      .x-hero .x-hero__vl {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        font-size: 0.92rem;
+        color: var(--x-muted);
+        line-height: 1.65;
+        animation: heroFadeUp 0.5s ease both;
+      }
+
+      .x-hero .x-hero__vl:nth-child(1) {
+        animation-delay: 0.35s;
+      }
+
+      .x-hero .x-hero__vl:nth-child(2) {
+        animation-delay: 0.45s;
+      }
+
+      .x-hero .x-hero__vl:nth-child(3) {
+        animation-delay: 0.55s;
+      }
+
+      .x-hero .x-hero__vl:nth-child(4) {
+        animation-delay: 0.65s;
+      }
+
+      .x-hero .x-hero__vl svg {
+        width: 18px;
+        height: 18px;
+        min-width: 18px;
+        stroke: var(--x-accent);
+        fill: none;
+        stroke-width: 1.6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        margin-top: 3px;
+        filter: drop-shadow(0 0 6px rgba(0, 229, 255, 0.3));
+      }
+
+      @keyframes heroFadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media(max-width: 600px) {
+        .x-hero .x-hero__pain-row {
+          gap: 6px;
+        }
+
+        .x-hero .x-hero__pain-pill {
+          font-size: 10px;
+          padding: 5px 10px 5px 8px;
+        }
+
+        .x-hero .x-hero__value-lines {
+          gap: 10px;
+        }
+
+        .x-hero .x-hero__vl {
+          font-size: 0.84rem;
+        }
+      }
     </style>
 
     <div class="x-wrap">
       <div class="x-hero__grid">
         <div class="x-hero__content">
           <p class="x-hero__eyebrow">Операционный контур для агрокомплексов</p>
-          <h1>Единая система управления агропредприятием: AI автоматизирует рутинные процессы — вы решаете главное</h1>
-          <p class="x-hero__sub">От мониторинга техники и контроля процессов — до прогнозирования, планирования и
-            автоматической отчётности надзорным органам. AI координирует людей, оборудование и беспилотный парк в едином
-            контуре. Глубина автоматизации — на ваш выбор.</p>
+
+          <!-- Pain-point pills -->
+          <div class="x-hero__pain-row">
+            <span class="x-hero__pain-pill">
+              <svg viewBox="0 0 24 24">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+              Дефицит кадров
+            </span>
+            <span class="x-hero__pain-pill">
+              <svg viewBox="0 0 24 24">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                <line x1="8" y1="21" x2="16" y2="21" />
+                <line x1="12" y1="17" x2="12" y2="21" />
+                <line x1="7" y1="8" x2="7" y2="13" />
+                <line x1="12" y1="6" x2="12" y2="13" />
+                <line x1="17" y1="10" x2="17" y2="13" />
+              </svg>
+              Разрозненные системы
+            </span>
+            <span class="x-hero__pain-pill">
+              <svg viewBox="0 0 24 24">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+                <line x1="9" y1="15" x2="15" y2="15" />
+              </svg>
+              Ручная диспетчеризация
+            </span>
+          </div>
+
+          <h1><span class="x-hero__h1-first">это <span class="x-hero__loss">от 15%</span> потерь с&nbsp;оборота
+              предприятия</span><br>
+            <span class="x-hero__h1-sub">«Агротактик» решает проблему:</span>
+          </h1>
+
+          <div class="x-hero__value-lines">
+            <p class="x-hero__vl">
+              <svg viewBox="0 0 24 24">
+                <rect x="3" y="3" width="7" height="7" />
+                <rect x="14" y="3" width="7" height="7" />
+                <rect x="14" y="14" width="7" height="7" />
+                <rect x="3" y="14" width="7" height="7" />
+              </svg>
+              Единый контур поверх 1С, телематики, датчиков, «Меркурия» и&nbsp;CRM — одно рабочее пространство вместо
+              десятка окон.
+            </p>
+            <p class="x-hero__vl">
+              <svg viewBox="0 0 24 24">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+              </svg>
+              Каждое отклонение → приоритет → ответственный → действие → результат → документ. Аналитика выявляет
+              проблемы раньше, чем они станут потерями.
+            </p>
+            <p class="x-hero__vl">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+              Решения и подписание остаются за людьми — система готовит черновики, но не подменяет ответственных.
+            </p>
+            <p class="x-hero__vl">
+              <svg viewBox="0 0 24 24">
+                <line x1="12" y1="20" x2="12" y2="10" />
+                <line x1="18" y1="20" x2="18" y2="4" />
+                <line x1="6" y1="20" x2="6" y2="16" />
+              </svg>
+              Начинаем с&nbsp;наблюдаемости, наращиваем автоматизацию по вашему регламенту — без&nbsp;скачков
+              и&nbsp;рискованных обещаний.
+            </p>
+          </div>
           <!-- Role Switcher -->
           <div class="x-tabs" role="tablist">
             <button aria-selected="true" class="x-tab x-tab--active" data-panel="coo" role="tab">Руководителю</button>
