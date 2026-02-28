@@ -1778,6 +1778,11 @@
     justify-content: center
   }
 
+  .x-drawer__doc .x-btn {
+    flex-shrink: 0;
+    white-space: nowrap
+  }
+
   .x-drawer__doc-name {
     font-weight: 600
   }
@@ -3158,6 +3163,12 @@
       #x-platform .x-arch-card--layer2:hover {
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 229, 255, 0.15);
         border-top-color: var(--x-accent);
+      }
+
+      #x-platform .x-arch-card--layer2:hover .x-arch-card__icon {
+        background: var(--x-accent);
+        color: #000;
+        box-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
       }
 
       #x-platform .x-arch-card--layer3:hover {
