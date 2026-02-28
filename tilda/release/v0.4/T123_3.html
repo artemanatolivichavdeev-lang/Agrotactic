@@ -1,3 +1,4 @@
+<div class="x-site">
   <!-- S6: ИНТЕГРАЦИИ -->
   <section class="x-section" id="x-integrations">
     <div class="x-wrap">
@@ -1094,10 +1095,12 @@
       </div>
     </div>
   </div>
-</div><!-- /.x-site -->
+</div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+(function(){
+  function init(){
+    try {
       /* Sync data-active-role on hero for CSS-driven role colors */
       (function () {
         var hero = document.querySelector('.x-hero[data-active-role]');
@@ -1920,5 +1923,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
   })();
-});
+    } catch(e){ console.error('[Agrotactic] init error', e); }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
 </script>
