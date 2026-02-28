@@ -9819,51 +9819,7 @@
                   placeholder="Директор по операциям" type="text">
               </div>
             </div>
-            <div class="x-form__row">
-              <label class="x-form__label">Ваша роль <span class="x-form__label-req">*</span><span
-                  class="x-form__label-hint">Мы адаптируем демо под вашу зону ответственности</span></label>
-              <div class="x-form__roles" id="f-roles">
-                <label class="x-form__role"><input name="role" required type="radio" value="coo">
-                  <div class="x-form__role-card"><span class="x-form__role-icon"><svg viewBox="0 0 24 24">
-                        <path d="M3 3v18h18" />
-                        <path d="M7 16l4-8 4 4 4-6" />
-                      </svg></span><span class="x-form__role-name">Руководитель / COO</span></div>
-                </label>
-                <label class="x-form__role"><input name="role" type="radio" value="agro">
-                  <div class="x-form__role-card"><span class="x-form__role-icon"><svg viewBox="0 0 24 24">
-                        <path d="M12 10a4 4 0 0 0-4 4H4a8 8 0 0 1 8-8V2l4 4-4 4z" />
-                        <path d="M12 22c4.4 0 8-3.6 8-8h-4a4 4 0 0 1-4 4v4z" />
-                      </svg></span><span class="x-form__role-name">Агроном</span></div>
-                </label>
-                <label class="x-form__role"><input name="role" type="radio" value="zoo">
-                  <div class="x-form__role-card"><span class="x-form__role-icon"><svg viewBox="0 0 24 24">
-                        <circle cx="12" cy="10" r="3" />
-                        <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z" />
-                        <path d="M7 20.7V19a5 5 0 0 1 10 0v1.7" />
-                      </svg></span><span class="x-form__role-name">Зоотехник</span></div>
-                </label>
-                <label class="x-form__role"><input name="role" type="radio" value="mech">
-                  <div class="x-form__role-card"><span class="x-form__role-icon"><svg viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="3" />
-                        <path
-                          d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
-                      </svg></span><span class="x-form__role-name">Гл. механик</span></div>
-                </label>
-                <label class="x-form__role"><input name="role" type="radio" value="it">
-                  <div class="x-form__role-card"><span class="x-form__role-icon"><svg viewBox="0 0 24 24">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                      </svg></span><span class="x-form__role-name">IT / ИБ</span></div>
-                </label>
-                <label class="x-form__role"><input name="role" type="radio" value="other">
-                  <div class="x-form__role-card"><span class="x-form__role-icon"><svg viewBox="0 0 24 24">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                        <circle cx="12" cy="7" r="4" />
-                      </svg></span><span class="x-form__role-name">Другая</span></div>
-                </label>
-              </div>
-              <div class="x-form__error-msg" id="err-role">Выберите вашу роль</div>
-            </div>
+
           </div>
 
           <!-- PAGE 2: ЧТО НУЖНО -->
@@ -10148,20 +10104,16 @@
         var name = document.getElementById('f-name');
         var email = document.getElementById('f-email');
         var company = document.getElementById('f-company');
-        var roleSelected = wrap.querySelector('input[name="role"]:checked');
+
         if (!name.value.trim()) { showError('f-name', 'err-name'); valid = false; }
         var emailVal = email.value.trim();
-        var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        var freeProviders = ['gmail.com', 'mail.ru', 'yandex.ru', 'ya.ru', 'bk.ru', 'inbox.ru', 'list.ru', 'rambler.ru', 'hotmail.com', 'outlook.com', 'yahoo.com', 'icloud.com'];
-        if (!emailVal || !emailRe.test(emailVal)) { showError('f-email', 'err-email'); valid = false; }
-        else {
-          var domain = emailVal.split('@')[1].toLowerCase();
-          var isFree = false;
-          for (var i = 0; i < freeProviders.length; i++) { if (domain === freeProviders[i]) { isFree = true; break; } }
-          if (isFree) { document.getElementById('err-email').textContent = 'Пожалуйста, используйте рабочий email'; showError('f-email', 'err-email'); valid = false; }
+        var emailRe = /^[a-zA-Z0-9](?:[a-zA-Z0-9._%+\-]*[a-zA-Z0-9])?@[a-zA-Z0-9](?:[a-zA-Z0-9\-]*[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9\-]*[a-zA-Z0-9])?)*\.[a-zA-Z]{2,12}$/;
+        if (!emailVal || !emailRe.test(emailVal)) {
+          document.getElementById('err-email').textContent = 'Укажите корректный email (например, i.petrov@agro.ru)';
+          showError('f-email', 'err-email'); valid = false;
         }
         if (!company.value.trim()) { showError('f-company', 'err-company'); valid = false; }
-        if (!roleSelected) { document.getElementById('err-role').classList.add('x-form__error-msg--visible'); valid = false; }
+
       }
       if (n === 3) {
         var consent = document.getElementById('f-consent');
@@ -10195,7 +10147,7 @@
       d.phone = document.getElementById('f-phone').value.trim();
       d.company = document.getElementById('f-company').value.trim();
       d.title = document.getElementById('f-title').value.trim();
-      var r = wrap.querySelector('input[name="role"]:checked'); d.role = r ? r.value : '';
+
       var fm = wrap.querySelector('input[name="format"]:checked'); d.format = fm ? fm.value : '';
       d.focus = document.getElementById('f-focus').value;
       d.scale = document.getElementById('f-scale').value;
@@ -10208,12 +10160,12 @@
     }
 
     function showSuccess(data) {
-      var roleNames = { coo: 'Руководитель / COO', agro: 'Агроном', zoo: 'Зоотехник', mech: 'Гл. механик', it: 'IT / ИБ', other: 'Другая' };
+
       var fmtNames = { demo: 'Демо по сценарию', tech: 'Техсессия (IT+ИБ)', pilot: 'Обсуждение пилота', docs: 'Только документы' };
       pages.forEach(function (p) { p.classList.remove('x-form__page--active'); });
       actions.style.display = 'none';
       successBlock.classList.add('x-form__success--visible');
-      successSummary.innerHTML = '<strong>Формат:</strong> ' + (fmtNames[data.format] || data.format) + '<br><strong>Роль:</strong> ' + (roleNames[data.role] || data.role) + '<br><strong>Компания:</strong> ' + data.company + (data.nda ? '<br><strong>NDA:</strong> потребуется' : '');
+      successSummary.innerHTML = '<strong>Формат:</strong> ' + (fmtNames[data.format] || data.format) + '<br><strong>Компания:</strong> ' + data.company + (data.nda ? '<br><strong>NDA:</strong> потребуется' : '');
     }
 
     btnNext.addEventListener('click', function () { if (validatePage(currentPage)) showPage(currentPage + 1); });
@@ -10221,18 +10173,56 @@
     btnSubmit.addEventListener('click', function () {
       if (!validatePage(currentPage)) return;
       var data = gatherData();
-      // === STUB: future Google Sheets integration ===
-      console.log('[AgroTactic] Demo form submitted:', JSON.stringify(data, null, 2));
-      showSuccess(data);
+      btnSubmit.disabled = true;
+      btnSubmit.textContent = 'Отправка…';
+
+      // Web3Forms integration
+      var payload = {
+        access_key: 'a84bf2da-51c5-4c34-a880-c5495df9b752',
+        subject: 'Новая заявка на демо — ' + data.company,
+        from_name: 'Agrotactic Demo Form',
+        name: (data.name + ' ' + (data.surname || '')).trim(),
+        email: data.email,
+        phone: data.phone || '—',
+        company: data.company,
+        title: data.title || '—',
+        format: data.format || '—',
+        focus: data.focus || '—',
+        scale: data.scale || '—',
+        fleet: data.fleet || '—',
+        systems: data.systems ? data.systems.join(', ') : '—',
+        urgency: data.urgency || '—',
+        comment: data.comment || '—',
+        nda: data.nda ? 'Да' : 'Нет'
+      };
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+        .then(function (res) { return res.json(); })
+        .then(function (result) {
+          if (result.success) {
+            showSuccess(data);
+          } else {
+            alert('Ошибка отправки: ' + (result.message || 'попробуйте позже'));
+            btnSubmit.disabled = false;
+            btnSubmit.textContent = 'Отправить заявку';
+          }
+        })
+        .catch(function () {
+          alert('Ошибка сети. Проверьте подключение и попробуйте снова.');
+          btnSubmit.disabled = false;
+          btnSubmit.textContent = 'Отправить заявку';
+        });
     });
 
     // Clear errors on interaction
     wrap.querySelectorAll('.x-form__input,.x-form__select,.x-form__textarea').forEach(function (el) {
       el.addEventListener('input', function () { el.classList.remove('x-form__input--error', 'x-form__select--error'); });
     });
-    wrap.querySelectorAll('input[name="role"]').forEach(function (r) {
-      r.addEventListener('change', function () { document.getElementById('err-role').classList.remove('x-form__error-msg--visible'); });
-    });
+
   })();
 </script>
 <script>
