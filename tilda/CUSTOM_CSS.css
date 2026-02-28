@@ -1770,7 +1770,12 @@
 
   .x-drawer__doc-icon {
     width: 28px;
-    text-align: center
+    min-width: 28px;
+    flex-shrink: 0;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center
   }
 
   .x-drawer__doc-name {
