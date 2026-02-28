@@ -1,0 +1,568 @@
+<script>
+(function(){
+  function init0(){
+    try {
+      /* Sync data-active-role on hero for CSS-driven role colors */
+      (function () {
+        var hero = document.querySelector('.x-hero[data-active-role]');
+        if (!hero) return;
+        document.querySelectorAll('.x-hero .x-tab').forEach(function (tab) {
+          tab.addEventListener('click', function () {
+            hero.setAttribute('data-active-role', tab.getAttribute('data-panel'));
+          });
+        });
+      })();
+
+      (function () {
+        var els = document.querySelectorAll('#x-model .mdl-anim');
+        if (!els.length) return;
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('mdl-anim--visible');
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        els.forEach(function (el, i) {
+          el.style.transitionDelay = (i * 0.08) + 's';
+          io.observe(el);
+        });
+      })();
+
+      (function () {
+        var els = document.querySelectorAll('#x-platform .pla-anim');
+        if (!els.length) return;
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('pla-anim--visible');
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        els.forEach(function (el, i) {
+          el.style.transitionDelay = (i * 0.1) + 's';
+          io.observe(el);
+        });
+      })();
+
+      (function () {
+        var btns = document.querySelectorAll('.x-scen-btn');
+        var panels = document.querySelectorAll('.x-scen-panel');
+
+        btns.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            // Remove active classes
+            btns.forEach(function (b) { b.classList.remove('x-scen-btn--active'); });
+            panels.forEach(function (p) {
+              p.classList.remove('x-scen-panel--active');
+            });
+
+            // Set current active
+            btn.classList.add('x-scen-btn--active');
+            var scen = btn.getAttribute('data-scen');
+            var panel = document.getElementById('scen-panel-' + scen);
+
+            // Re-trigger reflow to restart CSS animations
+            if (panel) {
+              void panel.offsetWidth;
+              panel.classList.add('x-scen-panel--active');
+            }
+          });
+        });
+      })();
+
+      (function () {
+        var form = document.getElementById('int-form');
+        var out = document.getElementById('int-result');
+        if (!form || !out) return;
+
+        var templates = {
+          'A0': {
+            level: 'A0',
+            title: 'Точка отсчёта',
+            recommend: 'начните с A0 (снимок готовности).',
+            get: 'инвентаризацию контуров данных, ролей и требований.',
+            time: '1 неделя (снимок готовности)',
+            next: 'перейти к A1/A2 по чек-листу.'
+          },
+          'A1': {
+            level: 'A1',
+            title: 'Подготовка данных и дисциплины',
+            recommend: 'начните с A1 (база данных и дисциплины).',
+            get: 'стабильные исходные данные и основу для управляемого контура.',
+            time: '1–3 недели',
+            next: 'подключение A2.'
+          },
+          'A2': {
+            level: 'A2',
+            title: 'Наблюдаемость (командный центр)',
+            recommend: 'начните с A2 (наблюдаемость).',
+            get: 'план-факт, KPI, карта, очередь отклонений.',
+            time: '2–4 недели (1 площадка, 1–2 источника, read-only)',
+            next: 'A3 по готовности регламентов и ролей.'
+          },
+          'A3': {
+            level: 'A3',
+            title: 'Рекомендации и контроль решений',
+            recommend: 'вам подходит A3 (рекомендации + контроль).',
+            get: 'приоритизация действий, регламенты реакции, проверяемость решений.',
+            time: '4–6 недель (роли/аудит/правила)',
+            next: 'A4 при необходимости автоматизации по регламенту.'
+          },
+          'A4': {
+            level: 'A4',
+            title: 'Оркестрация (по регламенту)',
+            recommend: 'цель — A4 (оркестрация), начните с A2/A3 как этапа.',
+            get: 'автоматическое исполнение в рамках регламента + аудит + документы.',
+            time: 'по техсессии (зависит от масштаба, ИБ и обратной записи)',
+            next: 'согласование обратной записи, ИБ и комплаенса.'
+          }
+        };
+
+        function checkIncludes(arr, val) {
+          for (var i = 0; i < arr.length; i++) {
+            if (arr[i] === val) return true;
+          }
+          return false;
+        }
+
+        function updateCalc() {
+          var inputNodes = form.querySelectorAll('input[type="checkbox"]');
+          var checks = [];
+          for (var i = 0; i < inputNodes.length; i++) {
+            checks.push(inputNodes[i]);
+          }
+
+          var state = {};
+          var selectedCount = 0;
+          var sourceCount = 0; // ERP, TEL, IOT
+          var sourceKeys = ['ERP', 'TEL', 'IOT'];
+
+          checks.forEach(function (cb) {
+            state[cb.name] = cb.checked;
+            if (cb.checked) {
+              selectedCount++;
+              if (checkIncludes(sourceKeys, cb.name)) {
+                sourceCount++;
+              }
+            }
+          });
+
+          var ERP = state['ERP'];
+          var TEL = state['TEL'];
+          var IOT = state['IOT'];
+          var KPI = state['KPI'];
+          var DOC = state['DOC'];
+          var SEC = state['SEC'];
+          var WB = state['WB'];
+
+          var resLvl = 'A0';
+          if (WB) {
+            resLvl = 'A4';
+          } else if (DOC && (SEC || KPI)) {
+            resLvl = 'A3';
+          } else if (KPI && (ERP || TEL || IOT)) {
+            resLvl = 'A2';
+          } else if (ERP || TEL || IOT) {
+            resLvl = 'A1';
+          }
+
+          var complexity = '—';
+          if (selectedCount > 0) {
+            if (WB || selectedCount >= 5) {
+              complexity = 'Сложная';
+            } else if (selectedCount >= 3) {
+              complexity = 'Средняя';
+            } else {
+              complexity = 'Лёгкая';
+            }
+          }
+
+          var tpl = templates[resLvl];
+
+          out.innerHTML =
+            '<div class="x-calc-out__level">[Уровень ' + tpl.level + ']</div>' +
+            '<h4 class="x-calc-out__title">' + tpl.title + '</h4>' +
+            '<div class="x-calc-out__metrics">' +
+            '<div class="x-calc-metric"><span class="x-calc-metric__label">Сложность</span><span class="x-calc-metric__value">' + complexity + '</span></div>' +
+            '<div class="x-calc-metric"><span class="x-calc-metric__label">Срок</span><span class="x-calc-metric__value" style="color:var(--x-accent)">' + tpl.time + '</span></div>' +
+            '</div>' +
+            '<div class="x-calc-out__rows">' +
+            '<div class="x-calc-out__row"><span class="x-calc-out__row-label">Рекомендация</span><span class="x-calc-out__row-value">' + tpl.recommend + '</span></div>' +
+            '<div class="x-calc-out__row"><span class="x-calc-out__row-label">Что получите</span><span class="x-calc-out__row-value">' + tpl.get + '</span></div>' +
+            '<div class="x-calc-out__row"><span class="x-calc-out__row-label">Дальше</span><span class="x-calc-out__row-value">' + tpl.next + '</span></div>' +
+            '</div>';
+        }
+
+        form.addEventListener('change', updateCalc);
+        updateCalc();
+      })();
+
+      (function () {
+        var section = document.getElementById('x-compliance');
+        if (!section) return;
+        var items = section.querySelectorAll('.comp-anim');
+        if (!items.length) return;
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var el = entry.target;
+              var siblings = Array.prototype.slice.call(el.parentElement.children).filter(function (c) {
+                return c.classList.contains('comp-anim');
+              });
+              var idx = siblings.indexOf(el);
+              el.style.animationDelay = (idx * 0.12) + 's';
+              el.classList.add('comp-anim--visible');
+              observer.unobserve(el);
+            }
+          });
+        }, { threshold: 0.15 });
+
+        items.forEach(function (item) {
+          observer.observe(item);
+        });
+      })();
+
+      (function () {
+        var section = document.getElementById('x-security');
+        if (!section) return;
+        var items = section.querySelectorAll('.sec-anim');
+        if (!items.length) return;
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var el = entry.target;
+              var siblings = Array.prototype.slice.call(el.parentElement.children).filter(function (c) {
+                return c.classList.contains('sec-anim');
+              });
+              var idx = siblings.indexOf(el);
+              el.style.animationDelay = (idx * 0.12) + 's';
+              el.classList.add('sec-anim--visible');
+              observer.unobserve(el);
+            }
+          });
+        }, { threshold: 0.15 });
+
+        items.forEach(function (item) {
+          observer.observe(item);
+        });
+      })();
+
+      (function () {
+        var els = document.querySelectorAll('#x-pilot .pil-anim');
+        if (!els.length) return;
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('pil-anim--visible');
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        els.forEach(function (el, i) {
+          el.style.transitionDelay = (i * 0.08) + 's';
+          io.observe(el);
+        });
+      })();
+
+      (function () {
+        var els = document.querySelectorAll('#x-procurement .proc-anim');
+        if (!els.length) return;
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('proc-anim--visible');
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        els.forEach(function (el, i) {
+          el.style.transitionDelay = (i * 0.08) + 's';
+          io.observe(el);
+        });
+      })();
+
+      (function () {
+        var els = document.querySelectorAll('#x-request-demo .cta-anim');
+        if (!els.length) return;
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('cta-anim--visible');
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        els.forEach(function (el, i) {
+          el.style.transitionDelay = (i * 0.1) + 's';
+          io.observe(el);
+        });
+      })();
+
+      (function () {
+        var els = document.querySelectorAll('#recCONTACTS .ct-anim');
+        if (!els.length) return;
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('ct-anim--visible');
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        els.forEach(function (el, i) {
+          el.style.transitionDelay = (i * 0.1) + 's';
+          io.observe(el);
+        });
+      })();
+
+      (function () {
+        var els = document.querySelectorAll('#x-partners .prt-anim');
+        if (!els.length) return;
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('prt-anim--visible');
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        els.forEach(function (el, i) {
+          el.style.transitionDelay = (i * 0.1) + 's';
+          io.observe(el);
+        });
+      })();
+
+  (function () {
+    /* === DEMO FORM DRAWER OPEN/CLOSE === */
+    var demoDrawer = document.getElementById('x-drawer-demo');
+    if (!demoDrawer) return;
+
+    function openDemoDrawer(e) {
+      if (e) e.preventDefault();
+      demoDrawer.classList.add('x-drawer-demo--open');
+      document.documentElement.style.overflow = 'hidden';
+      document.getElementById('x-demo-close').focus();
+    }
+    function closeDemoDrawer() {
+      demoDrawer.classList.remove('x-drawer-demo--open');
+      document.documentElement.style.overflow = '';
+    }
+
+    // Wire all demo buttons (href="#x-request-demo" and class x-btn--demo)
+    document.querySelectorAll('a[href="#x-request-demo"]').forEach(function (a) {
+      a.addEventListener('click', openDemoDrawer);
+    });
+    // Also header CTA button
+    document.querySelectorAll('.x-header__cta, .x-btn--demo').forEach(function (btn) {
+      btn.addEventListener('click', openDemoDrawer);
+    });
+
+    document.getElementById('x-demo-overlay').addEventListener('click', closeDemoDrawer);
+    document.getElementById('x-demo-close').addEventListener('click', closeDemoDrawer);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && demoDrawer.classList.contains('x-drawer-demo--open')) closeDemoDrawer();
+    });
+
+    /* === FORM WIZARD LOGIC === */
+    var TOTAL_PAGES = 3;
+    var currentPage = 1;
+    var wrap = document.getElementById('x-demo-form-wrap');
+    var pages = wrap.querySelectorAll('.x-form__page');
+    var dots = wrap.querySelectorAll('.x-form__step-dot');
+    var lines = wrap.querySelectorAll('.x-form__step-line');
+    var btnBack = document.getElementById('btn-back');
+    var btnNext = document.getElementById('btn-next');
+    var btnSubmit = document.getElementById('btn-submit');
+    var actions = document.getElementById('x-form-actions');
+    var successBlock = document.getElementById('x-form-success');
+    var successSummary = document.getElementById('x-success-summary');
+    var rowFocus = document.getElementById('row-focus');
+    var formatInputs = wrap.querySelectorAll('input[name="format"]');
+
+    function updateConditional() {
+      var sel = wrap.querySelector('input[name="format"]:checked');
+      if (sel && sel.value === 'docs') rowFocus.classList.add('x-form__row--hidden');
+      else rowFocus.classList.remove('x-form__row--hidden');
+    }
+    formatInputs.forEach(function (inp) { inp.addEventListener('change', updateConditional); });
+    updateConditional();
+
+    // "None" checkbox logic
+    var sysCbs = wrap.querySelectorAll('input[name="sys"]');
+    sysCbs.forEach(function (cb) {
+      cb.addEventListener('change', function () {
+        if (cb.value === 'none' && cb.checked) {
+          sysCbs.forEach(function (o) { if (o.value !== 'none') o.checked = false; });
+        } else if (cb.value !== 'none' && cb.checked) {
+          var n = wrap.querySelector('input[name="sys"][value="none"]');
+          if (n) n.checked = false;
+        }
+      });
+    });
+
+    function showPage(n) {
+      currentPage = n;
+      pages.forEach(function (p) { p.classList.remove('x-form__page--active'); });
+      var target = wrap.querySelector('.x-form__page[data-page="' + n + '"]');
+      if (target) target.classList.add('x-form__page--active');
+      dots.forEach(function (d) {
+        var s = parseInt(d.getAttribute('data-step'));
+        d.classList.remove('x-form__step-dot--active', 'x-form__step-dot--done');
+        if (s === n) d.classList.add('x-form__step-dot--active');
+        if (s < n) { d.classList.add('x-form__step-dot--done'); d.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>'; }
+        else d.textContent = s;
+      });
+      lines.forEach(function (l) { var ln = parseInt(l.getAttribute('data-line')); l.classList.toggle('x-form__step-line--done', ln < n); });
+      btnBack.style.visibility = n === 1 ? 'hidden' : 'visible';
+      if (n === TOTAL_PAGES) { btnNext.style.display = 'none'; btnSubmit.style.display = 'inline-flex'; }
+      else { btnNext.style.display = 'inline-flex'; btnSubmit.style.display = 'none'; }
+    }
+
+    function clearErrors() {
+      wrap.querySelectorAll('.x-form__error-msg').forEach(function (m) { m.classList.remove('x-form__error-msg--visible'); });
+      wrap.querySelectorAll('.x-form__input--error,.x-form__select--error').forEach(function (el) { el.classList.remove('x-form__input--error', 'x-form__select--error'); });
+    }
+    function showError(inputId, msgId) {
+      var inp = document.getElementById(inputId);
+      var msg = document.getElementById(msgId);
+      if (inp) inp.classList.add('x-form__input--error');
+      if (msg) msg.classList.add('x-form__error-msg--visible');
+    }
+    function validatePage(n) {
+      clearErrors();
+      var valid = true;
+      if (n === 1) {
+        var name = document.getElementById('f-name');
+        var email = document.getElementById('f-email');
+        var company = document.getElementById('f-company');
+
+        if (!name.value.trim()) { showError('f-name', 'err-name'); valid = false; }
+        var emailVal = email.value.trim();
+        var emailRe = /^[a-zA-Z0-9](?:[a-zA-Z0-9._%+\-]*[a-zA-Z0-9])?@[a-zA-Z0-9](?:[a-zA-Z0-9\-]*[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9\-]*[a-zA-Z0-9])?)*\.[a-zA-Z]{2,12}$/;
+        if (!emailVal || !emailRe.test(emailVal)) {
+          document.getElementById('err-email').textContent = 'Укажите корректный email (например, i.petrov@agro.ru)';
+          showError('f-email', 'err-email'); valid = false;
+        }
+        if (!company.value.trim()) { showError('f-company', 'err-company'); valid = false; }
+
+      }
+      if (n === 3) {
+        var consent = document.getElementById('f-consent');
+        if (!consent.checked) { document.getElementById('err-consent').classList.add('x-form__error-msg--visible'); valid = false; }
+      }
+      return valid;
+    }
+
+    // Phone mask
+    var phoneInput = document.getElementById('f-phone');
+    if (phoneInput) {
+      phoneInput.addEventListener('input', function () {
+        var v = phoneInput.value.replace(/\D/g, '');
+        if (v.length === 0) { phoneInput.value = ''; return; }
+        if (v[0] === '8') v = '7' + v.slice(1);
+        if (v[0] !== '7') v = '7' + v;
+        var f = '+7';
+        if (v.length > 1) f += ' (' + v.slice(1, 4);
+        if (v.length > 4) f += ') ' + v.slice(4, 7);
+        if (v.length > 7) f += '-' + v.slice(7, 9);
+        if (v.length > 9) f += '-' + v.slice(9, 11);
+        phoneInput.value = f;
+      });
+    }
+
+    function gatherData() {
+      var d = {};
+      d.name = document.getElementById('f-name').value.trim();
+      d.surname = document.getElementById('f-surname').value.trim();
+      d.email = document.getElementById('f-email').value.trim();
+      d.phone = document.getElementById('f-phone').value.trim();
+      d.company = document.getElementById('f-company').value.trim();
+      d.title = document.getElementById('f-title').value.trim();
+
+      var fm = wrap.querySelector('input[name="format"]:checked'); d.format = fm ? fm.value : '';
+      d.focus = document.getElementById('f-focus').value;
+      d.scale = document.getElementById('f-scale').value;
+      d.fleet = document.getElementById('f-fleet').value;
+      var sys = []; wrap.querySelectorAll('input[name="sys"]:checked').forEach(function (cb) { sys.push(cb.value); }); d.systems = sys;
+      d.urgency = document.getElementById('f-urgency').value;
+      d.comment = document.getElementById('f-comment').value.trim();
+      d.nda = wrap.querySelector('input[name="nda"]').checked;
+      return d;
+    }
+
+    function showSuccess(data) {
+
+      var fmtNames = { demo: 'Демо по сценарию', tech: 'Техсессия (IT+ИБ)', pilot: 'Обсуждение пилота', docs: 'Только документы' };
+      pages.forEach(function (p) { p.classList.remove('x-form__page--active'); });
+      actions.style.display = 'none';
+      successBlock.classList.add('x-form__success--visible');
+      successSummary.innerHTML = '<strong>Формат:</strong> ' + (fmtNames[data.format] || data.format) + '<br><strong>Компания:</strong> ' + data.company + (data.nda ? '<br><strong>NDA:</strong> потребуется' : '');
+    }
+
+    btnNext.addEventListener('click', function () { if (validatePage(currentPage)) showPage(currentPage + 1); });
+    btnBack.addEventListener('click', function () { if (currentPage > 1) showPage(currentPage - 1); });
+    btnSubmit.addEventListener('click', function () {
+      if (!validatePage(currentPage)) return;
+      var data = gatherData();
+      btnSubmit.disabled = true;
+      btnSubmit.textContent = 'Отправка…';
+
+      // Web3Forms integration
+      var payload = {
+        access_key: 'a84bf2da-51c5-4c34-a880-c5495df9b752',
+        subject: 'Новая заявка на демо — ' + data.company,
+        from_name: 'Agrotactic Demo Form',
+        name: (data.name + ' ' + (data.surname || '')).trim(),
+        email: data.email,
+        phone: data.phone || '—',
+        company: data.company,
+        title: data.title || '—',
+        format: data.format || '—',
+        focus: data.focus || '—',
+        scale: data.scale || '—',
+        fleet: data.fleet || '—',
+        systems: data.systems ? data.systems.join(', ') : '—',
+        urgency: data.urgency || '—',
+        comment: data.comment || '—',
+        nda: data.nda ? 'Да' : 'Нет'
+      };
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+        .then(function (res) { return res.json(); })
+        .then(function (result) {
+          if (result.success) {
+            showSuccess(data);
+          } else {
+            alert('Ошибка отправки: ' + (result.message || 'попробуйте позже'));
+            btnSubmit.disabled = false;
+            btnSubmit.textContent = 'Отправить заявку';
+          }
+        })
+        .catch(function () {
+          alert('Ошибка сети. Проверьте подключение и попробуйте снова.');
+          btnSubmit.disabled = false;
+          btnSubmit.textContent = 'Отправить заявку';
+        });
+    });
+
+    // Clear errors on interaction
+    wrap.querySelectorAll('.x-form__input,.x-form__select,.x-form__textarea').forEach(function (el) {
+      el.addEventListener('input', function () { el.classList.remove('x-form__input--error', 'x-form__select--error'); });
+    });
+
+  })();
+    } catch(e){ console.error('[Agrotactic] init error', e); }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init0);
+  else init0();
+})();
+</script>

@@ -1,0 +1,273 @@
+<script>
+(function(){
+  function init1(){
+    try {
+  (function () {
+    'use strict';
+
+    /* === STICKY HEADER + SCROLL PROGRESS === */
+    var header = document.getElementById('x-header');
+    var progressBar = document.getElementById('x-header-progress');
+    if (header) {
+      var ticking = false;
+      window.addEventListener('scroll', function () {
+        if (!ticking) {
+          window.requestAnimationFrame(function () {
+            header.classList.toggle('x-header--sticky', window.scrollY > 100);
+            // Scroll progress
+            if (progressBar) {
+              var scrollTop = window.scrollY;
+              var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+              var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+              progressBar.style.width = pct + '%';
+            }
+            // Active nav item
+            var sections = ['x-model', 'x-scenarios', 'x-security', 'x-pilot', 'recCONTACTS'];
+            var navItems = document.querySelectorAll('.x-nav__item');
+            var found = false;
+            for (var i = sections.length - 1; i >= 0; i--) {
+              var sec = document.getElementById(sections[i]);
+              if (sec && sec.getBoundingClientRect().top <= 150) {
+                navItems.forEach(function (n) { n.classList.remove('x-nav__item--active'); });
+                navItems[i].classList.add('x-nav__item--active');
+                found = true;
+                break;
+              }
+            }
+            if (!found) navItems.forEach(function (n) { n.classList.remove('x-nav__item--active'); });
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+    }
+
+    /* === BURGER MENU === */
+    var burger = document.getElementById('x-burger');
+    var burgerSvgOpen = '<svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>';
+    var burgerSvgClose = '<svg viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>';
+    if (burger) {
+      burger.addEventListener('click', function () {
+        header.classList.toggle('x-header--menu-open');
+        burger.innerHTML = header.classList.contains('x-header--menu-open') ? burgerSvgClose : burgerSvgOpen;
+      });
+    }
+
+    /* === HERO ROLE TABS === */
+    document.querySelectorAll('.x-site .x-tab').forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        document.querySelectorAll('.x-site .x-tab').forEach(function (t) {
+          t.classList.remove('x-tab--active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('x-tab--active');
+        tab.setAttribute('aria-selected', 'true');
+        document.querySelectorAll('.x-site .x-tab-panel').forEach(function (p) {
+          p.classList.remove('x-tab-panel--active');
+        });
+        var panelK = tab.getAttribute('data-panel');
+        var tgt = document.getElementById('panel-' + panelK);
+        if (tgt) tgt.classList.add('x-tab-panel--active');
+        if (window.renderHotspots) window.renderHotspots(panelK);
+      });
+    });
+
+    /* === AUTONOMY SWITCHER === */
+    var autoBtns = document.querySelectorAll('.x-site .x-auto-btn');
+    var autoPanels = document.querySelectorAll('.x-site .x-auto-panel');
+    var autoProgress = document.getElementById('x-auto-progress');
+
+    autoBtns.forEach(function (btn, index) {
+      btn.addEventListener('click', function () {
+        autoBtns.forEach(function (b) { b.classList.remove('x-auto-btn--active'); });
+        autoPanels.forEach(function (p) { p.classList.remove('x-auto-panel--active'); });
+
+        btn.classList.add('x-auto-btn--active');
+        var level = btn.getAttribute('data-level');
+        var panel = document.getElementById('auto-panel-' + level);
+        if (panel) panel.classList.add('x-auto-panel--active');
+      });
+    });
+
+    /* === ACCORDION === */
+    document.querySelectorAll('.x-site .x-acc-item__head').forEach(function (b) {
+      b.addEventListener('click', function () {
+        b.parentElement.classList.toggle('x-acc-item--open');
+      });
+    });
+
+    /* === DRAWER === */
+    var drawer = document.getElementById('x-drawer');
+    function openDrawer() {
+      drawer.classList.add('x-drawer--open');
+      document.documentElement.style.overflow = 'hidden';
+      document.getElementById('x-drawer-close').focus();
+    }
+    function closeDrawer() {
+      drawer.classList.remove('x-drawer--open');
+      document.documentElement.style.overflow = '';
+    }
+    ['x-open-drawer', 'x-open-drawer-2', 'x-open-drawer-3', 'x-open-trust', 'x-open-procurement'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('click', openDrawer);
+    });
+    document.getElementById('x-drawer-overlay').addEventListener('click', closeDrawer);
+    ['x-drawer-close', 'x-drawer-close-2'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('click', closeDrawer);
+    });
+    document.querySelectorAll('.x-site .x-badge').forEach(function (b) {
+      b.addEventListener('click', openDrawer);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && drawer.classList.contains('x-drawer--open')) closeDrawer();
+    });
+
+    /* === DOC-LINK placeholders → open drawer === */
+    document.querySelectorAll('.x-site .x-doc-link').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        openDrawer();
+      });
+    });
+
+    /* === DYNAMIC HOTSPOTS DATA & LOGIC === */
+    var HOTSPOT_DATA = {
+      coo: [
+        { key: "KPI", text: "План-факт и KPI по подразделениям/кластерам в одном экране." },
+        { key: "Exceptions", text: "Очередь отклонений: приоритет → ответственный → срок реакции → статус." },
+        { key: "Economics", text: "Экономический эффект по сценариям: простои, логистика, дисциплина процессов, ошибки." },
+        { key: "Pilot Status", text: "Пилот 6–8 недель: метрики, критерии приёмки, текущий прогресс, артефакты." },
+        { key: "Board Pack", text: "Готовые материалы для комитета: KPI, риски, план внедрения, решения по следующему шагу." }
+      ],
+      it: [
+        { key: "Integrations", text: "ERP/1С, телематика, BI, API: подключение поверх существующего контура без замены." },
+        { key: "Access", text: "Роли и права, минимальные привилегии, SSO/MFA (если есть) — управляемый доступ." },
+        { key: "Audit Trail", text: "Кто-что-когда-почему: полная трассировка действий пользователей и системных событий." },
+        { key: "Security Controls", text: "Шифрование, сегментация, ключи/токены, политика передачи/хранения данных." },
+        { key: "Observability", text: "Мониторинг интеграций: статусы коннектекторов, ошибки обмена, SLA и алерты по данным." }
+      ],
+      eng: [
+        { key: "Missions", text: "Задания, маршруты, статусы выполнения и контроль отклонений “по месту и времени”." },
+        { key: "Safety/ODD", text: "Геозоны, ограничения применимости, безопасные режимы, сценарии деградации (fail-safe)." },
+        { key: "Alerts", text: "Алерты по рискам выполнения: отклонение траектории/режима/условий → действие → закрытие." },
+        { key: "Map Layers", text: "Поля, геозоны, маршруты, участки работ — слойно и прозрачно для управления." },
+        { key: "Incident Review", text: "Журнал событий и решений: что произошло → кто вмешался → какое действие выполнено → результат." }
+      ],
+      mech: [
+        { key: "Diagnostics", text: "Отклонения телематики/датчиков: ранние признаки поломки до простоя." },
+        { key: "Maintenance Queue", text: "Наработка/регламент → очередь работ → назначение исполнителя → контроль выполнения." },
+        { key: "Downtime", text: "Причины простоев, длительность, влияние на план-факт, ответственность и статус устранения." },
+        { key: "Parts", text: "Потребность по ТО/инцидентам, критичность, сроки, история замен и причин." },
+        { key: "Service Log", text: "Журнал обслуживаний по нормативам: когда/что/кем/почему, с прозрачным audit trail." }
+      ],
+      agro: [
+        { key: "Field Plan-Fact", text: "План-факт работ в разрезе культур/полей: окна операций, отклонения, причины." },
+        { key: "Ops Quality", text: "Перекрытия/пропуски/скорости/нормы внесения + карта фактического выполнения." },
+        { key: "Windows", text: "Контроль “окон” и готовности ресурсов: риск срыва сроков и сценарии реагирования." },
+        { key: "Map", text: "Карта полей и участков: где сделано/не сделано, где риск, где нужно вмешательство." },
+        { key: "Season Risks", text: "Погодные/технологические/ресурсные риски: алерты, приоритеты, ответственные, план действий." }
+      ],
+      zoo: [
+        { key: "Feed Logistics", text: "План-факт заготовки/доставки, очередь задач, отклонения и ответственные." },
+        { key: "Feed Quality", text: "Партии/показатели/события отклонений: контроль качества и реакции." },
+        { key: "Traceability", text: "Трассировка “партия → рацион → событие → результат” для разборов и контроля." },
+        { key: "Farm Ops", text: "Журнал событий: кормление/перемещения/вет-события, нарушения регламентов, аудит." },
+        { key: "KPI", text: "KPI по фермам/участкам: отклонения, динамика, точки риска и управленческие действия." }
+      ]
+    };
+
+    window.renderHotspots = function (roleKey) {
+      var container = document.getElementById('x-hotspots');
+      if (!container) return;
+      var data = HOTSPOT_DATA[roleKey] || [];
+      container.innerHTML = '';
+      data.forEach(function (item) {
+        var btn = document.createElement('button');
+        btn.className = 'x-hotspot';
+        btn.type = 'button';
+        btn.innerHTML =
+          '<div class="x-hotspot__beacon"></div>' +
+          '<div class="x-hotspot__callout">' +
+          '<div class="x-hotspot__key">' + item.key + '</div>' +
+          '<div class="x-hotspot__text">' + item.text + '</div>' +
+          '</div>';
+        container.appendChild(btn);
+      });
+    };
+
+    var hotspotsContainer = document.getElementById('x-hotspots');
+    if (hotspotsContainer) {
+      function closeAllHotspots() {
+        var all = hotspotsContainer.querySelectorAll('.x-hotspot.is-active');
+        all.forEach(function (el) { el.classList.remove('is-active'); });
+      }
+
+      hotspotsContainer.addEventListener('click', function (e) {
+        var btn = e.target.closest('.x-hotspot');
+        if (!btn) return;
+        var wasActive = btn.classList.contains('is-active');
+        closeAllHotspots();
+        if (!wasActive) btn.classList.add('is-active');
+      });
+
+      hotspotsContainer.addEventListener('mouseover', function (e) {
+        if (!window.matchMedia('(hover: hover)').matches) return;
+        var btn = e.target.closest('.x-hotspot');
+        if (btn) {
+          closeAllHotspots();
+          btn.classList.add('is-active');
+        }
+      });
+
+      hotspotsContainer.addEventListener('mouseout', function (e) {
+        if (!window.matchMedia('(hover: hover)').matches) return;
+        var btn = e.target.closest('.x-hotspot');
+        if (btn) {
+          btn.classList.remove('is-active');
+        }
+      });
+
+      hotspotsContainer.addEventListener('focusin', function (e) {
+        var btn = e.target.closest('.x-hotspot');
+        if (btn) {
+          closeAllHotspots();
+          btn.classList.add('is-active');
+        }
+      });
+
+      hotspotsContainer.addEventListener('focusout', function (e) {
+        var btn = e.target.closest('.x-hotspot');
+        if (btn) btn.classList.remove('is-active');
+      });
+    }
+
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.x-hotspot') && hotspotsContainer) {
+        var all = hotspotsContainer.querySelectorAll('.x-hotspot.is-active');
+        all.forEach(function (el) { el.classList.remove('is-active'); });
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && hotspotsContainer) {
+        var all = hotspotsContainer.querySelectorAll('.x-hotspot.is-active');
+        all.forEach(function (el) { el.classList.remove('is-active'); });
+      }
+    });
+
+    /* Init on page load */
+    var activePanelTab = document.querySelector('.x-site .x-tab--active');
+    if (activePanelTab) {
+      window.renderHotspots(activePanelTab.getAttribute('data-panel'));
+    }
+
+
+
+  })();
+    } catch(e){ console.error('[Agrotactic] init error', e); }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init1);
+  else init1();
+})();
+</script>
