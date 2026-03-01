@@ -7784,3 +7784,18 @@
       .x-form__success-detail strong {
         color: var(--f-text);
       }
+
+/* === MOBILE FIX: hide hero interactive visual on smartphones === */
+@media (max-width: 520px) {
+  .x-site .x-hero__visual {
+    display: none !important;
+  }
+
+  .x-site .x-hero {
+    padding-bottom: var(--x-sp-6);
+  }
+
+  .x-site .x-hero__grid {
+    gap: var(--x-sp-5);
+  }
+}
