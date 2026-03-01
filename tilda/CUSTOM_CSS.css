@@ -1615,13 +1615,14 @@
 
   /* --- Badge base --- */
   .x-badge {
+    --b-color: #00e5ff; /* default fallback */
     appearance: none;
     position: relative;
     display: inline-flex;
     align-items: center;
     gap: 12px;
     padding: 12px 22px 12px 14px;
-    border: 1px solid rgba(0, 229, 255, 0.15);
+    border: 1px solid color-mix(in srgb, var(--b-color) 20%, transparent);
     border-radius: 14px;
     background: linear-gradient(135deg, rgba(19, 27, 46, 0.7), rgba(11, 17, 32, 0.85));
     backdrop-filter: blur(16px);
@@ -1640,7 +1641,8 @@
       transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
       border-color 0.4s ease,
       box-shadow 0.4s ease,
-      background 0.4s ease;
+      background 0.4s ease,
+      opacity 0.4s ease;
 
     /* Staggered entrance */
     opacity: 0;
@@ -1649,11 +1651,12 @@
     animation-delay: calc(var(--badge-i, 0) * 0.12s), calc(0.8s + var(--badge-i, 0) * 0.12s);
   }
 
-  .x-badge:nth-child(1) { --badge-i: 0; }
-  .x-badge:nth-child(2) { --badge-i: 1; }
-  .x-badge:nth-child(3) { --badge-i: 2; }
-  .x-badge:nth-child(4) { --badge-i: 3; }
-  .x-badge:nth-child(5) { --badge-i: 4; }
+  /* Per-badge colors */
+  .x-badge:nth-child(1) { --badge-i: 0; --b-color: #10b981; } /* Security → Emerald */
+  .x-badge:nth-child(2) { --badge-i: 1; --b-color: #f59e0b; } /* Safety → Amber */
+  .x-badge:nth-child(3) { --badge-i: 2; --b-color: #06b6d4; } /* Integration → Cyan */
+  .x-badge:nth-child(4) { --badge-i: 3; --b-color: #a855f7; } /* Compliance → Violet */
+  .x-badge:nth-child(5) { --badge-i: 4; --b-color: #f43f5e; } /* Procurement → Rose */
 
   /* Entrance animation */
   @keyframes badgeEnter {
@@ -1684,9 +1687,9 @@
     background: linear-gradient(
       105deg,
       transparent 35%,
-      rgba(0, 229, 255, 0.08) 45%,
+      color-mix(in srgb, var(--b-color) 12%, transparent) 45%,
       rgba(255, 255, 255, 0.06) 50%,
-      rgba(0, 229, 255, 0.08) 55%,
+      color-mix(in srgb, var(--b-color) 12%, transparent) 55%,
       transparent 65%
     );
     background-size: 250% 100%;
@@ -1709,11 +1712,11 @@
     padding: 1px;
     background: conic-gradient(
       from var(--badge-angle, 0deg),
-      rgba(0, 229, 255, 0.6),
-      rgba(34, 211, 238, 0.2),
-      rgba(0, 229, 255, 0.05),
-      rgba(34, 211, 238, 0.2),
-      rgba(0, 229, 255, 0.6)
+      color-mix(in srgb, var(--b-color) 60%, transparent),
+      color-mix(in srgb, var(--b-color) 20%, transparent),
+      color-mix(in srgb, var(--b-color) 5%, transparent),
+      color-mix(in srgb, var(--b-color) 20%, transparent),
+      color-mix(in srgb, var(--b-color) 60%, transparent)
     );
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -1739,15 +1742,16 @@
 
   /* --- Hover state --- */
   .x-badge:hover {
-    border-color: rgba(0, 229, 255, 0.5);
+    opacity: 1;
+    border-color: color-mix(in srgb, var(--b-color) 55%, transparent);
     color: #fff;
-    background: linear-gradient(135deg, rgba(19, 27, 46, 0.9), rgba(0, 229, 255, 0.06));
+    background: linear-gradient(135deg, rgba(19, 27, 46, 0.9), color-mix(in srgb, var(--b-color) 8%, transparent));
     box-shadow:
-      0 6px 30px rgba(0, 229, 255, 0.15),
-      0 0 40px rgba(0, 229, 255, 0.08),
+      0 6px 30px color-mix(in srgb, var(--b-color) 20%, transparent),
+      0 0 40px color-mix(in srgb, var(--b-color) 10%, transparent),
       inset 0 1px 0 rgba(255, 255, 255, 0.06);
     transform: translateY(-5px) scale(1.03);
-    animation: none;
+    animation-name: none;
   }
 
   .x-badge:hover::after {
@@ -1755,7 +1759,7 @@
   }
 
   .x-badge:hover::before {
-    animation: none;
+    animation-play-state: paused;
     background-position: -50% 0;
     opacity: 0.5;
   }
@@ -1764,8 +1768,8 @@
   .x-badge:active {
     transform: translateY(0px) scale(0.97);
     box-shadow:
-      0 2px 12px rgba(0, 229, 255, 0.3),
-      inset 0 2px 8px rgba(0, 229, 255, 0.1);
+      0 2px 12px color-mix(in srgb, var(--b-color) 35%, transparent),
+      inset 0 2px 8px color-mix(in srgb, var(--b-color) 15%, transparent);
     transition-duration: 0.1s;
   }
 
@@ -1783,10 +1787,10 @@
     width: 32px;
     height: 32px;
     border-radius: 10px;
-    background: rgba(0, 229, 255, 0.08);
-    border: 1px solid rgba(0, 229, 255, 0.2);
-    color: var(--x-accent);
-    box-shadow: 0 0 12px rgba(0, 229, 255, 0.12);
+    background: color-mix(in srgb, var(--b-color) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--b-color) 25%, transparent);
+    color: var(--b-color);
+    box-shadow: 0 0 12px color-mix(in srgb, var(--b-color) 15%, transparent);
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     flex-shrink: 0;
     z-index: 2;
@@ -1798,7 +1802,7 @@
     position: absolute;
     inset: -4px;
     border-radius: 13px;
-    border: 1px solid rgba(0, 229, 255, 0.3);
+    border: 1px solid color-mix(in srgb, var(--b-color) 35%, transparent);
     opacity: 0;
     animation: iconRadar 3s ease-out infinite;
     animation-delay: calc(var(--badge-i, 0) * 0.5s);
@@ -1822,10 +1826,10 @@
 
   /* Icon hover */
   .x-badge:hover .x-badge__icon {
-    background: var(--x-accent);
+    background: var(--b-color);
     color: #0b1120;
     border-color: transparent;
-    box-shadow: 0 0 20px rgba(0, 229, 255, 0.5), 0 0 6px #fff;
+    box-shadow: 0 0 20px color-mix(in srgb, var(--b-color) 55%, transparent), 0 0 6px #fff;
     transform: scale(1.12) rotate(-6deg);
   }
 
