@@ -1574,92 +1574,306 @@
     gap: var(--x-sp-4)
   }
 
+  /* === TRUST STRIP (Premium v2 — Animated Badges) === */
   .x-trust {
-    padding: var(--x-sp-4) 0;
+    padding: var(--x-sp-5) 0;
     border-top: 1px solid var(--x-line);
     border-bottom: 1px solid var(--x-line);
-    background: linear-gradient(90deg, rgba(19, 27, 46, .35), rgba(0, 229, 255, .05), rgba(19, 27, 46, .35))
-  }
-
-  .x-trust__row {
-    display: flex;
-    gap: var(--x-sp-3);
-    flex-wrap: wrap;
-    justify-content: center
-  }
-
-  .x-badge {
-    appearance: none;
-    border: 1px solid rgba(0, 229, 255, 0.2);
-    background: linear-gradient(135deg, rgba(19, 27, 46, 0.6), rgba(11, 17, 32, 0.8));
-    backdrop-filter: blur(8px);
-    color: var(--x-text);
-    padding: 10px 18px;
-    border-radius: 999px;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 14px;
-    font-family: var(--x-ff-mono);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    cursor: pointer;
-    user-select: none;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    background:
+      linear-gradient(90deg, rgba(19, 27, 46, .4), rgba(0, 229, 255, .04) 50%, rgba(19, 27, 46, .4)),
+      radial-gradient(ellipse at 50% 0%, rgba(0, 229, 255, 0.06), transparent 70%);
     position: relative;
     overflow: hidden;
   }
 
+  /* Ambient shimmer line across the strip */
+  .x-trust::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--x-accent), transparent);
+    animation: trustShimmer 6s ease-in-out infinite;
+  }
+
+  @keyframes trustShimmer {
+    0%, 100% { left: -60%; opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { left: 100%; opacity: 0; }
+  }
+
+  .x-trust__row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+  }
+
+  /* --- Badge base --- */
+  .x-badge {
+    appearance: none;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 22px 12px 14px;
+    border: 1px solid rgba(0, 229, 255, 0.15);
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(19, 27, 46, 0.7), rgba(11, 17, 32, 0.85));
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    color: var(--x-text);
+    font-size: 13px;
+    font-family: var(--x-ff-mono);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    user-select: none;
+    overflow: hidden;
+    isolation: isolate;
+    transition:
+      transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.4s ease,
+      box-shadow 0.4s ease,
+      background 0.4s ease;
+
+    /* Staggered entrance */
+    opacity: 0;
+    animation: badgeEnter 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+               badgeFloat 4s ease-in-out infinite;
+    animation-delay: calc(var(--badge-i, 0) * 0.12s), calc(0.8s + var(--badge-i, 0) * 0.12s);
+  }
+
+  .x-badge:nth-child(1) { --badge-i: 0; }
+  .x-badge:nth-child(2) { --badge-i: 1; }
+  .x-badge:nth-child(3) { --badge-i: 2; }
+  .x-badge:nth-child(4) { --badge-i: 3; }
+  .x-badge:nth-child(5) { --badge-i: 4; }
+
+  /* Entrance animation */
+  @keyframes badgeEnter {
+    from {
+      opacity: 0;
+      transform: translateY(18px) scale(0.92);
+      filter: blur(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+  }
+
+  /* Subtle idle float */
+  @keyframes badgeFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+  }
+
+  /* --- Sweep shine (idle) --- */
   .x-badge::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.1), transparent);
-    transform: translateX(-100%) skewX(-15deg);
-    transition: transform 0.6s ease;
+    z-index: 1;
+    background: linear-gradient(
+      105deg,
+      transparent 35%,
+      rgba(0, 229, 255, 0.08) 45%,
+      rgba(255, 255, 255, 0.06) 50%,
+      rgba(0, 229, 255, 0.08) 55%,
+      transparent 65%
+    );
+    background-size: 250% 100%;
+    animation: badgeSweep 5s ease-in-out infinite;
+    animation-delay: calc(var(--badge-i, 0) * 0.6s);
+    pointer-events: none;
   }
 
+  @keyframes badgeSweep {
+    0%, 100% { background-position: 200% 0; }
+    50% { background-position: -50% 0; }
+  }
+
+  /* --- Conic gradient border layer (visible on hover) --- */
+  .x-badge::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 15px;
+    padding: 1px;
+    background: conic-gradient(
+      from var(--badge-angle, 0deg),
+      rgba(0, 229, 255, 0.6),
+      rgba(34, 211, 238, 0.2),
+      rgba(0, 229, 255, 0.05),
+      rgba(34, 211, 238, 0.2),
+      rgba(0, 229, 255, 0.6)
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: -1;
+    animation: badgeBorderSpin 3s linear infinite;
+  }
+
+  @keyframes badgeBorderSpin {
+    to { --badge-angle: 360deg; }
+  }
+
+  /* Register custom property for conic gradient animation */
+  @property --badge-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  /* --- Hover state --- */
   .x-badge:hover {
-    border-color: var(--x-accent);
+    border-color: rgba(0, 229, 255, 0.5);
     color: #fff;
-    box-shadow: 0 0 20px rgba(0, 229, 255, 0.3), inset 0 0 10px rgba(0, 229, 255, 0.1);
-    transform: translateY(-2px);
+    background: linear-gradient(135deg, rgba(19, 27, 46, 0.9), rgba(0, 229, 255, 0.06));
+    box-shadow:
+      0 6px 30px rgba(0, 229, 255, 0.15),
+      0 0 40px rgba(0, 229, 255, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    transform: translateY(-5px) scale(1.03);
+    animation: none;
+  }
+
+  .x-badge:hover::after {
+    opacity: 1;
   }
 
   .x-badge:hover::before {
-    transform: translateX(100%) skewX(-15deg);
+    animation: none;
+    background-position: -50% 0;
+    opacity: 0.5;
   }
 
+  /* --- Active/Click --- */
   .x-badge:active {
-    transform: translateY(1px);
-    box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
+    transform: translateY(0px) scale(0.97);
+    box-shadow:
+      0 2px 12px rgba(0, 229, 255, 0.3),
+      inset 0 2px 8px rgba(0, 229, 255, 0.1);
+    transition-duration: 0.1s;
   }
 
   .x-badge:focus-visible {
     outline: 2px solid var(--x-accent);
-    outline-offset: 2px;
+    outline-offset: 3px;
   }
 
+  /* --- Icon orb --- */
   .x-badge__icon {
-    font-size: 16px;
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 26px;
-    height: 26px;
-    background: rgba(0, 229, 255, 0.1);
-    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    background: rgba(0, 229, 255, 0.08);
+    border: 1px solid rgba(0, 229, 255, 0.2);
     color: var(--x-accent);
-    box-shadow: 0 0 8px rgba(0, 229, 255, 0.2);
-    transition: all 0.3s ease;
+    box-shadow: 0 0 12px rgba(0, 229, 255, 0.12);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    flex-shrink: 0;
+    z-index: 2;
   }
 
+  /* Icon orb radar pulse */
+  .x-badge__icon::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 13px;
+    border: 1px solid rgba(0, 229, 255, 0.3);
+    opacity: 0;
+    animation: iconRadar 3s ease-out infinite;
+    animation-delay: calc(var(--badge-i, 0) * 0.5s);
+    pointer-events: none;
+  }
+
+  @keyframes iconRadar {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    15% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.8);
+      border-width: 0px;
+    }
+  }
+
+  /* Icon hover */
   .x-badge:hover .x-badge__icon {
     background: var(--x-accent);
-    color: #000;
-    box-shadow: 0 0 12px var(--x-accent);
-    transform: scale(1.1);
+    color: #0b1120;
+    border-color: transparent;
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.5), 0 0 6px #fff;
+    transform: scale(1.12) rotate(-6deg);
+  }
+
+  .x-badge:hover .x-badge__icon::before {
+    animation: none;
+    opacity: 0;
+  }
+
+  /* --- Mobile responsive --- */
+  @media (max-width: 520px) {
+    .x-trust__row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .x-badge {
+      padding: 10px 12px;
+      font-size: 11px;
+      gap: 8px;
+      border-radius: 10px;
+      justify-content: flex-start;
+    }
+
+    .x-badge__icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+    }
+
+    /* Last badge spans full width if odd count */
+    .x-badge:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+      justify-content: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .x-badge,
+    .x-badge::before,
+    .x-badge::after,
+    .x-badge__icon::before {
+      animation: none !important;
+    }
+
+    .x-badge {
+      opacity: 1;
+    }
   }
 
   .x-chip {
@@ -7784,18 +7998,3 @@
       .x-form__success-detail strong {
         color: var(--f-text);
       }
-
-/* === MOBILE FIX: hide hero interactive visual on smartphones === */
-@media (max-width: 520px) {
-  .x-site .x-hero__visual {
-    display: none !important;
-  }
-
-  .x-site .x-hero {
-    padding-bottom: var(--x-sp-6);
-  }
-
-  .x-site .x-hero__grid {
-    gap: var(--x-sp-5);
-  }
-}
