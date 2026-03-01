@@ -313,7 +313,11 @@
     transform: scale(1.05);
   }
 
-  .x-site .x-logo span {
+  .x-site .x-logo__text {
+    display: inline;
+  }
+
+  .x-site .x-logo__text > span {
     background: linear-gradient(135deg, #fff 30%, var(--x-accent));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
