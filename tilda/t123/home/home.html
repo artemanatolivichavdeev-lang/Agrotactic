@@ -10277,6 +10277,40 @@
       });
     }
 
+    /* === MOBILE MENU: CLOSE ON LINK CLICK (PATCH) === */
+    function closeMobileMenu() {
+      if (!header || !burger) return;
+      if (header.classList.contains('x-header--menu-open')) {
+        header.classList.remove('x-header--menu-open');
+        burger.innerHTML = burgerSvgOpen;
+      }
+    }
+
+    // 1) close menu after clicking any nav item
+    document.querySelectorAll('.x-nav__item').forEach(function (a) {
+      a.addEventListener('click', function () {
+        if (window.innerWidth <= 900) closeMobileMenu();
+      });
+    });
+
+    // 2) close menu after clicking CTA "Заказать Демо"
+    var menuCta = document.querySelector('.x-header__cta');
+    if (menuCta) {
+      menuCta.addEventListener('click', function () {
+        if (window.innerWidth <= 900) closeMobileMenu();
+      });
+    }
+
+    // 3) ESC closes mobile menu
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeMobileMenu();
+    });
+
+    // 4) resize to desktop closes mobile menu
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 900) closeMobileMenu();
+    });
+
     /* === HERO ROLE TABS === */
     document.querySelectorAll('.x-site .x-tab').forEach(function (tab) {
       tab.addEventListener('click', function () {
