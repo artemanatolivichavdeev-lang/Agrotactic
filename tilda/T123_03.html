@@ -1,0 +1,216 @@
+<div class="x-site">
+  <!-- S5: ЦЕНТР УПРАВЛЕНИЯ -->
+  <div id="x-scenarios"></div>
+  <section class="x-section" id="x-command">
+    <div class="x-wrap">
+      <div class="x-section__head">
+        <p class="x-section__label">Центр управления</p>
+        <h2 class="x-h2">Сценарии: от отклонения до решения за минуты</h2>
+        <p class="x-lead">Каждое отклонение &mdash; это задача с приоритетом, ответственным и сроком. Система ведёт от
+          сигнала до закрытия и фиксирует результат в журнале.</p>
+      </div>
+
+      <div class="x-scen-picker">
+        <button class="x-scen-btn x-scen-btn--active" data-scen="1" type="button"><svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>Срыв окна работ</button>
+        <button class="x-scen-btn" data-scen="2" type="button"><svg viewBox="0 0 24 24">
+            <path
+              d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+          </svg>Отклонение техники</button>
+        <button class="x-scen-btn" data-scen="3" type="button"><svg viewBox="0 0 24 24">
+            <rect x="1" y="3" width="15" height="13" rx="2" />
+            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+            <circle cx="5.5" cy="18.5" r="2.5" />
+            <circle cx="18.5" cy="18.5" r="2.5" />
+          </svg>Логистика и простой</button>
+        <button class="x-scen-btn" data-scen="4" type="button"><svg viewBox="0 0 24 24">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <polyline points="14 2 14 8 20 8" />
+            <line x1="12" y1="18" x2="12" y2="12" />
+            <line x1="12" y1="9" x2="12.01" y2="9" />
+          </svg>Комплаенс-ошибка</button>
+      </div>
+
+      <div class="x-stepper-wrap">
+        <!-- Panel 1 -->
+        <div class="x-scen-panel x-scen-panel--active" id="scen-panel-1">
+          <div class="x-scen-panel__inner">
+            <div class="x-scen-panel__title"><span class="x-scen-panel__title-badge">Сценарий 1</span> Срыв окна работ
+            </div>
+            <div class="x-stepper-line"></div>
+            <div class="x-stepper">
+              <div class="x-step">
+                <div class="x-step__num">1</div>
+                <div>
+                  <h3 class="x-step__title">Факт отклоняется</h3>
+                  <p class="x-step__text">Система фиксирует, что операция отстаёт от плана: темп ниже нормы, окно работ
+                    сужается, риск срыва растёт.</p>
+                </div>
+              </div>
+              <div class="x-step">
+                <div class="x-step__num">2</div>
+                <div>
+                  <h3 class="x-step__title">Отклонение в очереди</h3>
+                  <p class="x-step__text">Отклонение попадает в очередь: приоритет, ответственный, срок реакции.
+                    Предлагается действие по регламенту (перераспределить технику/смену/маршрут).</p>
+                </div>
+              </div>
+              <div class="x-step">
+                <div class="x-step__num">3</div>
+                <div>
+                  <h3 class="x-step__title">Решение и контроль</h3>
+                  <p class="x-step__text">Ответственный подтверждает действие, система отслеживает выполнение: изменение
+                    плана, статус задачи, устранение причины отставания.</p>
+                </div>
+              </div>
+              <div class="x-step">
+                <div class="x-step__num">4</div>
+                <div>
+                  <h3 class="x-step__title">Итог и доказательство</h3>
+                  <p class="x-step__text">Результат фиксируется в KPI и журнале: что изменили, кто утвердил, что
+                    получилось. При необходимости формируется отчёт по смене/кластеру.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 2 -->
+        <div class="x-scen-panel" id="scen-panel-2">
+          <div class="x-scen-panel__inner">
+            <div class="x-scen-panel__title"><span class="x-scen-panel__title-badge">Сценарий 2</span> Отклонение
+              техники</div>
+            <div class="x-stepper-line"></div>
+            <div class="x-stepper">
+              <div class="x-step">
+                <div class="x-step__num">1</div>
+                <div>
+                  <h3 class="x-step__title">Сигнал риска</h3>
+                  <p class="x-step__text">Телематика/датчик фиксирует аномалию: перегрев, давление, уход с траектории,
+                    нарушение режима или геозоны.</p>
+                </div>
+              </div>
+              <div class="x-step">
+                <div class="x-step__num">2</div>
+                <div>
+                  <h3 class="x-step__title">Алерт и назначение</h3>
+                  <p class="x-step__text">Система создаёт алерт, задаёт приоритет и назначает ответственного
+                    (инженер/механик/диспетчер) со сроком реакции. Подсказывает безопасный сценарий (остановка/перевод в
+                    режим/проверка).</p>
+                </div>
+              </div>
+              <div class="x-step">
+                <div class="x-step__num">3</div>
+                <div>
+                  <h3 class="x-step__title">Действие и проверка</h3>
+                  <p class="x-step__text">Ответственный подтверждает действие, система контролирует статус техники и
+                    результат: риск устранён/техника остановлена/задача переназначена.</p>
+                </div>
+              </div>
+              <div class="x-step">
+                <div class="x-step__num">4</div>
+                <div>
+                  <h3 class="x-step__title">Разбор и журнал</h3>
+                  <p class="x-step__text">В журнал попадает цепочка: что случилось → кто вмешался → какое действие
+                    выполнено → чем закрыто. Это основа для разборов и профилактики.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 3 -->
+        <div class="x-scen-panel" id="scen-panel-3">
+          <div class="x-scen-panel__inner">
+            <div class="x-scen-panel__title"><span class="x-scen-panel__title-badge">Сценарий 3</span> Логистика и
+              простой</div>
+            <div class="x-stepper-line"></div>
+            <div class="x-stepper">
+              <div class="x-step">
+                <div class="x-step__num">1</div>
+                <div>
+                  <h3 class="x-step__title">Узкое место</h3>
+                  <p class="x-step__text">Система фиксирует простой или “бутылочное горлышко”: ожидание на
+                    разгрузке/подвозе, конфликт маршрутов, задержка прибытия.</p>
+                </div>
+              </div>
+              <div class="x-step">
+                <div class="x-step__num">2</div>
+                <div>
+                  <h3 class="x-step__title">Отклонение в приоритете</h3>
+                  <p class="x-step__text">Отклонение ставится в очередь с приоритетом и ответственным. Система
+                    предлагает корректировку: переназначить ресурс, перестроить маршрут, изменить порядок задач.</p>
+                </div>
+              </div>
+              <div class="x-step">
+                <div class="x-step__num">3</div>
+                <div>
+                  <h3 class="x-step__title">Перепланирование и контроль</h3>
+                  <p class="x-step__text">После подтверждения система обновляет назначения и маршруты, отслеживает
+                    сокращение ожидания и восстановление темпа работ.</p>
+                </div>
+              </div>
+              <div class="x-step">
+                <div class="x-step__num">4</div>
+                <div>
+                  <h3 class="x-step__title">KPI и отчёт по простоям</h3>
+                  <p class="x-step__text">Изменения отражаются в KPI (время ожидания/простой/оборачиваемость). В отчёте
+                    видно: причина, решение, эффект.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 4 -->
+        <div class="x-scen-panel" id="scen-panel-4">
+          <div class="x-scen-panel__inner">
+            <div class="x-scen-panel__title"><span class="x-scen-panel__title-badge">Сценарий 4</span> Комплаенс-ошибка
+            </div>
+            <div class="x-stepper-line"></div>
+            <div class="x-stepper">
+              <div class="x-step">
+                <div class="x-step__num">1</div>
+                <div>
+                  <h3 class="x-step__title">Риск в документах</h3>
+                  <p class="x-step__text">Система фиксирует ошибку или неполноту: не хватает данных, неверный статус,
+                    несоответствие регламенту, риск отказа/возврата.</p>
+                </div>
+              </div>
+              <div class="x-step">
+                <div class="x-step__num">2</div>
+                <div>
+                  <h3 class="x-step__title">Задача на исправление</h3>
+                  <p class="x-step__text">Ошибка попадает в очередь с ответственным и сроком. Валидатор подсказывает,
+                    что именно нужно исправить и какие данные подтянуть из контуров.</p>
+                </div>
+              </div>
+              <div class="x-step">
+                <div class="x-step__num">3</div>
+                <div>
+                  <h3 class="x-step__title">Исправление и подтверждение</h3>
+                  <p class="x-step__text">Ответственный вносит правку/подтверждает, система проверяет условия и
+                    фиксирует действие в журнале.</p>
+                </div>
+              </div>
+              <div class="x-step">
+                <div class="x-step__num">4</div>
+                <div>
+                  <h3 class="x-step__title">Документ готов и проверяем</h3>
+                  <p class="x-step__text">Документ получает корректный статус, сохраняется трассировка
+                    “кто-что-когда-почему”. По запросу формируется выгрузка/отчёт.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:var(--x-sp-8)">
+        <a class="x-btn x-btn--primary x-btn--demo" href="#x-request-demo">Запросить демо по сценарию</a>
+      </div>
+    </div>
+  </section>
+</div><!-- /.x-site -->

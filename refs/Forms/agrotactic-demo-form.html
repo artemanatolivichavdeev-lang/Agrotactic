@@ -1,0 +1,1312 @@
+<!--
+  АГРОТАКТИК — Форма заявки на демо / техсессию
+  Встраивается в секцию #x-request-demo (замена текущего CTA-блока)
+  или как отдельный Tilda-блок T123 "Embed HTML Code"
+-->
+<style>
+  /* === FORM TOKENS (inherit from .x-site) === */
+  .x-form-wrap {
+    --f-bg: #0b1120;
+    --f-surface: #131b2e;
+    --f-surface-2: #1a2340;
+    --f-text: #e2e8f0;
+    --f-muted: #94a3b8;
+    --f-line: #334155;
+    --f-accent: #00e5ff;
+    --f-accent-alpha: rgba(0, 229, 255, 0.12);
+    --f-error: #ef4444;
+    --f-success: #10b981;
+    --f-warning: #f59e0b;
+    --f-orange: #ff6b35;
+    --f-ff-head: 'Inter', system-ui, sans-serif;
+    --f-ff-body: 'Inter', system-ui, sans-serif;
+    --f-ff-mono: 'JetBrains Mono', monospace;
+    --f-radius: 10px;
+    --f-radius-sm: 6px;
+
+    font-family: var(--f-ff-body);
+    color: var(--f-text);
+    box-sizing: border-box;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .x-form-wrap *,
+  .x-form-wrap *::before,
+  .x-form-wrap *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* === FORM CONTAINER === */
+  .x-form {
+    position: relative;
+    background: linear-gradient(170deg, rgba(19, 27, 46, 0.6), rgba(11, 17, 32, 0.85));
+    border: 1px solid rgba(51, 65, 85, 0.5);
+    border-radius: 18px;
+    padding: 40px 36px 36px;
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .x-form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent 5%, var(--f-accent) 50%, transparent 95%);
+    opacity: 0.6;
+  }
+
+  /* === HEADER === */
+  .x-form__header {
+    text-align: center;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(51, 65, 85, 0.4);
+  }
+
+  .x-form__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--f-ff-mono);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--f-accent);
+    background: rgba(0, 229, 255, 0.06);
+    border: 1px solid rgba(0, 229, 255, 0.18);
+    border-radius: 6px;
+    padding: 5px 14px;
+    margin-bottom: 16px;
+  }
+
+  .x-form__title {
+    font-family: var(--f-ff-head);
+    font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.25;
+    margin-bottom: 10px;
+  }
+
+  .x-form__subtitle {
+    font-size: 0.875rem;
+    color: var(--f-muted);
+    line-height: 1.55;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* === STEPPER === */
+  .x-form__stepper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 28px;
+  }
+
+  .x-form__step-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--f-ff-mono);
+    font-size: 13px;
+    font-weight: 700;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: var(--f-surface);
+    color: var(--f-muted);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    flex-shrink: 0;
+  }
+
+  .x-form__step-dot--active {
+    border-color: var(--f-accent);
+    background: rgba(0, 229, 255, 0.12);
+    color: var(--f-accent);
+    box-shadow: 0 0 14px rgba(0, 229, 255, 0.2);
+  }
+
+  .x-form__step-dot--done {
+    border-color: var(--f-success);
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--f-success);
+  }
+
+  .x-form__step-line {
+    width: 48px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    transition: background 0.4s;
+  }
+
+  .x-form__step-line--done {
+    background: rgba(16, 185, 129, 0.4);
+  }
+
+  /* === FIELDSET PAGES === */
+  .x-form__page {
+    display: none;
+    animation: formFadeIn 0.35s ease;
+  }
+
+  .x-form__page--active {
+    display: block;
+  }
+
+  @keyframes formFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .x-form__page-label {
+    font-family: var(--f-ff-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--f-accent);
+    margin-bottom: 18px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .x-form__page-label::before {
+    content: '';
+    width: 16px;
+    height: 1px;
+    background: var(--f-accent);
+    opacity: 0.5;
+  }
+
+  /* === FORM ROWS === */
+  .x-form__row {
+    margin-bottom: 18px;
+  }
+
+  .x-form__row--grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  @media(max-width: 600px) {
+    .x-form__row--grid2 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .x-form__row--hidden {
+    display: none;
+  }
+
+  /* === LABELS === */
+  .x-form__label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--f-text);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .x-form__label-req {
+    color: var(--f-accent);
+    font-weight: 400;
+    margin-left: 2px;
+  }
+
+  .x-form__label-hint {
+    display: block;
+    font-size: 11px;
+    color: var(--f-muted);
+    font-weight: 400;
+    margin-top: 2px;
+    line-height: 1.4;
+  }
+
+  /* === INPUTS === */
+  .x-form__input,
+  .x-form__select,
+  .x-form__textarea {
+    width: 100%;
+    font-family: var(--f-ff-body);
+    font-size: 0.9rem;
+    color: var(--f-text);
+    background: var(--f-surface);
+    border: 1px solid rgba(51, 65, 85, 0.5);
+    border-radius: var(--f-radius-sm);
+    padding: 11px 14px;
+    outline: none;
+    transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+    -webkit-appearance: none;
+  }
+
+  .x-form__input::placeholder,
+  .x-form__textarea::placeholder {
+    color: rgba(148, 163, 184, 0.5);
+  }
+
+  .x-form__input:hover,
+  .x-form__select:hover,
+  .x-form__textarea:hover {
+    border-color: rgba(0, 229, 255, 0.3);
+    background: var(--f-surface-2);
+  }
+
+  .x-form__input:focus,
+  .x-form__select:focus,
+  .x-form__textarea:focus {
+    border-color: var(--f-accent);
+    box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.08), 0 0 12px rgba(0, 229, 255, 0.06);
+    background: var(--f-surface-2);
+  }
+
+  .x-form__input--error,
+  .x-form__select--error {
+    border-color: var(--f-error) !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.08) !important;
+  }
+
+  .x-form__error-msg {
+    font-size: 11px;
+    color: var(--f-error);
+    margin-top: 4px;
+    display: none;
+    line-height: 1.3;
+  }
+
+  .x-form__error-msg--visible {
+    display: block;
+  }
+
+  .x-form__select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%2394a3b8' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 36px;
+  }
+
+  .x-form__textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  /* === ROLE SELECTOR (visual cards) === */
+  .x-form__roles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  @media(max-width: 600px) {
+    .x-form__roles {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .x-form__role {
+    position: relative;
+    cursor: pointer;
+  }
+
+  .x-form__role input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .x-form__role-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 8px 12px;
+    background: var(--f-surface);
+    border: 1px solid rgba(51, 65, 85, 0.45);
+    border-radius: var(--f-radius);
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .x-form__role-card:hover {
+    border-color: rgba(0, 229, 255, 0.3);
+    background: var(--f-surface-2);
+    transform: translateY(-2px);
+  }
+
+  .x-form__role input:checked+.x-form__role-card {
+    border-color: var(--f-accent);
+    background: rgba(0, 229, 255, 0.06);
+    box-shadow: 0 0 16px rgba(0, 229, 255, 0.1), inset 0 0 8px rgba(0, 229, 255, 0.04);
+  }
+
+  .x-form__role-icon {
+    font-size: 22px;
+    line-height: 1;
+  }
+
+  .x-form__role-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--f-text);
+    line-height: 1.25;
+  }
+
+  /* === FORMAT SELECTOR (radio cards) === */
+  .x-form__formats {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .x-form__format {
+    position: relative;
+    cursor: pointer;
+  }
+
+  .x-form__format input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .x-form__format-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 16px;
+    background: var(--f-surface);
+    border: 1px solid rgba(51, 65, 85, 0.45);
+    border-radius: var(--f-radius);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .x-form__format-card:hover {
+    border-color: rgba(0, 229, 255, 0.3);
+    background: var(--f-surface-2);
+  }
+
+  .x-form__format input:checked+.x-form__format-card {
+    border-color: var(--f-accent);
+    background: rgba(0, 229, 255, 0.05);
+    box-shadow: 0 0 14px rgba(0, 229, 255, 0.08);
+  }
+
+  .x-form__format-radio {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(148, 163, 184, 0.4);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 1px;
+    transition: all 0.25s;
+    position: relative;
+  }
+
+  .x-form__format input:checked+.x-form__format-card .x-form__format-radio {
+    border-color: var(--f-accent);
+  }
+
+  .x-form__format input:checked+.x-form__format-card .x-form__format-radio::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 8px;
+    height: 8px;
+    background: var(--f-accent);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--f-accent);
+  }
+
+  .x-form__format-body {
+    flex: 1;
+  }
+
+  .x-form__format-title {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--f-text);
+    margin-bottom: 3px;
+  }
+
+  .x-form__format-desc {
+    font-size: 11px;
+    color: var(--f-muted);
+    line-height: 1.45;
+  }
+
+  .x-form__format-time {
+    font-family: var(--f-ff-mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--f-accent);
+    background: rgba(0, 229, 255, 0.06);
+    border: 1px solid rgba(0, 229, 255, 0.15);
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-top: 6px;
+    display: inline-block;
+  }
+
+  /* === CHECKBOXES === */
+  .x-form__check {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+
+  .x-form__check input {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(148, 163, 184, 0.4);
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .x-form__check input:checked {
+    border-color: var(--f-accent);
+    background: var(--f-accent);
+    box-shadow: 0 0 8px rgba(0, 229, 255, 0.3);
+  }
+
+  .x-form__check input:checked::after {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 5px;
+    width: 4px;
+    height: 9px;
+    border: solid var(--f-bg);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  .x-form__check-text {
+    font-size: 0.8rem;
+    color: var(--f-muted);
+    line-height: 1.45;
+  }
+
+  .x-form__check-text a {
+    color: var(--f-accent);
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(0, 229, 255, 0.3);
+  }
+
+  /* === ACTIONS === */
+  .x-form__actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(51, 65, 85, 0.35);
+  }
+
+  .x-form__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--f-ff-mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 11px 24px;
+    border-radius: var(--f-radius-sm);
+    cursor: pointer;
+    transition: all 0.25s;
+    border: 1px solid transparent;
+  }
+
+  .x-form__btn--next {
+    background: var(--f-accent);
+    color: #000;
+    border-color: var(--f-accent);
+  }
+
+  .x-form__btn--next:hover {
+    background: #fff;
+    border-color: #fff;
+    box-shadow: 0 0 14px rgba(0, 229, 255, 0.4);
+  }
+
+  .x-form__btn--back {
+    background: transparent;
+    color: var(--f-muted);
+    border: none;
+    padding-left: 0;
+  }
+
+  .x-form__btn--back:hover {
+    color: var(--f-accent);
+  }
+
+  .x-form__btn--submit {
+    background: #facc15;
+    color: #b91c1c;
+    border-color: #facc15;
+    font-size: 0.85rem;
+    padding: 13px 32px;
+  }
+
+  .x-form__btn--submit:hover {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+    box-shadow: 0 0 16px rgba(250, 204, 21, 0.4);
+  }
+
+  .x-form__btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .x-form__btn svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* === TRUST LINE === */
+  .x-form__trust {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+    padding: 14px;
+    background: rgba(19, 27, 46, 0.4);
+    border-radius: var(--f-radius);
+    border: 1px dashed rgba(51, 65, 85, 0.35);
+  }
+
+  .x-form__trust-item {
+    font-size: 11px;
+    color: var(--f-muted);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .x-form__trust-item svg {
+    width: 13px;
+    height: 13px;
+    stroke: var(--f-success);
+    fill: none;
+    stroke-width: 2;
+    flex-shrink: 0;
+  }
+
+  /* === SUCCESS STATE === */
+  .x-form__success {
+    display: none;
+    text-align: center;
+    padding: 32px 20px;
+    animation: formFadeIn 0.5s ease;
+  }
+
+  .x-form__success--visible {
+    display: block;
+  }
+
+  .x-form__success-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(16, 185, 129, 0.1);
+    border: 2px solid rgba(16, 185, 129, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+  }
+
+  .x-form__success-icon svg {
+    width: 26px;
+    height: 26px;
+    stroke: var(--f-success);
+    fill: none;
+    stroke-width: 2;
+  }
+
+  .x-form__success h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+
+  .x-form__success p {
+    font-size: 0.875rem;
+    color: var(--f-muted);
+    line-height: 1.6;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .x-form__success-detail {
+    margin-top: 20px;
+    padding: 16px;
+    background: var(--f-surface);
+    border: 1px solid rgba(51, 65, 85, 0.4);
+    border-radius: var(--f-radius);
+    text-align: left;
+    font-size: 0.8rem;
+    color: var(--f-muted);
+    line-height: 1.55;
+  }
+
+  .x-form__success-detail strong {
+    color: var(--f-text);
+  }
+</style>
+
+<div class="x-form-wrap" id="x-demo-form-wrap">
+  <div class="x-form" id="x-demo-form">
+
+    <!-- HEADER -->
+    <div class="x-form__header">
+      <div class="x-form__badge">Заявка</div>
+      <h3 class="x-form__title">Запросить демо или техсессию</h3>
+      <p class="x-form__subtitle">Заполните форму — мы подберём формат, адаптируем сценарий под вашу ситуацию и свяжемся
+        в течение одного рабочего дня.</p>
+    </div>
+
+    <!-- STEPPER -->
+    <div class="x-form__stepper" id="x-stepper">
+      <div class="x-form__step-dot x-form__step-dot--active" data-step="1">1</div>
+      <div class="x-form__step-line" data-line="1"></div>
+      <div class="x-form__step-dot" data-step="2">2</div>
+      <div class="x-form__step-line" data-line="2"></div>
+      <div class="x-form__step-dot" data-step="3">3</div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- СТРАНИЦА 1: КТО ВЫ                            -->
+    <!-- ============================================== -->
+    <div class="x-form__page x-form__page--active" data-page="1">
+      <div class="x-form__page-label">Шаг 1 — О вас и компании</div>
+
+      <!-- Имя + Фамилия -->
+      <div class="x-form__row x-form__row--grid2">
+        <div>
+          <label class="x-form__label" for="f-name">Имя <span class="x-form__label-req">*</span></label>
+          <input autocomplete="given-name" class="x-form__input" id="f-name" name="name" placeholder="Иван"
+            required type="text">
+          <div class="x-form__error-msg" id="err-name">Укажите имя</div>
+        </div>
+        <div>
+          <label class="x-form__label" for="f-surname">Фамилия</label>
+          <input autocomplete="family-name" class="x-form__input" id="f-surname" name="surname"
+            placeholder="Петров" type="text">
+        </div>
+      </div>
+
+      <!-- Email + Телефон -->
+      <div class="x-form__row x-form__row--grid2">
+        <div>
+          <label class="x-form__label" for="f-email">Рабочий email <span class="x-form__label-req">*</span></label>
+          <input autocomplete="email" class="x-form__input" id="f-email" name="email"
+            placeholder="i.petrov@agro.ru" required type="email">
+          <div class="x-form__error-msg" id="err-email">Укажите корректный рабочий email</div>
+        </div>
+        <div>
+          <label class="x-form__label" for="f-phone">Телефон
+            <span class="x-form__label-hint">Для быстрой связи (необязательно)</span>
+          </label>
+          <input autocomplete="tel" class="x-form__input" id="f-phone" name="phone"
+            placeholder="+7 (___) ___-__-__" type="tel">
+        </div>
+      </div>
+
+      <!-- Компания + Должность -->
+      <div class="x-form__row x-form__row--grid2">
+        <div>
+          <label class="x-form__label" for="f-company">Компания <span class="x-form__label-req">*</span></label>
+          <input autocomplete="organization" class="x-form__input" id="f-company" name="company"
+            placeholder="АО «Агросоюз»" required type="text">
+          <div class="x-form__error-msg" id="err-company">Укажите компанию</div>
+        </div>
+        <div>
+          <label class="x-form__label" for="f-title">Должность</label>
+          <input autocomplete="organization-title" class="x-form__input" id="f-title" name="title"
+            placeholder="Директор по операциям" type="text">
+        </div>
+      </div>
+
+      <!-- Роль (визуальные карточки) -->
+      <div class="x-form__row">
+        <label class="x-form__label">Ваша роль <span class="x-form__label-req">*</span>
+          <span class="x-form__label-hint">Мы адаптируем демо под вашу зону ответственности</span>
+        </label>
+        <div class="x-form__roles" id="f-roles">
+          <label class="x-form__role">
+            <input name="role" required type="radio" value="coo">
+            <div class="x-form__role-card">
+              <span class="x-form__role-icon">📊</span>
+              <span class="x-form__role-name">Руководитель / COO</span>
+            </div>
+          </label>
+          <label class="x-form__role">
+            <input name="role" type="radio" value="agro">
+            <div class="x-form__role-card">
+              <span class="x-form__role-icon">🌾</span>
+              <span class="x-form__role-name">Агроном</span>
+            </div>
+          </label>
+          <label class="x-form__role">
+            <input name="role" type="radio" value="zoo">
+            <div class="x-form__role-card">
+              <span class="x-form__role-icon">🐄</span>
+              <span class="x-form__role-name">Зоотехник</span>
+            </div>
+          </label>
+          <label class="x-form__role">
+            <input name="role" type="radio" value="mech">
+            <div class="x-form__role-card">
+              <span class="x-form__role-icon">⚙️</span>
+              <span class="x-form__role-name">Гл. механик</span>
+            </div>
+          </label>
+          <label class="x-form__role">
+            <input name="role" type="radio" value="it">
+            <div class="x-form__role-card">
+              <span class="x-form__role-icon">🔒</span>
+              <span class="x-form__role-name">IT / ИБ</span>
+            </div>
+          </label>
+          <label class="x-form__role">
+            <input name="role" type="radio" value="other">
+            <div class="x-form__role-card">
+              <span class="x-form__role-icon">👤</span>
+              <span class="x-form__role-name">Другая</span>
+            </div>
+          </label>
+        </div>
+        <div class="x-form__error-msg" id="err-role">Выберите вашу роль</div>
+      </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- СТРАНИЦА 2: ЧТО ВАМ НУЖНО                    -->
+    <!-- ============================================== -->
+    <div class="x-form__page" data-page="2">
+      <div class="x-form__page-label">Шаг 2 — Что вам нужно</div>
+
+      <!-- Формат встречи -->
+      <div class="x-form__row">
+        <label class="x-form__label">Формат <span class="x-form__label-req">*</span></label>
+        <div class="x-form__formats" id="f-formats">
+          <label class="x-form__format">
+            <input checked name="format" required type="radio" value="demo">
+            <div class="x-form__format-card">
+              <div class="x-form__format-radio"></div>
+              <div class="x-form__format-body">
+                <div class="x-form__format-title">Демо по сценарию</div>
+                <div class="x-form__format-desc">Покажем цепочку «отклонение → ответственный → решение → результат» на
+                  вашей ситуации.</div>
+                <span class="x-form__format-time">30–45 мин</span>
+              </div>
+            </div>
+          </label>
+          <label class="x-form__format">
+            <input name="format" type="radio" value="tech">
+            <div class="x-form__format-card">
+              <div class="x-form__format-radio"></div>
+              <div class="x-form__format-body">
+                <div class="x-form__format-title">Техсессия (IT + ИБ)</div>
+                <div class="x-form__format-desc">Архитектура, интеграции, безопасность, требования к инфраструктуре.
+                </div>
+                <span class="x-form__format-time">45–60 мин</span>
+              </div>
+            </div>
+          </label>
+          <label class="x-form__format">
+            <input name="format" type="radio" value="pilot">
+            <div class="x-form__format-card">
+              <div class="x-form__format-radio"></div>
+              <div class="x-form__format-body">
+                <div class="x-form__format-title">Обсуждение пилота</div>
+                <div class="x-form__format-desc">KPI, метрики, источники данных, границы пилота, критерии приёмки.
+                </div>
+                <span class="x-form__format-time">30–45 мин</span>
+              </div>
+            </div>
+          </label>
+          <label class="x-form__format">
+            <input name="format" type="radio" value="docs">
+            <div class="x-form__format-card">
+              <div class="x-form__format-radio"></div>
+              <div class="x-form__format-body">
+                <div class="x-form__format-title">Только документы</div>
+                <div class="x-form__format-desc">One-pager, Pilot Blueprint, Architecture / Security / Compliance —
+                  без звонка.</div>
+                <span class="x-form__format-time">Отправим на email</span>
+              </div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Контекст: что сейчас болит (условное — показываем только для demo/pilot) -->
+      <div class="x-form__row" id="row-focus">
+        <label class="x-form__label" for="f-focus">Фокус / что сейчас актуально
+          <span class="x-form__label-hint">Чтобы мы подготовили релевантный сценарий</span>
+        </label>
+        <select class="x-form__select" id="f-focus" name="focus">
+          <option value="">— Выберите —</option>
+          <option value="season">Сезонная кампания: окна работ, сроки, техника</option>
+          <option value="equipment">Мониторинг и ТОиР техники</option>
+          <option value="logistics">Логистика и простои</option>
+          <option value="compliance">Комплаенс и документооборот (в т.ч. «Меркурий»)</option>
+          <option value="livestock">Животноводство: кормовая логистика, KPI ферм</option>
+          <option value="integration">Интеграции с ERP/1С/телематикой</option>
+          <option value="security">ИБ, роли и контроль доступа</option>
+          <option value="general">Общий обзор платформы</option>
+        </select>
+      </div>
+
+      <!-- Масштаб (квалификация) -->
+      <div class="x-form__row x-form__row--grid2">
+        <div>
+          <label class="x-form__label" for="f-scale">Масштаб хозяйства
+            <span class="x-form__label-hint">Площадь обработки или поголовье</span>
+          </label>
+          <select class="x-form__select" id="f-scale" name="scale">
+            <option value="">— Необязательно —</option>
+            <option value="small">До 10 000 га / до 1 000 голов</option>
+            <option value="medium">10 000 – 50 000 га / 1 000 – 10 000 голов</option>
+            <option value="large">50 000 – 200 000 га / 10 000+ голов</option>
+            <option value="xlarge">200 000+ га / холдинг</option>
+          </select>
+        </div>
+        <div>
+          <label class="x-form__label" for="f-fleet">Парк техники
+            <span class="x-form__label-hint">Примерное кол-во единиц</span>
+          </label>
+          <select class="x-form__select" id="f-fleet" name="fleet">
+            <option value="">— Необязательно —</option>
+            <option value="<50">До 50 единиц</option>
+            <option value="50-200">50 – 200</option>
+            <option value="200-500">200 – 500</option>
+            <option value="500+">500+</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- СТРАНИЦА 3: ДЕТАЛИ И ОТПРАВКА                 -->
+    <!-- ============================================== -->
+    <div class="x-form__page" data-page="3">
+      <div class="x-form__page-label">Шаг 3 — Детали и отправка</div>
+
+      <!-- Текущие системы -->
+      <div class="x-form__row">
+        <label class="x-form__label">Какие системы уже используете?
+          <span class="x-form__label-hint">Отметьте актуальное — поможет подготовить интеграционный сценарий</span>
+        </label>
+        <div class="x-form__row--grid2" style="gap:6px;">
+          <label class="x-form__check"><input name="sys" type="checkbox" value="erp"><span
+              class="x-form__check-text">ERP / 1С</span></label>
+          <label class="x-form__check"><input name="sys" type="checkbox" value="telemetry"><span
+              class="x-form__check-text">Телематика (GPS/CAN)</span></label>
+          <label class="x-form__check"><input name="sys" type="checkbox" value="iot"><span
+              class="x-form__check-text">Датчики IoT</span></label>
+          <label class="x-form__check"><input name="sys" type="checkbox" value="bi"><span
+              class="x-form__check-text">BI (Power BI / Tableau)</span></label>
+          <label class="x-form__check"><input name="sys" type="checkbox" value="mercury"><span
+              class="x-form__check-text">«Меркурий» / ФГИС</span></label>
+          <label class="x-form__check"><input name="sys" type="checkbox" value="none"><span
+              class="x-form__check-text">Пока ничего из этого</span></label>
+        </div>
+      </div>
+
+      <!-- Срочность -->
+      <div class="x-form__row">
+        <label class="x-form__label" for="f-urgency">Горизонт решения</label>
+        <select class="x-form__select" id="f-urgency" name="urgency">
+          <option value="">— Не определён —</option>
+          <option value="asap">Нужно к сезону (ближайшие 1–2 месяца)</option>
+          <option value="quarter">В ближайший квартал</option>
+          <option value="research">Исследуем рынок / собираем информацию</option>
+          <option value="nextyr">Планируем на следующий год</option>
+        </select>
+      </div>
+
+      <!-- Комментарий -->
+      <div class="x-form__row">
+        <label class="x-form__label" for="f-comment">Комментарий
+          <span class="x-form__label-hint">Что важно учесть? Специфика, ограничения, вопросы — всё полезно</span>
+        </label>
+        <textarea class="x-form__textarea" id="f-comment" name="comment"
+          placeholder="Например: «Интересует мониторинг 120 комбайнов в сезон уборки, сейчас на Wialon + 1С:УПП»"></textarea>
+      </div>
+
+      <!-- NDA -->
+      <div class="x-form__row">
+        <label class="x-form__check">
+          <input name="nda" type="checkbox" value="yes">
+          <span class="x-form__check-text">Потребуется NDA перед обменом данными</span>
+        </label>
+      </div>
+
+      <!-- Согласие -->
+      <div class="x-form__row">
+        <label class="x-form__check">
+          <input id="f-consent" name="consent" required type="checkbox" value="yes">
+          <span class="x-form__check-text">Я согласен на обработку персональных данных в целях обработки заявки.
+            <a href="#">Политика конфиденциальности</a></span>
+        </label>
+        <div class="x-form__error-msg" id="err-consent">Необходимо дать согласие</div>
+      </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- SUCCESS STATE                                  -->
+    <!-- ============================================== -->
+    <div class="x-form__success" id="x-form-success">
+      <div class="x-form__success-icon">
+        <svg viewBox="0 0 24 24">
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+      </div>
+      <h3>Заявка отправлена</h3>
+      <p>Мы свяжемся с вами в течение одного рабочего дня, чтобы согласовать формат и время.</p>
+      <div class="x-form__success-detail" id="x-success-summary"></div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- ACTIONS                                        -->
+    <!-- ============================================== -->
+    <div class="x-form__actions" id="x-form-actions">
+      <button class="x-form__btn x-form__btn--back" id="btn-back" style="visibility:hidden" type="button">
+        <svg viewBox="0 0 24 24">
+          <polyline points="15 18 9 12 15 6" />
+        </svg> Назад
+      </button>
+      <button class="x-form__btn x-form__btn--next" id="btn-next" type="button">
+        Далее <svg viewBox="0 0 24 24">
+          <polyline points="9 18 15 12 9 6" />
+        </svg>
+      </button>
+      <button class="x-form__btn x-form__btn--submit" id="btn-submit" style="display:none" type="button">
+        Отправить заявку
+      </button>
+    </div>
+
+    <!-- TRUST -->
+    <div class="x-form__trust">
+      <span class="x-form__trust-item">
+        <svg viewBox="0 0 24 24">
+          <polyline points="20 6 9 17 4 12" />
+        </svg> Без обязательств
+      </span>
+      <span class="x-form__trust-item">
+        <svg viewBox="0 0 24 24">
+          <polyline points="20 6 9 17 4 12" />
+        </svg> NDA по запросу
+      </span>
+      <span class="x-form__trust-item">
+        <svg viewBox="0 0 24 24">
+          <polyline points="20 6 9 17 4 12" />
+        </svg> Данные не передаём третьим лицам
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================== -->
+<!-- LOGIC                                          -->
+<!-- ============================================== -->
+<script>
+  (function () {
+    var TOTAL_PAGES = 3;
+    var currentPage = 1;
+
+    // DOM refs
+    var pages = document.querySelectorAll('.x-form__page');
+    var dots = document.querySelectorAll('.x-form__step-dot');
+    var lines = document.querySelectorAll('.x-form__step-line');
+    var btnBack = document.getElementById('btn-back');
+    var btnNext = document.getElementById('btn-next');
+    var btnSubmit = document.getElementById('btn-submit');
+    var actions = document.getElementById('x-form-actions');
+    var successBlock = document.getElementById('x-form-success');
+    var successSummary = document.getElementById('x-success-summary');
+
+    // Format-dependent rows
+    var rowFocus = document.getElementById('row-focus');
+    var formatInputs = document.querySelectorAll('input[name="format"]');
+
+    // --- Conditional visibility: hide "focus" for "docs" format ---
+    function updateConditionalFields() {
+      var selected = document.querySelector('input[name="format"]:checked');
+      if (selected && selected.value === 'docs') {
+        rowFocus.classList.add('x-form__row--hidden');
+      } else {
+        rowFocus.classList.remove('x-form__row--hidden');
+      }
+    }
+    formatInputs.forEach(function (inp) {
+      inp.addEventListener('change', updateConditionalFields);
+    });
+    updateConditionalFields();
+
+    // --- "None" checkbox logic: uncheck others when "none" is checked ---
+    var sysCheckboxes = document.querySelectorAll('input[name="sys"]');
+    sysCheckboxes.forEach(function (cb) {
+      cb.addEventListener('change', function () {
+        if (cb.value === 'none' && cb.checked) {
+          sysCheckboxes.forEach(function (other) {
+            if (other.value !== 'none') other.checked = false;
+          });
+        } else if (cb.value !== 'none' && cb.checked) {
+          var noneCb = document.querySelector('input[name="sys"][value="none"]');
+          if (noneCb) noneCb.checked = false;
+        }
+      });
+    });
+
+    // --- Navigation ---
+    function showPage(n) {
+      currentPage = n;
+      pages.forEach(function (p) {
+        p.classList.remove('x-form__page--active');
+      });
+      var target = document.querySelector('.x-form__page[data-page="' + n + '"]');
+      if (target) target.classList.add('x-form__page--active');
+
+      // Stepper
+      dots.forEach(function (d) {
+        var s = parseInt(d.getAttribute('data-step'));
+        d.classList.remove('x-form__step-dot--active', 'x-form__step-dot--done');
+        if (s === n) d.classList.add('x-form__step-dot--active');
+        if (s < n) {
+          d.classList.add('x-form__step-dot--done');
+          d.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>';
+        } else {
+          d.textContent = s;
+        }
+      });
+      lines.forEach(function (l) {
+        var ln = parseInt(l.getAttribute('data-line'));
+        l.classList.toggle('x-form__step-line--done', ln < n);
+      });
+
+      // Buttons
+      btnBack.style.visibility = n === 1 ? 'hidden' : 'visible';
+      if (n === TOTAL_PAGES) {
+        btnNext.style.display = 'none';
+        btnSubmit.style.display = 'inline-flex';
+      } else {
+        btnNext.style.display = 'inline-flex';
+        btnSubmit.style.display = 'none';
+      }
+    }
+
+    // --- Validation ---
+    function clearErrors() {
+      document.querySelectorAll('.x-form__error-msg').forEach(function (m) {
+        m.classList.remove('x-form__error-msg--visible');
+      });
+      document.querySelectorAll('.x-form__input--error, .x-form__select--error').forEach(function (el) {
+        el.classList.remove('x-form__input--error', 'x-form__select--error');
+      });
+    }
+
+    function showError(inputId, msgId) {
+      var inp = document.getElementById(inputId);
+      var msg = document.getElementById(msgId);
+      if (inp) inp.classList.add('x-form__input--error');
+      if (msg) msg.classList.add('x-form__error-msg--visible');
+    }
+
+    function validatePage(n) {
+      clearErrors();
+      var valid = true;
+
+      if (n === 1) {
+        var name = document.getElementById('f-name');
+        var email = document.getElementById('f-email');
+        var company = document.getElementById('f-company');
+        var roleSelected = document.querySelector('input[name="role"]:checked');
+
+        if (!name.value.trim()) { showError('f-name', 'err-name'); valid = false; }
+
+        var emailVal = email.value.trim();
+        var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var freeProviders = ['gmail.com', 'mail.ru', 'yandex.ru', 'ya.ru', 'bk.ru', 'inbox.ru', 'list.ru', 'rambler.ru', 'hotmail.com', 'outlook.com', 'yahoo.com', 'icloud.com'];
+        if (!emailVal || !emailRe.test(emailVal)) {
+          showError('f-email', 'err-email'); valid = false;
+        } else {
+          var domain = emailVal.split('@')[1].toLowerCase();
+          var isFree = false;
+          for (var i = 0; i < freeProviders.length; i++) {
+            if (domain === freeProviders[i]) { isFree = true; break; }
+          }
+          if (isFree) {
+            document.getElementById('err-email').textContent = 'Пожалуйста, используйте рабочий email';
+            showError('f-email', 'err-email');
+            valid = false;
+          }
+        }
+
+        if (!company.value.trim()) { showError('f-company', 'err-company'); valid = false; }
+        if (!roleSelected) {
+          document.getElementById('err-role').classList.add('x-form__error-msg--visible');
+          valid = false;
+        }
+      }
+
+      if (n === 3) {
+        var consent = document.getElementById('f-consent');
+        if (!consent.checked) {
+          document.getElementById('err-consent').classList.add('x-form__error-msg--visible');
+          valid = false;
+        }
+      }
+
+      return valid;
+    }
+
+    // --- Phone mask (simple) ---
+    var phoneInput = document.getElementById('f-phone');
+    phoneInput.addEventListener('input', function () {
+      var v = phoneInput.value.replace(/\D/g, '');
+      if (v.length === 0) { phoneInput.value = ''; return; }
+      if (v[0] === '8') v = '7' + v.slice(1);
+      if (v[0] !== '7') v = '7' + v;
+      var formatted = '+7';
+      if (v.length > 1) formatted += ' (' + v.slice(1, 4);
+      if (v.length > 4) formatted += ') ' + v.slice(4, 7);
+      if (v.length > 7) formatted += '-' + v.slice(7, 9);
+      if (v.length > 9) formatted += '-' + v.slice(9, 11);
+      phoneInput.value = formatted;
+    });
+
+    // --- Submit ---
+    function gatherData() {
+      var data = {};
+      data.name = document.getElementById('f-name').value.trim();
+      data.surname = document.getElementById('f-surname').value.trim();
+      data.email = document.getElementById('f-email').value.trim();
+      data.phone = document.getElementById('f-phone').value.trim();
+      data.company = document.getElementById('f-company').value.trim();
+      data.title = document.getElementById('f-title').value.trim();
+
+      var roleEl = document.querySelector('input[name="role"]:checked');
+      data.role = roleEl ? roleEl.value : '';
+
+      var fmtEl = document.querySelector('input[name="format"]:checked');
+      data.format = fmtEl ? fmtEl.value : '';
+
+      data.focus = document.getElementById('f-focus').value;
+      data.scale = document.getElementById('f-scale').value;
+      data.fleet = document.getElementById('f-fleet').value;
+
+      var sys = [];
+      document.querySelectorAll('input[name="sys"]:checked').forEach(function (cb) { sys.push(cb.value); });
+      data.systems = sys;
+
+      data.urgency = document.getElementById('f-urgency').value;
+      data.comment = document.getElementById('f-comment').value.trim();
+      data.nda = document.querySelector('input[name="nda"]').checked;
+
+      return data;
+    }
+
+    function formatLabels(data) {
+      var roleNames = { coo: 'Руководитель / COO', agro: 'Агроном', zoo: 'Зоотехник', mech: 'Гл. механик', it: 'IT / ИБ', other: 'Другая' };
+      var formatNames = { demo: 'Демо по сценарию', tech: 'Техсессия (IT+ИБ)', pilot: 'Обсуждение пилота', docs: 'Только документы' };
+      return {
+        role: roleNames[data.role] || data.role,
+        format: formatNames[data.format] || data.format
+      };
+    }
+
+    function showSuccess(data) {
+      var labels = formatLabels(data);
+      pages.forEach(function (p) { p.classList.remove('x-form__page--active'); });
+      actions.style.display = 'none';
+      successBlock.classList.add('x-form__success--visible');
+      successSummary.innerHTML =
+        '<strong>Формат:</strong> ' + labels.format + '<br>' +
+        '<strong>Роль:</strong> ' + labels.role + '<br>' +
+        '<strong>Компания:</strong> ' + data.company +
+        (data.nda ? '<br><strong>NDA:</strong> потребуется' : '');
+    }
+
+    // --- Events ---
+    btnNext.addEventListener('click', function () {
+      if (validatePage(currentPage)) {
+        showPage(currentPage + 1);
+      }
+    });
+
+    btnBack.addEventListener('click', function () {
+      if (currentPage > 1) showPage(currentPage - 1);
+    });
+
+    btnSubmit.addEventListener('click', function () {
+      if (!validatePage(currentPage)) return;
+      var data = gatherData();
+
+      // === INTEGRATION POINT ===
+      // Здесь отправка данных:
+      // 1) Tilda: window.Tilda && Tilda.sendForm(data)
+      // 2) Webhook: fetch('https://...', { method:'POST', body: JSON.stringify(data) })
+      // 3) Email: формировать mailto или серверный endpoint
+      console.log('[AgroTactic] Form submitted:', JSON.stringify(data, null, 2));
+
+      showSuccess(data);
+    });
+
+    // Clear field errors on interaction
+    document.querySelectorAll('.x-form__input, .x-form__select, .x-form__textarea').forEach(function (el) {
+      el.addEventListener('input', function () { el.classList.remove('x-form__input--error', 'x-form__select--error'); });
+    });
+    document.querySelectorAll('input[name="role"]').forEach(function (r) {
+      r.addEventListener('change', function () { document.getElementById('err-role').classList.remove('x-form__error-msg--visible'); });
+    });
+
+  })();
+</script>

@@ -1,0 +1,243 @@
+<div class="x-site">
+  <!-- S3: 4 СЛОЯ ПЛАТФОРМЫ -->
+  <section class="x-section" id="x-platform">
+
+    <div class="x-wrap">
+      <div class="x-section__head">
+        <p class="x-section__label">Архитектура</p>
+        <h2 class="x-h2">Архитектура системы: как устроен контур изнутри</h2>
+        <p class="x-lead">Агротактик построен на четырёх независимых, но взаимосвязанных слоях — каждый работает
+          автономно и усиливает следующий.</p>
+      </div>
+      <div class="x-arch-grid">
+        <div class="x-arch-card x-arch-card--layer1 pla-anim">
+          <div class="x-arch-card__icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+            </svg></div>
+          <span class="x-arch-badge">Слой 1</span>
+          <h3 class="x-arch-card__title">Сбор и нормализация данных</h3>
+          <p class="x-card__text">Единая точка входа для всех источников: телематика техники, датчики поля, ERP, 1С,
+            «Меркурий» и внешние API. Данные поступают в реальном времени, нормализуются и передаются в единую шину без
+            дублирования и ручного переноса.</p>
+          <ul class="x-hero__bullets" style="margin-top: var(--x-sp-4); margin-bottom: 0;">
+            <li>Поддержка протоколов: MQTT, REST API, OPC-UA, ISOBUS</li>
+            <li>Частота синхронизации: от 30 секунд до реального времени</li>
+            <li>Хранение сырых данных с полным audit trail</li>
+          </ul>
+        </div>
+        <div class="x-arch-card x-arch-card--layer2 pla-anim">
+          <div class="x-arch-card__icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10" />
+              <line x1="12" y1="20" x2="12" y2="4" />
+              <line x1="6" y1="20" x2="6" y2="14" />
+            </svg></div>
+          <span class="x-arch-badge">Слой 2</span>
+          <h3 class="x-arch-card__title">AI-аналитика и прогнозирование</h3>
+          <p class="x-card__text">Интеллектуальное ядро системы. AI анализирует операционные данные, выявляет
+            отклонения, строит прогнозы по урожайности, загрузке техники и расходу ресурсов — и формирует дашборды под
+            роль каждого пользователя.</p>
+          <ul class="x-hero__bullets" style="margin-top: var(--x-sp-4); margin-bottom: 0;">
+            <li>Автоматическое выявление отклонений план/факт</li>
+            <li>Прогнозные модели по ресурсам, срокам и рискам</li>
+            <li>Персонализированные дашборды: агроном, диспетчер, директор</li>
+          </ul>
+        </div>
+        <div class="x-arch-card x-arch-card--layer3 pla-anim">
+          <div class="x-arch-card__icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+            </svg></div>
+          <span class="x-arch-badge">Слой 3</span>
+          <h3 class="x-arch-card__title">Операционный контур</h3>
+          <p class="x-card__text">Исполнительный слой: управление задачами, диспетчеризация, назначение ответственных,
+            контроль исполнения и коммуникация между участниками процесса. Люди, техника и беспилотный парк
+            координируются в едином пространстве.</p>
+          <ul class="x-hero__bullets" style="margin-top: var(--x-sp-4); margin-bottom: 0;">
+            <li>Очередь задач с приоритетами и сроками реакции</li>
+            <li>Управление беспилотной техникой и GPS-контроль</li>
+            <li>Встроенные регламенты эскалации и уведомлений</li>
+          </ul>
+        </div>
+        <div class="x-arch-card x-arch-card--layer4 pla-anim">
+          <div class="x-arch-card__icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+              <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+            </svg></div>
+          <span class="x-arch-badge">Слой 4</span>
+          <h3 class="x-arch-card__title">Документирование и комплаенс</h3>
+          <p class="x-card__text">Каждое действие в системе автоматически формирует документальный след. Отчётность для
+            надзорных органов, журнал операций, первичная документация — генерируются системой без ручного оформления.
+          </p>
+          <ul class="x-hero__bullets" style="margin-top: var(--x-sp-4); margin-bottom: 0;">
+            <li>Автоматическое формирование закрывающих документов</li>
+            <li>Интеграция с «Меркурием» и федеральными реестрами</li>
+            <li>Готовность к проверкам: полный audit trail по каждой операции</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="x-pla-callout pla-anim">
+        <h4 class="x-pla-callout__title">Принцип оптимальной сборки под Ваши задачи</h4>
+        <p class="x-pla-callout__text">Агротактик не требует внедрения всех слоёв сразу. Архитектура модульная: начните
+          с
+          операционного контура и диспетчеризации — и добавляйте слои по мере роста задач. Каждый модуль работает
+          самостоятельно и усиливается при подключении соседних.</p>
+      </div>
+
+      <p class="x-hero__micro pla-anim" style="margin-top: var(--x-sp-6); text-align: center;">Начать с пилота →
+        Фиксированные
+        метрики. Прозрачная приёмка. Результат за 30 дней</p>
+    </div>
+
+
+    <div class="x-wrap" style="margin-top:var(--x-sp-6);">
+      <div class="x-hero__ctas" style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;">
+        <a class="x-btn x-btn--primary x-btn--demo" href="#x-request-demo">Запросить демо / техсессию</a>
+        <button class="x-btn x-btn--secondary" onclick="document.getElementById('x-open-drawer').click()">Получить пакет
+          документов</button>
+      </div>
+    </div>
+  </section>
+  <!-- S4: ЛЕСТНИЦА АВТОНОМИИ -->
+  <section class="x-section" id="x-autonomy">
+    <div class="x-wrap">
+      <div class="x-section__head">
+        <p class="x-section__label">Уровни автономии</p>
+        <h2 class="x-h2">Уровни автоматизации: управляемый переход от ручного труда к оркестрации процессов</h2>
+        <p class="x-lead">Каждый уровень даёт измеримый эффект и имеет чёткие требования к данным, инфраструктуре связи,
+          регламентам и информационной безопасности. Переходите поэтапно — без скачков и принудительной смены процессов.
+        </p>
+        <p class="x-hero__micro" style="margin-top: var(--x-sp-4);">Выберите уровень — увидите эффект, границы
+          ответственности, требования к внедрению и документы для согласования.</p>
+      </div>
+      <!-- NEW SWITCHER -->
+      <div class="x-autonomy-switcher">
+        <button class="x-auto-btn x-auto-btn--active" data-level="1">
+          <span class="x-auto-btn__ring"><span class="x-auto-btn__text">A1</span></span>
+          <span class="x-auto-btn__label">Ассистент</span>
+        </button>
+        <button class="x-auto-btn" data-level="2">
+          <span class="x-auto-btn__ring"><span class="x-auto-btn__text">A2</span></span>
+          <span class="x-auto-btn__label">Супервизор</span>
+        </button>
+        <button class="x-auto-btn" data-level="3">
+          <span class="x-auto-btn__ring"><span class="x-auto-btn__text">A3</span></span>
+          <span class="x-auto-btn__label">Агент</span>
+        </button>
+        <button class="x-auto-btn" data-level="4">
+          <span class="x-auto-btn__ring"><span class="x-auto-btn__text">A4</span></span>
+          <span class="x-auto-btn__label">Оркестратор</span>
+        </button>
+      </div>
+
+      <!-- NEW PANELS -->
+      <div class="x-autonomy-panels">
+        <!-- Panel 1 -->
+        <div class="x-auto-panel x-auto-panel--active" id="auto-panel-1">
+          <div class="x-auto-panel__inner">
+            <div class="x-auto-panel__bg-level">A1</div>
+            <div class="x-auto-panel__content">
+              <h3 class="x-auto-panel__title">Ассистент: качество операций и дисциплина данных</h3>
+              <ul class="x-hero__bullets" style="margin-bottom: var(--x-sp-4);">
+                <li>Стабильное выполнение работ: меньше ошибок, ручных отклонений и потерь на качестве</li>
+                <li>Данные становятся пригодными для управления: моточасы, операции, базовые статусы и события
+                  фиксируются системно</li>
+                <li>Готовность к A2: определяем минимальный набор телематики, каналов связи и правил реакции</li>
+              </ul>
+              <div class="x-step__chips" style="margin-bottom: var(--x-sp-5);">
+                <span class="x-chip">Качество работ</span>
+                <span class="x-chip">Дисциплина данных</span>
+                <span class="x-chip">Подготовка к следующему уровню</span>
+              </div>
+              <p style="margin-top:var(--x-sp-4);font-size:var(--x-fs-6);color:var(--x-muted)">Этот уровень часто
+                проходят «незаметно» — но именно он снижает риски при переходе к A2 и формирует фундамент для всей
+                автоматизации.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 2 -->
+        <div class="x-auto-panel" id="auto-panel-2">
+          <div class="x-auto-panel__inner">
+            <div class="x-auto-panel__bg-level">A2</div>
+            <div class="x-auto-panel__content">
+              <h3 class="x-auto-panel__title">Супервизор: командный центр, контроль отклонений и ручные решения</h3>
+              <ul class="x-hero__bullets" style="margin-bottom: var(--x-sp-4);">
+                <li>План-факт и отклонения в реальном времени: видно, где срыв, кто отвечает и что делать прямо сейчас
+                </li>
+                <li>Очередь отклонений с ответственными: приоритет → назначение → срок реакции → статус закрытия</li>
+                <li>Карта и слои: поля, маршруты, геозоны, задачи — прозрачная картина всего парка на одном экране</li>
+              </ul>
+              <div class="x-step__chips" style="margin-bottom: var(--x-sp-5);">
+                <span class="x-chip">Командный центр</span>
+                <span class="x-chip">Контроль отклонений</span>
+                <span class="x-chip">Карта парка</span>
+              </div>
+              <p style="margin-top:var(--x-sp-4);font-size:var(--x-fs-6);color:var(--x-muted)">Самый безопасный старт:
+                полная видимость и управление без автоматического исполнения. Человек принимает все решения — система
+                только обеспечивает картину.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 3 -->
+        <div class="x-auto-panel" id="auto-panel-3">
+          <div class="x-auto-panel__inner">
+            <div class="x-auto-panel__bg-level">A3</div>
+            <div class="x-auto-panel__content">
+              <h3 class="x-auto-panel__title">Агент: система предлагает решения, руководитель утверждает</h3>
+              <ul class="x-hero__bullets" style="margin-bottom: var(--x-sp-4);">
+                <li>Приоритизация действий: что делать прямо сейчас и почему — на основе данных, истории и регламентов
+                </li>
+                <li>Снижение простоев и потерь: рекомендации по маршрутам, ресурсам, очерёдности задач и реакции на
+                  отклонения</li>
+                <li>Проверяемость каждого решения: журнал «кто — что — почему» для разборов, отчётности и распределения
+                  ответственности</li>
+              </ul>
+              <div class="x-step__chips" style="margin-bottom: var(--x-sp-5);">
+                <span class="x-chip">Рекомендации AI</span>
+                <span class="x-chip">Регламенты</span>
+                <span class="x-chip">Подтверждение руководителем</span>
+              </div>
+              <p style="margin-top:var(--x-sp-4);font-size:var(--x-fs-6);color:var(--x-muted)">Человек остаётся в
+                контуре управления. Система ускоряет и стандартизирует решения — но не забирает контроль.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 4 -->
+        <div class="x-auto-panel" id="auto-panel-4">
+          <div class="x-auto-panel__inner">
+            <div class="x-auto-panel__bg-level">A4</div>
+            <div class="x-auto-panel__content">
+              <h3 class="x-auto-panel__title">Оркестратор: автоматическое исполнение в рамках утверждённых правил</h3>
+              <ul class="x-hero__bullets" style="margin-bottom: var(--x-sp-4);">
+                <li>Авторасчёт и распределение задач: система назначает исполнителей по регламенту, руководитель
+                  управляет только исключениями</li>
+                <li>Сквозная трассировка: от события и действия — до закрывающего документа с полным audit trail</li>
+                <li>Готовность к проверкам: информационная безопасность, аудит и комплаенс — включая «Меркурий» — как
+                  часть штатного процесса</li>
+              </ul>
+              <div class="x-step__chips" style="margin-bottom: var(--x-sp-5);">
+                <span class="x-chip">Оркестрация процессов</span>
+                <span class="x-chip">Аудит</span>
+                <span class="x-chip">Регуляторный комплаенс</span>
+              </div>
+              <p style="margin-top:var(--x-sp-4);font-size:var(--x-fs-6);color:var(--x-muted)">Этот уровень активируется
+                только после фиксации правил, ролей и критериев приёмки. Никаких скачков — только управляемый переход.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;gap:var(--x-sp-4);justify-content:center;flex-wrap:wrap;margin-top:var(--x-sp-6);">
+        <a class="x-btn x-btn--primary x-btn--demo" href="#x-request-demo">Запросить демо / техсессию</a>
+        <button class="x-btn x-btn--secondary" id="x-open-drawer-3">Получить пакет документов</button>
+      </div>
+    </div>
+  </section>
+</div><!-- /.x-site -->
