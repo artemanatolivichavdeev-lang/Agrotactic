@@ -1735,7 +1735,7 @@
 
   /* Register custom property for conic gradient animation */
   @property --badge-angle {
-    syntax: '<angle>';
+    syntax: '';
     initial-value: 0deg;
     inherits: false;
   }
